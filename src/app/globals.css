@@ -1,26 +1,98 @@
 @import "tailwindcss";
 
 :root {
-	--background: #ffffff;
-	--foreground: #171717;
+	/* Cleaning Paradise design tokens */
+	--pink-50: #fff0f9;
+	--pink-100: #ffd6ef;
+	--pink-200: #ffaede;
+	--pink-300: #ff85cd;
+	--pink-400: #ff69c0;
+	--pink-500: #ff50b5;
+	--pink-600: #e0389c;
+	--pink-700: #bc2180;
+	--pink-800: #8f1261;
+	--pink-900: #5c063d;
+	--blue-50: #eef2ff;
+	--blue-100: #d0dafc;
+	--blue-200: #a2b5f9;
+	--blue-300: #6b8bf0;
+	--blue-400: #4468e6;
+	--blue-500: #2b50d8;
+	--blue-600: #1e3ea2;
+	--blue-700: #162e7a;
+	--blue-800: #0f1f52;
+	--blue-900: #07102a;
+	--neutral-0: #ffffff;
+	--neutral-50: #f8f8fc;
+	--neutral-100: #f1f1f8;
+	--neutral-200: #e4e4ef;
+	--neutral-300: #cecede;
+	--neutral-400: #a8a8c0;
+	--neutral-500: #808098;
+	--neutral-600: #606078;
+	--neutral-700: #404058;
+	--neutral-800: #282838;
+	--neutral-900: #131320;
+	--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @theme inline {
-	--color-background: var(--background);
-	--color-foreground: var(--foreground);
-	--font-sans: var(--font-geist-sans);
-	--font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-	:root {
-		--background: #0a0a0a;
-		--foreground: #ededed;
-	}
+	--color-pink-50: var(--pink-50);
+	--color-pink-100: var(--pink-100);
+	--color-pink-200: var(--pink-200);
+	--color-pink-300: var(--pink-300);
+	--color-pink-400: var(--pink-400);
+	--color-pink-500: var(--pink-500);
+	--color-pink-600: var(--pink-600);
+	--color-pink-700: var(--pink-700);
+	--color-pink-800: var(--pink-800);
+	--color-pink-900: var(--pink-900);
+	--color-blue-50: var(--blue-50);
+	--color-blue-100: var(--blue-100);
+	--color-blue-200: var(--blue-200);
+	--color-blue-300: var(--blue-300);
+	--color-blue-400: var(--blue-400);
+	--color-blue-500: var(--blue-500);
+	--color-blue-600: var(--blue-600);
+	--color-blue-700: var(--blue-700);
+	--color-blue-800: var(--blue-800);
+	--color-blue-900: var(--blue-900);
+	--color-ink-50: var(--neutral-50);
+	--color-ink-100: var(--neutral-100);
+	--color-ink-200: var(--neutral-200);
+	--color-ink-300: var(--neutral-300);
+	--color-ink-400: var(--neutral-400);
+	--color-ink-500: var(--neutral-500);
+	--color-ink-600: var(--neutral-600);
+	--color-ink-700: var(--neutral-700);
+	--color-ink-800: var(--neutral-800);
+	--color-ink-900: var(--neutral-900);
+	--font-serif: var(--font-instrument-serif), serif;
+	--font-sans: var(--font-poppins), system-ui, sans-serif;
+	--shadow-xs: 0 1px 2px 0 rgba(30, 62, 162, 0.06);
+	--shadow-sm: 0 1px 6px 0 rgba(30, 62, 162, 0.08);
+	--shadow-md: 0 4px 16px 0 rgba(30, 62, 162, 0.12);
+	--shadow-lg: 0 8px 32px 0 rgba(30, 62, 162, 0.16);
+	--shadow-xl: 0 16px 56px 0 rgba(30, 62, 162, 0.2);
+	--shadow-pink: 0 4px 24px 0 rgba(255, 80, 181, 0.32);
+	--shadow-blue: 0 4px 24px 0 rgba(30, 62, 162, 0.28);
+	--ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 body {
-	background: var(--background);
-	color: var(--foreground);
-	font-family: Arial, Helvetica, sans-serif;
+	background: var(--neutral-0);
+	color: var(--neutral-800);
+	font-family: var(--font-poppins), system-ui, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	overflow-x: clip;
+}
+
+/* Horizontal marquee for service-page gallery */
+@keyframes galleryScrollH {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-50%);
+	}
 }
