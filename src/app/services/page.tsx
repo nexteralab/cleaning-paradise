@@ -78,7 +78,7 @@ const serviceCards: ServiceCard[] = [
 		title: "Packing & Unpacking",
 		description: "Your team packs, labels, and settles in — move day without the chaos.",
 		tags: ["One-time"],
-		href: "/services",
+		href: "/services/packing-unpacking",
 		color: "blue",
 	},
 	{

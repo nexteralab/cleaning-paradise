@@ -524,6 +524,102 @@ export const services: Record<string, ServiceContent> = {
 			},
 		],
 	},
+	// content from design: Service - Packing Unpacking.dc.html
+	"packing-unpacking": {
+		slug: "packing-unpacking",
+		metaTitle: "Packing & Unpacking Services in Seattle, WA | Cleaning Paradise",
+		metaDescription:
+			"Trained local movers pack, label and unpack your home across Seattle, WA — settle in faster with a lot less stress.",
+		badgeIcon: "truck",
+		badgeLabel: "Packing & Unpacking",
+		heroTitle: [
+			{ text: "Packing & Unpacking " },
+			{ text: "Services", italic: true },
+		],
+		heroSubtitle:
+			"Skip the late-night boxing marathon. Our trained home care team packs, organizes and unpacks so you can settle in faster and with a lot less stress.",
+		introEyebrow: "Professional packing & unpacking",
+		introImage: "/img/svc-packing.jpg",
+		introImageAlt: "Packing and unpacking service Seattle",
+		introLead:
+			"Moving day should not mean weeks of boxes piling up in every room. Our Packing and Unpacking service pairs you with a professional local team that carefully wraps, labels and packs your belongings — from kitchenware to closets — so nothing gets lost, damaged or left behind. It's the same trusted home care approach our clients already know from our housekeeping and maid services, applied to your move.",
+		introParas: [
+			"On the other end, our team unpacks and organizes your new home room by room, so you're not living out of boxes or eating off paper plates for weeks.",
+			"Combine Packing and Unpacking with our Move In / Out Cleaning for a fully hands-off moving experience — we'll have your old place spotless and your new place set up, all in one coordinated visit.",
+		],
+		frequencyChips: [
+			{ label: "Full pack", active: true },
+			{ label: "Partial pack", active: true },
+			{ label: "Unpacking", active: true },
+			{ label: "Fragile items", active: false },
+		],
+		callout: {
+			title: "Moving out? Add Move In / Out Cleaning.",
+			before: "Many clients bundle packing with a ",
+			link: { label: "Move In / Out Cleaning", href: "/services/move-in-out" },
+			after:
+				" so the home is packed, emptied, and left spotless for inspection — one team, one schedule, one invoice.",
+		},
+		customEyebrow: "Tailored to your home",
+		customTitle: "Every move is a new project for us",
+		customParas: [
+			"Some clients need a full pack and unpack from start to finish. Others just want help with the kitchen, a few closets or the tricky fragile stuff. We start by understanding what you're moving, your timeline and how you like things organized.",
+			"Then we put together a plan and crew size that makes sense for your move, not a generic package. Your move feels handled, not handed off.",
+		],
+		features: [
+			{
+				icon: "sparkles",
+				title: "Quality packing materials",
+				text: "Sturdy boxes, wrapping, and padding included — your belongings arrive safe.",
+			},
+			{
+				icon: "circle-check",
+				title: "Labeled room by room",
+				text: "Every box is labeled so unpacking is fast and nothing gets lost.",
+			},
+			{
+				icon: "file-x",
+				title: "No contracts, no surprise fees",
+				text: "Reschedule anytime with 24-hour notice.",
+			},
+		],
+		formDefaultService: "packing",
+		coverageText:
+			"Cleaning Paradise offers packing and unpacking across Seattle and the greater Puget Sound area. Our local team can usually reach you within 24–48 hours of your request.",
+		faqHeading: "Common questions about our packing & unpacking in Seattle",
+		faqs: [
+			{
+				q: "Do you provide boxes and packing materials?",
+				a: [
+					"Yes. We can supply boxes, bubble wrap, tape and packing paper, or work with materials you already have — whatever fits your budget.",
+				],
+			},
+			{
+				q: "Can you unpack and organize my kitchen and closets?",
+				a: [
+					"Yes. Unpacking includes organizing kitchens, closets, bathrooms and any other rooms you want set up properly — not just emptying boxes onto shelves.",
+				],
+			},
+			{
+				q: "Can I combine packing and unpacking with move in / out cleaning?",
+				a: [
+					"Absolutely. Many clients combine both services for a fully coordinated, hands-off moving day. It's one of the most popular bundles we offer.",
+				],
+			},
+			{
+				q: "How many team members will be at my home?",
+				a: [
+					"Crew size depends on your home's size and your timeline. We'll recommend the right number when you request your free quote.",
+				],
+			},
+			{
+				q: "Is packing and unpacking available on short notice?",
+				a: [
+					"We accommodate quick-turnaround moves when our schedule allows. Reach out as early as you can to lock in your preferred date.",
+				],
+			},
+		],
+	},
 };
 
 export const serviceSlugs = Object.keys(services);

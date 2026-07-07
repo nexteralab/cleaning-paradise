@@ -6,7 +6,7 @@ const services = [
 	{ label: "Deep Cleaning", href: "/services/deep-cleaning" },
 	{ label: "Commercial Cleaning", href: "/services/commercial-cleaning" },
 	{ label: "Move In / Out", href: "/services/move-in-out" },
-	{ label: "Packing & Unpacking", href: "/services" },
+	{ label: "Packing & Unpacking", href: "/services/packing-unpacking" },
 	{ label: "Carpet Cleaning", href: "/services/carpet-cleaning" },
 ];
 

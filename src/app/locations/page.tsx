@@ -47,8 +47,9 @@ const cities: City[] = [
     alt: "Cleaning Paradise team serving Lynnwood",
     description:
       "Home to Cleaning Paradise headquarters. Serving Lynnwood, Edmonds, and nearby areas with reliable weekly or bi-weekly service.",
-    href: "/#book",
-    linkLabel: "Book cleaning",
+    href: "/locations/lynnwood",
+    linkLabel: "View Lynnwood services",
+    badge: "Full service page",
   },
   {
     name: "Bellevue",
