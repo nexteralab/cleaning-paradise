@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Reveal from "@/components/Reveal";
+import { locations, locationSlugs } from "./locations-data";
 import {
   MapPin,
   Sparkles,
@@ -30,64 +32,19 @@ type City = {
   badge?: string;
 };
 
-const cities: City[] = [
-  {
-    name: "Seattle",
-    img: "/img/aw1a0550.jpg",
-    alt: "Cleaning Paradise team serving Seattle",
-    description:
-      "Premium residential and commercial cleaning across Seattle neighborhoods including Capitol Hill, Ballard, and Queen Anne.",
-    href: "/service-areas",
-    linkLabel: "View Seattle services",
-    badge: "Full service page",
-  },
-  {
-    name: "Lynnwood",
-    img: "/img/pasted-1782782394450-0.png",
-    alt: "Cleaning Paradise team serving Lynnwood",
-    description:
-      "Home to Cleaning Paradise headquarters. Serving Lynnwood, Edmonds, and nearby areas with reliable weekly or bi-weekly service.",
-    href: "/locations/lynnwood",
-    linkLabel: "View Lynnwood services",
-    badge: "Full service page",
-  },
-  {
-    name: "Bellevue",
-    img: "/img/aw1a0619.jpg",
-    alt: "Cleaning Paradise team serving Bellevue",
-    description:
-      "Luxury homes and high-rise apartments on the Eastside. Expert deep cleaning and move-in/out services for premium properties.",
-    href: "/#book",
-    linkLabel: "Book cleaning",
-  },
-  {
-    name: "Kirkland",
-    img: "/img/aw1a0659.jpg",
-    alt: "Cleaning Paradise team serving Kirkland",
-    description:
-      "Waterfront living and established neighborhoods. Bi-weekly and monthly cleaning for busy professionals and growing families.",
-    href: "/#book",
-    linkLabel: "Book cleaning",
-  },
-  {
-    name: "Mercer Island",
-    img: "/img/mercer-island.jpg",
-    alt: "Cleaning Paradise team serving Mercer Island",
-    description:
-      "Premier island community with spacious homes. Specialized cleaning for large properties and eco-conscious homeowners.",
-    href: "/#book",
-    linkLabel: "Book cleaning",
-  },
-  {
-    name: "Shoreline",
-    img: "/img/aw1a0732.jpg",
-    alt: "Cleaning Paradise team serving Shoreline",
-    description:
-      "Family-friendly neighborhoods north of Seattle. Affordable, dependable cleaning services tailored to your schedule.",
-    href: "/#book",
-    linkLabel: "Book cleaning",
-  },
-];
+// Derived from the single source of truth in locations-data.ts.
+const cities: City[] = locationSlugs.map((slug) => {
+  const l = locations[slug];
+  return {
+    name: l.name,
+    img: l.img,
+    alt: `Cleaning Paradise team serving ${l.name}`,
+    description: l.blurb,
+    href: `/locations/${slug}`,
+    linkLabel: `View ${l.name} services`,
+    badge: l.hq ? "HQ · Full service page" : "Full service page",
+  };
+});
 
 type Feature = {
   icon: React.ReactNode;
@@ -257,7 +214,7 @@ export default function LocationsPage() {
     <div className="relative w-full overflow-x-clip">
       {/* HERO: Locations Overview */}
       <section className="bg-white px-10 pt-[120px] pb-20 text-center border-b border-ink-200 max-md:px-5">
-        <div className="max-w-[1000px] mx-auto">
+        <Reveal className="max-w-[1000px] mx-auto">
           <div className="inline-flex items-center gap-[7px] bg-pink-500/15 text-pink-500 text-[11.5px] font-semibold tracking-[.06em] uppercase px-4 py-2 rounded-full mb-[22px]">
             <MapPin size={13} />
             Serving Greater Seattle
@@ -273,13 +230,13 @@ export default function LocationsPage() {
           <div className="text-[15px] text-[#808098] mt-4">
             ✓ Same-week availability · ✓ Licensed & Insured · ✓ 100% satisfaction guarantee
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* CITIES GRID */}
       <section className="py-24 px-10 bg-white max-md:px-5">
         <div className="max-w-[1240px] mx-auto">
-          <div className="text-center mb-16">
+          <Reveal className="text-center mb-16">
             <h2 className="font-serif text-[40px] text-ink-800 tracking-[-0.01em] leading-[1.05] mb-4">
               Choose Your Location
             </h2>
@@ -287,11 +244,13 @@ export default function LocationsPage() {
               Select your city to learn more about our cleaning services in your area and schedule
               your appointment.
             </p>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mb-10">
-            {cities.map((city) => (
-              <CityCard key={city.name} city={city} />
+            {cities.map((city, i) => (
+              <Reveal key={city.name} delay={(i % 3) * 90}>
+                <CityCard city={city} />
+              </Reveal>
             ))}
           </div>
         </div>
@@ -300,21 +259,23 @@ export default function LocationsPage() {
       {/* SEO Optimized Content Section */}
       <section className="py-20 px-10 bg-white border-t border-ink-200 max-md:px-5">
         <div className="max-w-[1000px] mx-auto">
-          <h2 className="font-serif text-4xl text-ink-900 tracking-[-0.01em] mb-7">
-            Why Choose Cleaning Paradise for Your Local Cleaning Needs
-          </h2>
+          <Reveal>
+            <h2 className="font-serif text-4xl text-ink-900 tracking-[-0.01em] mb-7">
+              Why Choose Cleaning Paradise for Your Local Cleaning Needs
+            </h2>
+          </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-11">
-            <div>
+            <Reveal>
               {featuresLeft.map((feature, i) => (
                 <FeatureItem key={feature.title} feature={feature} last={i === featuresLeft.length - 1} />
               ))}
-            </div>
-            <div>
+            </Reveal>
+            <Reveal delay={120}>
               {featuresRight.map((feature, i) => (
                 <FeatureItem key={feature.title} feature={feature} last={i === featuresRight.length - 1} />
               ))}
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -322,7 +283,7 @@ export default function LocationsPage() {
       {/* Upcoming Blog Section */}
       <section className="py-20 px-10 bg-white max-md:px-5">
         <div className="max-w-[1240px] mx-auto">
-          <div className="text-center mb-[54px]">
+          <Reveal className="text-center mb-[54px]">
             <h2 className="font-serif text-[40px] text-ink-900 tracking-[-0.01em] leading-[1.05] mb-3.5">
               Cleaning Tips & Local News
             </h2>
@@ -330,12 +291,13 @@ export default function LocationsPage() {
               Expert advice, seasonal cleaning guides, and updates from your neighborhood. Coming
               soon.
             </p>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {blogCards.map((card) => (
-              <div
+            {blogCards.map((card, i) => (
+              <Reveal
                 key={card.title}
+                delay={i * 90}
                 className={`bg-white border-[1.5px] border-ink-200 rounded-[18px] px-7 py-9 text-center transition-all duration-200 ${card.hoverClasses}`}
               >
                 <div
@@ -345,7 +307,7 @@ export default function LocationsPage() {
                 </div>
                 <h3 className="text-base font-semibold text-ink-600 mb-2">{card.title}</h3>
                 <p className="text-[13px] text-[#808098] leading-[1.6]">{card.description}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -353,7 +315,7 @@ export default function LocationsPage() {
 
       {/* CTA Section */}
       <section className="bg-white py-20 px-10 text-center border-t border-ink-200 max-md:px-5">
-        <div className="max-w-[800px] mx-auto">
+        <Reveal className="max-w-[800px] mx-auto">
           <h2 className="font-serif text-[clamp(40px,5vw,64px)] font-normal text-ink-900 tracking-[-0.02em] leading-[1.1] mb-[18px]">
             Ready to Get Your Home Clean?
           </h2>
@@ -375,7 +337,7 @@ export default function LocationsPage() {
               Call (425) 610-0241
             </a>
           </div>
-        </div>
+        </Reveal>
       </section>
     </div>
   );

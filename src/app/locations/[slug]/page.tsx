@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import {
 	ArrowRight,
 	Award,
@@ -17,12 +18,27 @@ import {
 	type LucideIcon,
 } from "lucide-react";
 import { CitySelector, FaqAccordion, HeroSlider } from "./client-sections";
+import Reveal from "@/components/Reveal";
+import CountUp from "@/components/CountUp";
+import { locations, locationSlugs } from "../locations-data";
 
-export const metadata: Metadata = {
-	title: "House Cleaning Services in Lynnwood, WA | Cleaning Paradise",
-	description:
-		"Your local maids in Lynnwood, WA. Cleaning Paradise offers licensed, insured residential and commercial cleaning with same-week availability and a 100% satisfaction guarantee.",
-};
+export function generateStaticParams() {
+	return locationSlugs.map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+	const { slug } = await params;
+	const loc = locations[slug];
+	if (!loc) return {};
+	return {
+		title: `House Cleaning Services in ${loc.name}, WA | Cleaning Paradise`,
+		description: `Your local maids in ${loc.name}, WA. Cleaning Paradise offers licensed, insured residential and commercial cleaning with same-week availability and a 100% satisfaction guarantee.`,
+	};
+}
 
 type HeroBadge = { label: string; classes: string; dot?: string };
 
@@ -177,12 +193,20 @@ const blogPosts: BlogPost[] = [
 ];
 
 const whyPhotos = [
-	{ src: "/img/pasted-1782782341097-0.png", alt: "Lynnwood neighborhood" },
+	{ src: "/img/pasted-1782782341097-0.png", alt: "Local neighborhood" },
 	{ src: "/img/aw1a0591.jpg", alt: "Sparkling kitchen" },
 	{ src: "/img/aw1a0619.jpg", alt: "Happy client" },
 ];
 
-export default function LynnwoodPage() {
+export default async function LocationPage({
+	params,
+}: {
+	params: Promise<{ slug: string }>;
+}) {
+	const { slug } = await params;
+	const loc = locations[slug];
+	if (!loc) notFound();
+
 	return (
 		<div className="relative w-full overflow-x-clip">
 			{/* ===== HERO / BEFORE-AFTER ===== */}
@@ -190,7 +214,7 @@ export default function LynnwoodPage() {
 				<div className="px-[clamp(28px,5vw,72px)] pt-[clamp(96px,9vw,116px)] pb-[clamp(44px,6vw,72px)]">
 					<div className="mx-auto flex max-w-[1240px] flex-wrap items-center gap-[clamp(32px,5vw,60px)]">
 						{/* LEFT: copy */}
-						<div className="min-w-[300px] flex-[1_1_430px]">
+						<Reveal className="min-w-[300px] flex-[1_1_430px]">
 							<div className="mb-[22px]">
 								<span className="inline-flex items-center gap-1.5 rounded-full bg-pink-500/15 px-4 py-2 text-[11.5px] font-semibold tracking-[0.06em] text-pink-500 uppercase">
 									<MapPin size={13} />
@@ -200,12 +224,12 @@ export default function LynnwoodPage() {
 							<h1 className="mb-5 text-[clamp(36px,4.6vw,60px)] leading-[1.08] font-normal tracking-[-0.03em] text-ink-900">
 								A spotless home, right here in Greater{" "}
 								<span className="underline decoration-pink-500 decoration-[3px] underline-offset-[6px]">
-									Lynnwood, WA
+									{loc.name}, WA
 								</span>
 							</h1>
 							<p className="mb-[30px] max-w-[520px] text-[clamp(16px,1.4vw,18px)] leading-[1.75] text-[#5A5A6E]">
 								Your home deserves a spotless finish and a team you can actually count on. We are
-								Cleaning Paradise, your local maids in Lynnwood.
+								Cleaning Paradise, your local maids in {loc.name}.
 							</p>
 							<div className="mb-[26px] flex flex-wrap gap-[13px]">
 								<Link
@@ -232,10 +256,17 @@ export default function LynnwoodPage() {
 									</span>
 								))}
 							</div>
-						</div>
+						</Reveal>
 
-						{/* RIGHT: before/after slider */}
-						<HeroSlider />
+						{/* RIGHT: before/after slider (per-city images) */}
+						<Reveal delay={150} className="min-w-[300px] max-w-[680px] flex-[1_1_480px]">
+							<HeroSlider
+								before={loc.before}
+								after={loc.after}
+								beforeAlt={loc.beforeAlt}
+								afterAlt={loc.afterAlt}
+							/>
+						</Reveal>
 					</div>
 				</div>
 			</section>
@@ -255,31 +286,35 @@ export default function LynnwoodPage() {
 					/>
 					<div className="pointer-events-none absolute inset-0 bg-[rgba(12,17,38,0.48)]" />
 					<div className="relative z-[2] px-[clamp(28px,5vw,72px)] py-[clamp(52px,6.5vw,88px)] text-center">
-						<h2 className="mb-[clamp(36px,5vw,60px)] leading-[1.1] tracking-[-0.02em] text-white">
-							<span className="text-[clamp(30px,3.8vw,54px)] font-bold">Trusted.</span>
-							<span className="font-serif text-[clamp(30px,3.8vw,54px)] font-normal italic"> Spotless.</span>
-							<span className="text-[clamp(30px,3.8vw,54px)] font-bold"> Proven.</span>
-						</h2>
+						<Reveal>
+							<h2 className="mb-[clamp(36px,5vw,60px)] leading-[1.1] tracking-[-0.02em] text-white">
+								<span className="text-[clamp(30px,3.8vw,54px)] font-bold">Trusted.</span>
+								<span className="font-serif text-[clamp(30px,3.8vw,54px)] font-normal italic"> Spotless.</span>
+								<span className="text-[clamp(30px,3.8vw,54px)] font-bold"> Proven.</span>
+							</h2>
+						</Reveal>
 						<div className="mx-auto grid max-w-[860px] grid-cols-1 gap-[clamp(12px,2vw,22px)] sm:grid-cols-3">
-							{stats.map((stat) => {
+							{stats.map((stat, i) => {
 								const Icon = stat.icon;
 								return (
-									<div
+									<Reveal
 										key={stat.label}
+										delay={i * 90}
 										className="flex items-center gap-3.5 rounded-2xl border border-white/[0.18] px-[clamp(14px,1.8vw,24px)] py-[clamp(18px,2.2vw,30px)] text-left"
 									>
 										<div className="shrink-0">
 											<Icon size={22} className="text-pink-500" />
 										</div>
 										<div>
-											<div className="text-[clamp(28px,3.2vw,46px)] leading-none font-bold tracking-[-0.03em] text-white">
-												{stat.value}
-											</div>
+											<CountUp
+												value={stat.value}
+												className="block text-[clamp(28px,3.2vw,46px)] leading-none font-bold tracking-[-0.03em] text-white"
+											/>
 											<div className="mt-1.5 text-[clamp(11px,1.1vw,13px)] font-medium text-white/[0.68]">
 												{stat.label}
 											</div>
 										</div>
-									</div>
+									</Reveal>
 								);
 							})}
 						</div>
@@ -290,7 +325,7 @@ export default function LynnwoodPage() {
 			{/* ===== SERVICES ===== */}
 			<section id="services" className="bg-ink-50 py-[clamp(64px,8vw,104px)]">
 				<div className="mx-auto max-w-[1240px] px-10 max-md:px-5">
-					<div className="mb-12 text-center">
+					<Reveal className="mb-12 text-center">
 						<div className="mb-4">
 							<span className="inline-flex items-center rounded-full bg-pink-500/15 px-4 py-2 text-[11.5px] font-semibold tracking-[0.06em] text-pink-500 uppercase">
 								Nuestros Servicios
@@ -304,12 +339,13 @@ export default function LynnwoodPage() {
 							that keeps your kitchen and bathrooms sparkling all year, or professional sanitization
 							after illness — our local maids show up prepared, trained, and ready.
 						</p>
-					</div>
+					</Reveal>
 
 					<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-						{services.map((s) => (
-							<div
+						{services.map((s, i) => (
+							<Reveal
 								key={s.title}
+								delay={(i % 3) * 90}
 								className="overflow-hidden rounded-[18px] border-[1.5px] border-ink-200 bg-white shadow-[var(--shadow-sm)] transition-all duration-300 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(30,62,162,0.12)]"
 							>
 								{/* eslint-disable-next-line @next/next/no-img-element */}
@@ -326,7 +362,7 @@ export default function LynnwoodPage() {
 										Book now <ArrowRight size={14} />
 									</Link>
 								</div>
-							</div>
+							</Reveal>
 						))}
 					</div>
 				</div>
@@ -336,46 +372,48 @@ export default function LynnwoodPage() {
 			<section id="why" className="border-t border-ink-200 bg-white py-24">
 				<div className="mx-auto max-w-[1240px] px-10 max-md:px-5">
 					{/* header asymmetric */}
-					<div className="mb-[62px] grid grid-cols-1 items-end gap-14 md:grid-cols-[1.05fr_0.95fr]">
+					<Reveal className="mb-[62px] grid grid-cols-1 items-end gap-14 md:grid-cols-[1.05fr_0.95fr]">
 						<div>
 							<div className="mb-[22px] inline-flex items-center gap-[11px] text-xs font-bold tracking-[0.14em] text-pink-500 uppercase">
 								<span className="inline-block h-[1.5px] w-7 bg-pink-500" />
 								Why choose us
 							</div>
 							<h2 className="font-serif text-[clamp(40px,4.5vw,64px)] leading-[1.12] font-normal tracking-[-0.025em] text-ink-900">
-								Why Lynnwood Families Choose{" "}
+								Why {loc.name} Families Choose{" "}
 								<span className="rounded-[3px] bg-pink-500/[0.35] px-[5px] pb-[3px]">
 									Cleaning Paradise
 								</span>
 							</h2>
 						</div>
 						<p className="pb-2.5 text-[16.5px] leading-[1.95] text-ink-600">
-							We have been cleaning homes in Lynnwood for over 5 years. Our maids are background
+							We have been cleaning homes in {loc.name} for over 5 years. Our maids are background
 							checked, trained, and genuinely care about leaving your home sparkling. Here is what
 							makes us different.
 						</p>
-					</div>
+					</Reveal>
 
 					{/* photo strip */}
 					<div className="mb-[84px] grid h-[clamp(240px,29vw,360px)] grid-cols-1 gap-4 sm:grid-cols-[1.7fr_1fr_1fr]">
-						{whyPhotos.map((photo) => (
-							<div
+						{whyPhotos.map((photo, i) => (
+							<Reveal
 								key={photo.src}
+								delay={i * 100}
 								className="overflow-hidden rounded-[22px] shadow-[0_26px_60px_rgba(30,62,162,0.10)] max-sm:h-[240px]"
 							>
 								{/* eslint-disable-next-line @next/next/no-img-element */}
 								<img src={photo.src} alt={photo.alt} className="block h-full w-full object-cover" />
-							</div>
+							</Reveal>
 						))}
 					</div>
 
 					{/* features 2-col */}
 					<div className="grid grid-cols-1 gap-x-20 md:grid-cols-2">
-						{features.map((f) => {
+						{features.map((f, i) => {
 							const Icon = f.icon;
 							return (
-								<div
+								<Reveal
 									key={f.title}
+									delay={(i % 2) * 90}
 									className="flex gap-6 border-t border-ink-200 py-[42px]"
 								>
 									<div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-[15px] bg-pink-50 text-pink-500">
@@ -387,7 +425,7 @@ export default function LynnwoodPage() {
 										</h3>
 										<p className="text-[14.5px] leading-[1.95] text-ink-600">{f.description}</p>
 									</div>
-								</div>
+								</Reveal>
 							);
 						})}
 					</div>
@@ -397,22 +435,24 @@ export default function LynnwoodPage() {
 			{/* ===== FAQs ===== */}
 			<section id="faq" className="bg-ink-50 py-24">
 				<div className="mx-auto max-w-[820px] px-10 max-md:px-5">
-					<div className="mb-11 text-center">
+					<Reveal className="mb-11 text-center">
 						<div className="mb-[13px] text-xs font-bold tracking-[0.1em] text-pink-500 uppercase">
 							FAQ
 						</div>
 						<h2 className="font-serif text-[clamp(36px,4vw,56px)] leading-[1.15] font-normal tracking-[-0.02em] text-ink-900">
-							Questions About Our Seattle Cleaning Services
+							Questions About Our {loc.name} Cleaning Services
 						</h2>
-					</div>
-					<FaqAccordion />
+					</Reveal>
+					<Reveal delay={80}>
+						<FaqAccordion />
+					</Reveal>
 				</div>
 			</section>
 
 			{/* ===== MAP / CITY SELECTOR ===== */}
 			<section id="areas" className="bg-white py-[clamp(64px,8vw,104px)]">
 				<div className="mx-auto max-w-[1240px] px-10 max-md:px-5">
-					<div className="mb-[34px] text-center">
+					<Reveal className="mb-[34px] text-center">
 						<div className="mb-4">
 							<span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-4 py-2 text-[11.5px] font-semibold tracking-[0.06em] text-blue-600 uppercase">
 								<Navigation size={13} />
@@ -426,16 +466,18 @@ export default function LynnwoodPage() {
 							Pick your city to see local availability, ratings and the neighborhoods our teams cover
 							across Greater Seattle.
 						</p>
-					</div>
+					</Reveal>
 
-					<CitySelector />
+					<Reveal delay={80}>
+						<CitySelector initial={slug} />
+					</Reveal>
 				</div>
 			</section>
 
 			{/* ===== BLOG INVITATION ===== */}
 			<section id="blog" className="bg-pink-50 py-[clamp(64px,8vw,104px)]">
 				<div className="mx-auto max-w-[1240px] px-10 max-md:px-5">
-					<div className="mb-[52px] text-center">
+					<Reveal className="mb-[52px] text-center">
 						<div className="mb-3.5 text-xs font-bold tracking-[0.1em] text-pink-500 uppercase">
 							From the blog
 						</div>
@@ -446,42 +488,43 @@ export default function LynnwoodPage() {
 							Expert advice on maintaining your Seattle-area home — seasonal guides, eco tips, and
 							stories from the neighborhoods we serve.
 						</p>
-					</div>
+					</Reveal>
 
 					<div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-3">
-						{blogPosts.map((post) => {
+						{blogPosts.map((post, i) => {
 							const TagIcon = post.tagIcon;
 							return (
-								<Link
-									key={post.title}
-									href="/blog"
-									className="block text-inherit no-underline transition-transform duration-300 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1.5"
-								>
-									<div className="relative mb-[22px] h-[280px] w-full overflow-hidden rounded-[20px] bg-[#f0f0f5]">
-										{/* eslint-disable-next-line @next/next/no-img-element */}
-										<img
-											src={post.img}
-											alt={post.title}
-											className="block h-full w-full object-cover"
-										/>
-										<div
-											className={`absolute top-3.5 left-3.5 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-[11px] py-[5px] text-[11px] font-bold tracking-[0.06em] uppercase ${post.tagClasses}`}
-										>
-											<TagIcon size={11} />
-											{post.tag}
+								<Reveal key={post.title} delay={(i % 3) * 90}>
+									<Link
+										href="/blog"
+										className="block text-inherit no-underline transition-transform duration-300 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1.5"
+									>
+										<div className="relative mb-[22px] h-[280px] w-full overflow-hidden rounded-[20px] bg-[#f0f0f5]">
+											{/* eslint-disable-next-line @next/next/no-img-element */}
+											<img
+												src={post.img}
+												alt={post.title}
+												className="block h-full w-full object-cover"
+											/>
+											<div
+												className={`absolute top-3.5 left-3.5 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-[11px] py-[5px] text-[11px] font-bold tracking-[0.06em] uppercase ${post.tagClasses}`}
+											>
+												<TagIcon size={11} />
+												{post.tag}
+											</div>
 										</div>
-									</div>
-									<div className="mb-2 text-[11.5px] font-bold tracking-[0.06em] text-[#A0A0AE] uppercase">
-										{post.category}
-									</div>
-									<h3 className="mb-2.5 font-serif text-2xl leading-[1.3] font-normal tracking-[-0.01em] text-ink-900">
-										{post.title}
-									</h3>
-									<div className="flex items-center gap-[7px] text-[13px] text-[#808098]">
-										<Calendar size={13} className={post.dateIconColor} />
-										{post.date}
-									</div>
-								</Link>
+										<div className="mb-2 text-[11.5px] font-bold tracking-[0.06em] text-[#A0A0AE] uppercase">
+											{post.category}
+										</div>
+										<h3 className="mb-2.5 font-serif text-2xl leading-[1.3] font-normal tracking-[-0.01em] text-ink-900">
+											{post.title}
+										</h3>
+										<div className="flex items-center gap-[7px] text-[13px] text-[#808098]">
+											<Calendar size={13} className={post.dateIconColor} />
+											{post.date}
+										</div>
+									</Link>
+								</Reveal>
 							);
 						})}
 					</div>

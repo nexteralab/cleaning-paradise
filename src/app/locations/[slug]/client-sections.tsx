@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import Link from "next/link";
 import {
 	ArrowRight,
@@ -14,10 +15,21 @@ import {
 	Star,
 	Home,
 } from "lucide-react";
+import { locations, locationSlugs } from "../locations-data";
 
-/* ─── Hero before / after slider ─── */
+/* ─── Hero before / after slider (per-city images) ─── */
 
-export function HeroSlider() {
+export function HeroSlider({
+	before,
+	after,
+	beforeAlt,
+	afterAlt,
+}: {
+	before: string;
+	after: string;
+	beforeAlt: string;
+	afterAlt: string;
+}) {
 	const ref = useRef<HTMLDivElement>(null);
 	const dragging = useRef(false);
 	const [pct, setPct] = useState(50);
@@ -52,8 +64,8 @@ export function HeroSlider() {
 				{/* After image (base) */}
 				{/* eslint-disable-next-line @next/next/no-img-element */}
 				<img
-					src="/img/after.png"
-					alt="After cleaning"
+					src={after}
+					alt={afterAlt}
 					draggable={false}
 					className="pointer-events-none absolute inset-0 h-full w-full object-cover"
 				/>
@@ -67,8 +79,8 @@ export function HeroSlider() {
 				>
 					{/* eslint-disable-next-line @next/next/no-img-element */}
 					<img
-						src="/img/before.png"
-						alt="Before cleaning"
+						src={before}
+						alt={beforeAlt}
 						draggable={false}
 						className="pointer-events-none absolute inset-0 h-full w-full object-cover"
 					/>
@@ -202,98 +214,48 @@ export function FaqAccordion() {
 
 /* ─── Map / city selector ─── */
 
-type CityData = {
-	blurb: string;
-	hoods: string;
-	rating: string;
-	resp: string;
-	homes: number;
-};
+const hq = locationSlugs.find((s) => locations[s].hq)!;
+const num = (v: string) => parseFloat(v);
 
-const CITIES: Record<string, CityData> = {
-	Seattle: {
-		blurb:
-			"Premium residential and commercial cleaning across Seattle — from downtown high-rises to Craftsman homes in Ballard and Queen Anne.",
-		hoods: "Capitol Hill · Ballard · Queen Anne · Fremont",
-		rating: "4.9",
-		resp: "Same day",
-		homes: 180,
-	},
-	Bellevue: {
-		blurb:
-			"Luxury homes and Eastside high-rises. Deep cleans, recurring upkeep and detailed move-in / move-out service.",
-		hoods: "Downtown · Somerset · Bridle Trails · Newport",
-		rating: "5.0",
-		resp: "2 hrs",
-		homes: 120,
-	},
-	Kirkland: {
-		blurb:
-			"Waterfront living and established neighborhoods — flexible bi-weekly and monthly plans for busy professionals.",
-		hoods: "Moss Bay · Juanita · Houghton · Totem Lake",
-		rating: "4.9",
-		resp: "3 hrs",
-		homes: 95,
-	},
-	Lynnwood: {
-		blurb:
-			"Our home base. Reliable weekly and bi-weekly cleaning for Lynnwood, Mill Creek and the north corridor.",
-		hoods: "Alderwood · Martha Lake · Mill Creek",
-		rating: "4.9",
-		resp: "Same day",
-		homes: 160,
-	},
-	Shoreline: {
-		blurb:
-			"Family-friendly neighborhoods north of Seattle — affordable, dependable cleaning that works around your schedule.",
-		hoods: "Richmond Beach · Echo Lake · Ridgecrest",
-		rating: "4.8",
-		resp: "4 hrs",
-		homes: 70,
-	},
-	Edmonds: {
-		blurb:
-			"Coastal charm minutes from our HQ — meticulous home cleaning with a personal, local touch.",
-		hoods: "Downtown · Seaview · Perrinville",
-		rating: "5.0",
-		resp: "2 hrs",
-		homes: 65,
-	},
-};
+/** Curved route path (viewBox 0-100) from the HQ pin to a target city pin. */
+function routePath(targetSlug: string): string | null {
+	const t = locations[targetSlug];
+	if (!t || t.hq) return null;
+	const h = locations[hq].pin;
+	const hx = num(h.left);
+	const hy = num(h.top);
+	const tx = num(t.pin.left);
+	const ty = num(t.pin.top);
+	const cx = (hx + tx) / 2;
+	const cy = (hy + ty) / 2 - 12;
+	return `M ${hx} ${hy} Q ${cx} ${cy} ${tx} ${ty}`;
+}
 
-const cityOrder = ["Seattle", "Bellevue", "Kirkland", "Lynnwood", "Shoreline", "Edmonds"];
-
-const pins: { name: string; left: string; top: string; hq?: boolean }[] = [
-	{ name: "Lynnwood", left: "40%", top: "28%", hq: true },
-	{ name: "Edmonds", left: "23%", top: "37%" },
-	{ name: "Shoreline", left: "45%", top: "50%" },
-	{ name: "Kirkland", left: "64%", top: "44%" },
-	{ name: "Seattle", left: "41%", top: "66%" },
-	{ name: "Bellevue", left: "67%", top: "62%" },
-];
-
-export function CitySelector() {
-	const [current, setCurrent] = useState("Seattle");
-	const d = CITIES[current];
+export function CitySelector({ initial }: { initial: string }) {
+	const [current, setCurrent] = useState(
+		locations[initial] ? initial : "seattle",
+	);
+	const d = locations[current];
+	const path = routePath(current);
 
 	return (
 		<div className="flex flex-col gap-[42px]">
 			{/* city pills */}
 			<div className="flex flex-wrap justify-center gap-2.5">
-				{cityOrder.map((c) => {
-					const on = c === current;
+				{locationSlugs.map((slug) => {
+					const on = slug === current;
 					return (
 						<button
-							key={c}
+							key={slug}
 							type="button"
-							onClick={() => setCurrent(c)}
+							onClick={() => setCurrent(slug)}
 							className={`cursor-pointer rounded-full border-[1.5px] px-[22px] py-[11px] text-sm font-semibold transition-all duration-250 ease-[cubic-bezier(.16,1,.3,1)] ${
 								on
 									? "border-pink-500 bg-pink-500 text-white shadow-[0_10px_24px_rgba(255,80,181,0.30)]"
 									: "border-ink-200 bg-white text-ink-600"
 							}`}
 						>
-							{c}
+							{locations[slug].name}
 						</button>
 					);
 				})}
@@ -309,38 +271,49 @@ export function CitySelector() {
 							Now serving
 						</span>
 					</div>
-					<div className="mb-4 text-[clamp(30px,3.4vw,44px)] leading-[1.08] font-semibold tracking-[-0.02em] text-ink-900">
-						{current}
-					</div>
-					<div className="mb-[18px] flex flex-wrap gap-[9px]">
-						<span className="inline-flex items-center gap-1.5 rounded-full border border-[#FCD9EE] bg-white px-[13px] py-[7px] text-[13px] font-semibold text-ink-800">
-							<Star size={14} className="text-pink-500" />
-							{d.rating} rating
-						</span>
-						<span className="inline-flex items-center gap-1.5 rounded-full border border-[#FCD9EE] bg-white px-[13px] py-[7px] text-[13px] font-semibold text-ink-800">
-							<Clock size={14} className="text-blue-600" />
-							Responds in {d.resp}
-						</span>
-					</div>
-					<p className="mb-5 text-[15.5px] leading-[1.8] text-[#5A5A6E]">{d.blurb}</p>
-					<div className="mb-5 flex items-start gap-[9px] border-y border-[#FCD9EE] py-[15px]">
-						<MapIcon size={17} className="mt-0.5 shrink-0 text-pink-500" />
-						<span className="text-[13.5px] leading-[1.55] text-ink-600">{d.hoods}</span>
-					</div>
-					<div className="mt-auto flex flex-wrap items-center justify-between gap-4">
-						<div className="flex items-baseline gap-[7px]">
-							<span className="text-[30px] font-bold tracking-[-0.02em] text-pink-500">
-								{d.homes}+
-							</span>
-							<span className="text-[13px] text-[#808098]">homes cleaned</span>
-						</div>
-						<Link
-							href="/#book"
-							className="inline-flex items-center gap-[7px] rounded-full bg-pink-500 px-[22px] py-3 text-sm font-semibold text-white no-underline transition-all duration-200 ease-[cubic-bezier(.16,1,.3,1)] hover:bg-pink-600 hover:shadow-[0_10px_26px_rgba(255,80,181,0.36)]"
+					<AnimatePresence mode="wait">
+						<motion.div
+							key={current}
+							initial={{ opacity: 0, y: 12 }}
+							animate={{ opacity: 1, y: 0 }}
+							exit={{ opacity: 0, y: -12 }}
+							transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+							className="flex flex-1 flex-col"
 						>
-							Book a free quote <ArrowRight size={15} />
-						</Link>
-					</div>
+							<div className="mb-4 text-[clamp(30px,3.4vw,44px)] leading-[1.08] font-semibold tracking-[-0.02em] text-ink-900">
+								{d.name}
+							</div>
+							<div className="mb-[18px] flex flex-wrap gap-[9px]">
+								<span className="inline-flex items-center gap-1.5 rounded-full border border-[#FCD9EE] bg-white px-[13px] py-[7px] text-[13px] font-semibold text-ink-800">
+									<Star size={14} className="text-pink-500" />
+									{d.rating} rating
+								</span>
+								<span className="inline-flex items-center gap-1.5 rounded-full border border-[#FCD9EE] bg-white px-[13px] py-[7px] text-[13px] font-semibold text-ink-800">
+									<Clock size={14} className="text-blue-600" />
+									Responds in {d.resp}
+								</span>
+							</div>
+							<p className="mb-5 text-[15.5px] leading-[1.8] text-[#5A5A6E]">{d.blurb}</p>
+							<div className="mb-5 flex items-start gap-[9px] border-y border-[#FCD9EE] py-[15px]">
+								<MapIcon size={17} className="mt-0.5 shrink-0 text-pink-500" />
+								<span className="text-[13.5px] leading-[1.55] text-ink-600">{d.hoods}</span>
+							</div>
+							<div className="mt-auto flex flex-wrap items-center justify-between gap-4">
+								<div className="flex items-baseline gap-[7px]">
+									<span className="text-[30px] font-bold tracking-[-0.02em] text-pink-500">
+										{d.homes}+
+									</span>
+									<span className="text-[13px] text-[#808098]">homes cleaned</span>
+								</div>
+								<Link
+									href={`/locations/${current}`}
+									className="inline-flex items-center gap-[7px] rounded-full bg-pink-500 px-[22px] py-3 text-sm font-semibold text-white no-underline transition-all duration-200 ease-[cubic-bezier(.16,1,.3,1)] hover:bg-pink-600 hover:shadow-[0_10px_26px_rgba(255,80,181,0.36)]"
+								>
+									View {d.name} <ArrowRight size={15} />
+								</Link>
+							</div>
+						</motion.div>
+					</AnimatePresence>
 				</div>
 
 				{/* decorative map */}
@@ -363,35 +336,66 @@ export function CitySelector() {
 						<Navigation size={13} />
 						Greater Seattle service area
 					</div>
+					{/* animated route from HQ to selected city */}
+					<svg
+						className="pointer-events-none absolute inset-0 z-[2] h-full w-full"
+						viewBox="0 0 100 100"
+						preserveAspectRatio="none"
+						aria-hidden
+					>
+						{path && (
+							<motion.path
+								key={current}
+								d={path}
+								fill="none"
+								stroke="#FF50B5"
+								strokeWidth={2.5}
+								strokeLinecap="round"
+								vectorEffect="non-scaling-stroke"
+								initial={{ pathLength: 0, opacity: 0 }}
+								animate={{ pathLength: 1, opacity: 1 }}
+								transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+							/>
+						)}
+					</svg>
 					{/* pins */}
-					{pins.map((pin) => {
-						const on = pin.name === current;
+					{locationSlugs.map((slug) => {
+						const loc = locations[slug];
+						const on = slug === current;
 						return (
 							<button
-								key={pin.name}
+								key={slug}
 								type="button"
-								aria-label={pin.name}
-								onClick={() => setCurrent(pin.name)}
+								aria-label={loc.name}
+								onClick={() => setCurrent(slug)}
 								className="absolute flex -translate-x-1/2 -translate-y-1/2 cursor-pointer flex-col items-center gap-[5px] border-none bg-transparent p-0"
-								style={{ left: pin.left, top: pin.top, zIndex: on ? 6 : 3 }}
+								style={{ left: loc.pin.left, top: loc.pin.top, zIndex: on ? 6 : 3 }}
 							>
 								<span
-									className={`flex items-center justify-center rounded-full border-2 transition-all duration-250 ease-[cubic-bezier(.16,1,.3,1)] ${
-										pin.hq ? "h-9 w-9" : "h-8 w-8"
+									className={`relative flex items-center justify-center rounded-full border-2 transition-all duration-250 ease-[cubic-bezier(.16,1,.3,1)] ${
+										loc.hq ? "h-9 w-9" : "h-8 w-8"
 									} ${
 										on
 											? "scale-110 border-pink-500 bg-pink-500 text-white shadow-[0_12px_26px_rgba(255,80,181,0.42)]"
 											: "border-[#D8D8E4] bg-white text-[#9A9AB0] shadow-[0_4px_12px_rgba(30,62,162,0.18)]"
 									}`}
 								>
-									{pin.hq ? <Home size={17} /> : <MapPin size={16} />}
+									{on && (
+										<motion.span
+											className="absolute inset-0 rounded-full border-2 border-pink-500"
+											initial={{ scale: 1, opacity: 0.55 }}
+											animate={{ scale: 2.3, opacity: 0 }}
+											transition={{ duration: 1.6, repeat: Infinity, ease: "easeOut" }}
+										/>
+									)}
+									{loc.hq ? <Home size={17} /> : <MapPin size={16} />}
 								</span>
 								<span
 									className={`rounded-full bg-white/90 px-[9px] py-0.5 text-xs font-bold whitespace-nowrap shadow-[0_2px_8px_rgba(30,62,162,0.10)] ${
 										on ? "text-pink-500" : "text-[#808098]"
 									}`}
 								>
-									{pin.hq ? "Lynnwood · HQ" : pin.name}
+									{loc.hq ? `${loc.name} · HQ` : loc.name}
 								</span>
 							</button>
 						);

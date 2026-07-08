@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Music, Star, Phone, Mail, MapPin, Clock } from "lucide-react";
 
 const services = [
@@ -23,6 +26,9 @@ const socialClass =
 	"flex h-[38px] w-[38px] items-center justify-center rounded-[11px] bg-white/[0.07] text-ink-400 transition-all duration-200 hover:bg-pink-500 hover:text-white";
 
 export default function Footer() {
+	const pathname = usePathname();
+	if (pathname?.startsWith("/admin")) return null;
+
 	return (
 		<footer className="bg-ink-900 pt-[66px] pb-[30px]">
 			<div className="mx-auto max-w-[1240px] px-10">

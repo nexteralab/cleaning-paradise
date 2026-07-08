@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CountUp from "@/components/CountUp";
+import Reveal from "@/components/Reveal";
 import {
 	ArrowRight,
 	Award,
@@ -30,18 +32,18 @@ function TrustSection() {
 	return (
 		<section className="pt-[70px] pb-16 bg-white">
 			<div className="max-w-[1240px] mx-auto px-10 max-md:px-6">
-				<div className="text-center mb-[42px]">
-					<p className="font-sans text-[30px] max-md:text-[24px] text-ink-800 tracking-[-0.01em] max-w-[620px] mx-auto">
+				<Reveal className="text-center mb-[42px]">
+					<p className="font-sans text-[30px] max-md:text-[24px] text-ink-800 tracking-[-0.01em] mx-auto">
 						Over 450 Seattle-area households trust our maids and housekeepers to keep their homes spotless,
 						sanitized, and sparkling clean <i>week after week.</i>
 					</p>
-				</div>
+				</Reveal>
 				<div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-					{STATS.map((s) => (
-						<div key={s.label} className="text-center bg-white border border-ink-200 rounded-[22px] px-6 py-[34px]">
-							<div className={`font-sans text-[58px] leading-none ${s.color}`}>{s.value}</div>
+					{STATS.map((s, i) => (
+						<Reveal key={s.label} delay={i * 90} className="text-center bg-white border border-ink-200 rounded-[22px] px-6 py-[34px]">
+							<CountUp value={s.value} className={`block font-sans text-[58px] leading-none ${s.color}`} />
 							<div className="text-sm font-semibold text-ink-600 mt-2.5">{s.label}</div>
-						</div>
+						</Reveal>
 					))}
 				</div>
 			</div>
@@ -89,7 +91,7 @@ function WhySection() {
 		<section id="why" className="py-24 bg-white border-t border-ink-200">
 			<div className="max-w-[1240px] mx-auto px-10 max-md:px-6">
 				{/* Header: asymmetric split */}
-				<div className="grid md:grid-cols-[1.05fr_0.95fr] gap-14 items-end mb-[62px]">
+				<Reveal className="grid md:grid-cols-[1.05fr_0.95fr] gap-14 items-end mb-[62px]">
 					<div>
 						<div className="inline-flex items-center gap-[11px] text-xs font-bold text-pink-500 uppercase tracking-[0.14em] mb-[22px]">
 							<span className="w-7 h-[1.5px] bg-pink-500 inline-block" />
@@ -106,7 +108,7 @@ function WhySection() {
 						We&apos;ve spent 10+ years earning the trust of homeowners across King and Snohomish County.
 						Here&apos;s what sets us apart from other cleaning companies in Seattle:
 					</p>
-				</div>
+				</Reveal>
 
 				{/* Photo strip */}
 				<div className="grid grid-cols-1 md:grid-cols-[1.7fr_1fr_1fr] gap-4 md:h-[clamp(240px,29vw,360px)] mb-[84px]">
@@ -114,20 +116,21 @@ function WhySection() {
 						{ src: "/img/pasted-1782782341097-0.png", alt: "Seattle" },
 						{ src: "/img/aw1a0619.jpg", alt: "Sparkling kitchen" },
 						{ src: "/img/aw1a0659.jpg", alt: "Happy client" },
-					].map((photo) => (
-						<div
+					].map((photo, i) => (
+						<Reveal
 							key={photo.src}
+							delay={i * 100}
 							className="rounded-[22px] overflow-hidden shadow-[0_26px_60px_rgba(30,62,162,0.10)] h-[220px] md:h-auto"
 						>
 							<img src={photo.src} alt={photo.alt} className="w-full h-full object-cover block" />
-						</div>
+						</Reveal>
 					))}
 				</div>
 
 				{/* Features: 2-col list */}
 				<div className="grid md:grid-cols-2 gap-x-20">
-					{FEATURES.map((f) => (
-						<div key={f.title} className="flex gap-6 py-[42px] border-t border-ink-200">
+					{FEATURES.map((f, i) => (
+						<Reveal key={f.title} delay={(i % 2) * 90} className="flex gap-6 py-[42px] border-t border-ink-200">
 							<div className="shrink-0 w-[50px] h-[50px] rounded-[15px] bg-pink-50 text-pink-500 flex items-center justify-center">
 								{f.icon}
 							</div>
@@ -137,7 +140,7 @@ function WhySection() {
 								</h3>
 								<p className="text-[14.5px] text-ink-600 leading-[1.95]">{f.desc}</p>
 							</div>
-						</div>
+						</Reveal>
 					))}
 				</div>
 			</div>
@@ -169,7 +172,7 @@ function TestimonialsSection() {
 	return (
 		<section className="py-24 bg-white border-t border-ink-200">
 			<div className="max-w-[1240px] mx-auto px-10 max-md:px-6">
-				<div className="text-center mb-12">
+				<Reveal className="text-center mb-12">
 					<div className="text-xs font-bold text-pink-500 uppercase tracking-[0.1em] mb-[13px]">Testimonials</div>
 					<h2 className="font-serif text-[clamp(40px,4.5vw,60px)] font-normal text-ink-900 tracking-[-0.02em] mb-4">
 						Rated by real Seattle-area clients
@@ -178,7 +181,7 @@ function TestimonialsSection() {
 						<Star size={16} className="text-pink-500 fill-pink-500" />
 						<span className="text-sm font-semibold text-ink-800">39 verified reviews on Thumbtack</span>
 					</div>
-				</div>
+				</Reveal>
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-[22px] mb-[34px]">
 					{/* Review 1 */}
 					<div className="bg-white rounded-[22px] px-7 py-[30px] shadow-[0_8px_24px_rgba(30,62,162,0.06)]">
@@ -289,7 +292,7 @@ function GallerySection() {
 		<section id="gallery" className="py-24 bg-pink-50">
 			<div className="max-w-[1240px] mx-auto px-10 max-md:px-6">
 				{/* header */}
-				<div className="flex items-end justify-between flex-wrap gap-6 mb-10">
+				<Reveal className="flex items-end justify-between flex-wrap gap-6 mb-10">
 					<div>
 						<div className="text-xs font-bold text-pink-500 uppercase tracking-[0.1em] mb-3">Our work</div>
 						<h2 className="font-serif text-[clamp(36px,4vw,56px)] font-normal text-ink-900 tracking-[-0.02em] leading-[1.12]">
@@ -302,7 +305,7 @@ function GallerySection() {
 					>
 						Read our blog <ArrowRight size={15} />
 					</Link>
-				</div>
+				</Reveal>
 
 				{/* masonry grid */}
 				<div className="grid grid-cols-2 auto-rows-[180px] lg:grid-cols-4 lg:grid-rows-[220px_220px_300px] gap-3.5">

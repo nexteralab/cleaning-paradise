@@ -139,7 +139,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 					{/* LEFT: text */}
 					<div>
 						<Link
-							href="/services"
+							href="/cleaning-services-in-wa"
 							className="mb-5 inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-[#808098] no-underline transition-colors hover:text-pink-500"
 						>
 							<ArrowLeft size={13} />

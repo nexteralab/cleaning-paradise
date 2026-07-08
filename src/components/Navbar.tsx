@@ -1,18 +1,22 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Phone, Menu, X } from "lucide-react";
 
 const links = [
-	{ href: "/services", label: "Services" },
+	{ href: "/cleaning-services-in-wa", label: "Services" },
 	{ href: "/locations", label: "Locations" },
 	{ href: "/blog", label: "Blog" },
-	{ href: "/about", label: "About Us" },
+	{ href: "/about-us", label: "About Us" },
 ];
 
 export default function Navbar() {
 	const [open, setOpen] = useState(false);
+	const pathname = usePathname();
+
+	if (pathname?.startsWith("/admin")) return null;
 
 	return (
 		<div className="fixed top-[30px] right-4 left-[30px] z-[9999] md:top-[42px] md:right-auto md:left-[42px]">

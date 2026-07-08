@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Reveal from "@/components/Reveal";
 import {
 	ArrowDown,
 	ArrowRight,
@@ -29,37 +30,37 @@ const serviceCards: ServiceCard[] = [
 		img: "/img/aw1a0696-mr6t4de0.jpg",
 		title: "Standard Cleaning",
 		description: "Recurring upkeep for kitchens, baths, living areas and bedrooms — week after week.",
-		href: "/services/standard-cleaning",
+		href: "/cleaning-services-in-wa/standard-cleaning",
 	},
 	{
 		img: "/img/aw1a0734-mr6t5kd1.jpg",
 		title: "Deep Cleaning",
 		description: "Top-to-bottom reset: baseboards, appliances, grout and every overlooked corner.",
-		href: "/services/deep-cleaning",
+		href: "/cleaning-services-in-wa/deep-cleaning",
 	},
 	{
 		img: "/img/comercial-cleaning-mr6t64gm.png",
 		title: "Commercial Cleaning",
 		description: "Offices and workspaces across the metro — productive, hygienic and client-ready.",
-		href: "/services/commercial-cleaning",
+		href: "/cleaning-services-in-wa/commercial-cleaning",
 	},
 	{
 		img: "/img/aw1a0626-scaled-mr6t6wy8.jpg",
 		title: "Move In / Out",
 		description: "Detailed cleaning before you hand over the keys or settle into your new home.",
-		href: "/services/move-in-out",
+		href: "/cleaning-services-in-wa/move-in-out",
 	},
 	{
 		img: "/img/svc-packing-new.png",
 		title: "Packing & Unpacking",
 		description: "Professional packing and unpacking to take the stress out of moving day.",
-		href: "/services/packing-unpacking",
+		href: "/cleaning-services-in-wa/packing-unpacking",
 	},
 	{
 		img: "/img/carpet-cleaning-mr81cvnx.png",
 		title: "Carpet Cleaning",
 		description: "Deep extraction that lifts allergens, pet dander and embedded dirt — freshness restored.",
-		href: "/services/carpet-cleaning",
+		href: "/cleaning-services-in-wa/carpet-cleaning",
 	},
 ];
 
@@ -101,7 +102,7 @@ export default function CleaningServicesInWaPage() {
 					/>
 
 					<div className="relative z-[2] flex flex-wrap items-center gap-[60px] px-[max(48px,calc(50%-560px))] pt-[110px] pb-20">
-						<div className="min-w-[300px] flex-[1_1_420px]">
+						<Reveal className="min-w-[300px] flex-[1_1_420px]">
 							<div className="mb-6 inline-flex items-center gap-2 rounded-full bg-white/[0.18] px-4 py-[7px] text-[11.5px] font-bold tracking-[0.08em] text-white uppercase backdrop-blur-[6px]">
 								<Sparkles size={13} />6 Professional Services
 							</div>
@@ -129,7 +130,7 @@ export default function CleaningServicesInWaPage() {
 									Get a free quote
 								</Link>
 							</div>
-						</div>
+						</Reveal>
 					</div>
 				</div>
 			</section>
@@ -137,7 +138,7 @@ export default function CleaningServicesInWaPage() {
 			{/* SERVICES GRID */}
 			<section id="services" className="bg-white pt-[88px] pb-24">
 				<div className="mx-auto max-w-[1240px] px-10">
-					<div className="mb-[60px] text-center">
+					<Reveal className="mb-[60px] text-center">
 						<div className="mb-3.5 text-xs font-bold tracking-[0.1em] text-pink-500 uppercase">
 							What we offer
 						</div>
@@ -148,29 +149,30 @@ export default function CleaningServicesInWaPage() {
 							Every service is handled by trained, background-checked professionals. Licensed, insured,
 							and satisfaction-guaranteed.
 						</p>
-					</div>
+					</Reveal>
 
 					<div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-						{serviceCards.map((card) => (
-							<Link
-								key={card.title}
-								href={card.href}
-								className="flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-[0_12px_40px_rgba(30,62,162,0.08)] transition-all duration-[250ms] ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1.5 hover:shadow-[0_22px_55px_rgba(30,62,162,0.16)]"
-							>
-								{/* eslint-disable-next-line @next/next/no-img-element */}
-								<img src={card.img} alt={card.title} className="block h-[250px] w-full object-cover" />
-								<div className="flex flex-1 flex-col px-8 pt-7 pb-[34px]">
-									<h3 className="mb-3.5 text-2xl font-bold tracking-[-0.01em] text-blue-600">
-										{card.title}
-									</h3>
-									<p className="mb-[26px] flex-1 text-[15px] leading-[1.6] text-[#3f4f8f]">
-										{card.description}
-									</p>
-									<span className="inline-flex items-center gap-2 text-[15px] font-semibold text-pink-500">
-										Book now <ArrowRight size={16} />
-									</span>
-								</div>
-							</Link>
+						{serviceCards.map((card, i) => (
+							<Reveal key={card.title} delay={(i % 3) * 90} className="h-full">
+								<Link
+									href={card.href}
+									className="flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-[0_12px_40px_rgba(30,62,162,0.08)] transition-all duration-[250ms] ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1.5 hover:shadow-[0_22px_55px_rgba(30,62,162,0.16)]"
+								>
+									{/* eslint-disable-next-line @next/next/no-img-element */}
+									<img src={card.img} alt={card.title} className="block h-[250px] w-full object-cover" />
+									<div className="flex flex-1 flex-col px-8 pt-7 pb-[34px]">
+										<h3 className="mb-3.5 text-2xl font-bold tracking-[-0.01em] text-blue-600">
+											{card.title}
+										</h3>
+										<p className="mb-[26px] flex-1 text-[15px] leading-[1.6] text-[#3f4f8f]">
+											{card.description}
+										</p>
+										<span className="inline-flex items-center gap-2 text-[15px] font-semibold text-pink-500">
+											Book now <ArrowRight size={16} />
+										</span>
+									</div>
+								</Link>
+							</Reveal>
 						))}
 					</div>
 				</div>
@@ -179,20 +181,21 @@ export default function CleaningServicesInWaPage() {
 			{/* WHY CLEANING PARADISE */}
 			<section className="bg-blue-600 py-[88px]">
 				<div className="mx-auto max-w-[1240px] px-10">
-					<div className="mb-14 text-center">
+					<Reveal className="mb-14 text-center">
 						<div className="mb-3.5 text-xs font-bold tracking-[0.1em] text-white/60 uppercase">
 							Why choose us
 						</div>
 						<h2 className="font-serif text-[clamp(34px,4vw,52px)] leading-[1.1] font-normal tracking-[-0.02em] text-white">
 							The Cleaning Paradise difference
 						</h2>
-					</div>
+					</Reveal>
 					<div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-						{whyItems.map((item) => {
+						{whyItems.map((item, i) => {
 							const Icon = item.icon;
 							return (
-								<div
+								<Reveal
 									key={item.title}
+									delay={(i % 4) * 80}
 									className="rounded-[22px] border border-white/10 bg-white/[0.08] px-6 py-7"
 								>
 									<div className="mb-[18px] flex h-11 w-11 items-center justify-center rounded-[14px] bg-pink-500">
@@ -200,7 +203,7 @@ export default function CleaningServicesInWaPage() {
 									</div>
 									<h3 className="mb-2 text-base font-semibold text-white">{item.title}</h3>
 									<p className="text-[13.5px] leading-[1.6] text-white/65">{item.description}</p>
-								</div>
+								</Reveal>
 							);
 						})}
 					</div>

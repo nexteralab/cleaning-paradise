@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Reveal from "@/components/Reveal";
+import CountUp from "@/components/CountUp";
 import {
 	ArrowRight,
 	ArrowUpRight,
@@ -137,7 +139,7 @@ export default function AboutPage() {
 				<div className="max-w-[1240px] mx-auto">
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center mb-14">
 						{/* Left: text */}
-						<div>
+						<Reveal>
 							<div className="text-[12px] font-bold text-pink-500 uppercase tracking-[.12em] mb-[22px]">
 								About Us
 							</div>
@@ -152,28 +154,28 @@ export default function AboutPage() {
 								themselves. Based in Lynnwood, WA — serving Greater Seattle
 								since 2014.
 							</p>
-						</div>
+						</Reveal>
 						{/* Right: team photo */}
-						<div className="rounded-3xl overflow-hidden h-[520px]">
+						<Reveal delay={120} className="rounded-3xl overflow-hidden h-[520px]">
 							<img
 								src="/img/aw1a0562.jpg"
 								alt="The Cleaning Paradise team"
 								className="w-full h-full object-cover block"
 							/>
-						</div>
+						</Reveal>
 					</div>
 
 					{/* Divider + quick stats */}
 					<div className="border-t border-ink-200 pt-10 grid grid-cols-2 md:grid-cols-4 gap-8">
-						{stats.map((s) => (
-							<div key={s.label}>
+						{stats.map((s, i) => (
+							<Reveal key={s.label} delay={i * 80}>
 								<div className="font-serif text-[52px] font-normal text-ink-900 leading-none tracking-[-0.02em]">
-									{s.value}
+									<CountUp value={s.value} />
 								</div>
 								<div className="text-[13px] font-semibold text-[#808098] mt-1.5">
 									{s.label}
 								</div>
-							</div>
+							</Reveal>
 						))}
 					</div>
 				</div>
@@ -183,7 +185,7 @@ export default function AboutPage() {
 			<section id="story" className="px-10 py-24 bg-white border-t border-ink-200">
 				<div className="max-w-[1240px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
 					{/* Left: image */}
-					<div className="relative">
+					<Reveal className="relative">
 						<div className="rounded-[20px] overflow-hidden aspect-[4/5]">
 							<img
 								src="/img/aw1a0626-scaled.jpg"
@@ -194,16 +196,16 @@ export default function AboutPage() {
 						{/* year badge */}
 						<div className="absolute -bottom-5 -right-5 bg-ink-900 rounded-2xl px-6 py-[18px]">
 							<div className="font-serif text-4xl font-normal text-white leading-none">
-								2014
+								2020
 							</div>
 							<div className="text-[11px] font-semibold text-ink-400 mt-[3px] uppercase tracking-[.07em]">
 								Founded
 							</div>
 						</div>
-					</div>
+					</Reveal>
 
 					{/* Right: text */}
-					<div>
+					<Reveal delay={120}>
 						<Kicker>Our story</Kicker>
 						<h2 className="font-serif text-[clamp(36px,4vw,56px)] font-normal text-ink-900 tracking-[-0.02em] leading-[1.15] mb-8">
 							From a single mop to Seattle&apos;s most trusted cleaning crew
@@ -230,26 +232,26 @@ export default function AboutPage() {
 								</div>
 							</div>
 						</div>
-					</div>
+					</Reveal>
 				</div>
 			</section>
 
 			{/* ============ VALUES ============ */}
 			<section className="px-10 py-24 bg-white border-t border-ink-200">
 				<div className="max-w-[1240px] mx-auto">
-					<div className="mb-16">
+					<Reveal className="mb-16">
 						<Kicker>What drives us</Kicker>
 						<h2 className="font-serif text-[clamp(40px,5vw,68px)] font-normal text-ink-900 tracking-[-0.025em] leading-[1.08] max-w-[700px]">
 							Our mission is a cleaner, happier home for every Seattle family
 						</h2>
-					</div>
+					</Reveal>
 
 					{/* Values: editorial list */}
 					<div className="grid grid-cols-1 md:grid-cols-3 gap-0">
-						{values.map((v) => {
+						{values.map((v, i) => {
 							const Icon = v.icon;
 							return (
-								<div key={v.title} className={v.className}>
+								<Reveal key={v.title} delay={(i % 3) * 90} className={v.className}>
 									<div
 										className={`w-11 h-11 rounded-xl flex items-center justify-center mb-5 ${
 											v.color === "pink" ? "bg-pink-50" : "bg-blue-50"
@@ -263,10 +265,8 @@ export default function AboutPage() {
 									<h3 className="font-serif text-[26px] font-normal text-ink-900 mb-3 leading-[1.2]">
 										{v.title}
 									</h3>
-									<p className="text-[14.5px] text-ink-600 leading-[1.8]">
-										{v.text}
-									</p>
-								</div>
+									<p className="text-[14.5px] text-ink-600 leading-[1.8]">{v.text}</p>
+								</Reveal>
 							);
 						})}
 					</div>
@@ -277,7 +277,7 @@ export default function AboutPage() {
 			<section className="px-10 py-24 bg-white border-t border-ink-200">
 				<div className="max-w-[1240px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
 					{/* Left: text */}
-					<div>
+					<Reveal>
 						<Kicker>The team</Kicker>
 						<h2 className="font-serif text-[clamp(36px,4vw,54px)] font-normal text-ink-900 tracking-[-0.02em] leading-[1.12] mb-7">
 							Real people who genuinely care about your home
@@ -301,13 +301,14 @@ export default function AboutPage() {
 								</div>
 							))}
 						</div>
-					</div>
+					</Reveal>
 
 					{/* Right: staggered photo grid */}
 					<div className="grid grid-cols-2 gap-4">
-						{teamPhotos.map((p) => (
-							<div
+						{teamPhotos.map((p, i) => (
+							<Reveal
 								key={p.src}
+								delay={i * 90}
 								className={`rounded-[20px] overflow-hidden aspect-[3/4] ${p.className}`}
 							>
 								<img
@@ -315,7 +316,7 @@ export default function AboutPage() {
 									alt="Team member"
 									className="w-full h-full object-cover block"
 								/>
-							</div>
+							</Reveal>
 						))}
 					</div>
 				</div>
@@ -324,7 +325,7 @@ export default function AboutPage() {
 			{/* ============ REVIEWS ============ */}
 			<section className="px-10 py-24 bg-white border-t border-ink-200">
 				<div className="max-w-[1240px] mx-auto">
-					<div className="mb-14 flex items-end justify-between gap-8 flex-wrap">
+					<Reveal className="mb-14 flex items-end justify-between gap-8 flex-wrap">
 						<div>
 							<Kicker>What clients say</Kicker>
 							<h2 className="font-serif text-[clamp(36px,4.5vw,60px)] font-normal text-ink-900 tracking-[-0.02em] leading-[1.08]">
@@ -341,12 +342,13 @@ export default function AboutPage() {
 						>
 							All 39 reviews on Thumbtack <ArrowUpRight size={15} />
 						</a>
-					</div>
+					</Reveal>
 
 					<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-						{reviews.map((r) => (
-							<div
+						{reviews.map((r, i) => (
+							<Reveal
 								key={r.name}
+								delay={i * 90}
 								className="border border-ink-200 rounded-[20px] py-8 px-7"
 							>
 								<div className="text-pink-500 text-[15px] tracking-[2px] mb-4">
@@ -368,7 +370,7 @@ export default function AboutPage() {
 										</div>
 									</div>
 								</div>
-							</div>
+							</Reveal>
 						))}
 					</div>
 				</div>
@@ -376,7 +378,7 @@ export default function AboutPage() {
 
 			{/* ============ CTA ============ */}
 			<section className="px-10 py-24 bg-white border-t border-ink-200">
-				<div className="max-w-[1240px] mx-auto flex items-center justify-between gap-12 flex-wrap">
+				<Reveal className="max-w-[1240px] mx-auto flex items-center justify-between gap-12 flex-wrap">
 					<div>
 						<h2 className="font-serif text-[clamp(40px,5vw,66px)] font-normal text-ink-900 tracking-[-0.025em] leading-[1.08] mb-4">
 							Ready for a spotless home?
@@ -401,7 +403,7 @@ export default function AboutPage() {
 							(425) 610-0241
 						</a>
 					</div>
-				</div>
+				</Reveal>
 			</section>
 		</div>
 	);

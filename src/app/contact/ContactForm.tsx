@@ -40,6 +40,8 @@ function SectionHeading({ number, children }: { number: number; children: React.
 
 export default function ContactForm() {
 	const [submitted, setSubmitted] = useState(false);
+	const [submitting, setSubmitting] = useState(false);
+	const [error, setError] = useState("");
 	const [selectedServices, setSelectedServices] = useState<string[]>([]);
 
 	const toggleService = (label: string) => {
@@ -70,10 +72,40 @@ export default function ContactForm() {
 	return (
 		<div className="rounded-3xl border border-[#EAEAF2] bg-white p-[clamp(24px,3vw,40px)] shadow-[0_24px_64px_rgba(30,62,162,0.09)]">
 			<form
-				onSubmit={(e) => {
+				onSubmit={async (e) => {
 					e.preventDefault();
-					setSubmitted(true);
-					window.scrollTo({ top: 0, behavior: "smooth" });
+					setError("");
+					setSubmitting(true);
+					const fd = new FormData(e.currentTarget);
+					const payload = {
+						firstName: fd.get("firstName"),
+						lastName: fd.get("lastName"),
+						email: fd.get("email"),
+						phone: fd.get("phone"),
+						street: fd.get("street"),
+						unit: fd.get("unit"),
+						city: fd.get("city"),
+						zip: fd.get("zip"),
+						services: selectedServices,
+						date: fd.get("date"),
+						time: fd.get("time"),
+						frequency: fd.get("frequency"),
+						notes: fd.get("notes"),
+						promo: fd.get("promo") === "on",
+						source: "contact",
+					};
+					const res = await fetch("/api/contact", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(payload),
+					});
+					setSubmitting(false);
+					if (res.ok) {
+						setSubmitted(true);
+						window.scrollTo({ top: 0, behavior: "smooth" });
+					} else {
+						setError("Something went wrong. Please call (425) 610-0241.");
+					}
 				}}
 				className="flex flex-col gap-[30px]"
 			>
@@ -211,11 +243,13 @@ export default function ContactForm() {
 					</label>
 				</div>
 
+				{error && <p className="text-center text-sm text-pink-600">{error}</p>}
 				<button
 					type="submit"
-					className="flex cursor-pointer items-center justify-center gap-2 rounded-[14px] bg-pink-500 p-4 text-[15px] font-bold text-white transition-all duration-200 ease-[cubic-bezier(.16,1,.3,1)] hover:bg-pink-600 hover:shadow-[0_10px_30px_rgba(255,80,181,.36)]"
+					disabled={submitting}
+					className="flex cursor-pointer items-center justify-center gap-2 rounded-[14px] bg-pink-500 p-4 text-[15px] font-bold text-white transition-all duration-200 ease-[cubic-bezier(.16,1,.3,1)] hover:bg-pink-600 hover:shadow-[0_10px_30px_rgba(255,80,181,.36)] disabled:opacity-60"
 				>
-					Request my free quote <ArrowRight size={16} />
+					{submitting ? "Sending…" : "Request my free quote"} <ArrowRight size={16} />
 				</button>
 				<p className="flex items-center justify-center gap-[5px] text-center text-[11.5px] text-[#A0A0AE]">
 					<ShieldCheck size={13} />
