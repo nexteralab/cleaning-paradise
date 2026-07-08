@@ -212,7 +212,7 @@ export default function CleaningServicesInWaPage() {
 
 			{/* CTA */}
 			<section className="bg-white px-[max(40px,calc(50%-580px))] py-[88px]">
-				<div className="text-center">
+				<Reveal className="text-center">
 					<h2 className="mb-4 font-serif text-[clamp(36px,5vw,62px)] leading-[1.1] font-normal text-ink-900 italic">
 						Ready for a spotless home?
 					</h2>
@@ -233,7 +233,7 @@ export default function CleaningServicesInWaPage() {
 							Call (425) 610-0241
 						</a>
 					</div>
-				</div>
+				</Reveal>
 			</section>
 		</div>
 	);
