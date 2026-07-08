@@ -349,7 +349,7 @@ export function ServicesSection() {
 												))}
 											</div>
 											<a
-												href="#book"
+												href="/contact"
 												className={`inline-flex items-center gap-2 font-sans text-[13px] font-bold text-white rounded-full px-[22px] py-2.5 no-underline ${
 													pink
 														? "bg-pink-500 shadow-[0_4px_20px_rgba(255,80,181,0.30)]"
