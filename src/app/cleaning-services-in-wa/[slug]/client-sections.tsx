@@ -36,7 +36,7 @@ export function BeforeAfterSlider() {
 		>
 			{/* After image (base) */}
 			<img
-				src="/img/after.png"
+				src="/img/after.webp"
 				alt="After cleaning"
 				className="pointer-events-none absolute inset-0 h-full w-full object-cover"
 			/>
@@ -46,7 +46,7 @@ export function BeforeAfterSlider() {
 				style={{ clipPath: `inset(0 ${100 - pct}% 0 0)` }}
 			>
 				<img
-					src="/img/before.png"
+					src="/img/before.webp"
 					alt="Before cleaning"
 					className="absolute inset-0 h-full w-full object-cover"
 				/>

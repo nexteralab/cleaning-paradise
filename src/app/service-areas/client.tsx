@@ -52,7 +52,7 @@ export function BeforeAfterSlider() {
 				className="relative w-full aspect-[760/620] rounded-3xl overflow-hidden shadow-[0_28px_60px_rgba(30,62,162,0.22)] select-none cursor-ew-resize touch-none bg-[#222]"
 			>
 				<img
-					src="/img/after.png"
+					src="/img/after.webp"
 					alt="After cleaning"
 					draggable={false}
 					className="absolute inset-0 w-full h-full object-cover pointer-events-none"
@@ -65,7 +65,7 @@ export function BeforeAfterSlider() {
 					style={{ clipPath: `inset(0 ${100 - pos}% 0 0)` }}
 				>
 					<img
-						src="/img/before.png"
+						src="/img/before.webp"
 						alt="Before cleaning"
 						draggable={false}
 						className="absolute inset-0 w-full h-full object-cover pointer-events-none"

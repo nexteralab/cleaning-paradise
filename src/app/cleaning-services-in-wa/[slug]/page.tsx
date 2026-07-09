@@ -23,6 +23,8 @@ import {
 } from "lucide-react";
 import { BeforeAfterSlider, FaqAccordion, QuoteForm } from "./client-sections";
 import { services, serviceSlugs, type IconName, type ServiceContent } from "./services-data";
+import ReviewCard from "@/components/ReviewCard";
+import { reviews } from "@/lib/reviews";
 
 const icons: Record<IconName, LucideIcon> = {
 	house: House,
@@ -66,37 +68,6 @@ const galleryImages: { src: string; alt: string; wide: boolean }[] = [
 	{ src: "/img/svc-move.jpg", alt: "Move cleaning", wide: false },
 	{ src: "/img/svc-deep.jpg", alt: "Service", wide: true },
 	{ src: "/img/svc-carpet.jpg", alt: "Carpet cleaning", wide: false },
-];
-
-const testimonials = [
-	{
-		paragraphs: [
-			"Cleaning Paradise has been amazing to work with. Their communication is always prompt, professional, and friendly. The quality of their cleaning service is outstanding, and they consistently pay attention to the details. Their pricing is also very reasonable for the level of service they provide. It's hard to find a company that combines reliability, quality, and affordability so well. I highly recommend Cleaning Paradise to anyone in the Seattle area looking for a trustworthy cleaning service.",
-		],
-		initials: "MG",
-		name: "Camilo P.",
-		location: "Bellevue, WA",
-	},
-	{
-		paragraphs: [
-			"Allizon was a true lifesaver during a family crisis. We all live out of state. She moved her schedule around to assist with a cleaning for a terminally ill family member and a disabled child.",
-			"She came in with no judgement, we talked priorities and the team went to town. The house looked so nice and smelled so fresh, I would never have been able to pull that off without her help.",
-			"This wasn't a normal clean as I needed help moving furniture around to accommodate a large group of people in the middle of trying to get the house ready for sale.",
-			"We will be working with her again in the future and highly recommend Cleaning Paradise LLC for all your cleaning needs.",
-			"They are amazing and the house shined when the whole family showed up for the funeral.",
-		],
-		initials: "JC",
-		name: "Brenda G.",
-		location: "Kirkland, WA",
-	},
-	{
-		paragraphs: [
-			"We've been using Cleaning Paradise's services for about 6 months, almost monthly. Allizon and her team are excellent, always communicating well, working with our schedules and very kind. We always love how spotless they make our home, especially with us having a pet dog that sheds a lot! Happy to keep their services for many more months to come!",
-		],
-		initials: "AL",
-		name: "Roynerah B",
-		location: "Seattle, WA",
-	},
 ];
 
 const coverageCities = [
@@ -339,30 +310,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 							</span>
 						</div>
 					</div>
-					<div className="mb-[34px] grid grid-cols-1 gap-[22px] md:grid-cols-3">
-						{testimonials.map((t) => (
-							<div
-								key={t.name}
-								className="rounded-[22px] bg-white px-7 py-[30px] shadow-[0_8px_24px_rgba(30,62,162,0.06)]"
-							>
-								<div className="mb-3.5 text-[15px] tracking-[2px] text-pink-500">★★★★★</div>
-								<div className="mb-[22px] text-[15px] leading-[1.65] text-ink-800 italic">
-									{t.paragraphs.map((p, i) => (
-										<p key={i} className={i < t.paragraphs.length - 1 ? "mb-3" : ""}>
-											{p}
-										</p>
-									))}
-								</div>
-								<div className="flex items-center gap-3">
-									<div className="flex h-[42px] w-[42px] items-center justify-center rounded-full bg-[#FFD6EF] text-[13px] font-bold text-[#BC2180]">
-										{t.initials}
-									</div>
-									<div>
-										<div className="text-sm font-semibold text-ink-800">{t.name}</div>
-										<div className="text-xs text-[#808098]">{t.location}</div>
-									</div>
-								</div>
-							</div>
+					<div className="mb-[34px] grid grid-cols-1 items-start gap-[22px] md:grid-cols-3">
+						{reviews.map((r) => (
+							<ReviewCard key={r.name} review={r} />
 						))}
 					</div>
 					<div className="text-center">

@@ -39,8 +39,8 @@ export function HeroSection() {
 	}, []);
 
 	return (
-		<section id="top" className="bg-white p-6">
-			<div className="relative w-full h-[calc(100vh-48px)] min-h-[660px] rounded-[30px] overflow-hidden shadow-[0_30px_70px_rgba(30,62,162,0.18)]">
+		<section id="top" className="bg-white p-4 md:p-6">
+			<div className="relative w-full h-full min-h-[660px] rounded-[30px] overflow-hidden shadow-[0_30px_70px_rgba(30,62,162,0.18)]">
 				{/* background video */}
 				<video
 					ref={videoRef}
@@ -55,12 +55,12 @@ export function HeroSection() {
 				<div className="absolute inset-0 pointer-events-none bg-[linear-gradient(180deg,rgba(19,19,32,0.22)_0%,rgba(19,19,32,0.04)_32%,rgba(19,19,32,0.10)_60%,rgba(19,19,32,0.50)_100%)]" />
 
 				{/* content layer */}
-				<div className="relative z-10 flex flex-col h-full p-[26px] gap-6">
+				<div className="relative z-10 flex flex-col h-full p-4 md:p-6 gap-6 h-full">
 					{/* spacer */}
 					<div className="flex-1 min-h-8" />
 
 					{/* bottom row: headline + form */}
-					<div className="flex items-end justify-between gap-8 flex-wrap">
+					<div className="flex items-end justify-between gap-8 flex-wrap mt-8 md:mt-0">
 						{/* headline */}
 						<div className="flex-[1_1_360px] min-w-[300px]">
 							<div className="inline-flex items-center gap-[7px] bg-white/[0.18] backdrop-blur-[6px] text-white text-[11.5px] font-semibold tracking-[0.06em] uppercase px-3.5 py-1.5 rounded-full mb-5">
@@ -77,7 +77,7 @@ export function HeroSection() {
 						</div>
 
 						{/* contact / booking form */}
-						<div id="book" className="w-[min(460px,44%)] min-w-[320px] shrink-0 max-md:w-full">
+						<div id="book" className="w-[min(460px,44%)] min-w-[230px] shrink-0 max-md:w-full">
 							<form
 								onSubmit={(e) => e.preventDefault()}
 								className="bg-white rounded-[26px] shadow-[0_26px_60px_rgba(19,19,32,0.28)] p-6 flex flex-col gap-[15px] max-h-[calc(100vh-150px)] overflow-y-auto"
@@ -88,7 +88,7 @@ export function HeroSection() {
 								</div>
 
 								{/* name + email */}
-								<div className="flex gap-2.5">
+								<div className="flex flex-col gap-2.5 sm:flex-row">
 									<input name="name" placeholder="Your name" className={`flex-1 min-w-0 ${inputClasses}`} />
 									<input
 										name="email"
@@ -194,7 +194,7 @@ const SERVICES: Service[] = [
 		desc: "Professional janitorial services for offices and commercial spaces in Seattle WA. We keep your workspace spotless, hygienic, and ready for business every day",
 		tags: ["Weekly", "Biweekly", "Monthly"],
 		accent: "blue",
-		img: "/img/comercial-cleaning.png",
+		img: "/img/comercial-cleaning.webp",
 		alt: "Commercial Cleaning",
 	},
 	{
@@ -214,7 +214,7 @@ const SERVICES: Service[] = [
 		desc: "Your local housekeeper team helps you pack, move, and settle in reducing move-day chaos without adding a thing to your to-do list.",
 		tags: ["One-time"],
 		accent: "pink",
-		img: "/img/gemini_generated_image_67heuh67heuh67he.png",
+		img: "/img/gemini_generated_image_67heuh67heuh67he.webp",
 		alt: "Packing & Unpacking",
 	},
 	{
@@ -224,7 +224,7 @@ const SERVICES: Service[] = [
 		desc: "Deep extraction that removes allergens, pet dander, and embedded grime. One of the most requested add-ons for our recurring housekeeping clients.",
 		tags: ["Monthly", "One-time"],
 		accent: "pink",
-		img: "/img/carpet-cleaning.png",
+		img: "/img/carpet-cleaning.webp",
 		alt: "Carpet Cleaning",
 	},
 ];
@@ -236,7 +236,9 @@ export function ServicesSection() {
 	const N = SERVICES.length;
 
 	useEffect(() => {
+		let ticking = false;
 		const compute = () => {
+			ticking = false;
 			const section = sectionRef.current;
 			if (!section || window.innerWidth < 1024) return;
 			const vh = window.innerHeight || document.documentElement.clientHeight;
@@ -245,14 +247,22 @@ export function ServicesSection() {
 			let raw = scrollable > 0 ? -rect.top / scrollable : 0;
 			raw = Math.max(0, Math.min(1, raw));
 			setProgress(raw * 100);
-			setActive(Math.min(N - 1, Math.max(0, Math.floor(raw * N))));
+			// +0.5 so the active row switches mid-band, not at the hard edge.
+			const idx = Math.min(N - 1, Math.max(0, Math.round(raw * N - 0.5)));
+			setActive((prev) => (prev === idx ? prev : idx));
 		};
-		window.addEventListener("scroll", compute, { passive: true });
-		window.addEventListener("resize", compute, { passive: true });
+		// rAF-throttle so we update at most once per frame (no per-event jitter).
+		const onScroll = () => {
+			if (ticking) return;
+			ticking = true;
+			requestAnimationFrame(compute);
+		};
+		window.addEventListener("scroll", onScroll, { passive: true });
+		window.addEventListener("resize", onScroll, { passive: true });
 		compute();
 		return () => {
-			window.removeEventListener("scroll", compute);
-			window.removeEventListener("resize", compute);
+			window.removeEventListener("scroll", onScroll);
+			window.removeEventListener("resize", onScroll);
 		};
 	}, [N]);
 
@@ -325,10 +335,11 @@ export function ServicesSection() {
 										<ChevronRight size={14} className="text-[#E0E0EE] shrink-0" />
 									</div>
 									<div
-										className={`overflow-hidden transition-[max-height,opacity,margin-top] duration-500 ease-[var(--ease-out)] max-lg:max-h-none max-lg:opacity-100 max-lg:mt-2 ${
-											on ? "lg:max-h-[520px] lg:opacity-100 lg:mt-2.5" : "lg:max-h-0 lg:opacity-0 lg:mt-0"
+										className={`grid transition-[grid-template-rows,opacity,margin-top] duration-[600ms] ease-[var(--ease-out)] max-lg:grid-rows-[1fr] max-lg:opacity-100 max-lg:mt-2 ${
+											on ? "lg:grid-rows-[1fr] lg:opacity-100 lg:mt-2.5" : "lg:grid-rows-[0fr] lg:opacity-0 lg:mt-0"
 										}`}
 									>
+										<div className="overflow-hidden">
 										<div className="pt-5 pb-2 pl-8">
 											<h3 className="font-serif text-[clamp(28px,2.8vw,46px)] font-normal text-ink-900 tracking-[-0.025em] leading-[1.1] mb-3">
 												{svc.title}
@@ -358,6 +369,7 @@ export function ServicesSection() {
 											>
 												Get a quote <ArrowRight size={12} />
 											</a>
+										</div>
 										</div>
 									</div>
 								</div>

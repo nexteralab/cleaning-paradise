@@ -3,6 +3,7 @@ import { Instrument_Serif, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import MusicPlayer from "@/components/MusicPlayer";
 
 const instrumentSerif = Instrument_Serif({
 	variable: "--font-instrument-serif",
@@ -19,6 +20,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
+	metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://cleaningparadisellc.com"),
 	title: "Cleaning Paradise | House Cleaning Services in Seattle, WA",
 	description:
 		"Professional residential and commercial cleaning based in Lynnwood, WA — serving Seattle and King & Snohomish County. Your home, perfectly clean.",
@@ -35,6 +37,7 @@ export default function RootLayout({
 				<Navbar />
 				{children}
 				<Footer />
+				<MusicPlayer />
 			</body>
 		</html>
 	);

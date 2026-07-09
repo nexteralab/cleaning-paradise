@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import CountUp from "@/components/CountUp";
 import Reveal from "@/components/Reveal";
+import ReviewCard from "@/components/ReviewCard";
+import { reviews } from "@/lib/reviews";
 import {
 	ArrowRight,
 	Award,
@@ -113,7 +115,7 @@ function WhySection() {
 				{/* Photo strip */}
 				<div className="grid grid-cols-1 md:grid-cols-[1.7fr_1fr_1fr] gap-4 md:h-[clamp(240px,29vw,360px)] mb-[84px]">
 					{[
-						{ src: "/img/pasted-1782782341097-0.png", alt: "Seattle" },
+						{ src: "/img/pasted-1782782341097-0.webp", alt: "Seattle" },
 						{ src: "/img/aw1a0619.jpg", alt: "Sparkling kitchen" },
 						{ src: "/img/aw1a0659.jpg", alt: "Happy client" },
 					].map((photo, i) => (
@@ -150,24 +152,6 @@ function WhySection() {
 
 /* ============ TESTIMONIALS (Thumbtack) ============ */
 
-function ReviewPhoto({ src }: { src: string }) {
-	return <img src={src} alt="Review photo" className="w-[76px] h-[76px] shrink-0 rounded-[10px] object-cover" />;
-}
-
-function ReviewerRow({ initials, name, city }: { initials: string; name: string; city: string }) {
-	return (
-		<div className="flex items-center gap-3">
-			<div className="w-[42px] h-[42px] rounded-full bg-pink-100 text-pink-700 font-bold text-[13px] flex items-center justify-center">
-				{initials}
-			</div>
-			<div>
-				<div className="font-semibold text-sm text-ink-800">{name}</div>
-				<div className="text-xs text-[#808098]">{city}</div>
-			</div>
-		</div>
-	);
-}
-
 function TestimonialsSection() {
 	return (
 		<section className="py-24 bg-white border-t border-ink-200">
@@ -182,71 +166,12 @@ function TestimonialsSection() {
 						<span className="text-sm font-semibold text-ink-800">39 verified reviews on Thumbtack</span>
 					</div>
 				</Reveal>
-				<div className="grid grid-cols-1 md:grid-cols-3 gap-[22px] mb-[34px]">
-					{/* Review 1 */}
-					<div className="bg-white rounded-[22px] px-7 py-[30px] shadow-[0_8px_24px_rgba(30,62,162,0.06)]">
-						<div className="text-pink-500 text-[15px] tracking-[2px] mb-3.5">★★★★★</div>
-						<p className="text-[15px] text-ink-800 leading-[1.65] italic mb-4">
-							Cleaning Paradise has been amazing to work with. Their communication is always prompt,
-							professional, and friendly. The quality of their cleaning service is outstanding, and they
-							consistently pay attention to the details. Their pricing is also very reasonable for the level of
-							service they provide. It&rsquo;s hard to find a company that combines reliability, quality, and
-							affordability so well. I highly recommend Cleaning Paradise to anyone in the Seattle area looking
-							for a trustworthy cleaning service.
-						</p>
-						<div className="flex gap-2 mb-[18px]">
-							<ReviewPhoto src="/img/aw1a0591.jpg" />
-						</div>
-						<ReviewerRow initials="MG" name="Camilo P." city="Bellevue, WA" />
-					</div>
-					{/* Review 2 */}
-					<div className="bg-white rounded-[22px] px-7 py-[30px] shadow-[0_8px_24px_rgba(30,62,162,0.06)]">
-						<div className="text-pink-500 text-[15px] tracking-[2px] mb-3.5">★★★★★</div>
-						<div className="text-[15px] text-ink-800 leading-[1.65] italic mb-[22px]">
-							<div>
-								Allizon was a true lifesaver during a family crisis. We all live out of state. She moved her
-								schedule around to assist with a cleaning for a terminally ill family member and a disabled
-								child.
-							</div>
-							<div>
-								She came in with no judgement, we talked priorities and the team went to town. The house looked
-								so nice and smelled so fresh,&nbsp; I would never have been able to pull that off without her
-								help.
-							</div>
-							<div>
-								This wasn&apos;t a normal clean as I needed help moving furniture around to accommodate a large
-								group of people in the middle of trying to get the house ready for sale.
-							</div>
-							<div>
-								We will be working with her again in the future and highly recommend Cleaning Paradise LLC for
-								all your cleaning needs.
-							</div>
-							<div>
-								<br />
-							</div>
-							<div>They are amazing and the house shined when the whole family showed up for the funeral.</div>
-						</div>
-						<div className="flex gap-2 mb-[18px]">
-							<ReviewPhoto src="/img/before.png" />
-							<ReviewPhoto src="/img/after.png" />
-						</div>
-						<ReviewerRow initials="JC" name="Brenda G." city="Kirkland, WA" />
-					</div>
-					{/* Review 3 */}
-					<div className="bg-white rounded-[22px] px-7 py-[30px] shadow-[0_8px_24px_rgba(30,62,162,0.06)]">
-						<div className="text-pink-500 text-[15px] tracking-[2px] mb-3.5">★★★★★</div>
-						<p className="text-[15px] text-ink-800 leading-[1.65] italic mb-[22px]">
-							We&apos;ve been using Cleaning Paradise&apos;s services for about 6 months, almost monthly. Allizon
-							and her team are excellent, always communicating well, working with our schedules and very kind. We
-							always love how spotless they make our home, especially with us having a pet dog that sheds a lot!
-							Happy to keep their services for many more months to come!
-						</p>
-						<div className="flex gap-2 mb-[18px]">
-							<ReviewPhoto src="/img/aw1a0630-mr2eiji3.jpg" />
-							<ReviewPhoto src="/img/aw1a0562-mr2ei5id.jpg" />
-						</div>
-						<ReviewerRow initials="AL" name="Roynerah B" city="Seattle, WA" />
-					</div>
+				<div className="grid grid-cols-1 md:grid-cols-3 gap-[22px] mb-[34px] items-start">
+					{reviews.map((r, i) => (
+						<Reveal key={r.name} delay={i * 90} className="h-full">
+							<ReviewCard review={r} />
+						</Reveal>
+					))}
 				</div>
 				<div className="text-center">
 					<a
@@ -324,7 +249,7 @@ function GallerySection() {
 					{/* tall right */}
 					<div className="row-span-2 lg:col-start-4 lg:row-start-1 lg:row-span-2 rounded-[22px] overflow-hidden shadow-[0_12px_32px_rgba(30,62,162,0.10)]">
 						<img
-							src="/img/pasted-1782782341097-0.png"
+							src="/img/pasted-1782782341097-0.webp"
 							alt="Team photo"
 							className="w-full h-full object-cover block"
 						/>

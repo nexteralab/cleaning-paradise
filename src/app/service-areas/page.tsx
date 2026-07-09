@@ -37,7 +37,7 @@ const SERVICES = [
 		desc: "Top-to-bottom reset: baseboards, appliances, grout and every overlooked corner.",
 	},
 	{
-		img: "/img/comercial-cleaning.png",
+		img: "/img/comercial-cleaning.webp",
 		alt: "Commercial cleaning",
 		title: "Commercial Cleaning",
 		desc: "Offices and workspaces across the metro — productive, hygienic and client-ready.",
@@ -49,13 +49,13 @@ const SERVICES = [
 		desc: "Detailed cleaning before you hand over the keys or settle into your new home.",
 	},
 	{
-		img: "/img/gemini_generated_image_67heuh67heuh67he.png",
+		img: "/img/gemini_generated_image_67heuh67heuh67he.webp",
 		alt: "Packing and unpacking",
 		title: "Packing & Unpacking",
 		desc: "Professional packing and unpacking to take the stress out of moving day.",
 	},
 	{
-		img: "/img/carpet-cleaning.png",
+		img: "/img/carpet-cleaning.webp",
 		alt: "Carpet cleaning",
 		title: "Carpet Cleaning",
 		desc: "Deep extraction that lifts allergens, pet dander and embedded dirt — freshness restored.",
@@ -275,7 +275,7 @@ export default function ServiceAreasPage() {
 					<div className="grid grid-cols-1 md:grid-cols-[1.7fr_1fr_1fr] gap-4 md:h-[clamp(240px,29vw,360px)] mb-[84px]">
 						<div className="rounded-[22px] overflow-hidden shadow-[0_26px_60px_rgba(30,62,162,0.10)] h-[240px] md:h-full">
 							<img
-								src="/img/pasted-1782782341097-0.png"
+								src="/img/pasted-1782782341097-0.webp"
 								alt="Seattle neighborhood"
 								className="w-full h-full object-cover block"
 							/>

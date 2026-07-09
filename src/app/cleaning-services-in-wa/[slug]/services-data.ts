@@ -443,7 +443,7 @@ export const services: Record<string, ServiceContent> = {
 		heroSubtitle:
 			"Professional carpet and rug cleaning across Seattle, WA — lifting stains, odors and allergens that vacuuming leaves behind.",
 		introEyebrow: "Professional carpet care",
-		introImage: "/img/carpet-cleaning.png",
+		introImage: "/img/carpet-cleaning.webp",
 		introImageAlt: "Carpet cleaning service Seattle",
 		introLead:
 			"Carpets trap dust, pet dander, odors and stains deep in the fibers where a vacuum can't reach. Cleaning Paradise's carpet cleaning service uses professional hot-water extraction to lift out embedded dirt, refresh high-traffic areas and leave your carpets looking — and smelling — like new.",

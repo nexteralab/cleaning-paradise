@@ -74,7 +74,7 @@ const services: Service[] = [
 		title: "Commercial Cleaning",
 		description:
 			"Offices and workspaces across the metro — productive, hygienic and client-ready.",
-		img: "/img/comercial-cleaning.png",
+		img: "/img/comercial-cleaning.webp",
 		alt: "Commercial cleaning",
 	},
 	{
@@ -87,14 +87,14 @@ const services: Service[] = [
 	{
 		title: "Packing & Unpacking",
 		description: "Professional packing and unpacking to take the stress out of moving day.",
-		img: "/img/gemini_generated_image_67heuh67heuh67he.png",
+		img: "/img/gemini_generated_image_67heuh67heuh67he.webp",
 		alt: "Packing and unpacking",
 	},
 	{
 		title: "Carpet Cleaning",
 		description:
 			"Deep extraction that lifts allergens, pet dander and embedded dirt — freshness restored.",
-		img: "/img/carpet-cleaning.png",
+		img: "/img/carpet-cleaning.webp",
 		alt: "Carpet cleaning",
 	},
 ];
@@ -193,7 +193,7 @@ const blogPosts: BlogPost[] = [
 ];
 
 const whyPhotos = [
-	{ src: "/img/pasted-1782782341097-0.png", alt: "Local neighborhood" },
+	{ src: "/img/pasted-1782782341097-0.webp", alt: "Local neighborhood" },
 	{ src: "/img/aw1a0591.jpg", alt: "Sparkling kitchen" },
 	{ src: "/img/aw1a0619.jpg", alt: "Happy client" },
 ];

@@ -39,7 +39,7 @@ const serviceCards: ServiceCard[] = [
 		href: "/cleaning-services-in-wa/deep-cleaning",
 	},
 	{
-		img: "/img/comercial-cleaning-mr6t64gm.png",
+		img: "/img/comercial-cleaning-mr6t64gm.webp",
 		title: "Commercial Cleaning",
 		description: "Offices and workspaces across the metro — productive, hygienic and client-ready.",
 		href: "/cleaning-services-in-wa/commercial-cleaning",
@@ -51,13 +51,13 @@ const serviceCards: ServiceCard[] = [
 		href: "/cleaning-services-in-wa/move-in-out",
 	},
 	{
-		img: "/img/svc-packing-new.png",
+		img: "/img/svc-packing-new.webp",
 		title: "Packing & Unpacking",
 		description: "Professional packing and unpacking to take the stress out of moving day.",
 		href: "/cleaning-services-in-wa/packing-unpacking",
 	},
 	{
-		img: "/img/carpet-cleaning-mr81cvnx.png",
+		img: "/img/carpet-cleaning-mr81cvnx.webp",
 		title: "Carpet Cleaning",
 		description: "Deep extraction that lifts allergens, pet dander and embedded dirt — freshness restored.",
 		href: "/cleaning-services-in-wa/carpet-cleaning",

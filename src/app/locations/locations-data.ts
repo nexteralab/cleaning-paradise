@@ -71,7 +71,7 @@ export const locations: Record<string, Location> = {
 	lynnwood: {
 		slug: "lynnwood",
 		name: "Lynnwood",
-		img: "/img/pasted-1782782394450-0.png",
+		img: "/img/pasted-1782782394450-0.webp",
 		before: "/img/locations/before4.png",
 		after: "/img/locations/after4.png",
 		beforeAlt: "Lynnwood home before cleaning",
