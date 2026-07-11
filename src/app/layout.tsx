@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MusicPlayer from "@/components/MusicPlayer";
+import ChatBot from "@/components/chatbot/ChatBot";
 
 const instrumentSerif = Instrument_Serif({
 	variable: "--font-instrument-serif",
@@ -38,6 +39,7 @@ export default function RootLayout({
 				{children}
 				<Footer />
 				<MusicPlayer />
+				<ChatBot />
 			</body>
 		</html>
 	);

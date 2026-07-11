@@ -15,6 +15,7 @@ import {
 	Heart,
 	House,
 	Leaf,
+	Phone,
 	Tag,
 	ShieldCheck,
 	Sparkles,
@@ -57,13 +58,6 @@ export async function generateMetadata({
 	return { title: service.metaTitle, description: service.metaDescription };
 }
 
-const trustChips: { icon: LucideIcon; label: string }[] = [
-	{ icon: ShieldCheck, label: "Licensed & Insured" },
-	{ icon: UserCheck, label: "Background-checked" },
-	{ icon: CircleCheck, label: "100% Guarantee" },
-	{ icon: Leaf, label: "Eco-friendly" },
-];
-
 const galleryImages: { src: string; alt: string; wide: boolean }[] = [
 	{ src: "/img/aw1a0562-mr2ei5id.jpg", alt: "Cleaning result", wide: true },
 	{ src: "/img/deep-cleaning-mr2ehsjj.jpg", alt: "Deep cleaning", wide: false },
@@ -103,8 +97,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 	const service: ServiceContent | undefined = services[slug];
 	if (!service) notFound();
 
-	const BadgeIcon = icons[service.badgeIcon];
-
 	return (
 		<div className="relative w-full overflow-x-clip">
 			{/* ═══ HERO ═══ */}
@@ -119,10 +111,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 							<ArrowLeft size={13} />
 							All Services
 						</Link>
-						<div className="mb-[22px] ml-3 inline-flex items-center gap-1.5 rounded-full bg-pink-50 px-3.5 py-1.5 text-[11px] font-bold tracking-[.08em] text-pink-500 uppercase">
-							<BadgeIcon size={12} />
-							{service.badgeLabel}
-						</div>
 						<h1 className="mb-4 font-serif text-[clamp(34px,3.8vw,58px)] leading-[1.1] font-normal tracking-[-0.02em] text-ink-900 text-pretty">
 							{service.heroTitle.map((part, i) => (
 								<span key={i}>
@@ -134,17 +122,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 						<p className="mb-7 max-w-[500px] text-[clamp(15px,1.3vw,18px)] leading-[1.75] text-ink-600">
 							{service.heroSubtitle}
 						</p>
-						<div className="mb-8 flex flex-wrap gap-2">
-							{trustChips.map(({ icon: Icon, label }) => (
-								<span
-									key={label}
-									className="inline-flex items-center gap-1.5 rounded-full bg-[#F4F4F8] px-3.5 py-[7px] text-xs font-semibold text-ink-600"
-								>
-									<Icon size={13} className="text-pink-500" />
-									{label}
-								</span>
-							))}
-						</div>
 						<div className="flex flex-wrap gap-3">
 							<a
 								href="#quote"
@@ -154,9 +131,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 							</a>
 							<a
 								href="tel:+14256100241"
-								className="inline-flex items-center gap-2 rounded-full border-[1.5px] border-ink-200 px-7 py-3.5 text-[15px] font-semibold text-ink-900 no-underline transition-all hover:border-pink-500 hover:text-pink-500"
+								aria-label="Call (425) 610-0241"
+								className="inline-flex items-center gap-2 rounded-full border-[1.5px] border-ink-200 px-7 py-3.5 text-[15px] font-semibold text-ink-900 no-underline transition-all hover:border-pink-500 hover:text-pink-500 max-md:px-4"
 							>
-								(425) 610-0241
+								<Phone size={16} className="md:hidden" />
+								<span className="max-md:hidden">(425) 610-0241</span>
 							</a>
 						</div>
 					</div>

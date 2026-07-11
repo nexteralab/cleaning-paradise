@@ -40,7 +40,6 @@ export interface ServiceContent {
 	metaTitle: string;
 	metaDescription: string;
 	badgeIcon: IconName;
-	badgeLabel: string;
 	heroImage: string;
 	heroImageAlt: string;
 	heroTitle: TitlePart[];
@@ -100,13 +99,10 @@ export const services: Record<string, ServiceContent> = {
 		metaDescription:
 			"Local, background-checked maids providing dependable house cleaning services across Seattle, WA on your schedule, your way.",
 		badgeIcon: "house",
-		badgeLabel: "Standard Maid Service",
 		heroImage: "/img/aw1a0685.jpg",
 		heroImageAlt: "Professional maid cleaning a kitchen counter in Seattle",
 		heroTitle: [
-			{ text: "Professional Maid Service for a " },
-			{ text: "Spotless", italic: true },
-			{ text: " Home, Every Visit" },
+			{ text: "Standard Cleaning Services" }
 		],
 		heroSubtitle:
 			"Local, background-checked maids providing dependable house cleaning services across Seattle, WA. On your schedule and your way.",
@@ -180,7 +176,6 @@ export const services: Record<string, ServiceContent> = {
 		metaDescription:
 			"From kitchen surface sanitization to full bathroom disinfection, our deep clean service removes what everyday cleaning leaves behind.",
 		badgeIcon: "sparkles",
-		badgeLabel: "Deep Cleaning & Sanitization",
 		heroImage: "/img/aw1a0630-mr2eiji3.jpg",
 		heroImageAlt: "Deep cleaning and sanitization service in Seattle",
 		heroTitle: [{ text: "Deep Cleaning & Sanitization" }],
@@ -269,12 +264,10 @@ export const services: Record<string, ServiceContent> = {
 		metaDescription:
 			"Professional office and commercial cleaning for businesses across Seattle, WA — flexible schedules, insured crews, spotless results.",
 		badgeIcon: "building-2",
-		badgeLabel: "Commercial & Janitorial",
 		heroImage: "/img/comercial-cleaning-mr6t64gm.webp",
 		heroImageAlt: "Commercial cleaning service in Seattle",
 		heroTitle: [
-			{ text: "Commercial Cleaning & Janitorial Services Built Around Your " },
-			{ text: "Business", italic: true },
+			{ text: "Commercial Cleaning & Janitorial Services" }
 		],
 		heroSubtitle:
 			"Keep your office, retail space or facility spotless with flexible janitorial service scheduled before, during or after business hours.",
@@ -366,7 +359,6 @@ export const services: Record<string, ServiceContent> = {
 		metaDescription:
 			"Top-to-bottom move in / move out cleaning for homes and apartments across Seattle, WA — get your deposit back or move into a truly clean space.",
 		badgeIcon: "truck",
-		badgeLabel: "Move In/Out Cleaning",
 		heroImage: "/img/aw1a0626-scaled.jpg",
 		heroImageAlt: "Move in / move out cleaning service in Seattle",
 		heroTitle: [{ text: "Move In/Out Cleaning" }],
@@ -460,13 +452,10 @@ export const services: Record<string, ServiceContent> = {
 		metaDescription:
 			"Professional carpet and rug cleaning across Seattle, WA — lifting stains, odors and allergens that vacuuming leaves behind.",
 		badgeIcon: "brush",
-		badgeLabel: "Carpet Cleaning",
 		heroImage: "/img/carpet-cleaning.webp",
 		heroImageAlt: "Carpet cleaning service in Seattle",
 		heroTitle: [
-			{ text: "Carpet Cleaning That Restores Spotless, " },
-			{ text: "Sparkling", italic: true },
-			{ text: " Floors" },
+			{ text: "Carpet Cleaning Services" }
 		],
 		heroSubtitle:
 			"Professional extraction cleaning that lifts deep stains, odors and allergens. Your carpets come out spotless, sparkling and genuinely fresh.",
@@ -558,7 +547,6 @@ export const services: Record<string, ServiceContent> = {
 		metaDescription:
 			"Trained local movers pack, label and unpack your home across Seattle, WA — settle in faster with a lot less stress.",
 		badgeIcon: "truck",
-		badgeLabel: "Packing & Unpacking",
 		heroImage: "/img/gemini_generated_image_67heuh67heuh67he.webp",
 		heroImageAlt: "Packing and unpacking service in Seattle",
 		heroTitle: [{ text: "Packing & Unpacking Services" }],
