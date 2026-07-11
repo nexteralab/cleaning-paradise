@@ -23,7 +23,7 @@ export const locations: Record<string, Location> = {
 	seattle: {
 		slug: "seattle",
 		name: "Seattle",
-		img: "/img/aw1a0550.jpg",
+		img: "/img/locations/seattle.png",
 		before: "/img/locations/before.png",
 		after: "/img/locations/after.png",
 		beforeAlt: "Seattle home before cleaning",
@@ -39,7 +39,7 @@ export const locations: Record<string, Location> = {
 	bellevue: {
 		slug: "bellevue",
 		name: "Bellevue",
-		img: "/img/aw1a0619.jpg",
+		img: "/img/locations/bellevue.png",
 		before: "/img/locations/Antes1.png",
 		after: "/img/locations/despues1.png",
 		beforeAlt: "Bellevue home before cleaning",
@@ -55,7 +55,7 @@ export const locations: Record<string, Location> = {
 	kirkland: {
 		slug: "kirkland",
 		name: "Kirkland",
-		img: "/img/aw1a0659.jpg",
+		img: "/img/locations/kirkland.png",
 		before: "/img/locations/Antes3.png",
 		after: "/img/locations/despues3.png",
 		beforeAlt: "Kirkland home before cleaning",
@@ -104,7 +104,7 @@ export const locations: Record<string, Location> = {
 	shoreline: {
 		slug: "shoreline",
 		name: "Shoreline",
-		img: "/img/aw1a0732.jpg",
+		img: "/img/locations/shoreline.png",
 		before: "/img/locations/Antes1.png",
 		after: "/img/locations/despues1.png",
 		beforeAlt: "Shoreline home before cleaning",
@@ -120,7 +120,7 @@ export const locations: Record<string, Location> = {
 	edmonds: {
 		slug: "edmonds",
 		name: "Edmonds",
-		img: "/img/aw1a0547.jpg",
+		img: "/img/locations/edmons.png",
 		before: "/img/locations/Antes3.png",
 		after: "/img/locations/despues3.png",
 		beforeAlt: "Edmonds home before cleaning",
@@ -136,7 +136,7 @@ export const locations: Record<string, Location> = {
 	"mill-creek": {
 		slug: "mill-creek",
 		name: "Mill Creek",
-		img: "/img/aw1a0591.jpg",
+		img: "/img/locations/millcreek.png",
 		before: "/img/locations/before4.png",
 		after: "/img/locations/after4.png",
 		beforeAlt: "Mill Creek home before cleaning",

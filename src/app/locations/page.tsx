@@ -29,7 +29,6 @@ type City = {
   description: string;
   href: string;
   linkLabel: string;
-  badge?: string;
 };
 
 // Derived from the single source of truth in locations-data.ts.
@@ -42,7 +41,6 @@ const cities: City[] = locationSlugs.map((slug) => {
     description: l.blurb,
     href: `/locations/${slug}`,
     linkLabel: `View ${l.name} services`,
-    badge: l.hq ? "HQ · Full service page" : "Full service page",
   };
 });
 
@@ -144,12 +142,6 @@ function CityCard({ city }: { city: City }) {
     <div className="relative w-full h-[280px] bg-[#f0f0f5] overflow-hidden">
       <img src={city.img} alt={city.alt} className="w-full h-full object-cover block" />
       <div className="absolute inset-0 bg-gradient-to-b from-black/0 to-black/30 pointer-events-none" />
-      {city.badge && (
-        <div className="absolute top-3.5 left-3.5 inline-flex items-center gap-1.5 bg-pink-500 text-white text-[11px] font-bold tracking-[.07em] uppercase px-3 py-[5px] rounded-full">
-          <Sparkles size={12} />
-          {city.badge}
-        </div>
-      )}
     </div>
   );
 
@@ -159,22 +151,6 @@ function CityCard({ city }: { city: City }) {
   const copy = (
     <p className="text-sm text-ink-600 leading-[1.6] mb-[18px]">{city.description}</p>
   );
-
-  // The Seattle card is a whole-card link in the design; the rest link from the CTA text.
-  if (city.badge) {
-    return (
-      <Link href={city.href} className={cardClasses}>
-        {media}
-        <div className="p-7">
-          {heading}
-          {copy}
-          <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-pink-500 transition-all duration-200">
-            {city.linkLabel} <ArrowRight size={15} />
-          </span>
-        </div>
-      </Link>
-    );
-  }
 
   return (
     <div className={cardClasses}>

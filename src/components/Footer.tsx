@@ -95,10 +95,6 @@ export default function Footer() {
 							<Phone size={15} className="text-pink-500" />
 							(425) 610-0241
 						</a>
-						<a href="tel:+14254808629" className="mb-[11px] flex items-center gap-[9px] text-sm text-ink-400 hover:text-pink-500">
-							<Phone size={15} className="text-pink-500" />
-							(425) 480-8629
-						</a>
 						<a href="mailto:cleaning.paradise.llc@gmail.com" className="mb-[11px] flex items-center gap-[9px] text-sm break-all text-ink-400 hover:text-pink-500">
 							<Mail size={15} className="shrink-0 text-pink-500" />
 							cleaning.paradise.llc@gmail.com
