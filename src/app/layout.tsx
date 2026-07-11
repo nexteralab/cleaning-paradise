@@ -4,7 +4,6 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MusicPlayer from "@/components/MusicPlayer";
-import BubbleCursor from "@/components/BubbleCursor";
 
 const instrumentSerif = Instrument_Serif({
 	variable: "--font-instrument-serif",
@@ -39,7 +38,6 @@ export default function RootLayout({
 				{children}
 				<Footer />
 				<MusicPlayer />
-				<BubbleCursor />
 			</body>
 		</html>
 	);
