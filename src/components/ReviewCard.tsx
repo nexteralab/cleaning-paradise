@@ -8,6 +8,14 @@ import type { Review } from "@/lib/reviews";
 // featured review. Longer quotes collapse to this and reveal on "Ver más".
 const COLLAPSED = 150;
 
+// "Camilo P." -> "CP". First letter of first two words.
+const initials = (name: string) =>
+	name
+		.split(/\s+/)
+		.slice(0, 2)
+		.map((w) => w[0]?.toUpperCase() ?? "")
+		.join("");
+
 export default function ReviewCard({ review }: { review: Review }) {
 	const textRef = useRef<HTMLParagraphElement>(null);
 	const [expanded, setExpanded] = useState(false);
@@ -67,7 +75,7 @@ export default function ReviewCard({ review }: { review: Review }) {
 			)}
 			<div className="mt-[18px] flex items-center gap-3">
 				<div className="flex h-[42px] w-[42px] items-center justify-center rounded-full bg-pink-100 text-[13px] font-bold text-pink-700">
-					{review.initials}
+					{initials(review.name)}
 				</div>
 				<div>
 					<div className="text-sm font-semibold text-ink-800">{review.name}</div>

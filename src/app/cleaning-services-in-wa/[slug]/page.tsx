@@ -5,6 +5,7 @@ import {
 	ArrowLeft,
 	ArrowRight,
 	ArrowUpRight,
+	Box,
 	Brush,
 	Building2,
 	CalendarCheck,
@@ -14,6 +15,7 @@ import {
 	Heart,
 	House,
 	Leaf,
+	Tag,
 	ShieldCheck,
 	Sparkles,
 	Star,
@@ -21,10 +23,9 @@ import {
 	UserCheck,
 	type LucideIcon,
 } from "lucide-react";
-import { BeforeAfterSlider, FaqAccordion, QuoteForm } from "./client-sections";
+import { FaqAccordion, QuoteForm } from "./client-sections";
 import { services, serviceSlugs, type IconName, type ServiceContent } from "./services-data";
-import ReviewCard from "@/components/ReviewCard";
-import { reviews } from "@/lib/reviews";
+import { TestimonialsSection } from "@/app/page";
 
 const icons: Record<IconName, LucideIcon> = {
 	house: House,
@@ -37,6 +38,8 @@ const icons: Record<IconName, LucideIcon> = {
 	"file-x": FileX,
 	clock: Clock,
 	"circle-check": CircleCheck,
+	box: Box,
+	tag: Tag,
 };
 
 export function generateStaticParams() {
@@ -110,7 +113,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 					{/* LEFT: text */}
 					<div>
 						<Link
-							href="/cleaning-services-in-wa"
+							href="/cleaning-services-in-wa#services"
 							className="mb-5 inline-flex items-center gap-1.5 text-[12.5px] font-semibold text-[#808098] no-underline transition-colors hover:text-pink-500"
 						>
 							<ArrowLeft size={13} />
@@ -158,8 +161,36 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 						</div>
 					</div>
 
-					{/* RIGHT: before/after slider */}
-					<BeforeAfterSlider />
+					{/* RIGHT: static hero image + stats overlay */}
+					<div className="relative h-[clamp(400px,52vh,580px)] overflow-hidden rounded-3xl select-none">
+						<img
+							src={service.heroImage}
+							alt={service.heroImageAlt}
+							className="absolute inset-0 block h-full w-full object-cover"
+						/>
+						<div className="absolute inset-x-5 bottom-5 rounded-2xl bg-white/95 px-5 py-4 shadow-[0_4px_24px_rgba(0,0,0,0.12)] backdrop-blur-md">
+							<div className="flex items-center justify-around gap-2">
+								<div className="text-center">
+									<div className="font-sans text-[22px] leading-none font-bold text-pink-500">450+</div>
+									<div className="mt-[3px] text-[11px] font-semibold text-[#808098]">Homes Cleaned</div>
+								</div>
+								<div className="h-8 w-px bg-ink-200" />
+								<div className="text-center">
+									<div className="font-sans text-[22px] leading-none font-bold text-pink-500">4+</div>
+									<div className="mt-[3px] text-[11px] font-semibold text-[#808098]">Years Experience</div>
+								</div>
+								<div className="h-8 w-px bg-ink-200" />
+								<div className="flex flex-col items-center gap-[3px]">
+									<div className="flex items-center gap-[5px]">
+										<Star size={14} className="fill-[#FBBC05] text-[#FBBC05]" />
+										<span className="font-sans text-[22px] leading-none font-bold text-ink-900">4.9</span>
+									</div>
+									<span className="text-[11px] tracking-[-1px] text-[#FBBC05]">★★★★★</span>
+									<div className="text-[10px] font-semibold text-[#808098]">(51) Google Reviews</div>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</section>
 
@@ -178,15 +209,19 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 					{/* RIGHT: text */}
 					<div>
 						<Eyebrow className="mb-[18px]">{service.introEyebrow}</Eyebrow>
+						{service.introTitle && (
+							<h2 className="mb-[22px] font-serif text-[clamp(28px,3.2vw,44px)] leading-[1.15] font-normal tracking-[-0.02em] text-ink-900">
+								{service.introTitle}
+							</h2>
+						)}
 						<p className="mb-6 text-[clamp(16px,1.5vw,19px)] leading-[1.82] text-[#3A3A52]">
 							{service.introLead}
 						</p>
 						{service.introParas.map((para, i) => (
 							<p
 								key={i}
-								className={`text-[clamp(15px,1.3vw,17px)] leading-[1.85] text-ink-600 ${
-									i === service.introParas.length - 1 ? "mb-8" : "mb-6"
-								}`}
+								className={`text-[clamp(15px,1.3vw,17px)] leading-[1.85] text-ink-600 ${i === service.introParas.length - 1 ? "mb-8" : "mb-6"
+									}`}
 							>
 								{para}
 							</p>
@@ -195,11 +230,10 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 							{service.frequencyChips.map((chip) => (
 								<span
 									key={chip.label}
-									className={`rounded-full border-[1.5px] px-[18px] py-1.5 text-[12.5px] font-semibold ${
-										chip.active
+									className={`rounded-full border-[1.5px] px-[18px] py-1.5 text-[12.5px] font-semibold ${chip.active
 											? "border-[#FFB8E2] bg-pink-50 text-pink-500"
 											: "border-ink-200 bg-[#F4F4F8] text-[#808098]"
-									}`}
+										}`}
 								>
 									{chip.label}
 								</span>
@@ -218,9 +252,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 								key={i}
 								src={img.src}
 								alt={img.alt}
-								className={`block h-[400px] shrink-0 rounded-[20px] object-cover ${
-									img.wide ? "w-[560px]" : "w-[480px]"
-								}`}
+								className={`block h-[400px] shrink-0 rounded-[20px] object-cover ${img.wide ? "w-[560px]" : "w-[480px]"
+									}`}
 							/>
 						))}
 					</div>
@@ -263,9 +296,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 						{service.customParas.map((para, i) => (
 							<p
 								key={i}
-								className={`text-base leading-[1.85] text-ink-600 ${
-									i === service.customParas.length - 1 ? "mb-9" : "mb-5"
-								}`}
+								className={`text-base leading-[1.85] text-ink-600 ${i === service.customParas.length - 1 ? "mb-9" : "mb-5"
+									}`}
 							>
 								{para}
 							</p>
@@ -295,45 +327,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 				</div>
 			</section>
 
-			{/* ═══ TESTIMONIALS ═══ */}
-			<section className="border-t border-ink-200 bg-white py-24">
-				<div className="mx-auto max-w-[1240px] px-10">
-					<div className="mb-12 text-center">
-						<Eyebrow className="mb-[13px]">Testimonials</Eyebrow>
-						<h2 className="mb-4 font-serif text-[clamp(40px,4.5vw,60px)] font-normal tracking-[-0.02em] text-ink-900">
-							Rated by real Seattle-area clients
-						</h2>
-						<div className="inline-flex items-center gap-[9px] rounded-full border border-[#FFD6EF] bg-white px-[18px] py-2">
-							<Star size={16} className="fill-pink-500 text-pink-500" />
-							<span className="text-sm font-semibold text-ink-800">
-								39 verified reviews on Thumbtack
-							</span>
-						</div>
-					</div>
-					<div className="mb-[34px] grid grid-cols-1 items-start gap-[22px] md:grid-cols-3">
-						{reviews.map((r) => (
-							<ReviewCard key={r.name} review={r} />
-						))}
-					</div>
-					<div className="text-center">
-						<a
-							href="#quote"
-							className="mb-[18px] inline-flex items-center gap-2 rounded-full bg-pink-500 px-[34px] py-4 text-base font-semibold text-white no-underline shadow-[0_10px_28px_rgba(255,80,181,0.32)] transition-all duration-200 ease-(--ease-out) hover:bg-pink-600 hover:shadow-[0_14px_36px_rgba(255,80,181,0.42)]"
-						>
-							Get my free quote <ArrowRight size={17} />
-						</a>
-						<br />
-						<a
-							href="https://www.thumbtack.com/wa/lynnwood/house-cleaning/cleaning-paradise-llc/service/454839254774677504"
-							target="_blank"
-							rel="noopener"
-							className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 no-underline hover:underline"
-						>
-							Read all 113 reviews on Thumbtack <ArrowUpRight size={15} />
-						</a>
-					</div>
-				</div>
-			</section>
+			<TestimonialsSection></TestimonialsSection>
 
 			{/* ═══ COVERAGE AREA ═══ */}
 			<section className="bg-blue-600 px-6 py-[clamp(52px,6vw,88px)]">

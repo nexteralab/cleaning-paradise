@@ -5,12 +5,12 @@ import { usePathname } from "next/navigation";
 import { Music, Star, Phone, Mail, MapPin, Clock } from "lucide-react";
 
 const services = [
-	{ label: "Standard Cleaning", href: "/services/standard-cleaning" },
-	{ label: "Deep Cleaning", href: "/services/deep-cleaning" },
-	{ label: "Commercial Cleaning", href: "/services/commercial-cleaning" },
-	{ label: "Move In / Out", href: "/services/move-in-out" },
-	{ label: "Packing & Unpacking", href: "/services/packing-unpacking" },
-	{ label: "Carpet Cleaning", href: "/services/carpet-cleaning" },
+	{ label: "Standard Cleaning", href: "/cleaning-services-in-wa/standard-cleaning" },
+	{ label: "Deep Cleaning", href: "/cleaning-services-in-wa/deep-cleaning" },
+	{ label: "Commercial Cleaning", href: "/cleaning-services-in-wa/commercial-cleaning" },
+	{ label: "Move In / Out", href: "/cleaning-services-in-wa/move-in-out" },
+	{ label: "Packing & Unpacking", href: "/cleaning-services-in-wa/packing-unpacking" },
+	{ label: "Carpet Cleaning", href: "/cleaning-services-in-wa/carpet-cleaning" },
 ];
 
 const locations = [

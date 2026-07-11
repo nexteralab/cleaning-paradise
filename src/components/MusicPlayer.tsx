@@ -23,8 +23,8 @@ export default function MusicPlayer() {
 	const ref = useRef<HTMLAudioElement>(null);
 	const [playing, setPlaying] = useState(false);
 
-	// Resume if the user had it playing. Browsers block autoplay with sound
-	// until a user gesture, so this may no-op until the first click.
+	// Resume if the user had it playing (keeps playback across navigation).
+	// Otherwise it stays paused until they press play.
 	useEffect(() => {
 		if (getCookie() === "1") {
 			ref.current
@@ -64,7 +64,7 @@ export default function MusicPlayer() {
 				aria-label={playing ? "Pause background music" : "Play background music"}
 				aria-pressed={playing}
 				title={playing ? "Pause music" : "Play music"}
-				className="fixed right-5 bottom-5 z-[9998] flex h-12 w-12 items-center justify-center rounded-full bg-ink-900 text-white shadow-[0_8px_24px_rgba(19,19,32,0.3)] transition-transform duration-200 ease-(--ease-out) hover:scale-105"
+				className="fixed left-5 bottom-5 z-[9998] flex h-12 w-12 items-center justify-center rounded-full bg-ink-900 text-white shadow-[0_8px_24px_rgba(19,19,32,0.3)] transition-transform duration-200 ease-(--ease-out) hover:scale-105"
 			>
 				{playing && (
 					<span className="absolute inset-0 animate-ping rounded-full bg-pink-500/40" />

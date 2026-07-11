@@ -94,11 +94,11 @@ export default async function BlogPostPage({ params }: Params) {
 		<div className="relative w-full overflow-x-clip">
 			{/* HERO IMAGE */}
 			<section className="px-6 pt-6">
-				<div className="relative h-[clamp(320px,48vh,580px)] w-full overflow-hidden rounded-3xl bg-[#0d1020]">
+				<div className="relative mx-auto aspect-[16/9] max-h-[520px] w-full max-w-[1080px] overflow-hidden rounded-3xl bg-[#0d1020]">
 					<img
 						src={post.image}
 						alt={post.title}
-						className="h-full w-full object-cover opacity-75"
+						className="h-full w-full object-cover opacity-[0.82]"
 					/>
 					<div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(19,19,32,0.10)_0%,rgba(19,19,32,0.72)_100%)]" />
 					<div className="absolute bottom-0 left-0 right-0 p-[clamp(24px,4vw,52px)]">
@@ -167,7 +167,7 @@ export default async function BlogPostPage({ params }: Params) {
 							</p>
 						</div>
 						<Link
-							href="/#book"
+							href="/contact"
 							className="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-[26px] py-3.5 text-sm font-bold text-pink-500 no-underline transition-all duration-200 ease-(--ease-out) hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(0,0,0,0.2)]"
 						>
 							Get a free quote <ArrowRight size={15} />

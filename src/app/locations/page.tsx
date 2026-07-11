@@ -280,39 +280,6 @@ export default function LocationsPage() {
         </div>
       </section>
 
-      {/* Upcoming Blog Section */}
-      <section className="py-20 px-10 bg-white max-md:px-5">
-        <div className="max-w-[1240px] mx-auto">
-          <Reveal className="text-center mb-[54px]">
-            <h2 className="font-serif text-[40px] text-ink-900 tracking-[-0.01em] leading-[1.05] mb-3.5">
-              Cleaning Tips & Local News
-            </h2>
-            <p className="text-base text-ink-600 max-w-[700px] mx-auto">
-              Expert advice, seasonal cleaning guides, and updates from your neighborhood. Coming
-              soon.
-            </p>
-          </Reveal>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {blogCards.map((card, i) => (
-              <Reveal
-                key={card.title}
-                delay={i * 90}
-                className={`bg-white border-[1.5px] border-ink-200 rounded-[18px] px-7 py-9 text-center transition-all duration-200 ${card.hoverClasses}`}
-              >
-                <div
-                  className={`w-[60px] h-[60px] rounded-xl flex items-center justify-center mx-auto mb-[18px] ${card.iconClasses}`}
-                >
-                  {card.icon}
-                </div>
-                <h3 className="text-base font-semibold text-ink-600 mb-2">{card.title}</h3>
-                <p className="text-[13px] text-[#808098] leading-[1.6]">{card.description}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section className="bg-white py-20 px-10 text-center border-t border-ink-200 max-md:px-5">
         <Reveal className="max-w-[800px] mx-auto">
@@ -325,7 +292,7 @@ export default function LocationsPage() {
           </p>
           <div className="flex gap-3.5 justify-center flex-wrap">
             <Link
-              href="/#book"
+              href="/contact"
               className="bg-pink-500 text-white font-bold text-base px-9 py-4 rounded-full no-underline transition-all duration-200 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(255,80,181,0.4)]"
             >
               Get Your Free Quote

@@ -101,8 +101,31 @@ function WhySection() {
 						</div>
 						<h2 className="font-serif text-[clamp(40px,4.5vw,64px)] font-normal text-ink-900 tracking-[-0.025em] leading-[1.12]">
 							Why Seattle Families Choose{" "}
-							<span className="bg-[linear-gradient(104deg,rgba(255,80,181,0)_0.9%,rgba(255,80,181,0.35)_2.4%,rgba(255,80,181,0.35)_97.6%,rgba(255,80,181,0)_99.1%)] px-[5px] pb-[3px] rounded-[3px] [box-decoration-break:clone] [-webkit-box-decoration-break:clone]">
+							<span className="relative inline">
 								Cleaning Paradise
+								<svg
+									viewBox="0 0 320 18"
+									className="absolute bottom-[-6px] left-[-4px] h-[18px] w-[calc(100%+8px)] overflow-visible"
+									preserveAspectRatio="none"
+									aria-hidden="true"
+								>
+									<path
+										d="M4 13 C 40 7, 100 5, 160 9 C 220 13, 280 8, 316 11"
+										stroke="#FF50B5"
+										strokeWidth="7"
+										fill="none"
+										strokeLinecap="round"
+										opacity="0.55"
+									/>
+									<path
+										d="M6 16 C 50 11, 110 9, 165 13 C 215 17, 275 12, 314 14"
+										stroke="#FF50B5"
+										strokeWidth="4.5"
+										fill="none"
+										strokeLinecap="round"
+										opacity="0.35"
+									/>
+								</svg>
 							</span>
 						</h2>
 					</div>
@@ -113,16 +136,18 @@ function WhySection() {
 				</Reveal>
 
 				{/* Photo strip */}
-				<div className="grid grid-cols-1 md:grid-cols-[1.7fr_1fr_1fr] gap-4 md:h-[clamp(240px,29vw,360px)] mb-[84px]">
+				<div className="grid grid-cols-2 auto-rows-[160px] md:grid-cols-[1.7fr_1fr_1fr] md:auto-rows-auto md:h-[clamp(240px,29vw,360px)] gap-4 mb-[84px]">
 					{[
-						{ src: "/img/pasted-1782782341097-0.webp", alt: "Seattle" },
-						{ src: "/img/aw1a0619.jpg", alt: "Sparkling kitchen" },
-						{ src: "/img/aw1a0659.jpg", alt: "Happy client" },
+						{ src: "/img/why-photo-1.webp", alt: "Seattle" },
+						{ src: "/img/why-photo-2.webp", alt: "Sparkling kitchen" },
+						{ src: "/img/why-photo-3.webp", alt: "Happy client" },
 					].map((photo, i) => (
 						<Reveal
 							key={photo.src}
 							delay={i * 100}
-							className="rounded-[22px] overflow-hidden shadow-[0_26px_60px_rgba(30,62,162,0.10)] h-[220px] md:h-auto"
+							className={`rounded-[22px] overflow-hidden shadow-[0_26px_60px_rgba(30,62,162,0.10)] md:h-auto ${
+								i === 0 ? "col-span-2 md:col-span-1" : ""
+							}`}
 						>
 							<img src={photo.src} alt={photo.alt} className="w-full h-full object-cover block" />
 						</Reveal>
@@ -152,7 +177,7 @@ function WhySection() {
 
 /* ============ TESTIMONIALS (Thumbtack) ============ */
 
-function TestimonialsSection() {
+export function TestimonialsSection() {
 	return (
 		<section className="py-24 bg-white border-t border-ink-200">
 			<div className="max-w-[1240px] mx-auto px-10 max-md:px-6">
@@ -174,12 +199,12 @@ function TestimonialsSection() {
 					))}
 				</div>
 				<div className="text-center">
-					<a
-						href="#book"
+					<Link
+						href="/contact"
 						className="inline-flex items-center gap-2 bg-pink-500 text-white font-sans font-semibold text-base px-[34px] py-4 rounded-full no-underline shadow-[0_10px_28px_rgba(255,80,181,0.32)] transition-all duration-200 ease-[var(--ease-out)] hover:bg-pink-600 hover:shadow-[0_14px_36px_rgba(255,80,181,0.42)] mb-[18px]"
 					>
 						Get my free quote <ArrowRight size={17} />
-					</a>
+					</Link>
 					<br />
 					<a
 						href="https://www.thumbtack.com/wa/lynnwood/house-cleaning/cleaning-paradise-llc/service/454839254774677504"

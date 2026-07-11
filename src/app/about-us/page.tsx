@@ -390,7 +390,7 @@ export default function AboutPage() {
 					</div>
 					<div className="flex gap-3.5 flex-wrap shrink-0">
 						<Link
-							href="/#book"
+							href="/contact"
 							className="bg-pink-500 text-white font-bold text-base px-[34px] py-4 rounded-full no-underline inline-flex items-center gap-[9px] transition-all duration-200 [transition-timing-function:var(--ease-out)] hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(255,80,181,0.34)]"
 						>
 							Book a clean <ArrowRight size={17} />

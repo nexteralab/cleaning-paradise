@@ -233,7 +233,7 @@ export default async function LocationPage({
 							</p>
 							<div className="mb-[26px] flex flex-wrap gap-[13px]">
 								<Link
-									href="/#book"
+									href="/contact"
 									className="inline-flex items-center rounded-full bg-pink-500 px-8 py-[15px] text-[15px] font-bold text-white no-underline transition-all duration-200 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(255,80,181,0.4)]"
 								>
 									Get my free quote
@@ -356,7 +356,7 @@ export default async function LocationPage({
 									</h3>
 									<p className="mb-4 text-sm leading-[1.7] text-blue-600">{s.description}</p>
 									<Link
-										href="/#book"
+										href="/contact"
 										className="inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-pink-500 no-underline transition-[gap] duration-200 hover:gap-2.5"
 									>
 										Book now <ArrowRight size={14} />

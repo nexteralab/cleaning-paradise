@@ -117,14 +117,14 @@ export default function CleaningServicesInWaPage() {
 								Paradise has the right service for you, with 100% satisfaction guaranteed.
 							</p>
 							<div className="flex flex-wrap gap-3.5">
-								<a
-									href="#services"
+								<Link
+									href="/cleaning-services-in-wa#services"
 									className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-[15px] font-bold text-blue-600 transition-all duration-200 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(0,0,0,0.15)]"
 								>
 									See all services <ArrowDown size={16} />
-								</a>
+								</Link>
 								<Link
-									href="/#book"
+									href="/contact"
 									className="rounded-full border-2 border-white/50 bg-transparent px-[26px] py-3 text-[15px] font-semibold text-white transition-all duration-200 hover:border-white hover:bg-white/15"
 								>
 									Get a free quote
@@ -221,7 +221,7 @@ export default function CleaningServicesInWaPage() {
 					</p>
 					<div className="flex flex-wrap justify-center gap-3.5">
 						<Link
-							href="/#book"
+							href="/contact"
 							className="inline-flex items-center gap-2 rounded-full bg-pink-500 px-[34px] py-[15px] text-base font-bold text-white transition-all duration-200 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(255,80,181,0.35)]"
 						>
 							Book now <ArrowRight size={16} />

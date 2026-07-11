@@ -12,7 +12,9 @@ export type IconName =
 	| "heart"
 	| "file-x"
 	| "clock"
-	| "circle-check";
+	| "circle-check"
+	| "box"
+	| "tag";
 
 export interface TitlePart {
 	text: string;
@@ -39,9 +41,12 @@ export interface ServiceContent {
 	metaDescription: string;
 	badgeIcon: IconName;
 	badgeLabel: string;
+	heroImage: string;
+	heroImageAlt: string;
 	heroTitle: TitlePart[];
 	heroSubtitle: string;
 	introEyebrow: string;
+	introTitle?: string;
 	introImage: string;
 	introImageAlt: string;
 	introLead: string;
@@ -89,463 +94,484 @@ const defaultFeatures: ServiceFeature[] = [
 ];
 
 export const services: Record<string, ServiceContent> = {
-	"standard-cleaning": {
+	"standard-cleaning": { // CHECK
 		slug: "standard-cleaning",
 		metaTitle: "Standard Cleaning Services in Seattle, WA | Cleaning Paradise",
 		metaDescription:
 			"Local, background-checked maids providing dependable house cleaning services across Seattle, WA on your schedule, your way.",
 		badgeIcon: "house",
 		badgeLabel: "Standard Maid Service",
+		heroImage: "/img/aw1a0685.jpg",
+		heroImageAlt: "Professional maid cleaning a kitchen counter in Seattle",
 		heroTitle: [
-			{ text: "Standard Cleaning Services in " },
-			{ text: "Seattle", italic: true },
+			{ text: "Professional Maid Service for a " },
+			{ text: "Spotless", italic: true },
+			{ text: " Home, Every Visit" },
 		],
 		heroSubtitle:
-			"Local, background-checked maids providing dependable house cleaning services across Seattle, WA on your schedule, your way.",
+			"Local, background-checked maids providing dependable house cleaning services across Seattle, WA. On your schedule and your way.",
 		introEyebrow: "Professional housekeeping",
-		introImage: "/img/aw1a0630-mr2eiji3.jpg",
+		introTitle: "What Our Standard Cleaning Service Covers",
+		introImage: "/img/cleaning.webp", // Imagen del segundo cuadro
 		introImageAlt: "Professional maid service Seattle",
 		introLead:
-			"Cleaning Paradise's Standard Maid Service brings dependable, professional housekeeping to homes across Seattle, WA. Our trained housekeepers handle the essentials — dusting, vacuuming, mopping, kitchen wipe-downs and bathroom cleaning, so you come home to a sparkling space every time.",
+			"Standard Cleaning from Cleaning Paradise is what keeps your home feeling good every day. Our trained housekeepers take care of the essentials: dusting, vacuuming, mopping, kitchen wipe-downs and bathroom sanitization. You come home to a space that is genuinely spotless, not just straightened up.",
 		introParas: [
-			"Whether you need a one-time visit or a long-term housekeeper, every member of our team is a local, vetted professional maid you can trust inside your home.",
-			"Most of our clients choose recurring housekeeping (weekly, biweekly or monthly visits) because consistency is what keeps a home truly clean. No contracts, no surprise fees, just a professional maid service built around your routine.",
+			"Most of our clients choose recurring housekeeping because consistency is what actually keeps a home clean over time. We also offer standard cleaning services for seniors with gentler scheduling and extra care where it matters. No contracts, no surprise fees — just a professional maid service that works around your life.",
 		],
 		frequencyChips: defaultFrequencyChips,
 		callout: {
 			title: "First time? Start with a Deep Clean.",
 			before: "Many clients start with a ",
-			link: { label: "Deep Cleaning & Sanitization", href: "/services/deep-cleaning" },
+			link: { label: "Deep Cleaning & Sanitization", href: "/cleaning-services-in-wa/deep-cleaning" },
 			after:
 				" to establish a baseline, then move to recurring housekeeping to maintain it — it's more cost-effective long term.",
 		},
 		customEyebrow: "Tailored to your home",
-		customTitle: "Every home is a new project for us",
+		customTitle: "Every Home Is a New Project for Us",
 		customParas: [
-			"No two households are the same, and we don't treat them that way. Before your first clean, we walk through your home — in person or with a quick questionnaire — to understand your layout, your priorities, pets, allergies and any areas that need extra care.",
-			"From there, we build a custom cleaning checklist and match you with the right local maid for your home — so every visit feels tailored, not templated.",
+			"No two homes are the same and we do not treat them that way. Before your first visit we take the time to understand your layout, your priorities and any areas that need extra attention like pets, allergies or rooms you use the most.",
+			"From there we put together a custom cleaning plan and match you with the right local maid for your home. Every visit feels tailored because it is.",
 		],
 		features: defaultFeatures,
 		formDefaultService: "standard",
 		coverageText:
-			"Cleaning Paradise provides standard maid service across Seattle and the greater Puget Sound area. Our local, professional team can reach you — usually within 24–48 hours of your request.",
-		faqHeading: "Common questions about our maid service in Seattle",
+			"Cleaning Paradise offers standard cleaning across Seattle, WA and the greater Puget Sound area. Our local team can usually reach you within 24 to 48 hours of your request.",
+		faqHeading: "Questions About Our Standard Cleaning Service",
 		faqs: [
 			{
-				q: "How much does maid service cost in Seattle?",
+				q: "How much does standard cleaning cost in Seattle?",
 				a: [
-					"Pricing depends on your home's size, condition and how often you'd like service. Recurring housekeeping plans typically cost less per visit than one-time cleans. Fill out the form above for a free, no-obligation quote based on your home.",
+					"Pricing depends on your home size and how often you want service. Recurring housekeeping plans are usually lower per visit than one time cleans. Fill out the form above for a free quote with no strings attached.",
 				],
 			},
 			{
-				q: "What's the difference between standard cleaning and deep cleaning?",
+				q: "What is the difference between standard cleaning and deep cleaning?",
 				a: [
-					"Standard maid service covers regular upkeep — floors, kitchens, bathrooms and dusting. ",
-					{ label: "Deep Cleaning & Sanitization", href: "/services/deep-cleaning" },
-					" goes further, tackling buildup, grime and disinfecting high-touch surfaces. Many clients start with a deep clean, then move to recurring housekeeping to maintain it.",
+					"Standard cleaning covers your regular upkeep: floors, kitchens, bathrooms and dusting. ",
+					{ label: "Deep Cleaning", href: "/cleaning-services-in-wa/deep-cleaning" },
+					" goes further and tackles buildup, grime and high touch surfaces that need disinfection. Many clients start with a deep clean and then move to recurring housekeeping to keep it that way.",
 				],
 			},
 			{
 				q: "Can I set up recurring housekeeping visits?",
 				a: [
-					"Yes. Weekly, biweekly and monthly plans are available, and you can adjust frequency anytime. Recurring clients also get priority scheduling with the same trusted maid whenever possible.",
+					"Yes. Weekly, biweekly and monthly plans are all available and you can change the frequency whenever you need to. Recurring clients also get priority scheduling with the same maid when possible.",
 				],
 			},
 			{
-				q: "Are your maids background-checked?",
+				q: "Are your maids background checked?",
 				a: [
-					"Every professional maid on our team is interviewed, background-checked and trained before stepping into a client's home. Your safety and trust come first — always.",
+					"Every maid on our team is interviewed, background checked and trained before they ever step into a client's home. Your safety and comfort come first.",
 				],
 			},
 			{
-				q: "Do you offer cleaning services for seniors?",
+				q: "Do you offer standard cleaning for seniors?",
 				a: [
-					"Yes. We offer flexible, attentive cleaning services for seniors, including light housekeeping and home care support. Just let us know any special requirements when you request your quote.",
+					"Yes. We offer flexible and attentive cleaning services for seniors including light housekeeping and home care support. Just let us know any specific needs when you request your quote.",
 				],
 			},
 		],
 	},
 
-	"deep-cleaning": {
+	"deep-cleaning": { // CHECK
 		slug: "deep-cleaning",
 		metaTitle: "Deep Cleaning & Sanitization Services in Seattle, WA | Cleaning Paradise",
 		metaDescription:
 			"From kitchen surface sanitization to full bathroom disinfection, our deep clean service removes what everyday cleaning leaves behind.",
 		badgeIcon: "sparkles",
 		badgeLabel: "Deep Cleaning & Sanitization",
-		heroTitle: [
-			{ text: "Deep Cleaning & " },
-			{ text: "Sanitization Services", brBefore: true },
-		],
+		heroImage: "/img/aw1a0630-mr2eiji3.jpg",
+		heroImageAlt: "Deep cleaning and sanitization service in Seattle",
+		heroTitle: [{ text: "Deep Cleaning & Sanitization" }],
 		heroSubtitle:
-			"From kitchen surface sanitization to full bathroom disinfection, our deep clean service removes what everyday cleaning leaves behind.",
-		introEyebrow: "Professional housekeeping",
-		introImage: "/img/aw1a0630-mr2eiji3.jpg",
+			"From full kitchen sanitization to complete bathroom disinfection, our deep clean removes what everyday cleaning leaves behind.",
+		introEyebrow: "Deep clean & sanitize",
+		introTitle: "What Our Deep Cleaning Service Covers",
+		introImage: "/img/pexels-stephanefabricebass-14215010-mr844mvy.jpg",
 		introImageAlt: "Deep cleaning service Seattle",
 		introLead:
-			"When dust, grease and grime build up over time, a quick wipe-down isn't enough. Cleaning Paradise's Deep Cleaning & Sanitization service goes beyond the surface — scrubbing baseboards, appliances and grout, plus thorough sanitization of kitchen surfaces and complete bathroom disinfection. It's the house deep clean service Seattle homeowners turn to before hosting guests, after an illness in the household, or simply to reset a home that hasn't had attention in a while.",
+			"When dust, grease and grime build up over time, a quick wipe down is not enough. Our Deep Cleaning service goes well beyond the surface: baseboards, appliances, grout lines, full sanitization of kitchen surfaces and complete bathroom disinfection. It is the house deep clean service Seattle homeowners reach for before hosting guests, after an illness in the home or whenever the place just needs a real reset.",
 		introParas: [
-			"We use environmentally responsible, hospital-grade disinfectants that are tough on germs but safe for kids, pets and seniors. Every deep clean is performed by a trained team using a detailed, room-by-room checklist, so nothing gets missed — from light switches and door handles to the inside of your oven and refrigerator.",
+			"We use environmentally responsible, hospital grade disinfectants that are effective against germs but safe for kids, pets and seniors. Every deep clean follows a detailed room by room checklist so nothing gets skipped, from light switches and door handles to the inside of your oven and refrigerator.",
 		],
 		frequencyChips: defaultFrequencyChips,
 		callout: {
-			title: "First time? Start with a Deep Clean.",
-			before: "Many clients start with a ",
-			link: { label: "Deep Cleaning & Sanitization", href: "/services/deep-cleaning" },
-			after:
-				" to establish a baseline, then move to recurring housekeeping to maintain it — it's more cost-effective long term.",
+			title: "Keep it that way with recurring cleaning.",
+			before: "After a deep clean, many clients switch to a recurring ",
+			link: { label: "Standard Maid Service", href: "/cleaning-services-in-wa/standard-cleaning" },
+			after: " to keep their home fresh — it's more cost-effective long term.",
 		},
 		customEyebrow: "Tailored to your home",
-		customTitle: "Every home is a new project for us",
+		customTitle: "Every Deep Clean Is a New Project for Us",
 		customParas: [
-			"A studio apartment and a five-bedroom house need very different deep cleans so we never use a one-size-fits-all checklist. We assess your home's size, condition and specific concerns (allergies, pet dander, recent illness, neglected areas) and build a custom sanitization plan before we start. Tell us what matters most to you, and we'll prioritize it.",
+			"A studio apartment and a five bedroom house need very different deep cleans. We never use a one size fits all checklist. We look at your home's size, condition and specific concerns like allergies, pet dander or areas that have not had attention in a while.",
+			"Then we build a custom sanitization plan before we start. You tell us what matters most and we prioritize it.",
 		],
-		features: defaultFeatures,
+		features: [
+			{
+				icon: "calendar-check",
+				title: "Reaches every corner",
+				text: "Baseboards, grout, vents and inside appliances — not just the surface.",
+			},
+			{
+				icon: "heart",
+				title: "Hospital-grade sanitization",
+				text: "EPA-registered disinfectants that eliminate bacteria and viruses on contact.",
+			},
+			{
+				icon: "file-x",
+				title: "Safe for kids, pets & seniors",
+				text: "Tough on germs while remaining gentle on sensitive households.",
+			},
+		],
 		formDefaultService: "deep",
 		coverageText:
-			"Cleaning Paradise provides deep cleaning & sanitization services across Seattle and the greater Puget Sound area. Our local, professional team can reach you — usually within 24–48 hours of your request.",
-		faqHeading: "Common questions about our deep cleaning in Seattle",
+			"Cleaning Paradise offers deep cleaning and sanitization across Seattle, WA and the greater Puget Sound area. Our local team can usually reach you within 24 to 48 hours of your request.",
+		faqHeading: "Questions About Our Deep Cleaning Service",
 		faqs: [
 			{
-				q: "What's included in a deep cleaning service?",
+				q: "What does a deep cleaning service include?",
 				a: [
-					"Deep cleaning covers everything a standard clean does, plus baseboards, vents, light fixtures, interior appliances, grout, and full sanitization of kitchen surfaces and bathrooms. It's a top-to-bottom reset for your home.",
+					"Deep cleaning covers everything a standard clean does plus baseboards, vents, light fixtures, inside appliances, grout scrubbing, full sanitization of kitchen surfaces and complete bathroom disinfection. It is a top to bottom reset for your home.",
 				],
 			},
 			{
-				q: "How is deep cleaning different from a regular house cleaning service?",
+				q: "How is deep cleaning different from regular house cleaning?",
 				a: [
-					"Standard cleaning maintains an already-clean home. Deep cleaning addresses buildup and areas that don't get touched weekly — think behind appliances, inside cabinets, and detailed bathroom disinfection. Most clients book a deep clean first, then switch to recurring housekeeping.",
+					"Standard cleaning keeps a tidy home maintained. Deep cleaning tackles the buildup and the areas that do not get touched weekly: behind appliances, inside cabinets, detailed bathroom disinfection and more. Most clients book a deep clean first and then switch to recurring housekeeping.",
 				],
 			},
 			{
 				q: "Do you sanitize kitchen surfaces and disinfect bathrooms?",
 				a: [
-					"Yes, kitchen surface sanitization and bathroom disinfection are core parts of every deep clean, using EPA-registered disinfectants that eliminate bacteria and viruses on contact.",
+					"Yes. Kitchen surface sanitization and bathroom disinfection are a core part of every deep clean. We use EPA registered disinfectants that eliminate bacteria and viruses on contact.",
 				],
 			},
 			{
 				q: "Is your deep cleaning safe for homes with kids, pets or seniors?",
 				a: [
-					"Yes. We prioritize environmental cleaning services and use products that disinfect effectively while remaining safe for sensitive households, including homes that need cleaning services for seniors.",
+					"Yes. We use environmental cleaning products that disinfect effectively while staying safe for sensitive households including families who need cleaning services for seniors.",
 				],
 			},
 			{
-				q: "How often should I schedule a deep clean?",
+				q: "How often should I book a deep clean?",
 				a: [
-					"Most homes benefit from a deep clean every 3–6 months, especially before seasonal changes or after a health event. Many clients then maintain results with recurring housekeeping in between.",
+					"Most homes benefit from a deep clean every 3 to 6 months, especially before seasonal changes or after a health event. Many clients then keep results going with recurring housekeeping in between.",
 				],
 			},
 		],
 	},
 
-	// placeholder copy — replace with SEO copy
-	"commercial-cleaning": {
+	"commercial-cleaning": { // CHECK
 		slug: "commercial-cleaning",
 		metaTitle: "Commercial Cleaning Services in Seattle, WA | Cleaning Paradise",
 		metaDescription:
 			"Professional office and commercial cleaning for businesses across Seattle, WA — flexible schedules, insured crews, spotless results.",
 		badgeIcon: "building-2",
-		badgeLabel: "Commercial Cleaning",
+		badgeLabel: "Commercial & Janitorial",
+		heroImage: "/img/comercial-cleaning-mr6t64gm.webp",
+		heroImageAlt: "Commercial cleaning service in Seattle",
 		heroTitle: [
-			{ text: "Commercial Cleaning Services in " },
-			{ text: "Seattle", italic: true },
+			{ text: "Commercial Cleaning & Janitorial Services Built Around Your " },
+			{ text: "Business", italic: true },
 		],
 		heroSubtitle:
-			"Professional office and commercial cleaning for businesses across Seattle, WA — flexible schedules, insured crews, spotless results.",
-		introEyebrow: "Professional commercial cleaning",
-		introImage: "/img/svc-commercial.jpg",
+			"Keep your office, retail space or facility spotless with flexible janitorial service scheduled before, during or after business hours.",
+		introEyebrow: "Commercial & janitorial",
+		introTitle: "What Our Commercial Cleaning Service Covers",
+		introImage: "/img/comercial-cleaning-mr.png",
 		introImageAlt: "Commercial cleaning service Seattle",
 		introLead:
-			"Cleaning Paradise keeps offices, retail spaces, clinics and small commercial buildings across Seattle spotless and presentable. Our insured, background-checked crews handle floors, restrooms, break rooms, high-touch surfaces and trash removal — so your team and your customers always walk into a clean space.",
+			"Cleaning Paradise provides dependable commercial cleaning services across Seattle, WA. From daily janitorial service for offices to recurring care for retail spaces, medical offices and multi unit facilities, our team shows up on time, follows your protocols and respects your workspace on every visit. Businesses searching for a cleaning office service near them trust us because we deliver consistent results without the back and forth.",
 		introParas: [
-			"We work around your business hours — early mornings, evenings or weekends — and follow a checklist built for your facility, not a generic template.",
-			"Most commercial clients choose recurring service (weekly, biweekly or monthly visits) to keep their space consistently presentable. No long-term contracts, no surprise fees — just dependable commercial cleaning built around your operation.",
+			"Our commercial and janitorial services cover trash removal, restroom sanitation, floor care, breakroom cleaning and disinfection of high touch surfaces like door handles and shared equipment. We combine maid services and janitorial services under one roof so businesses with mixed needs can manage everything through a single provider.",
 		],
-		frequencyChips: defaultFrequencyChips,
+		frequencyChips: [
+			{ label: "Offices", active: true },
+			{ label: "Retail", active: true },
+			{ label: "Medical", active: true },
+			{ label: "Facilities", active: false },
+		],
 		callout: {
-			title: "New tenant or handover coming up?",
-			before: "Pair commercial cleaning with our ",
-			link: { label: "Move In / Out Cleaning", href: "/services/move-in-out" },
-			after:
-				" for a full top-to-bottom reset of the space before keys change hands.",
+			title: "Need a reset first? Start with a deep clean.",
+			before: "Many businesses start with a one-time ",
+			link: { label: "Deep Cleaning & Sanitization", href: "/cleaning-services-in-wa/deep-cleaning" },
+			after: ", then move into a recurring janitorial schedule to maintain it.",
 		},
-		customEyebrow: "Tailored to your facility",
-		customTitle: "Every space is a new project for us",
+		customEyebrow: "Tailored to your home",
+		customTitle: "Every Business Is a New Project for Us",
 		customParas: [
-			"A dental office and a warehouse break room need very different cleaning plans, so we never use a one-size-fits-all checklist. We walk your facility, note your traffic patterns, surfaces and priorities, and build a custom scope of work before the first visit.",
-			"From there, we assign a consistent crew to your space — so every visit feels tailored, not templated.",
+			"A 10 person office and a large warehouse do not need the same janitorial plan. We start by understanding your foot traffic, hours, compliance needs and the areas that give you the most trouble.",
+			"From there we build a custom commercial cleaning scope and schedule around your business. You get a dedicated team that knows your space and a plan that grows with you.",
 		],
 		features: [
 			{
 				icon: "calendar-check",
-				title: "Same crew, every visit",
-				text: "Recurring clients get a consistent, trained crew that knows your space.",
+				title: "Before or after hours",
+				text: "Scheduled around your operating hours, so your team is never disrupted.",
 			},
 			{
-				icon: "clock",
-				title: "After-hours scheduling",
-				text: "Early mornings, evenings and weekends — we clean when your business is closed.",
+				icon: "heart",
+				title: "Multi-location accounts",
+				text: "Consistent standards and a single point of contact across every location.",
 			},
 			{
 				icon: "file-x",
-				title: "No contracts, no surprise fees",
-				text: "Adjust frequency or cancel anytime with 24-hour notice.",
+				title: "One-time or recurring",
+				text: "Start with a one-time deep clean or set a recurring janitorial schedule.",
 			},
 		],
 		formDefaultService: "commercial",
 		coverageText:
-			"Cleaning Paradise provides commercial cleaning across Seattle and the greater Puget Sound area. Our local, professional team can reach you — usually within 24–48 hours of your request.",
-		faqHeading: "Common questions about our commercial cleaning in Seattle",
+			"Cleaning Paradise offers commercial cleaning and janitorial services across Seattle, WA and the greater Puget Sound area. Our local team can usually reach you within 24 to 48 hours of your request.",
+		faqHeading: "Questions About Our Commercial Cleaning Service",
 		faqs: [
+			{
+				q: "What does commercial cleaning include?",
+				a: [
+					"Our commercial and janitorial services typically include trash removal, restroom sanitation, floor care, dusting, disinfection of high touch surfaces and breakroom or kitchen cleaning. The scope is fully customized to your business.",
+				],
+			},
+			{
+				q: "Can you clean our office after business hours?",
+				a: [
+					"Yes. We offer early morning, evening and overnight cleaning so your team is never disrupted. Many of our Seattle clients prefer this setup.",
+				],
+			},
+			{
+				q: "Do you work with multiple business locations?",
+				a: [
+					"Yes. We support multi location accounts across Seattle, WA with consistent standards and a single point of contact for scheduling.",
+				],
+			},
 			{
 				q: "How much does commercial cleaning cost in Seattle?",
 				a: [
-					"Pricing depends on your facility's size, layout and how often you'd like service. Recurring plans typically cost less per visit than one-time cleans. Fill out the form above for a free, no-obligation quote based on your space.",
+					"Cost depends on square footage, frequency and scope of service. Request a free quote and we will send you a custom proposal for your space.",
 				],
 			},
 			{
-				q: "Can you clean outside of business hours?",
+				q: "Can I book a one time deep clean for my office?",
 				a: [
-					"Yes. Most of our commercial clients schedule early-morning, evening or weekend visits so cleaning never interrupts their operation. We build the schedule around your hours.",
-				],
-			},
-			{
-				q: "Do you bring your own supplies and equipment?",
-				a: [
-					"Yes. Our crews arrive with professional equipment and commercial-grade, eco-friendly products. If your facility requires specific products or protocols, we're happy to follow them.",
-				],
-			},
-			{
-				q: "Are you licensed and insured for commercial work?",
-				a: [
-					"Yes. Cleaning Paradise is fully licensed and insured, and every crew member is interviewed, background-checked and trained before entering a client's facility.",
-				],
-			},
-			{
-				q: "What types of businesses do you serve?",
-				a: [
-					"Offices, retail storefronts, clinics, studios and small commercial buildings across the Seattle area. If you're not sure your space fits, reach out — we'll tell you honestly.",
+					"Absolutely. Many clients start with a one time deep clean and then move into a recurring janitorial schedule. We support both options.",
 				],
 			},
 		],
 	},
 
-	// placeholder copy — replace with SEO copy
-	"move-in-out": {
+	"move-in-out": { // CHECK
 		slug: "move-in-out",
 		metaTitle: "Move In / Out Cleaning Services in Seattle, WA | Cleaning Paradise",
 		metaDescription:
 			"Top-to-bottom move in / move out cleaning for homes and apartments across Seattle, WA — get your deposit back or move into a truly clean space.",
 		badgeIcon: "truck",
-		badgeLabel: "Move In / Out Cleaning",
-		heroTitle: [
-			{ text: "Move In / Out Cleaning Services in " },
-			{ text: "Seattle", italic: true },
-		],
+		badgeLabel: "Move In/Out Cleaning",
+		heroImage: "/img/aw1a0626-scaled.jpg",
+		heroImageAlt: "Move in / move out cleaning service in Seattle",
+		heroTitle: [{ text: "Move In/Out Cleaning" }],
 		heroSubtitle:
-			"Deep, top-to-bottom cleaning for empty homes and apartments across Seattle, WA — so you get your deposit back or move into a truly clean space.",
-		introEyebrow: "Professional move-out cleaning",
-		introImage: "/img/move-in.jpg",
+			"Leave your old place spotless and step into your new home fresh. Cabinets, appliances, floors and windows all covered.",
+		introEyebrow: "Move in / out cleaning",
+		introTitle: "What Our Move In/Out Cleaning Service Covers",
+		introImage: "/img/movein-2.jpg",
 		introImageAlt: "Move in / out cleaning service Seattle",
 		introLead:
-			"Moving is stressful enough — the cleaning shouldn't be. Cleaning Paradise's Move In / Out service covers everything landlords and new owners look for: inside cabinets and appliances, baseboards, bathrooms, floors and windowsills, leaving the home genuinely move-in ready.",
+			"Moving is stressful enough without adding a deep clean to your list. Our Move In Out Cleaning service is a thorough top to bottom clean made for empty or nearly empty homes and apartments across Seattle, WA. We get inside cabinets, drawers, closets and appliances, the spots landlords and buyers check first, so you can hand over the keys with confidence and nothing to worry about.",
 		introParas: [
-			"Because the home is empty, we can reach every corner — the areas a regular clean never touches. Our checklist follows what property managers actually inspect.",
-			"Whether you're a renter chasing a full deposit, a landlord preparing a listing, or a buyer who wants a fresh start, we schedule around your closing or lease dates — including short-notice bookings when possible.",
+			"Whether you are a renter going for your full deposit, a homeowner getting ready to list, or moving into a new place that needs a fresh start, our team treats every move in and move out clean as a full house deep clean: appliances inside and out, baseboards, light fixtures, window sills and all floors left spotless and ready for the next chapter.",
 		],
 		frequencyChips: [
 			{ label: "Move-out", active: true },
 			{ label: "Move-in", active: true },
-			{ label: "One-time", active: true },
-			{ label: "Recurring", active: false },
+			{ label: "Apartments", active: true },
+			{ label: "Houses", active: false },
 		],
 		callout: {
-			title: "Carpets staying behind?",
-			before: "Add ",
-			link: { label: "Carpet Cleaning", href: "/services/carpet-cleaning" },
-			after:
-				" to your move-out — freshly cleaned carpets are one of the most common landlord requirements for a full deposit return.",
+			title: "Moving too? Add Packing & Unpacking.",
+			before: "Pair your move-out clean with our ",
+			link: { label: "Packing & Unpacking", href: "/cleaning-services-in-wa/packing-unpacking" },
+			after: " service for a fully coordinated, hands-off moving day.",
 		},
-		customEyebrow: "Tailored to your move",
-		customTitle: "Every move-out is a new project for us",
+		customEyebrow: "Tailored to your home",
+		customTitle: "Every Move Is a New Project for Us",
 		customParas: [
-			"A studio hand-back and a five-bedroom family home are very different jobs, so we scope each move clean individually — size, condition, appliance interiors, and anything your landlord or agent has flagged.",
-			"Tell us your deadline and we'll build the visit around it, so the home is inspection-ready exactly when it needs to be.",
+			"Studio apartments, family homes and everything in between all move differently. We build your cleaning plan around your timeline and property so nothing is rushed or missed.",
+			"Tell us your move date, the size of the space and any priority areas like an oven that needs extra work or carpets before the final walkthrough. We coordinate around your schedule, your realtor and your moving truck.",
 		],
 		features: [
 			{
 				icon: "calendar-check",
-				title: "Scheduled around your move",
-				text: "We coordinate with closing, lease-end and key-handover dates.",
+				title: "Landlord-ready checklist",
+				text: "Built to meet standard move-out expectations before your deposit is returned.",
 			},
 			{
-				icon: "circle-check",
-				title: "Deposit-focused checklist",
-				text: "We clean to what property managers actually inspect.",
+				icon: "heart",
+				title: "Inside cabinets & appliances",
+				text: "Ovens, fridges, drawers and closets — the spots inspectors check first.",
 			},
 			{
 				icon: "file-x",
-				title: "No contracts, no surprise fees",
-				text: "Flat, upfront quotes based on the home's size and condition.",
+				title: "Coordinated with your move",
+				text: "We work around your moving truck, realtor or property manager.",
 			},
 		],
 		formDefaultService: "movein",
 		coverageText:
-			"Cleaning Paradise provides move in / out cleaning across Seattle and the greater Puget Sound area. Our local, professional team can reach you — usually within 24–48 hours of your request.",
-		faqHeading: "Common questions about our move in / out cleaning in Seattle",
+			"Cleaning Paradise offers move in and move out cleaning across Seattle, WA and the greater Puget Sound area. Our local team can usually reach you within 24 to 48 hours of your request.",
+		faqHeading: "Questions About Our Move In/Out Cleaning Service",
 		faqs: [
 			{
-				q: "What's included in a move out cleaning?",
+				q: "What is included in a move out cleaning checklist?",
 				a: [
-					"Everything a deep clean covers, plus the move-specific items landlords check: inside cabinets, drawers and closets, inside the oven and refrigerator, baseboards, windowsills, and full bathroom and kitchen detailing.",
+					"Our move out clean covers every room: inside cabinets and drawers, appliance interiors and exteriors, baseboards, light fixtures, window sills and all floors. Everything needed for a spotless handoff.",
 				],
 			},
 			{
-				q: "Does the home need to be empty?",
+				q: "Will move out cleaning help me get my security deposit back?",
 				a: [
-					"Empty is ideal — it lets us reach every surface and finish faster. If some furniture or boxes will still be there, just let us know when you request your quote so we can plan around it.",
+					"A thorough move out clean is one of the first things landlords check before returning a deposit. Our checklist is built to meet standard move out expectations so you have the best shot at a full return.",
 				],
 			},
 			{
-				q: "Will this help me get my deposit back?",
+				q: "Can you clean an empty apartment in Seattle on short notice?",
 				a: [
-					"Our checklist is built around what property managers actually inspect, and most clients pass their walkthrough on the first try. If your landlord flags something we missed, tell us within 24 hours and we'll come back to fix it.",
+					"We do our best to accommodate tight timelines. Reach out as early as possible and we will work to fit your move date.",
 				],
 			},
 			{
-				q: "How far in advance should I book?",
+				q: "Do you clean inside the oven and refrigerator?",
 				a: [
-					"A week's notice is ideal during busy end-of-month periods, but we accommodate short-notice moves whenever the schedule allows. The sooner you reach out, the more time slots we can offer.",
+					"Yes. Interior appliance cleaning is a standard part of every move in and move out service.",
 				],
 			},
 			{
-				q: "Can you clean right before my move-in?",
+				q: "How far in advance should I book a move out clean?",
 				a: [
-					"Yes. Many clients book a move-in clean between closing (or lease signing) and moving day, so the home is fresh and sanitized before a single box arrives.",
+					"We recommend booking 1 to 2 weeks ahead when you can, especially during busy moving periods. That said, we accommodate last minute requests when our schedule allows.",
 				],
 			},
 		],
 	},
 
-	// placeholder copy — replace with SEO copy
-	"carpet-cleaning": {
+	"carpet-cleaning": { // CHECK
 		slug: "carpet-cleaning",
 		metaTitle: "Carpet Cleaning Services in Seattle, WA | Cleaning Paradise",
 		metaDescription:
 			"Professional carpet and rug cleaning across Seattle, WA — lifting stains, odors and allergens that vacuuming leaves behind.",
 		badgeIcon: "brush",
 		badgeLabel: "Carpet Cleaning",
+		heroImage: "/img/carpet-cleaning.webp",
+		heroImageAlt: "Carpet cleaning service in Seattle",
 		heroTitle: [
-			{ text: "Carpet Cleaning Services in " },
-			{ text: "Seattle", italic: true },
+			{ text: "Carpet Cleaning That Restores Spotless, " },
+			{ text: "Sparkling", italic: true },
+			{ text: " Floors" },
 		],
 		heroSubtitle:
-			"Professional carpet and rug cleaning across Seattle, WA — lifting stains, odors and allergens that vacuuming leaves behind.",
-		introEyebrow: "Professional carpet care",
-		introImage: "/img/carpet-cleaning.webp",
+			"Professional extraction cleaning that lifts deep stains, odors and allergens. Your carpets come out spotless, sparkling and genuinely fresh.",
+		introEyebrow: "Professional carpet cleaning",
+		introTitle: "What Our Carpet Cleaning Service Covers",
+		introImage: "/img/pexels-pixabay-38325.jpg",
 		introImageAlt: "Carpet cleaning service Seattle",
 		introLead:
-			"Carpets trap dust, pet dander, odors and stains deep in the fibers where a vacuum can't reach. Cleaning Paradise's carpet cleaning service uses professional hot-water extraction to lift out embedded dirt, refresh high-traffic areas and leave your carpets looking — and smelling — like new.",
+			"Vacuuming only gets what is on the surface. Our Carpet Cleaning service uses hot water extraction to pull dirt, allergens, pet dander and odors out from deep inside the fibers. It is the kind of result most carpet cleaning companies in Seattle talk about but rarely deliver consistently. What you get is a spotless, sparkling carpet that looks and smells genuinely clean, not just damp.",
 		introParas: [
-			"We pre-treat stains and high-traffic lanes first, then deep-clean with equipment and solutions that are tough on grime but safe for kids and pets.",
-			"Carpet cleaning pairs perfectly with a deep clean or a move-out — many clients bundle them into a single visit.",
+			"We use environmentally responsible solutions that are tough on stains but completely safe for kids and pets. Our equipment is also calibrated to avoid over wetting so your carpets dry faster and the fibers stay protected longer. Want a full home refresh in one visit? Ask about bundling carpet cleaning with our window cleaning service.",
 		],
 		frequencyChips: [
-			{ label: "Whole home", active: true },
-			{ label: "Select rooms", active: true },
-			{ label: "Area rugs", active: true },
-			{ label: "Add-on service", active: false },
+			{ label: "Hot-water extraction", active: true },
+			{ label: "Pet stains", active: true },
+			{ label: "Odor removal", active: true },
+			{ label: "Allergen relief", active: false },
 		],
 		callout: {
-			title: "Moving out?",
-			before: "Bundle carpet cleaning with our ",
-			link: { label: "Move In / Out Cleaning", href: "/services/move-in-out" },
-			after:
-				" — professionally cleaned carpets are one of the most common requirements for a full deposit return.",
+			title: "Refresh the whole home.",
+			before: "Bundle carpet cleaning with a ",
+			link: { label: "Deep Cleaning & Sanitization", href: "/cleaning-services-in-wa/deep-cleaning" },
+			after: " for a complete, top-to-bottom refresh in one visit.",
 		},
-		customEyebrow: "Tailored to your carpets",
-		customTitle: "Every carpet is a new project for us",
+		customEyebrow: "Tailored to your home",
+		customTitle: "Every Carpet Is a New Project for Us",
 		customParas: [
-			"Wool, synthetic, high-pile or well-loved hallway runners — each fiber and stain type needs its own approach. We assess material, age and problem spots (pet accidents, spills, traffic lanes) before choosing the right treatment.",
-			"Tell us what matters most to you, and we'll prioritize it — whether that's a stubborn stain, lingering pet odor, or simply a whole-home refresh.",
+			"Wool, synthetic blends, light colors, high traffic hallways, pet stains. Every carpet has its own story. Before we start we assess the fiber type, stain history and traffic level so we can choose the right products and the right technique.",
+			"No generic passes with a rented machine. We treat your carpet the way it actually needs to be treated to get back to pristine.",
 		],
 		features: [
 			{
-				icon: "sparkles",
-				title: "Stain & odor pre-treatment",
-				text: "Targeted treatment for pet stains, spills and traffic lanes before extraction.",
+				icon: "calendar-check",
+				title: "Right method for your fiber",
+				text: "We match products and technique to your carpet type, never a generic pass.",
 			},
 			{
 				icon: "heart",
-				title: "Safe for kids & pets",
-				text: "Solutions that clean deep while staying safe for the whole household.",
+				title: "Pet stains & odors",
+				text: "Enzyme-based treatments that break down odor at the source, not just mask it.",
 			},
 			{
 				icon: "file-x",
-				title: "No contracts, no surprise fees",
-				text: "Clear per-room or whole-home pricing before we start.",
+				title: "Fast drying, safe products",
+				text: "Low-moisture extraction with kid- and pet-safe solutions.",
 			},
 		],
 		formDefaultService: "carpet",
 		coverageText:
-			"Cleaning Paradise provides carpet cleaning across Seattle and the greater Puget Sound area. Our local, professional team can reach you — usually within 24–48 hours of your request.",
-		faqHeading: "Common questions about our carpet cleaning in Seattle",
+			"Cleaning Paradise offers carpet cleaning across Seattle, WA and the greater Puget Sound area. Our local team can usually reach you within 24 to 48 hours of your request.",
+		faqHeading: "Questions About Our Carpet Cleaning Service",
 		faqs: [
 			{
-				q: "How long do carpets take to dry?",
+				q: "How long does it take for carpets to dry after cleaning?",
 				a: [
-					"Most carpets are dry within 4–8 hours depending on fiber, humidity and airflow. We extract as much moisture as possible and recommend keeping windows cracked or fans running to speed things up.",
+					"Most carpets dry within 4 to 8 hours with proper airflow thanks to our low moisture extraction process. We will share specific drying tips after your appointment.",
 				],
 			},
 			{
-				q: "Can you remove pet stains and odors?",
+				q: "Can you remove pet stains and odors from carpet?",
 				a: [
-					"Yes. We pre-treat pet accidents with enzyme-based cleaners that break down the source of the odor instead of masking it. Older, set-in stains may lighten rather than disappear completely — we'll always tell you honestly what to expect.",
+					"Yes. Pet stain and odor treatment is one of our most requested services. We use enzyme based solutions designed to break down the odor at the source, not just cover it up.",
+				],
+			},
+			{
+				q: "Do you offer window cleaning in Seattle too?",
+				a: [
+					"We do. Window cleaning pairs really well with carpet cleaning for clients who want a full refresh in one visit. Ask about bundled pricing when you request your quote.",
 				],
 			},
 			{
 				q: "Is your carpet cleaning safe for kids and pets?",
 				a: [
-					"Yes. We use professional solutions that are tough on embedded dirt but safe for children and pets once the carpet is dry.",
+					"Yes. As part of our environmental cleaning services we use solutions that clean effectively without leaving harsh residue behind. Safe for everyone in the home.",
 				],
 			},
 			{
 				q: "How often should carpets be professionally cleaned?",
 				a: [
-					"Every 6–12 months for most homes, and more often with pets, kids or heavy foot traffic. Regular professional cleaning also extends the life of your carpet.",
-				],
-			},
-			{
-				q: "Can I add carpet cleaning to another service?",
-				a: [
-					"Absolutely. Carpet cleaning is a popular add-on to deep cleans and move in / out cleans — bundling them into one visit is usually the most cost-effective option.",
+					"Most homes benefit from professional carpet cleaning every 6 to 12 months. Homes with pets, kids or high foot traffic usually do better with more frequent visits.",
 				],
 			},
 		],
 	},
 	// content from design: Service - Packing Unpacking.dc.html
-	"packing-unpacking": {
+	"packing-unpacking": { // CHECK PACKING
 		slug: "packing-unpacking",
 		metaTitle: "Packing & Unpacking Services in Seattle, WA | Cleaning Paradise",
 		metaDescription:
 			"Trained local movers pack, label and unpack your home across Seattle, WA — settle in faster with a lot less stress.",
 		badgeIcon: "truck",
 		badgeLabel: "Packing & Unpacking",
-		heroTitle: [
-			{ text: "Packing & Unpacking " },
-			{ text: "Services", italic: true },
-		],
+		heroImage: "/img/gemini_generated_image_67heuh67heuh67he.webp",
+		heroImageAlt: "Packing and unpacking service in Seattle",
+		heroTitle: [{ text: "Packing & Unpacking Services" }],
 		heroSubtitle:
-			"Skip the late-night boxing marathon. Our trained home care team packs, organizes and unpacks so you can settle in faster and with a lot less stress.",
+			"Skip the late night boxing marathon. Our trained home care team packs, organizes and unpacks so you can settle in faster and with a lot less stress.",
 		introEyebrow: "Professional packing & unpacking",
-		introImage: "/img/svc-packing.jpg",
+		introTitle: "What Our Packing & Unpacking Service Covers",
+		introImage: "/img/carpet.png",
 		introImageAlt: "Packing and unpacking service Seattle",
 		introLead:
-			"Moving day should not mean weeks of boxes piling up in every room. Our Packing and Unpacking service pairs you with a professional local team that carefully wraps, labels and packs your belongings — from kitchenware to closets — so nothing gets lost, damaged or left behind. It's the same trusted home care approach our clients already know from our housekeeping and maid services, applied to your move.",
+			"Moving day should not mean weeks of boxes piling up in every room. Our Packing and Unpacking service pairs you with a professional local team that carefully wraps, labels and packs your belongings from kitchenware to closets, so nothing gets lost, damaged or left behind. It is the same trusted home care approach our clients already know from our housekeeping and maid services, applied to your move.",
 		introParas: [
-			"On the other end, our team unpacks and organizes your new home room by room, so you're not living out of boxes or eating off paper plates for weeks.",
-			"Combine Packing and Unpacking with our Move In / Out Cleaning for a fully hands-off moving experience — we'll have your old place spotless and your new place set up, all in one coordinated visit.",
+			"On the other end, our team unpacks and organizes your new home room by room so you are not living out of boxes or eating off paper plates for weeks. Combine Packing and Unpacking with our Move In/Out Cleaning service for a fully hands off moving experience. We will have your old place spotless and your new place set up, all in one coordinated visit.",
 		],
 		frequencyChips: [
 			{ label: "Full pack", active: true },
@@ -556,24 +582,24 @@ export const services: Record<string, ServiceContent> = {
 		callout: {
 			title: "Moving out? Add Move In / Out Cleaning.",
 			before: "Many clients bundle packing with a ",
-			link: { label: "Move In / Out Cleaning", href: "/services/move-in-out" },
+			link: { label: "Move In / Out Cleaning", href: "/cleaning-services-in-wa/move-in-out" },
 			after:
 				" so the home is packed, emptied, and left spotless for inspection — one team, one schedule, one invoice.",
 		},
 		customEyebrow: "Tailored to your home",
-		customTitle: "Every move is a new project for us",
+		customTitle: "Every Move Is a New Project for Us",
 		customParas: [
-			"Some clients need a full pack and unpack from start to finish. Others just want help with the kitchen, a few closets or the tricky fragile stuff. We start by understanding what you're moving, your timeline and how you like things organized.",
+			"Some clients need a full pack and unpack from start to finish. Others just want help with the kitchen, a few closets or the tricky fragile stuff. We start by understanding what you are moving, your timeline and how you like things organized.",
 			"Then we put together a plan and crew size that makes sense for your move, not a generic package. Your move feels handled, not handed off.",
 		],
 		features: [
 			{
-				icon: "sparkles",
+				icon: "box",
 				title: "Quality packing materials",
 				text: "Sturdy boxes, wrapping, and padding included — your belongings arrive safe.",
 			},
 			{
-				icon: "circle-check",
+				icon: "tag",
 				title: "Labeled room by room",
 				text: "Every box is labeled so unpacking is fast and nothing gets lost.",
 			},
@@ -585,37 +611,37 @@ export const services: Record<string, ServiceContent> = {
 		],
 		formDefaultService: "packing",
 		coverageText:
-			"Cleaning Paradise offers packing and unpacking across Seattle and the greater Puget Sound area. Our local team can usually reach you within 24–48 hours of your request.",
-		faqHeading: "Common questions about our packing & unpacking in Seattle",
+			"Cleaning Paradise offers packing and unpacking across Seattle, WA and the greater Puget Sound area. Our local team can usually reach you within 24 to 48 hours of your request.",
+		faqHeading: "Questions About Our Packing & Unpacking Service",
 		faqs: [
 			{
 				q: "Do you provide boxes and packing materials?",
 				a: [
-					"Yes. We can supply boxes, bubble wrap, tape and packing paper, or work with materials you already have — whatever fits your budget.",
+					"Yes. We can supply boxes, bubble wrap, tape and packing paper or work with materials you already have. Whatever fits your budget.",
 				],
 			},
 			{
 				q: "Can you unpack and organize my kitchen and closets?",
 				a: [
-					"Yes. Unpacking includes organizing kitchens, closets, bathrooms and any other rooms you want set up properly — not just emptying boxes onto shelves.",
+					"Yes. Unpacking includes organizing kitchens, closets, bathrooms and any other rooms you want set up properly, not just emptying boxes onto shelves.",
 				],
 			},
 			{
-				q: "Can I combine packing and unpacking with move in / out cleaning?",
+				q: "Can I combine packing and unpacking with move in out cleaning?",
 				a: [
-					"Absolutely. Many clients combine both services for a fully coordinated, hands-off moving day. It's one of the most popular bundles we offer.",
+					"Absolutely. Many clients combine both services for a fully coordinated and hands off moving day. It is one of the most popular bundles we offer.",
 				],
 			},
 			{
 				q: "How many team members will be at my home?",
 				a: [
-					"Crew size depends on your home's size and your timeline. We'll recommend the right number when you request your free quote.",
+					"Crew size depends on your home size and your timeline. We will recommend the right number when you request your free quote.",
 				],
 			},
 			{
 				q: "Is packing and unpacking available on short notice?",
 				a: [
-					"We accommodate quick-turnaround moves when our schedule allows. Reach out as early as you can to lock in your preferred date.",
+					"We accommodate quick turnaround moves when our schedule allows. Reach out as early as you can to lock in your preferred date.",
 				],
 			},
 		],
