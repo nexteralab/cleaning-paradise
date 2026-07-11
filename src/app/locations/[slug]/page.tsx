@@ -3,10 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
 	ArrowRight,
-	Award,
-	BadgeDollarSign,
 	Calendar,
-	CalendarClock,
 	CircleCheck,
 	Leaf,
 	MapPin,
@@ -14,12 +11,12 @@ import {
 	Star,
 	Tag,
 	Users,
-	Wrench,
 	type LucideIcon,
 } from "lucide-react";
 import { CitySelector, FaqAccordion, HeroSlider } from "./client-sections";
 import Reveal from "@/components/Reveal";
 import CountUp from "@/components/CountUp";
+import WhyChooseUs from "@/components/WhyChooseUs";
 import { locations, locationSlugs } from "../locations-data";
 
 export function generateStaticParams() {
@@ -107,46 +104,6 @@ const stats: Stat[] = [
 	{ icon: Star, value: "50+", label: "5-star Reviews" },
 ];
 
-type Feature = { icon: LucideIcon; title: string; description: string };
-
-const features: Feature[] = [
-	{
-		icon: Wrench,
-		title: "Professional Equipment",
-		description:
-			"We use commercial-grade tools and EPA-approved products — the same ones used in hospitals and hotels — so results go beyond what a standard mop and bucket can achieve.",
-	},
-	{
-		icon: Award,
-		title: "10+ Years of Experience",
-		description:
-			"A decade of cleaning Seattle-area homes means we know what local homeowners actually need: how to handle Pacific Northwest moisture, older home layouts, and pet households.",
-	},
-	{
-		icon: BadgeDollarSign,
-		title: "Transparent Pricing",
-		description:
-			"No hidden fees, no surprise charges. Standard cleaning starts at $55/hr per person. You get a clear quote before we ever step through your door.",
-	},
-	{
-		icon: Users,
-		title: "Vetted, Trained Staff",
-		description:
-			"Every cleaner on our team goes through a rigorous hiring process, background check, and hands-on training. You let someone into your home — that person needs to earn that trust.",
-	},
-	{
-		icon: Leaf,
-		title: "Eco-Friendly Products",
-		description:
-			"We use biodegradable, non-toxic cleaning solutions safe for kids, pets, and sensitive surfaces. Your home will be clean — without the chemical smell.",
-	},
-	{
-		icon: CalendarClock,
-		title: "Flexible Scheduling",
-		description:
-			"Mornings, evenings, Saturdays — we work around your schedule, not the other way around. Same-week availability often possible.",
-	},
-];
 
 type BlogPost = {
 	img: string;
@@ -192,11 +149,6 @@ const blogPosts: BlogPost[] = [
 	},
 ];
 
-const whyPhotos = [
-	{ src: "/img/pasted-1782782341097-0.webp", alt: "Local neighborhood" },
-	{ src: "/img/aw1a0591.jpg", alt: "Sparkling kitchen" },
-	{ src: "/img/aw1a0619.jpg", alt: "Happy client" },
-];
 
 export default async function LocationPage({
 	params,
@@ -212,21 +164,40 @@ export default async function LocationPage({
 			{/* ===== HERO / BEFORE-AFTER ===== */}
 			<section id="top" className="bg-white p-6">
 				<div className="px-[clamp(28px,5vw,72px)] pt-[clamp(96px,9vw,116px)] pb-[clamp(44px,6vw,72px)]">
-					<div className="mx-auto flex max-w-[1240px] flex-wrap items-center gap-[clamp(32px,5vw,60px)]">
-						{/* LEFT: copy */}
-						<Reveal className="min-w-[300px] flex-[1_1_430px]">
+					{/* Mobile DOM order (grid-cols-1): h1 → slider → description/buttons.
+					    Desktop: copy stacked left, slider right (col/row placement). */}
+					<div className="mx-auto grid max-w-[1240px] grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-x-[clamp(32px,5vw,60px)] md:gap-y-0">
+						{/* h1 block */}
+						<Reveal className="md:col-start-1 md:row-start-1 md:self-end">
 							<div className="mb-[22px]">
 								<span className="inline-flex items-center gap-1.5 rounded-full bg-pink-500/15 px-4 py-2 text-[11.5px] font-semibold tracking-[0.06em] text-pink-500 uppercase">
 									<MapPin size={13} />
 									Local cleaning services
 								</span>
 							</div>
-							<h1 className="mb-5 text-[clamp(36px,4.6vw,60px)] leading-[1.08] font-normal tracking-[-0.03em] text-ink-900">
+							<h1 className="text-[clamp(36px,4.6vw,60px)] leading-[1.08] font-normal tracking-[-0.03em] text-ink-900 md:mb-5">
 								A spotless home, right here in Greater{" "}
 								<span className="underline decoration-pink-500 decoration-[3px] underline-offset-[6px]">
 									{loc.name}, WA
 								</span>
 							</h1>
+						</Reveal>
+
+						{/* before/after slider (per-city images) */}
+						<Reveal
+							delay={150}
+							className="w-full max-w-[680px] md:col-start-2 md:row-start-1 md:row-span-2 md:justify-self-end"
+						>
+							<HeroSlider
+								before={loc.before}
+								after={loc.after}
+								beforeAlt={loc.beforeAlt}
+								afterAlt={loc.afterAlt}
+							/>
+						</Reveal>
+
+						{/* description + buttons + trust badges */}
+						<Reveal delay={80} className="md:col-start-1 md:row-start-2 md:self-start">
 							<p className="mb-[30px] max-w-[520px] text-[clamp(16px,1.4vw,18px)] leading-[1.75] text-[#5A5A6E]">
 								Your home deserves a spotless finish and a team you can actually count on. We are
 								Cleaning Paradise, your local maids in {loc.name}.
@@ -256,16 +227,6 @@ export default async function LocationPage({
 									</span>
 								))}
 							</div>
-						</Reveal>
-
-						{/* RIGHT: before/after slider (per-city images) */}
-						<Reveal delay={150} className="min-w-[300px] max-w-[680px] flex-[1_1_480px]">
-							<HeroSlider
-								before={loc.before}
-								after={loc.after}
-								beforeAlt={loc.beforeAlt}
-								afterAlt={loc.afterAlt}
-							/>
 						</Reveal>
 					</div>
 				</div>
@@ -369,68 +330,10 @@ export default async function LocationPage({
 			</section>
 
 			{/* ===== WHY CHOOSE US ===== */}
-			<section id="why" className="border-t border-ink-200 bg-white py-24">
-				<div className="mx-auto max-w-[1240px] px-10 max-md:px-5">
-					{/* header asymmetric */}
-					<Reveal className="mb-[62px] grid grid-cols-1 items-end gap-14 md:grid-cols-[1.05fr_0.95fr]">
-						<div>
-							<div className="mb-[22px] inline-flex items-center gap-[11px] text-xs font-bold tracking-[0.14em] text-pink-500 uppercase">
-								<span className="inline-block h-[1.5px] w-7 bg-pink-500" />
-								Why choose us
-							</div>
-							<h2 className="font-serif text-[clamp(40px,4.5vw,64px)] leading-[1.12] font-normal tracking-[-0.025em] text-ink-900">
-								Why {loc.name} Families Choose{" "}
-								<span className="rounded-[3px] bg-pink-500/[0.35] px-[5px] pb-[3px]">
-									Cleaning Paradise
-								</span>
-							</h2>
-						</div>
-						<p className="pb-2.5 text-[16.5px] leading-[1.95] text-ink-600">
-							We have been cleaning homes in {loc.name} for over 5 years. Our maids are background
-							checked, trained, and genuinely care about leaving your home sparkling. Here is what
-							makes us different.
-						</p>
-					</Reveal>
-
-					{/* photo strip */}
-					<div className="mb-[84px] grid h-[clamp(240px,29vw,360px)] grid-cols-1 gap-4 sm:grid-cols-[1.7fr_1fr_1fr]">
-						{whyPhotos.map((photo, i) => (
-							<Reveal
-								key={photo.src}
-								delay={i * 100}
-								className="overflow-hidden rounded-[22px] shadow-[0_26px_60px_rgba(30,62,162,0.10)] max-sm:h-[240px]"
-							>
-								{/* eslint-disable-next-line @next/next/no-img-element */}
-								<img src={photo.src} alt={photo.alt} className="block h-full w-full object-cover" />
-							</Reveal>
-						))}
-					</div>
-
-					{/* features 2-col */}
-					<div className="grid grid-cols-1 gap-x-20 md:grid-cols-2">
-						{features.map((f, i) => {
-							const Icon = f.icon;
-							return (
-								<Reveal
-									key={f.title}
-									delay={(i % 2) * 90}
-									className="flex gap-6 border-t border-ink-200 py-[42px]"
-								>
-									<div className="flex h-[50px] w-[50px] shrink-0 items-center justify-center rounded-[15px] bg-pink-50 text-pink-500">
-										<Icon size={27} />
-									</div>
-									<div>
-										<h3 className="mb-3.5 text-xl leading-[1.4] font-semibold tracking-[-0.01em] text-ink-900">
-											{f.title}
-										</h3>
-										<p className="text-[14.5px] leading-[1.95] text-ink-600">{f.description}</p>
-									</div>
-								</Reveal>
-							);
-						})}
-					</div>
-				</div>
-			</section>
+			<WhyChooseUs
+				city={loc.name}
+				intro={`We have been cleaning homes in ${loc.name} for over 5 years. Our maids are background checked, trained, and genuinely care about leaving your home sparkling. Here is what makes us different.`}
+			/>
 
 			{/* ===== FAQs ===== */}
 			<section id="faq" className="bg-ink-50 py-24">

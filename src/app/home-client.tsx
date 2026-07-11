@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ChevronRight, MapPin, Plus, ShieldCheck } from "lucide-react";
+import SuccessModal from "@/components/SuccessModal";
 
 /* ============ HERO: full-screen video card + booking form ============ */
 
@@ -10,6 +11,7 @@ const inputClasses =
 
 export function HeroSection() {
 	const videoRef = useRef<HTMLVideoElement | null>(null);
+	const [sent, setSent] = useState(false);
 
 	useEffect(() => {
 		const el = videoRef.current;
@@ -79,7 +81,11 @@ export function HeroSection() {
 						{/* contact / booking form */}
 						<div id="book" className="w-[min(460px,44%)] min-w-[230px] shrink-0 max-md:w-full">
 							<form
-								onSubmit={(e) => e.preventDefault()}
+								onSubmit={(e) => {
+									e.preventDefault();
+									e.currentTarget.reset();
+									setSent(true);
+								}}
 								className="bg-white rounded-[26px] shadow-[0_26px_60px_rgba(19,19,32,0.28)] p-6 flex flex-col gap-[15px] max-h-[calc(100vh-150px)] overflow-y-auto"
 							>
 								<div>
@@ -159,6 +165,7 @@ export function HeroSection() {
 					</div>
 				</div>
 			</div>
+			<SuccessModal open={sent} onClose={() => setSent(false)} />
 		</section>
 	);
 }

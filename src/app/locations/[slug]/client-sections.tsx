@@ -69,7 +69,10 @@ export function HeroSlider({
 					draggable={false}
 					className="pointer-events-none absolute inset-0 h-full w-full object-cover"
 				/>
-				<div className="pointer-events-none absolute top-4 right-[18px] z-[4] rounded-full bg-blue-600/55 px-3 py-[5px] text-sm font-bold tracking-[0.08em] text-white backdrop-blur-[4px]">
+				<div
+					className="pointer-events-none absolute top-4 right-[18px] z-[4] rounded-full bg-blue-600/55 px-3 py-[5px] text-sm font-bold tracking-[0.08em] text-white backdrop-blur-[4px] transition-opacity duration-150"
+					style={{ opacity: pct > 88 ? 0 : 1 }}
+				>
 					AFTER
 				</div>
 				{/* Before image (clipped from right) */}
@@ -84,7 +87,10 @@ export function HeroSlider({
 						draggable={false}
 						className="pointer-events-none absolute inset-0 h-full w-full object-cover"
 					/>
-					<div className="absolute top-4 left-[18px] rounded-full bg-ink-900/50 px-3 py-[5px] text-sm font-bold tracking-[0.08em] text-white backdrop-blur-[4px]">
+					<div
+						className="absolute top-4 left-[18px] rounded-full bg-ink-900/50 px-3 py-[5px] text-sm font-bold tracking-[0.08em] text-white backdrop-blur-[4px] transition-opacity duration-150"
+						style={{ opacity: pct < 12 ? 0 : 1 }}
+					>
 						BEFORE
 					</div>
 				</div>

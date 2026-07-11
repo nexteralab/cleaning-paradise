@@ -4,7 +4,6 @@ import { useState } from "react";
 import {
 	ArrowRight,
 	Building2,
-	Check,
 	Home,
 	Layers,
 	Package,
@@ -13,6 +12,7 @@ import {
 	Truck,
 	type LucideIcon,
 } from "lucide-react";
+import SuccessModal from "@/components/SuccessModal";
 
 const inputClass =
 	"w-full rounded-xl border-[1.5px] border-ink-200 bg-ink-50 px-3.5 py-3 text-sm text-ink-900 outline-none transition-colors duration-200 focus:border-pink-500 focus:bg-white";
@@ -43,31 +43,13 @@ export default function ContactForm() {
 	const [submitting, setSubmitting] = useState(false);
 	const [error, setError] = useState("");
 	const [selectedServices, setSelectedServices] = useState<string[]>([]);
+	const [pets, setPets] = useState<"yes" | "no" | "">("");
 
 	const toggleService = (label: string) => {
 		setSelectedServices((prev) =>
 			prev.includes(label) ? prev.filter((s) => s !== label) : [...prev, label],
 		);
 	};
-
-	if (submitted) {
-		return (
-			<div className="rounded-3xl border border-[#EAEAF2] bg-white p-[clamp(24px,3vw,40px)] shadow-[0_24px_64px_rgba(30,62,162,0.09)]">
-				<div className="px-4 py-12 text-center">
-					<div className="mx-auto mb-[22px] flex h-[68px] w-[68px] items-center justify-center rounded-full bg-pink-50">
-						<Check size={32} className="text-pink-500" />
-					</div>
-					<h2 className="mb-2.5 font-serif text-[34px] font-normal text-ink-900">
-						Request received — thank you!
-					</h2>
-					<p className="mx-auto max-w-[400px] text-[15px] leading-[1.7] text-ink-600">
-						We&apos;ll reach out within one business day with your quote and available appointment
-						times. Need us sooner? Call (425) 610-0241.
-					</p>
-				</div>
-			</div>
-		);
-	}
 
 	return (
 		<div className="rounded-3xl border border-[#EAEAF2] bg-white p-[clamp(24px,3vw,40px)] shadow-[0_24px_64px_rgba(30,62,162,0.09)]">
@@ -76,7 +58,8 @@ export default function ContactForm() {
 					e.preventDefault();
 					setError("");
 					setSubmitting(true);
-					const fd = new FormData(e.currentTarget);
+					const form = e.currentTarget;
+					const fd = new FormData(form);
 					const payload = {
 						firstName: fd.get("firstName"),
 						lastName: fd.get("lastName"),
@@ -87,6 +70,7 @@ export default function ContactForm() {
 						city: fd.get("city"),
 						zip: fd.get("zip"),
 						services: selectedServices,
+						pets,
 						date: fd.get("date"),
 						time: fd.get("time"),
 						frequency: fd.get("frequency"),
@@ -102,7 +86,9 @@ export default function ContactForm() {
 					setSubmitting(false);
 					if (res.ok) {
 						setSubmitted(true);
-						window.scrollTo({ top: 0, behavior: "smooth" });
+						form.reset();
+						setSelectedServices([]);
+						setPets("");
 					} else {
 						setError("Something went wrong. Please call (425) 610-0241.");
 					}
@@ -223,6 +209,29 @@ export default function ContactForm() {
 				{/* Section 5: Details */}
 				<div>
 					<SectionHeading number={5}>Anything else we should know?</SectionHeading>
+					<div className="mb-3.5">
+						<label className={labelClass}>Do you have any pets?</label>
+						<div className="flex gap-2.5">
+							{(["yes", "no"] as const).map((value) => {
+								const active = pets === value;
+								return (
+									<button
+										key={value}
+										type="button"
+										onClick={() => setPets(value)}
+										aria-pressed={active}
+										className={`flex-1 cursor-pointer rounded-xl border-[1.5px] px-[15px] py-3 text-[13.5px] font-semibold capitalize transition-all duration-150 ${
+											active
+												? "border-pink-500 bg-pink-50 text-pink-500"
+												: "border-ink-200 bg-ink-50 text-ink-600"
+										}`}
+									>
+										{value}
+									</button>
+								);
+							})}
+						</div>
+					</div>
 					<textarea
 						name="notes"
 						rows={4}
@@ -256,6 +265,7 @@ export default function ContactForm() {
 					Licensed &amp; insured · We respond within one business day
 				</p>
 			</form>
+			<SuccessModal open={submitted} onClose={() => setSubmitted(false)} />
 		</div>
 	);
 }

@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Plus, ShieldCheck } from "lucide-react";
 import type { ServiceFaq } from "./services-data";
+import SuccessModal from "@/components/SuccessModal";
 
 /* ─── Before / After slider (hero) ─── */
 
@@ -133,12 +134,21 @@ const frequencies = ["Weekly", "Biweekly", "Monthly", "One-time"];
 
 export function QuoteForm({ defaultService }: { defaultService: string }) {
 	const [freq, setFreq] = useState("Weekly");
+	const [sent, setSent] = useState(false);
 
 	return (
 		<div className="rounded-3xl border border-[#EFEFF4] bg-white p-8 shadow-[0_20px_60px_rgba(30,62,162,0.11)] lg:sticky lg:top-[100px]">
 			<h3 className="mb-1 text-[22px] font-semibold text-ink-900">Get a free quote</h3>
 			<p className="mb-6 text-[13px] text-[#808098]">No obligation — we respond within 2 hours.</p>
-			<form onSubmit={(e) => e.preventDefault()} className="flex flex-col gap-[13px]">
+			<form
+				onSubmit={(e) => {
+					e.preventDefault();
+					e.currentTarget.reset();
+					setFreq("Weekly");
+					setSent(true);
+				}}
+				className="flex flex-col gap-[13px]"
+			>
 				<div className="flex gap-2.5">
 					<input name="name" placeholder="Your name" className={`${inputClass} min-w-0 flex-1`} />
 					<input
@@ -205,6 +215,7 @@ export function QuoteForm({ defaultService }: { defaultService: string }) {
 					Licensed &amp; insured · 100% satisfaction guarantee
 				</p>
 			</form>
+			<SuccessModal open={sent} onClose={() => setSent(false)} />
 		</div>
 	);
 }

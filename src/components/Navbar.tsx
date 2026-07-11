@@ -11,6 +11,7 @@ const links = [
 	{ href: "/locations", label: "Locations" },
 	{ href: "/blog", label: "Blog" },
 	{ href: "/about-us", label: "About Us" },
+	{ href: "/contact", label: "Contact Us" },
 ];
 
 export default function Navbar() {
