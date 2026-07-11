@@ -50,6 +50,7 @@ type Service = {
 	description: string;
 	img: string;
 	alt: string;
+	href: string;
 };
 
 const services: Service[] = [
@@ -59,6 +60,7 @@ const services: Service[] = [
 			"Recurring upkeep for kitchens, baths, living areas and bedrooms — week after week.",
 		img: "/img/move-in.jpg",
 		alt: "Standard cleaning",
+		href: "/cleaning-services-in-wa/standard-cleaning",
 	},
 	{
 		title: "Deep Cleaning",
@@ -66,6 +68,7 @@ const services: Service[] = [
 			"Top-to-bottom reset: baseboards, appliances, grout and every overlooked corner.",
 		img: "/img/deep-cleaning.jpg",
 		alt: "Deep cleaning",
+		href: "/cleaning-services-in-wa/deep-cleaning",
 	},
 	{
 		title: "Commercial Cleaning",
@@ -73,6 +76,7 @@ const services: Service[] = [
 			"Offices and workspaces across the metro — productive, hygienic and client-ready.",
 		img: "/img/comercial-cleaning.webp",
 		alt: "Commercial cleaning",
+		href: "/cleaning-services-in-wa/commercial-cleaning",
 	},
 	{
 		title: "Move In / Out",
@@ -80,12 +84,14 @@ const services: Service[] = [
 			"Detailed cleaning before you hand over the keys or settle into your new home.",
 		img: "/img/aw1a0626-scaled.jpg",
 		alt: "Move in / out",
+		href: "/cleaning-services-in-wa/move-in-out",
 	},
 	{
 		title: "Packing & Unpacking",
 		description: "Professional packing and unpacking to take the stress out of moving day.",
 		img: "/img/gemini_generated_image_67heuh67heuh67he.webp",
 		alt: "Packing and unpacking",
+		href: "/cleaning-services-in-wa/packing-unpacking",
 	},
 	{
 		title: "Carpet Cleaning",
@@ -93,6 +99,7 @@ const services: Service[] = [
 			"Deep extraction that lifts allergens, pet dander and embedded dirt — freshness restored.",
 		img: "/img/carpet-cleaning.webp",
 		alt: "Carpet cleaning",
+		href: "/cleaning-services-in-wa/carpet-cleaning",
 	},
 ];
 
@@ -309,13 +316,19 @@ export default async function LocationPage({
 								delay={(i % 3) * 90}
 								className="overflow-hidden rounded-[18px] border-[1.5px] border-ink-200 bg-white shadow-[var(--shadow-sm)] transition-all duration-300 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(30,62,162,0.12)]"
 							>
-								{/* eslint-disable-next-line @next/next/no-img-element */}
-								<img src={s.img} alt={s.alt} className="block h-[206px] w-full object-cover" />
-								<div className="px-6 pt-6 pb-[26px]">
-									<h3 className="mb-[9px] text-xl font-semibold tracking-[-0.01em] text-blue-600">
-										{s.title}
-									</h3>
-									<p className="mb-4 text-sm leading-[1.7] text-blue-600">{s.description}</p>
+								{/* Card body → service detail */}
+								<Link href={s.href} className="block text-inherit no-underline">
+									{/* eslint-disable-next-line @next/next/no-img-element */}
+									<img src={s.img} alt={s.alt} className="block h-[206px] w-full object-cover" />
+									<div className="px-6 pt-6">
+										<h3 className="mb-[9px] text-xl font-semibold tracking-[-0.01em] text-blue-600">
+											{s.title}
+										</h3>
+										<p className="text-sm leading-[1.7] text-blue-600">{s.description}</p>
+									</div>
+								</Link>
+								{/* Book now → contact */}
+								<div className="px-6 pt-4 pb-[26px]">
 									<Link
 										href="/contact"
 										className="inline-flex items-center gap-1.5 text-[13.5px] font-semibold text-pink-500 no-underline transition-[gap] duration-200 hover:gap-2.5"
