@@ -154,24 +154,30 @@ export default function CleaningServicesInWaPage() {
 					<div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 						{serviceCards.map((card, i) => (
 							<Reveal key={card.title} delay={(i % 3) * 90} className="h-full">
-								<Link
-									href={card.href}
-									className="flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-[0_12px_40px_rgba(30,62,162,0.08)] transition-all duration-[250ms] ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1.5 hover:shadow-[0_22px_55px_rgba(30,62,162,0.16)]"
-								>
-									{/* eslint-disable-next-line @next/next/no-img-element */}
-									<img src={card.img} alt={card.title} className="block h-[250px] w-full object-cover" />
-									<div className="flex flex-1 flex-col px-8 pt-7 pb-[34px]">
-										<h3 className="mb-3.5 text-2xl font-bold tracking-[-0.01em] text-blue-600">
-											{card.title}
-										</h3>
-										<p className="mb-[26px] flex-1 text-[15px] leading-[1.6] text-[#3f4f8f]">
-											{card.description}
-										</p>
-										<span className="inline-flex items-center gap-2 text-[15px] font-semibold text-pink-500">
+								<div className="flex h-full flex-col overflow-hidden rounded-3xl bg-white shadow-[0_12px_40px_rgba(30,62,162,0.08)] transition-all duration-[250ms] ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1.5 hover:shadow-[0_22px_55px_rgba(30,62,162,0.16)]">
+									{/* Card body → service detail */}
+									<Link href={card.href} className="flex flex-1 flex-col text-inherit no-underline">
+										{/* eslint-disable-next-line @next/next/no-img-element */}
+										<img src={card.img} alt={card.title} className="block h-[250px] w-full object-cover" />
+										<div className="flex flex-1 flex-col px-8 pt-7">
+											<h3 className="mb-3.5 text-2xl font-bold tracking-[-0.01em] text-blue-600">
+												{card.title}
+											</h3>
+											<p className="flex-1 text-[15px] leading-[1.6] text-[#3f4f8f]">
+												{card.description}
+											</p>
+										</div>
+									</Link>
+									{/* Book now → contact */}
+									<div className="px-8 pt-[26px] pb-[34px]">
+										<Link
+											href="/contact"
+											className="inline-flex items-center gap-2 text-[15px] font-semibold text-pink-500 no-underline transition-[gap] duration-200 hover:gap-3"
+										>
 											Book now <ArrowRight size={16} />
-										</span>
+										</Link>
 									</div>
-								</Link>
+								</div>
 							</Reveal>
 						))}
 					</div>

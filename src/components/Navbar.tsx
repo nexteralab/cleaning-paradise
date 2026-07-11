@@ -29,7 +29,7 @@ export default function Navbar() {
 				<Link
 					href="/"
 					onClick={() => setOpen(false)}
-					className="flex items-center gap-2 text-lg font-semibold tracking-[-0.02em] whitespace-nowrap text-black truncate"
+					className="flex items-center gap-2 text-sm md:text-lg font-semibold tracking-[-0.02em] whitespace-nowrap text-black truncate"
 				>
 					{/* eslint-disable-next-line @next/next/no-img-element */}
 					<img src="/img/logo.png" alt="Cleaning Paradise logo" className="h-7 w-7 rounded-full" />

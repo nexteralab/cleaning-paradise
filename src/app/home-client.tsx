@@ -11,7 +11,6 @@ const inputClasses =
 
 export function HeroSection() {
 	const videoRef = useRef<HTMLVideoElement | null>(null);
-	const [sent, setSent] = useState(false);
 
 	useEffect(() => {
 		const el = videoRef.current;
@@ -42,7 +41,7 @@ export function HeroSection() {
 
 	return (
 		<section id="top" className="bg-white p-4 md:p-6">
-			<div className="relative w-full h-full min-h-[660px] rounded-[30px] overflow-hidden shadow-[0_30px_70px_rgba(30,62,162,0.18)]">
+			<div className="relative w-full h-full min-h-[85vh] rounded-[30px] overflow-hidden shadow-[0_30px_70px_rgba(30,62,162,0.18)]">
 				{/* background video */}
 				<video
 					ref={videoRef}
@@ -57,116 +56,118 @@ export function HeroSection() {
 				<div className="absolute inset-0 pointer-events-none bg-[linear-gradient(180deg,rgba(19,19,32,0.22)_0%,rgba(19,19,32,0.04)_32%,rgba(19,19,32,0.10)_60%,rgba(19,19,32,0.50)_100%)]" />
 
 				{/* content layer */}
-				<div className="relative z-10 flex flex-col h-full p-4 md:p-6 gap-6 h-full">
+				<div className="relative z-10 flex flex-col p-4 md:p-6 gap-6 min-h-[85vh] max-md:pb-10">
 					{/* spacer */}
 					<div className="flex-1 min-h-8" />
 
 					{/* bottom row: headline + form */}
-					<div className="flex items-end justify-between gap-8 flex-wrap mt-45">
+					<div className="flex items-end justify-between gap-8 flex-wrap">
 						{/* headline */}
 						<div className="flex-[1_1_360px] min-w-[300px]">
 							<div className="inline-flex items-center gap-[7px] bg-white/[0.18] backdrop-blur-[6px] text-white text-[11.5px] font-semibold tracking-[0.06em] uppercase px-3.5 py-1.5 rounded-full mb-5">
 								<MapPin size={13} />
 								Serving Greater Seattle
 							</div>
-							<h1 className="font-sans text-[clamp(28px,3.8vw,52px)] font-semibold leading-[1.1] text-white tracking-[-0.025em] [text-shadow:0_4px_24px_rgba(0,0,0,0.35)] max-w-[620px] mb-4">
+							<h1 className="font-sans text-[clamp(34px,3.8vw,52px)] font-semibold leading-[1.1] text-white tracking-[-0.025em] [text-shadow:0_4px_24px_rgba(0,0,0,0.35)] max-w-[620px] mb-4">
 								House Cleaning Services in Seattle, WA
 							</h1>
-							<p className="text-[clamp(14px,1.3vw,17px)] text-white md:text-white/[0.88] leading-[1.72] max-w-[560px] [text-shadow:0_4px_40px_rgba(0,0,0,0.28)]">
+							<p className="text-[clamp(16px,1.3vw,17px)] text-white md:text-white/[0.88] leading-[1.72] max-w-[560px] [text-shadow:0_4px_40px_rgba(0,0,0,0.28)]">
 								Spotless homes, reliable maids, and a housekeeping experience that makes coming home the best
 								part of your day. Serving Seattle, Lynnwood, Bellevue, Kirkland, and surrounding communities.
 							</p>
 						</div>
 
-						{/* contact / booking form */}
-						<div id="book" className="w-[min(460px,44%)] min-w-[230px] shrink-0 max-md:w-full">
-							<form
-								onSubmit={(e) => {
-									e.preventDefault();
-									e.currentTarget.reset();
-									setSent(true);
-								}}
-								className="bg-white rounded-[26px] shadow-[0_26px_60px_rgba(19,19,32,0.28)] p-6 flex flex-col gap-[15px] max-h-[calc(100vh-150px)] overflow-y-auto"
-							>
-								<div>
-									<h3 className="font-sans text-[27px] text-ink-900 tracking-[-0.01em] mb-[3px]">Say hello!</h3>
-									<p className="text-[13px] text-[#808098]">Free quote in minutes — no obligation.</p>
-								</div>
-
-								{/* name + email */}
-								<div className="flex flex-col gap-2.5 sm:flex-row">
-									<input name="name" placeholder="Your name" className={`flex-1 min-w-0 ${inputClasses}`} />
-									<input
-										name="email"
-										type="email"
-										placeholder="Email"
-										className={`flex-1 min-w-0 ${inputClasses}`}
-									/>
-								</div>
-
-								{/* service select */}
-								<select name="service" defaultValue="" className={`${inputClasses} cursor-pointer appearance-none`}>
-									<option value="">Which service?</option>
-									<option>Standard Cleaning</option>
-									<option>Deep Cleaning</option>
-									<option>Commercial Cleaning</option>
-									<option>Move In / Out Cleaning</option>
-									<option>Packing &amp; Unpacking</option>
-									<option>Carpet Cleaning</option>
-								</select>
-
-								{/* sqft */}
-								<div>
-									<label className="block text-xs font-semibold text-ink-600 mb-2">Home size (sq ft)</label>
-									<input
-										name="sqft"
-										type="number"
-										min={100}
-										max={20000}
-										placeholder="e.g. 1,200"
-										className={`w-full ${inputClasses}`}
-									/>
-								</div>
-
-								{/* pets */}
-								<div>
-									<label className="block text-xs font-semibold text-ink-600 mb-2">Do you have any pets?</label>
-									<select name="pets" defaultValue="" className={`w-full ${inputClasses} cursor-pointer appearance-none`}>
-										<option value="" disabled>Select an option</option>
-										<option value="yes">Yes</option>
-										<option value="no">No</option>
-									</select>
-								</div>
-
-								{/* notes */}
-								<div>
-									<label className="block text-xs font-semibold text-ink-600 mb-2">Additional notes</label>
-									<textarea
-										name="notes"
-										rows={3}
-										placeholder="Pets, special areas to focus on, access instructions…"
-										className={`w-full resize-y ${inputClasses}`}
-									/>
-								</div>
-
-								{/* submit */}
-								<button
-									type="submit"
-									className="mt-0.5 bg-pink-500 text-white font-sans font-semibold text-[15px] border-none cursor-pointer p-[15px] rounded-[14px] flex items-center justify-center gap-2 transition-all duration-200 ease-[var(--ease-out)] hover:bg-pink-600 hover:shadow-[0_8px_28px_rgba(255,80,181,0.36)]"
-								>
-									Get my free quote <ArrowRight size={16} />
-								</button>
-								<div className="flex items-center justify-center gap-1.5 text-[11.5px] text-[#A0A0AE]">
-									<ShieldCheck size={13} />
-									Licensed &amp; insured · 100% satisfaction guarantee
-								</div>
-							</form>
-						</div>
+						{/* contact / booking form — desktop only (inside hero) */}
+						<BookingForm className="max-md:hidden" />
 					</div>
 				</div>
 			</div>
-			<SuccessModal open={sent} onClose={() => setSent(false)} />
+			{/* mobile only: booking form below the hero */}
+			<BookingForm className="md:hidden mt-4" />
 		</section>
+	);
+}
+
+/* ============ HERO BOOKING FORM (extracted so it can be toggled) ============ */
+
+export function BookingForm({ className = "" }: { className?: string }) {
+	const [sent, setSent] = useState(false);
+
+	return (
+		<div className={`w-[min(460px,44%)] min-w-[230px] shrink-0 max-md:w-full ${className}`}>
+			<form
+				onSubmit={(e) => {
+					e.preventDefault();
+					e.currentTarget.reset();
+					setSent(true);
+				}}
+				className="bg-white rounded-[26px] shadow-[0_26px_60px_rgba(19,19,32,0.28)] p-6 flex flex-col gap-[15px] max-h-[calc(100vh-150px)] overflow-y-auto"
+			>
+				<div>
+					<h3 className="font-sans text-[27px] text-ink-900 tracking-[-0.01em] mb-[3px]">Say hello!</h3>
+					<p className="text-[13px] text-[#808098]">Free quote in minutes — no obligation.</p>
+				</div>
+
+				{/* name + email */}
+				<div className="flex flex-col gap-2.5 sm:flex-row">
+					<input name="name" placeholder="Your name" className={`flex-1 min-w-0 ${inputClasses}`} />
+					<input
+						name="email"
+						type="email"
+						placeholder="Email"
+						className={`flex-1 min-w-0 ${inputClasses}`}
+					/>
+				</div>
+
+				{/* service select */}
+				<select name="service" defaultValue="" className={`${inputClasses} cursor-pointer appearance-none`}>
+					<option value="">Which service?</option>
+					<option>Standard Cleaning</option>
+					<option>Deep Cleaning</option>
+					<option>Commercial Cleaning</option>
+					<option>Move In / Out Cleaning</option>
+					<option>Packing &amp; Unpacking</option>
+					<option>Carpet Cleaning</option>
+				</select>
+
+				{/* sqft */}
+				<div>
+					<label className="block text-xs font-semibold text-ink-600 mb-2">Home size (sq ft)</label>
+					<input
+						name="sqft"
+						type="number"
+						min={100}
+						max={20000}
+						placeholder="e.g. 1,200"
+						className={`w-full ${inputClasses}`}
+					/>
+				</div>
+
+				{/* notes */}
+				<div>
+					<label className="block text-xs font-semibold text-ink-600 mb-2">Additional notes</label>
+					<textarea
+						name="notes"
+						rows={3}
+						placeholder="Pets, special areas to focus on, access instructions…"
+						className={`w-full resize-y ${inputClasses}`}
+					/>
+				</div>
+
+				{/* submit */}
+				<button
+					type="submit"
+					className="mt-0.5 bg-pink-500 text-white font-sans font-semibold text-[15px] border-none cursor-pointer p-[15px] rounded-[14px] flex items-center justify-center gap-2 transition-all duration-200 ease-[var(--ease-out)] hover:bg-pink-600 hover:shadow-[0_8px_28px_rgba(255,80,181,0.36)]"
+				>
+					Get my free quote <ArrowRight size={16} />
+				</button>
+				<div className="flex items-center justify-center gap-1.5 text-[11.5px] text-[#A0A0AE]">
+					<ShieldCheck size={13} />
+					Licensed &amp; insured · 100% satisfaction guarantee
+				</div>
+			</form>
+			<SuccessModal open={sent} onClose={() => setSent(false)} />
+		</div>
 	);
 }
 
