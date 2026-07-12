@@ -34,6 +34,17 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="en">
+			<head>
+				{/* Sin JS, motion deja el estado `initial` (opacity:0 + translate + blur) como
+				    inline style → contenido invisible. Esto lo fuerza a visible para SEO/no-JS. */}
+				<noscript>
+					<style>{`
+						[style*="opacity: 0"],[style*="opacity:0"]{opacity:1!important}
+						[style*="transform"][style*="translate"],[style*="transform"][style*="scale"],[style*="transform"][style*="matrix"]{transform:none!important}
+						[style*="filter"][style*="blur"]{filter:none!important}
+					`}</style>
+				</noscript>
+			</head>
 			<body className={`${instrumentSerif.variable} ${poppins.variable} antialiased`}>
 				<Navbar />
 				{children}
