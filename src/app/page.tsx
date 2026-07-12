@@ -131,31 +131,31 @@ function GallerySection() {
 				{/* masonry grid */}
 				<div className="grid grid-cols-2 auto-rows-[180px] lg:grid-cols-4 lg:grid-rows-[220px_220px_300px] gap-3.5">
 					{/* tall left */}
-					<div className="row-span-2 lg:col-start-1 lg:row-start-1 lg:row-span-2 rounded-[22px] overflow-hidden shadow-[0_12px_32px_rgba(30,62,162,0.10)]">
+					<Reveal delay={0} className="row-span-2 lg:col-start-1 lg:row-start-1 lg:row-span-2 rounded-[22px] overflow-hidden shadow-[0_12px_32px_rgba(30,62,162,0.10)]">
 						<img src="/img/aw1a0547.jpg" alt="Before & after" className="w-full h-full object-cover block" />
-					</div>
+					</Reveal>
 					{/* top center-left */}
-					<div className="lg:col-start-2 lg:row-start-1 rounded-[22px] overflow-hidden shadow-[0_12px_32px_rgba(30,62,162,0.10)]">
+					<Reveal delay={80} className="lg:col-start-2 lg:row-start-1 rounded-[22px] overflow-hidden shadow-[0_12px_32px_rgba(30,62,162,0.10)]">
 						<img src="/img/aw1a0550.jpg" alt="Kitchen clean" className="w-full h-full object-cover block" />
-					</div>
+					</Reveal>
 					{/* top center-right */}
-					<div className="lg:col-start-3 lg:row-start-1 rounded-[22px] overflow-hidden shadow-[0_12px_32px_rgba(30,62,162,0.10)]">
+					<Reveal delay={160} className="lg:col-start-3 lg:row-start-1 rounded-[22px] overflow-hidden shadow-[0_12px_32px_rgba(30,62,162,0.10)]">
 						<img src="/img/aw1a0562.jpg" alt="Bathroom detail" className="w-full h-full object-cover block" />
-					</div>
+					</Reveal>
 					{/* tall right */}
-					<div className="row-span-2 lg:col-start-4 lg:row-start-1 lg:row-span-2 rounded-[22px] overflow-hidden shadow-[0_12px_32px_rgba(30,62,162,0.10)]">
+					<Reveal delay={240} className="row-span-2 lg:col-start-4 lg:row-start-1 lg:row-span-2 rounded-[22px] overflow-hidden shadow-[0_12px_32px_rgba(30,62,162,0.10)]">
 						<img
 							src="/img/pasted-1782782341097-0.webp"
 							alt="Team photo"
 							className="w-full h-full object-cover block"
 						/>
-					</div>
+					</Reveal>
 					{/* bottom center-left */}
-					<div className="lg:col-start-2 lg:row-start-2 rounded-[22px] overflow-hidden shadow-[0_12px_32px_rgba(30,62,162,0.10)]">
+					<Reveal delay={120} className="lg:col-start-2 lg:row-start-2 rounded-[22px] overflow-hidden shadow-[0_12px_32px_rgba(30,62,162,0.10)]">
 						<img src="/img/aw1a0626-scaled.jpg" alt="Living room" className="w-full h-full object-cover block" />
-					</div>
+					</Reveal>
 					{/* blog CTA card */}
-					<div className="lg:col-start-3 lg:row-start-2 rounded-[22px] overflow-hidden bg-[linear-gradient(135deg,#FF50B5_0%,#E0389C_100%)] flex flex-col items-start justify-end p-[26px] shadow-[0_12px_32px_rgba(255,80,181,0.30)]">
+					<Reveal delay={200} className="lg:col-start-3 lg:row-start-2 rounded-[22px] overflow-hidden bg-[linear-gradient(135deg,#FF50B5_0%,#E0389C_100%)] flex flex-col items-start justify-end p-[26px] shadow-[0_12px_32px_rgba(255,80,181,0.30)]">
 						<div className="text-[11px] font-bold text-white/75 uppercase tracking-[0.1em] mb-2">
 							From our blog
 						</div>
@@ -168,11 +168,11 @@ function GallerySection() {
 						>
 							Read articles <ArrowRight size={13} />
 						</Link>
-					</div>
+					</Reveal>
 					{/* full-width team strip */}
-					<div className="col-span-2 lg:col-span-4 lg:row-start-3 rounded-[22px] overflow-hidden shadow-[0_12px_32px_rgba(30,62,162,0.10)]">
+					<Reveal delay={280} className="col-span-2 lg:col-span-4 lg:row-start-3 rounded-[22px] overflow-hidden shadow-[0_12px_32px_rgba(30,62,162,0.10)]">
 						<img src="/img/aw1a0732.jpg" alt="Team at work" className="w-full h-full object-cover block" />
-					</div>
+					</Reveal>
 				</div>
 			</div>
 		</section>

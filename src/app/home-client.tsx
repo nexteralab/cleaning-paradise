@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, ChevronRight, MapPin, Plus, ShieldCheck } from "lucide-react";
 import SuccessModal from "@/components/SuccessModal";
+import Reveal from "@/components/Reveal";
 
 /* ============ HERO: full-screen video card + booking form ============ */
 
@@ -282,12 +283,19 @@ export function ServicesSection() {
 			ticking = true;
 			requestAnimationFrame(compute);
 		};
+		// On resize the 440vh section collapses (lg: drops) and the doc shrinks,
+		// but the browser keeps scrollY → user lands in white void. Clamp it.
+		const onResize = () => {
+			const max = document.documentElement.scrollHeight - window.innerHeight;
+			if (window.scrollY > max) window.scrollTo(0, Math.max(0, max));
+			onScroll();
+		};
 		window.addEventListener("scroll", onScroll, { passive: true });
-		window.addEventListener("resize", onScroll, { passive: true });
+		window.addEventListener("resize", onResize, { passive: true });
 		compute();
 		return () => {
 			window.removeEventListener("scroll", onScroll);
-			window.removeEventListener("resize", onScroll);
+			window.removeEventListener("resize", onResize);
 		};
 	}, [N]);
 
@@ -504,8 +512,10 @@ export function FaqSection() {
 					</h2>
 				</div>
 				<div className="flex flex-col gap-3.5">
-					{FAQS.map((f) => (
-						<FaqItem key={f.q} q={f.q} a={f.a} />
+					{FAQS.map((f, i) => (
+						<Reveal key={f.q} delay={i * 70}>
+							<FaqItem q={f.q} a={f.a} />
+						</Reveal>
 					))}
 				</div>
 			</div>
