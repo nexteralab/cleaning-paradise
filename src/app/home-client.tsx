@@ -175,6 +175,7 @@ export function BookingForm({ className = "" }: { className?: string }) {
 
 type Service = {
 	num: string;
+	slug: string;
 	name: string;
 	title: string;
 	desc: string;
@@ -187,6 +188,7 @@ type Service = {
 const SERVICES: Service[] = [
 	{
 		num: "01",
+		slug: "standard-cleaning",
 		name: "Standard Cleaning",
 		title: "Standard Cleaning",
 		desc: "Regular housekeeping maintenance, surfaces wiped, floors mopped, bathrooms sanitized, kitchen scrubbed down. Your home stays pristine between deep cleans.",
@@ -197,6 +199,7 @@ const SERVICES: Service[] = [
 	},
 	{
 		num: "02",
+		slug: "deep-cleaning",
 		name: "Deep Cleaning",
 		title: "Deep Cleaning",
 		desc: "A full top-to-bottom sanitization: inside appliances, grout lines, baseboards, bathroom disinfection, and every corner your regular maid service doesn't reach.",
@@ -207,26 +210,29 @@ const SERVICES: Service[] = [
 	},
 	{
 		num: "03",
+		slug: "commercial-cleaning",
 		name: "Commercial Cleaning",
 		title: "Commercial Cleaning",
 		desc: "Professional janitorial services for offices and commercial spaces in Seattle WA. We keep your workspace spotless, hygienic, and ready for business every day",
 		tags: ["Weekly", "Biweekly", "Monthly"],
-		accent: "blue",
+		accent: "pink",
 		img: "/img/comercial-cleaning.webp",
 		alt: "Commercial Cleaning",
 	},
 	{
 		num: "04",
+		slug: "move-in-out",
 		name: "Move In / Out",
 		title: "Move In / Out",
 		desc: "Detailed maid service for lease turnovers and new move-ins. Every cabinet, appliance, and surface cleaned to a sparkling finish your landlord or buyer will notice.",
 		tags: ["One-time"],
-		accent: "blue",
+		accent: "pink",
 		img: "/img/aw1a0626-scaled.jpg",
 		alt: "Move In/Out",
 	},
 	{
 		num: "05",
+		slug: "packing-unpacking",
 		name: "Packing & Unpacking",
 		title: "Packing & Unpacking",
 		desc: "Your local housekeeper team helps you pack, move, and settle in reducing move-day chaos without adding a thing to your to-do list.",
@@ -237,6 +243,7 @@ const SERVICES: Service[] = [
 	},
 	{
 		num: "06",
+		slug: "carpet-cleaning",
 		name: "Carpet Cleaning",
 		title: "Carpet Cleaning",
 		desc: "Deep extraction that removes allergens, pet dander, and embedded grime. One of the most requested add-ons for our recurring housekeeping clients.",
@@ -329,6 +336,10 @@ export function ServicesSection() {
 									key={svc.num}
 									onClick={(e) => {
 										if ((e.target as HTMLElement).closest("a")) return;
+										if (window.innerWidth < 1024) {
+											window.location.href = `/cleaning-services-in-wa/${svc.slug}`;
+											return;
+										}
 										scrollToRow(i);
 									}}
 									className={`cursor-pointer py-[15px] ${i < N - 1 ? "border-b border-[#F0F0F4]" : ""}`}
@@ -340,15 +351,16 @@ export function ServicesSection() {
 											>
 												{svc.num}
 											</span>
-											<div
-												className={`font-sans text-base leading-[1.2] transition-colors duration-[400ms] ease-[var(--ease-out)] text-ink-900 font-medium ${
+											<a
+												href={`/cleaning-services-in-wa/${svc.slug}`}
+												className={`font-sans text-base leading-[1.2] transition-colors duration-[400ms] ease-[var(--ease-out)] text-ink-900 font-medium no-underline hover:underline ${
 													on
 														? `${pink ? "lg:text-pink-500" : "lg:text-blue-600"} lg:font-semibold`
 														: "lg:text-[#C8C8DA] lg:font-medium"
 												}`}
 											>
 												{svc.name}
-											</div>
+											</a>
 										</div>
 										<ChevronRight size={14} className="text-[#E0E0EE] shrink-0" />
 									</div>
@@ -359,12 +371,22 @@ export function ServicesSection() {
 									>
 										<div className="overflow-hidden">
 										<div className="pt-5 pb-2 pl-8">
+											<img
+												src={svc.img}
+												alt={svc.alt}
+												className="lg:hidden w-full h-[200px] object-cover rounded-[20px] mb-4"
+											/>
 											<h3 className="font-serif text-[clamp(28px,2.8vw,46px)] font-normal text-ink-900 tracking-[-0.025em] leading-[1.1] mb-3">
 												{svc.title}
 											</h3>
 											<p className="font-sans text-[14.5px] text-ink-600 leading-[1.78] mb-4 max-w-[440px]">
 												{svc.desc}
 											</p>
+											<span
+												className={`lg:hidden inline-flex items-center gap-1 font-sans text-[12px] font-semibold mb-4 ${pink ? "text-pink-500" : "text-blue-600"}`}
+											>
+												Tap to view details <ArrowRight size={12} />
+											</span>
 											<div className="flex flex-wrap gap-1.5 mb-5">
 												{svc.tags.map((tag) => (
 													<span
@@ -396,7 +418,7 @@ export function ServicesSection() {
 					</div>
 
 					{/* RIGHT: clean full-height photos */}
-					<div className="relative w-full h-[260px] mt-6 lg:w-[clamp(260px,40%,520px)] lg:h-[clamp(320px,72vh,640px)] lg:mt-0 lg:shrink-0 lg:self-center">
+					<div className="hidden lg:block relative lg:w-[clamp(260px,40%,520px)] lg:h-[clamp(320px,72vh,640px)] lg:shrink-0 lg:self-center">
 						{SERVICES.map((svc, i) => (
 							<div
 								key={svc.num}
