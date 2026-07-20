@@ -148,7 +148,7 @@ export default function ContactPage() {
 								<span className="text-sm font-bold text-ink-900">4.9</span>
 							</div>
 							<p className="text-[13px] leading-[1.55] text-ink-600">
-								Rated by 450+ homeowners across King &amp; Snohomish County.{" "}
+								Rated by 100+ homeowners across King &amp; Snohomish County.{" "}
 								<a
 									href="https://www.thumbtack.com/wa/lynnwood/house-cleaning/cleaning-paradise-llc/service/454839254774677504"
 									target="_blank"

@@ -150,7 +150,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 						<div className="absolute inset-x-5 bottom-5 rounded-2xl bg-white/95 px-5 py-4 shadow-[0_4px_24px_rgba(0,0,0,0.12)] backdrop-blur-md">
 							<div className="flex items-center justify-around gap-2">
 								<div className="text-center">
-									<div className="font-sans text-[22px] leading-none font-bold text-pink-500">450+</div>
+									<div className="font-sans text-[22px] leading-none font-bold text-pink-500">100+</div>
 									<div className="mt-[3px] text-[11px] font-semibold text-[#808098]">Homes Cleaned</div>
 								</div>
 								<div className="h-8 w-px bg-ink-200" />

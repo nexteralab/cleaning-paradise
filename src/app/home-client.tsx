@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { ArrowRight, ChevronRight, MapPin, Plus, ShieldCheck } from "lucide-react";
 import SuccessModal from "@/components/SuccessModal";
 import Reveal from "@/components/Reveal";
@@ -501,30 +502,73 @@ export function ServicesSection() {
 
 /* ============ FAQ accordion ============ */
 
-const FAQS: { q: string; a: string }[] = [
+const faqLink = "font-semibold text-pink-500 no-underline hover:underline";
+
+const FAQS: { q: string; a: React.ReactNode }[] = [
+	{
+		q: "What areas do you serve?",
+		a: (
+			<>
+				Looking for maid service or cleaning near me? We provide maid and housekeeping services across
+				Lynnwood, Seattle, Bellevue, Kirkland, Edmonds, Bothell, Shoreline, and Mercer Island. Visit our{" "}
+				<Link href="/locations" className={faqLink}>locations page here</Link> to see details for your city.
+			</>
+		),
+	},
 	{
 		q: "How is the price for maid service calculated?",
-		a: "Pricing is based on your home's size and how often you'd like our maids to come. Most standard housekeeping visits start at $55/hr per person. We provide a full quote before any work begins, no guessing, no surprises when the invoice arrives.",
+		a: (
+			<>
+				Every home is different, so we don&apos;t use a one size fits all price. We look at your home&apos;s
+				size, its condition, and how often you&apos;d like our maids to come, then put together a custom
+				quote just for you. Getting that quote is fast and free, no guessing, no surprises when the invoice
+				arrives. <Link href="/contact" className={faqLink}>Request your free quote here</Link> and we&apos;ll
+				get back to you right away.
+			</>
+		),
+	},
+	{
+		q: "Do you bring your own cleaning supplies and equipment?",
+		a: "Yes. Every maid arrives with all the supplies, tools, and equipment needed to get your home spotless, including vacuums, mops, and eco friendly products. You don't need to provide anything. If you prefer we use a specific product you already own, just mention it when booking and we'll gladly use it.",
+	},
+	{
+		q: "What if I have pets at home during the cleaning?",
+		a: "No problem at all. Our housekeepers are comfortable working around cats, dogs, and other pets. Just let us know when booking if your pet needs extra space or has any sensitivities, and we'll plan the visit around them. All our products are pet safe, so your furry family members stay protected too.",
+	},
+	{
+		q: "What payment methods do you accept?",
+		a: (
+			<>
+				We accept all major credit and debit cards, along with payments through Jobber, our online booking
+				and invoicing platform. You&apos;ll get a clear quote before the cleaning starts, and payment is
+				processed securely once the job is done. No cash needed, no surprises on the invoice. Ready to get a
+				quote? <Link href="/contact" className={faqLink}>Contact us here</Link>.
+			</>
+		),
+	},
+	{
+		q: "Do you offer same day cleaning service?",
+		a: "We do our best to accommodate same day requests whenever our schedule allows, especially for standard cleaning visits. For deep cleaning, move in or move out cleaning, or larger jobs, we recommend booking a day or two ahead to guarantee availability. Get in touch and we'll let you know the soonest opening.",
+	},
+	{
+		q: "Do I need to be home during the cleaning?",
+		a: "Not at all. Many of our clients give us a key, a code, or arrange access another way so we can clean while they're at work or running errands. Your home and belongings are always treated with care and respect, whether you're there or not.",
 	},
 	{
 		q: "What's the difference between regular maid service and deep cleaning?",
-		a: "Standard cleaning covers your home's recurring maintenance: vacuuming, mopping, wiping surfaces, sanitizing bathrooms and kitchens, and taking out trash. Deep cleaning goes further — inside appliances, behind furniture, grout lines, baseboards, and every surface you'd normally skip. We offer both; our team can help you decide which fits your current situation.",
-	},
-	{
-		q: "Can I cancel or reschedule my maid service appointment?",
-		a: "Yes. Give us at least 24 hours' notice and we'll reschedule at no charge. Late cancellations (within 24 hours) may incur a 20% fee to account for the housekeeper's reserved time.",
-	},
-	{
-		q: "What if I'm not satisfied with the results?",
-		a: "Contact us within 24 hours and describe the specific issue. We'll send your maid back to fix it at no extra cost. We don't consider a housekeeping job done until your home is genuinely spotless.",
-	},
-	{
-		q: "Are your products safe for kids, pets, and seniors?",
-		a: "Yes. We use professional-grade, non-toxic, biodegradable products safe for children, pets, and clients with allergies or sensitivities. Including cleaning services for seniors who may have respiratory concerns. If you have a specific product preference, just let us know when booking.",
+		a: (
+			<>
+				Standard cleaning covers your home&apos;s recurring maintenance: vacuuming, mopping, wiping surfaces,
+				sanitizing bathrooms and kitchens, and taking out trash. Deep cleaning goes further, including inside
+				appliances, behind furniture, grout lines, baseboards, and every surface you&apos;d normally skip.{" "}
+				<Link href="/cleaning-services-in-wa" className={faqLink}>See all the services we offer</Link> and
+				our team can help you decide which fits your current situation.
+			</>
+		),
 	},
 ];
 
-function FaqItem({ q, a }: { q: string; a: string }) {
+function FaqItem({ q, a }: { q: string; a: React.ReactNode }) {
 	const [open, setOpen] = useState(false);
 	return (
 		<div
@@ -556,19 +600,45 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 export function FaqSection() {
 	return (
 		<section id="faq" className="py-24 bg-white">
-			<div className="max-w-[1360px] mx-auto px-10 max-md:px-6">
-				<div className="text-center mb-11">
-					<div className="text-[13px] font-bold text-pink-500 uppercase tracking-[0.1em] mb-[13px]">FAQ</div>
-					<h2 className="font-heading text-[clamp(40px,4.5vw,60px)] font-normal text-ink-900 tracking-[-0.02em]">
+			<div className="max-w-[1360px] mx-auto px-10 max-md:px-6 grid grid-cols-1 lg:grid-cols-[0.85fr_1.5fr] gap-[clamp(36px,4vw,64px)] items-start">
+				{/* left: photo + CTA card */}
+				<div className="flex flex-col gap-6 lg:sticky lg:top-[100px]">
+					<Reveal>
+						<img
+							src="/img/group.webp"
+							alt="The Cleaning Paradise team"
+							className="w-full rounded-[26px] object-cover shadow-[0_16px_44px_rgba(30,62,162,0.12)]"
+						/>
+					</Reveal>
+					<Reveal delay={90}>
+						<div className="rounded-[26px] border border-pink-100 px-7 py-7 shadow-[0_10px_32px_rgba(30,62,162,0.06)]">
+							<p className="text-[17px] text-ink-600 leading-[1.7] mb-5">
+								Ready for a total refresh? Contact Cleaning Paradise for a customized cleaning quote.
+							</p>
+							<Link
+								href="/contact"
+								className="inline-flex items-center gap-2 bg-pink-500 text-white font-sans font-semibold text-[15px] px-7 py-3.5 rounded-full no-underline transition-all duration-200 ease-[var(--ease-out)] hover:bg-pink-600 hover:shadow-[0_10px_28px_rgba(255,80,181,0.36)]"
+							>
+								Get my free quote <ArrowRight size={16} />
+							</Link>
+						</div>
+					</Reveal>
+				</div>
+				{/* right: heading + accordion */}
+				<div>
+					<div className="text-[13px] font-bold text-pink-500 uppercase tracking-[0.1em] mb-[13px]">
+						Frequently asked
+					</div>
+					<h2 className="font-heading text-[clamp(40px,4.5vw,60px)] font-normal text-ink-900 tracking-[-0.02em] leading-[1.1] mb-10">
 						Questions About Our Seattle Cleaning Services
 					</h2>
-				</div>
-				<div className="flex flex-col gap-3.5">
-					{FAQS.map((f, i) => (
-						<Reveal key={f.q} delay={i * 70}>
-							<FaqItem q={f.q} a={f.a} />
-						</Reveal>
-					))}
+					<div className="flex flex-col gap-3.5">
+						{FAQS.map((f, i) => (
+							<Reveal key={f.q} delay={i * 70}>
+								<FaqItem q={f.q} a={f.a} />
+							</Reveal>
+						))}
+					</div>
 				</div>
 			</div>
 		</section>

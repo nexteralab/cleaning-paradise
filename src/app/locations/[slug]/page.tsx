@@ -106,7 +106,7 @@ const services: Service[] = [
 type Stat = { icon: LucideIcon; value: string; label: string };
 
 const stats: Stat[] = [
-	{ icon: Users, value: "450+", label: "Customers Served" },
+	{ icon: Users, value: "100+", label: "Customers Served" },
 	{ icon: CircleCheck, value: "100%", label: "Satisfaction Rate" },
 	{ icon: Star, value: "50+", label: "5-star Reviews" },
 ];

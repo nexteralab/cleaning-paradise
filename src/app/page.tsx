@@ -17,10 +17,88 @@ export const metadata: Metadata = {
 /* ============ TRUST INDICATORS ============ */
 
 const STATS: { value: string; label: string; color: string }[] = [
-	{ value: "450+", label: "Homes Cleaned", color: "text-pink-500" },
+	{ value: "100+", label: "Homes Cleaned", color: "text-pink-500" },
 	{ value: "100%", label: "Satisfaction Rate", color: "text-blue-600" },
 	{ value: "50+", label: "5-Star Reviews", color: "text-pink-500" },
 ];
+
+const THUMBTACK_URL =
+	"https://www.thumbtack.com/wa/lynnwood/house-cleaning/cleaning-paradise-llc/service/454839254774677504";
+
+/* Short 5-star pull-quotes for the marquee — excerpts from the full reviews in src/lib/reviews.ts */
+const QUOTES: { quote: string; name: string; city: string }[] = [
+	{
+		quote: "The quality of their cleaning is outstanding — they consistently pay attention to the details.",
+		name: "Camilo P.",
+		city: "Bellevue, WA",
+	},
+	{
+		quote: "The house looked so nice and smelled so fresh. They are amazing.",
+		name: "Brenda G.",
+		city: "Kirkland, WA",
+	},
+	{
+		quote: "We always love how spotless they make our home — even with a dog that sheds a lot!",
+		name: "Roynerah B.",
+		city: "Seattle, WA",
+	},
+	{
+		quote: "They always just find something to tackle and exceed our expectations. Love them!!",
+		name: "Melissa H.",
+		city: "Greater Seattle, WA",
+	},
+	{
+		quote: "The quality was as good as I've seen after trying several different local options.",
+		name: "Jay K.",
+		city: "Greater Seattle, WA",
+	},
+	{
+		quote: "They went way above and beyond my expectations. I was blown away.",
+		name: "Connie A.",
+		city: "Greater Seattle, WA",
+	},
+];
+
+function ReviewsMarquee() {
+	// ponytail: pure-CSS marquee — track duplicated ×2, keyframe slides -50%.
+	// QUOTES repeated so each half is wider than the container. Hover pauses,
+	// motion-safe honors prefers-reduced-motion (falls back to a swipeable strip).
+	const half = [...QUOTES, ...QUOTES];
+	const items = [...half, ...half];
+	return (
+		<div
+			className="group mt-9 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+			aria-label="Five-star customer reviews"
+		>
+			<div className="flex w-max gap-3.5 motion-safe:animate-[galleryScrollH_50s_linear_infinite] group-hover:[animation-play-state:paused]">
+				{items.map((r, i) => {
+					const clone = i >= half.length;
+					return (
+						<a
+							key={i}
+							href={THUMBTACK_URL}
+							target="_blank"
+							rel="noopener"
+							aria-hidden={clone}
+							tabIndex={clone ? -1 : undefined}
+							className="flex w-[360px] shrink-0 flex-col gap-2.5 rounded-2xl border border-ink-200 bg-white px-6 py-5 no-underline transition-colors duration-200 hover:border-pink-500"
+						>
+							<div className="flex gap-1">
+								{Array.from({ length: 5 }, (_, s) => (
+									<Star key={s} size={13} className="text-pink-500 fill-pink-500" />
+								))}
+							</div>
+							<p className="text-[14.5px] leading-[1.6] text-ink-700">&ldquo;{r.quote}&rdquo;</p>
+							<div className="text-[13px] font-semibold text-ink-600">
+								{r.name} <span className="font-normal text-ink-400">· {r.city}</span>
+							</div>
+						</a>
+					);
+				})}
+			</div>
+		</div>
+	);
+}
 
 function TrustSection() {
 	return (
@@ -28,7 +106,7 @@ function TrustSection() {
 			<div className="max-w-[1360px] mx-auto px-10 max-md:px-6">
 				<Reveal className="text-center mb-[42px]">
 					<p className="font-sans text-[30px] max-md:text-[24px] text-ink-800 tracking-[-0.01em] mx-auto">
-						Over 450 Seattle-area households trust our maids and housekeepers to keep their homes spotless,
+						Over 100 Seattle-area households trust our maids and housekeepers to keep their homes spotless,
 						sanitized, and sparkling clean <i>week after week.</i>
 					</p>
 				</Reveal>
@@ -40,6 +118,7 @@ function TrustSection() {
 						</Reveal>
 					))}
 				</div>
+				<ReviewsMarquee />
 			</div>
 		</section>
 	);

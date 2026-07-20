@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 const stats = [
-	{ value: "450+", label: "Homes Cleaned" },
+	{ value: "100+", label: "Homes Cleaned" },
 	{ value: "10+", label: "Years of Experience" },
 	{ value: "39", label: "5-Star Reviews" },
 	{ value: "100%", label: "Satisfaction Guarantee" },
