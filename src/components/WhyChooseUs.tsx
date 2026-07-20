@@ -60,7 +60,7 @@ export default function WhyChooseUs({
 							<span className="w-7 h-[1.5px] bg-pink-500 inline-block" />
 							Why choose us
 						</div>
-						<h2 className="font-serif text-[clamp(40px,4.5vw,64px)] font-normal text-ink-900 tracking-[-0.025em] leading-[1.12]">
+						<h2 className="font-heading text-[clamp(40px,4.5vw,64px)] font-normal text-ink-900 tracking-[-0.025em] leading-[1.12]">
 							Why {city} Families Choose{" "}
 							<span className="relative inline">
 								Cleaning Paradise

@@ -54,12 +54,12 @@ export function TestimonialsSection() {
 			<div className="max-w-[1240px] mx-auto px-10 max-md:px-6">
 				<Reveal className="text-center mb-12">
 					<div className="text-xs font-bold text-pink-500 uppercase tracking-[0.1em] mb-[13px]">Testimonials</div>
-					<h2 className="font-serif text-[clamp(40px,4.5vw,60px)] font-normal text-ink-900 tracking-[-0.02em] mb-4">
+					<h2 className="font-heading text-[clamp(40px,4.5vw,60px)] font-normal text-ink-900 tracking-[-0.02em] mb-4">
 						Rated by real Seattle-area clients
 					</h2>
 					<div className="inline-flex items-center gap-[9px] bg-white border border-pink-100 rounded-full px-[18px] py-2">
 						<Star size={16} className="text-pink-500 fill-pink-500" />
-						<span className="text-sm font-semibold text-ink-800">39 verified reviews on Thumbtack</span>
+						<span className="text-sm font-semibold text-ink-800">111 verified reviews on Thumbtack</span>
 					</div>
 				</Reveal>
 				<div className="grid grid-cols-1 md:grid-cols-3 gap-[22px] mb-[34px] items-start">
@@ -116,7 +116,7 @@ function GallerySection() {
 				<Reveal className="flex items-end justify-between flex-wrap gap-6 mb-10">
 					<div>
 						<div className="text-xs font-bold text-pink-500 uppercase tracking-[0.1em] mb-3">Our work</div>
-						<h2 className="font-serif text-[clamp(36px,4vw,56px)] font-normal text-ink-900 tracking-[-0.02em] leading-[1.12]">
+						<h2 className="font-heading text-[clamp(36px,4vw,56px)] font-normal text-ink-900 tracking-[-0.02em] leading-[1.12]">
 							Real homes. Real results.
 						</h2>
 					</div>

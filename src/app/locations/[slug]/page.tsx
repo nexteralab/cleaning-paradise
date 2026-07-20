@@ -244,12 +244,12 @@ export default async function LocationPage({
 				<div className="relative overflow-hidden rounded-[28px] bg-[#0d1020]">
 					{/* eslint-disable-next-line jsx-a11y/media-has-caption */}
 					<video
-						src="https://github.com/nexteralab/cleaning-paradise/raw/refs/heads/main/kirkland-bg.mp4"
+						src="/video/kirkland-bg.mp4"
 						muted
 						loop
 						playsInline
 						autoPlay
-						preload="auto"
+						preload="metadata"
 						className="absolute inset-0 h-full w-full object-cover opacity-[0.52]"
 					/>
 					<div className="pointer-events-none absolute inset-0 bg-[rgba(12,17,38,0.48)]" />
@@ -296,11 +296,11 @@ export default async function LocationPage({
 					<Reveal className="mb-12 text-center">
 						<div className="mb-4">
 							<span className="inline-flex items-center rounded-full bg-pink-500/15 px-4 py-2 text-[11.5px] font-semibold tracking-[0.06em] text-pink-500 uppercase">
-								Nuestros Servicios
+								Our Services
 							</span>
 						</div>
 						<h2 className="mb-3.5 text-[clamp(30px,3.4vw,46px)] leading-[1.12] font-normal tracking-[-0.025em] text-ink-900">
-							<span className="font-serif italic">Limpieza </span>para cada hogar
+							<span className="font-serif italic">Cleaning </span>for every home
 						</h2>
 						<p className="mx-auto max-w-[560px] text-[15.5px] leading-[1.7] text-ink-600">
 							Whether you need a one-time deep-clean before a home inspection, recurring housekeeping

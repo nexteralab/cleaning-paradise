@@ -405,6 +405,7 @@ export default function AboutPage() {
 					</div>
 				</Reveal>
 			</section>
+			<h1>h1</h1>
 		</div>
 	);
 }

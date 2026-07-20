@@ -46,11 +46,12 @@ export function HeroSection() {
 				{/* background video */}
 				<video
 					ref={videoRef}
-					src="https://github.com/nexteralab/cleaning-paradise/raw/refs/heads/main/cleaning-paradise-bg.mp4"
+					src="/video/cleaning-paradise-bg.mp4"
 					autoPlay
 					muted
 					loop
 					playsInline
+					preload="metadata"
 					className="absolute inset-0 w-full h-full object-cover"
 				/>
 				{/* legibility overlay */}
@@ -69,7 +70,7 @@ export function HeroSection() {
 								<MapPin size={13} />
 								Serving Greater Seattle
 							</div>
-							<h1 className="font-sans text-[clamp(34px,3.8vw,52px)] font-semibold leading-[1.1] text-white tracking-[-0.025em] [text-shadow:0_4px_24px_rgba(0,0,0,0.35)] max-w-[620px] mb-4">
+							<h1 className="font-heading italic text-[clamp(34px,3.8vw,52px)] font-semibold leading-[1.1] text-white tracking-[-0.025em] [text-shadow:0_4px_24px_rgba(0,0,0,0.35)] max-w-[620px] mb-4">
 								House Cleaning Services in Seattle, WA
 							</h1>
 							<p className="text-[clamp(16px,1.3vw,17px)] text-white md:text-white/[0.88] leading-[1.72] max-w-[560px] [text-shadow:0_4px_40px_rgba(0,0,0,0.28)]">
@@ -93,29 +94,77 @@ export function HeroSection() {
 
 export function BookingForm({ className = "" }: { className?: string }) {
 	const [sent, setSent] = useState(false);
+	const [submitting, setSubmitting] = useState(false);
+	const [error, setError] = useState("");
 
 	return (
 		<div className={`w-[min(460px,44%)] min-w-[230px] shrink-0 max-md:w-full ${className}`}>
 			<form
-				onSubmit={(e) => {
+				onSubmit={async (e) => {
 					e.preventDefault();
-					e.currentTarget.reset();
-					setSent(true);
+					setError("");
+					setSubmitting(true);
+					const form = e.currentTarget;
+					const fd = new FormData(form);
+					const service = fd.get("service");
+					const payload = {
+						firstName: fd.get("firstName"),
+						lastName: fd.get("lastName"),
+						email: fd.get("email"),
+						phone: fd.get("phone"),
+						service,
+						services: service ? [service] : [],
+						sqft: fd.get("sqft"),
+						notes: fd.get("notes"),
+						promo: true,
+						source: "home-hero",
+					};
+					try {
+						const res = await fetch("/api/contact", {
+							method: "POST",
+							headers: { "Content-Type": "application/json" },
+							body: JSON.stringify(payload),
+						});
+						if (!res.ok) throw new Error();
+						setSent(true);
+						form.reset();
+					} catch {
+						setError("Something went wrong. Please call (425) 610-0241.");
+					} finally {
+						setSubmitting(false);
+					}
 				}}
 				className="bg-white rounded-[26px] shadow-[0_26px_60px_rgba(19,19,32,0.28)] p-6 flex flex-col gap-[15px] max-h-[calc(100vh-150px)] overflow-y-auto"
 			>
 				<div>
-					<h3 className="font-sans text-[27px] text-ink-900 tracking-[-0.01em] mb-[3px]">Say hello!</h3>
-					<p className="text-[13px] text-[#808098]">Free quote in minutes — no obligation.</p>
+					<h3 className="font-sans text-[27px] text-ink-900 tracking-[-0.01em] mb-[3px]">Get your free quote</h3>
+					<p className="text-[13px] text-[#808098]">
+						Reply within one business day — plus <strong className="font-semibold text-pink-500">30% off</strong> your first clean.
+					</p>
 				</div>
 
-				{/* name + email */}
+				{/* name */}
 				<div className="flex flex-col gap-2.5 sm:flex-row">
-					<input name="name" placeholder="Your name" className={`flex-1 min-w-0 ${inputClasses}`} />
+					<input name="firstName" required autoComplete="given-name" placeholder="First name" className={`flex-1 min-w-0 ${inputClasses}`} />
+					<input name="lastName" autoComplete="family-name" placeholder="Last name" className={`flex-1 min-w-0 ${inputClasses}`} />
+				</div>
+
+				{/* email + phone */}
+				<div className="flex flex-col gap-2.5 sm:flex-row">
 					<input
 						name="email"
 						type="email"
+						required
+						autoComplete="email"
 						placeholder="Email"
+						className={`flex-1 min-w-0 ${inputClasses}`}
+					/>
+					<input
+						name="phone"
+						type="tel"
+						required
+						autoComplete="tel"
+						placeholder="Phone"
 						className={`flex-1 min-w-0 ${inputClasses}`}
 					/>
 				</div>
@@ -155,12 +204,15 @@ export function BookingForm({ className = "" }: { className?: string }) {
 					/>
 				</div>
 
+				{error && <p className="text-center text-[13px] text-pink-600">{error}</p>}
+
 				{/* submit */}
 				<button
 					type="submit"
-					className="mt-0.5 bg-pink-500 text-white font-sans font-semibold text-[15px] border-none cursor-pointer p-[15px] rounded-[14px] flex items-center justify-center gap-2 transition-all duration-200 ease-[var(--ease-out)] hover:bg-pink-600 hover:shadow-[0_8px_28px_rgba(255,80,181,0.36)]"
+					disabled={submitting}
+					className="mt-0.5 bg-pink-500 text-white font-sans font-semibold text-[15px] border-none cursor-pointer p-[15px] rounded-[14px] flex items-center justify-center gap-2 transition-all duration-200 ease-[var(--ease-out)] hover:bg-pink-600 hover:shadow-[0_8px_28px_rgba(255,80,181,0.36)] disabled:opacity-60"
 				>
-					Get my free quote <ArrowRight size={16} />
+					{submitting ? "Sending…" : "Get my free quote"} <ArrowRight size={16} />
 				</button>
 				<div className="flex items-center justify-center gap-1.5 text-[11.5px] text-[#A0A0AE]">
 					<ShieldCheck size={13} />
@@ -384,7 +436,7 @@ export function ServicesSection() {
 												alt={svc.alt}
 												className="lg:hidden w-full h-[200px] object-cover rounded-[20px] mb-4"
 											/>
-											<h3 className="font-serif text-[clamp(28px,2.8vw,46px)] font-normal text-ink-900 tracking-[-0.025em] leading-[1.1] mb-3">
+											<h3 className="font-heading text-[clamp(28px,2.8vw,46px)] font-normal text-ink-900 tracking-[-0.025em] leading-[1.1] mb-3">
 												{svc.title}
 											</h3>
 											<p className="font-sans text-[14.5px] text-ink-600 leading-[1.78] mb-4 max-w-[440px]">
@@ -507,7 +559,7 @@ export function FaqSection() {
 			<div className="max-w-[820px] mx-auto px-10 max-md:px-6">
 				<div className="text-center mb-11">
 					<div className="text-xs font-bold text-pink-500 uppercase tracking-[0.1em] mb-[13px]">FAQ</div>
-					<h2 className="font-serif text-[clamp(40px,4.5vw,60px)] font-normal text-ink-900 tracking-[-0.02em]">
+					<h2 className="font-heading text-[clamp(40px,4.5vw,60px)] font-normal text-ink-900 tracking-[-0.02em]">
 						Questions About Our Seattle Cleaning Services
 					</h2>
 				</div>

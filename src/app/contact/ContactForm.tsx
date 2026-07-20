@@ -101,19 +101,19 @@ export default function ContactForm() {
 					<div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
 						<div>
 							<label className={labelClass}>First name *</label>
-							<input name="firstName" required placeholder="Jane" className={inputClass} />
+							<input name="firstName" required autoComplete="given-name" placeholder="Jane" className={inputClass} />
 						</div>
 						<div>
 							<label className={labelClass}>Last name *</label>
-							<input name="lastName" required placeholder="Doe" className={inputClass} />
+							<input name="lastName" required autoComplete="family-name" placeholder="Doe" className={inputClass} />
 						</div>
 						<div>
 							<label className={labelClass}>Email *</label>
-							<input name="email" type="email" required placeholder="jane@email.com" className={inputClass} />
+							<input name="email" type="email" required autoComplete="email" placeholder="jane@email.com" className={inputClass} />
 						</div>
 						<div>
 							<label className={labelClass}>Phone *</label>
-							<input name="phone" type="tel" required placeholder="(425) 000-0000" className={inputClass} />
+							<input name="phone" type="tel" required autoComplete="tel" placeholder="(425) 000-0000" className={inputClass} />
 						</div>
 					</div>
 				</div>
@@ -124,11 +124,11 @@ export default function ContactForm() {
 					<div className="grid grid-cols-1 gap-3 sm:grid-cols-[2fr_1fr]">
 						<div>
 							<label className={labelClass}>Street address</label>
-							<input name="street" placeholder="123 Main St" className={inputClass} />
+							<input name="street" autoComplete="address-line1" placeholder="123 Main St" className={inputClass} />
 						</div>
 						<div>
 							<label className={labelClass}>Unit / Apt</label>
-							<input name="unit" placeholder="Apt 4B" className={inputClass} />
+							<input name="unit" autoComplete="address-line2" placeholder="Apt 4B" className={inputClass} />
 						</div>
 						<div>
 							<label className={labelClass}>City</label>
@@ -147,7 +147,7 @@ export default function ContactForm() {
 						</div>
 						<div>
 							<label className={labelClass}>ZIP code</label>
-							<input name="zip" inputMode="numeric" placeholder="98101" className={inputClass} />
+							<input name="zip" inputMode="numeric" autoComplete="postal-code" placeholder="98101" className={inputClass} />
 						</div>
 					</div>
 				</div>
@@ -163,6 +163,7 @@ export default function ContactForm() {
 									key={label}
 									type="button"
 									onClick={() => toggleService(label)}
+									aria-pressed={active}
 									className={`flex cursor-pointer items-center gap-2.5 rounded-xl border-[1.5px] px-[15px] py-3 text-left text-[13.5px] font-semibold transition-all duration-150 ${
 										active
 											? "border-pink-500 bg-pink-50 text-pink-500"
@@ -263,6 +264,13 @@ export default function ContactForm() {
 				<p className="flex items-center justify-center gap-[5px] text-center text-[11.5px] text-[#A0A0AE]">
 					<ShieldCheck size={13} />
 					Licensed &amp; insured · We respond within one business day
+				</p>
+				<p className="text-center text-[11px] text-[#A0A0AE]">
+					By submitting, you agree to our{" "}
+					<a href="/privacy" className="underline hover:text-pink-500">
+						Privacy Policy
+					</a>
+					.
 				</p>
 			</form>
 			<SuccessModal open={submitted} onClose={() => setSubmitted(false)} />

@@ -23,10 +23,19 @@ export default function CountUp({
 	const suffix = match ? match[2] : "";
 	const decimals = numeric.includes(".") ? numeric.split(".")[1].length : 0;
 
-	const [n, setN] = useState(0);
+	// Start at the final value so SSR / no-JS / crawlers see the real number
+	// (never "0+"). The count-up animation is progressive enhancement only.
+	const [n, setN] = useState(target);
 
 	useEffect(() => {
 		if (!inView) return;
+		const reduce =
+			typeof window !== "undefined" &&
+			window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+		if (reduce) {
+			setN(target);
+			return;
+		}
 		const controls = animate(0, target, {
 			duration,
 			ease: [0.16, 1, 0.3, 1],

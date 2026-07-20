@@ -62,7 +62,7 @@ export default function Navbar() {
 					<a
 						href="tel:+14256100241"
 						aria-label="Call (425) 610-0241"
-						className="flex h-9 w-9 items-center justify-center rounded-xl bg-black text-white"
+						className="flex h-11 w-11 items-center justify-center rounded-xl bg-black text-white"
 					>
 						<Phone size={16} />
 					</a>
@@ -71,7 +71,7 @@ export default function Navbar() {
 						aria-label={open ? "Close menu" : "Open menu"}
 						aria-expanded={open}
 						onClick={() => setOpen(!open)}
-						className="flex h-9 w-9 items-center justify-center rounded-xl text-black"
+						className="flex h-11 w-11 items-center justify-center rounded-xl text-black"
 					>
 						{open ? <X size={20} /> : <Menu size={20} />}
 					</button>

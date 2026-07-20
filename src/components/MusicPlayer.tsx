@@ -57,7 +57,7 @@ export default function MusicPlayer() {
 	return (
 		<>
 			{/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-			<audio ref={ref} src="/music/music_cleanign.mp3" loop preload="none" />
+			<audio ref={ref} src="/music/music-cleaning.mp3" loop preload="none" />
 			<button
 				type="button"
 				onClick={toggle}

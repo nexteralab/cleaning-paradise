@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Poppins } from "next/font/google";
+import { Instrument_Serif, Lora, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -13,6 +13,12 @@ const instrumentSerif = Instrument_Serif({
 	style: ["normal", "italic"],
 });
 
+const lora = Lora({
+	variable: "--font-lora",
+	subsets: ["latin"],
+	style: ["normal", "italic"],
+});
+
 const poppins = Poppins({
 	variable: "--font-poppins",
 	subsets: ["latin"],
@@ -20,11 +26,67 @@ const poppins = Poppins({
 	style: ["normal", "italic"],
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://cleaningparadisellc.com";
+const TITLE = "Cleaning Paradise | House Cleaning Services in Seattle, WA";
+const DESCRIPTION =
+	"Professional residential and commercial cleaning based in Lynnwood, WA — serving Seattle and King & Snohomish County. Your home, perfectly clean.";
+
 export const metadata: Metadata = {
-	metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "https://cleaningparadisellc.com"),
-	title: "Cleaning Paradise | House Cleaning Services in Seattle, WA",
-	description:
-		"Professional residential and commercial cleaning based in Lynnwood, WA — serving Seattle and King & Snohomish County. Your home, perfectly clean.",
+	metadataBase: new URL(SITE_URL),
+	title: TITLE,
+	description: DESCRIPTION,
+	icons: { icon: "/favicon.svg", apple: "/favicon.svg" },
+	openGraph: {
+		type: "website",
+		siteName: "Cleaning Paradise",
+		title: TITLE,
+		description: DESCRIPTION,
+		url: SITE_URL,
+		images: [{ url: "/img/logo.png", width: 512, height: 512, alt: "Cleaning Paradise" }],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: TITLE,
+		description: DESCRIPTION,
+		images: ["/img/logo.png"],
+	},
+};
+
+// Sitewide LocalBusiness structured data — helps Google/AI engines identify the
+// business, service area and hours. AggregateRating deliberately omitted until
+// on-page reviews are verifiable (avoids a manual-action risk).
+const localBusinessJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "HouseCleaningService",
+	name: "Cleaning Paradise LLC",
+	description: DESCRIPTION,
+	url: SITE_URL,
+	telephone: "+1-425-610-0241",
+	email: "cleaning.paradise.llc@gmail.com",
+	image: `${SITE_URL}/img/logo.png`,
+	priceRange: "$$",
+	address: {
+		"@type": "PostalAddress",
+		addressLocality: "Lynnwood",
+		addressRegion: "WA",
+		addressCountry: "US",
+	},
+	areaServed: [
+		"Seattle",
+		"Bellevue",
+		"Kirkland",
+		"Lynnwood",
+		"Mercer Island",
+		"Shoreline",
+		"Edmonds",
+		"Mill Creek",
+	].map((name) => ({ "@type": "City", name })),
+	openingHoursSpecification: {
+		"@type": "OpeningHoursSpecification",
+		dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+		opens: "07:00",
+		closes: "19:00",
+	},
 };
 
 export default function RootLayout({
@@ -44,10 +106,20 @@ export default function RootLayout({
 						[style*="filter"][style*="blur"]{filter:none!important}
 					`}</style>
 				</noscript>
+				<script
+					type="application/ld+json"
+					dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+				/>
 			</head>
-			<body className={`${instrumentSerif.variable} ${poppins.variable} antialiased`}>
+			<body className={`${instrumentSerif.variable} ${lora.variable} ${poppins.variable} antialiased`}>
+				<a
+					href="#main"
+					className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[10000] focus:rounded-lg focus:bg-ink-900 focus:px-4 focus:py-2 focus:text-white"
+				>
+					Skip to content
+				</a>
 				<Navbar />
-				{children}
+				<main id="main">{children}</main>
 				<Footer />
 				<MusicPlayer />
 				<ChatBot />

@@ -190,12 +190,12 @@ export default function LocationsPage() {
     <div className="relative w-full overflow-x-clip">
       {/* HERO: Locations Overview */}
       <section className="bg-white px-10 pt-[120px] pb-20 text-center border-b border-ink-200 max-md:px-5">
-        <Reveal className="max-w-[1000px] mx-auto">
+        <Reveal className="max-w-[1360px] mx-auto">
           <div className="inline-flex items-center gap-[7px] bg-pink-500/15 text-pink-500 text-[11.5px] font-semibold tracking-[.06em] uppercase px-4 py-2 rounded-full mb-[22px]">
             <MapPin size={13} />
             Serving Greater Seattle
           </div>
-          <h1 className="font-serif text-[clamp(56px,7vw,88px)] font-normal leading-[1.06] text-ink-900 tracking-[-0.025em] mb-6">
+          <h1 className="font-heading italic text-[clamp(56px,7vw,88px)] font-normal leading-[1.06] text-ink-900 tracking-[-0.025em] mb-6">
             Professional Cleaning in Your City
           </h1>
           <p className="text-lg text-ink-600 leading-[1.7] mb-2">
@@ -211,7 +211,7 @@ export default function LocationsPage() {
 
       {/* CITIES GRID */}
       <section className="py-24 px-10 bg-white max-md:px-5">
-        <div className="max-w-[1240px] mx-auto">
+        <div className="max-w-[1360px] mx-auto">
           <Reveal className="text-center mb-16">
             <h2 className="font-serif text-[40px] text-ink-800 tracking-[-0.01em] leading-[1.05] mb-4">
               Choose Your Location

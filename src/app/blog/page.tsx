@@ -22,9 +22,9 @@ export default function BlogPage() {
 		<div className="relative w-full overflow-x-clip">
 			{/* HERO: Giant Display Text */}
 			<section className="bg-white px-6 pb-20 pt-[120px] md:px-10">
-				<div className="mx-auto max-w-[1240px]">
+				<div className="mx-auto max-w-[1360px]">
 					<div className="mb-[60px]">
-						<h1 className="mb-6 font-serif text-[clamp(44px,7vw,88px)] font-normal leading-[1.15] tracking-[-0.02em] text-ink-900">
+						<h1 className="mb-6 font-heading text-[clamp(44px,7vw,88px)] font-normal leading-[1.15] tracking-[-0.02em] text-ink-900">
 							<span className="relative inline">
 								Cleaning Tips
 								<svg width="354" height="12" viewBox="0 0 354 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -61,7 +61,7 @@ export default function BlogPage() {
 
 			{/* BLOG GRID: 3 columns */}
 			<section className="px-6 py-20 md:px-10">
-				<div className="mx-auto max-w-[1240px]">
+				<div className="mx-auto max-w-[1360px]">
 					<div className="mb-[60px] grid grid-cols-1 gap-9 md:grid-cols-2 lg:grid-cols-3">
 						{postList.map((post) => {
 							const Icon = post.categoryIcon;
@@ -110,7 +110,7 @@ export default function BlogPage() {
 
 			{/* Newsletter CTA */}
 			<section className="bg-pink-50 px-6 py-20 md:px-10">
-				<div className="mx-auto max-w-[800px] text-center">
+				<div className="mx-auto max-w-[1360px] text-center">
 					<h2 className="mb-4 font-serif text-[40px] leading-[1.2] tracking-[-0.01em] text-ink-900">
 						Stay Updated
 					</h2>

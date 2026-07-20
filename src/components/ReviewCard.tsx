@@ -57,7 +57,7 @@ export default function ReviewCard({ review }: { review: Review }) {
 					onClick={() => setExpanded((v) => !v)}
 					className="mt-2 self-start text-[13px] font-semibold text-pink-500 hover:underline"
 				>
-					{expanded ? "Ver menos" : "Ver más"}
+					{expanded ? "Show less" : "Show more"}
 				</button>
 			)}
 			{review.photos && review.photos.length > 0 && (

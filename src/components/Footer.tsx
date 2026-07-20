@@ -14,12 +14,14 @@ const services = [
 ];
 
 const locations = [
-	"Seattle",
-	"Lynnwood",
-	"Bellevue",
-	"Kirkland",
-	"Mercer Island & Shoreline",
-	"Edmonds & Bothell",
+	{ label: "Seattle", href: "/locations/seattle" },
+	{ label: "Bellevue", href: "/locations/bellevue" },
+	{ label: "Kirkland", href: "/locations/kirkland" },
+	{ label: "Lynnwood", href: "/locations/lynnwood" },
+	{ label: "Mercer Island", href: "/locations/mercer-island" },
+	{ label: "Shoreline", href: "/locations/shoreline" },
+	{ label: "Edmonds", href: "/locations/edmonds" },
+	{ label: "Mill Creek", href: "/locations/mill-creek" },
 ];
 
 const socialClass =
@@ -31,7 +33,7 @@ export default function Footer() {
 
 	return (
 		<footer className="bg-ink-900 pt-[66px] pb-[30px]">
-			<div className="mx-auto max-w-[1240px] px-10">
+			<div className="mx-auto max-w-[1360px] px-10">
 				<div className="mb-[26px] grid grid-cols-1 gap-11 border-b border-white/[0.08] pb-[46px] md:grid-cols-[1.7fr_1fr_1fr_1.2fr]">
 					<div>
 						<div className="mb-4 flex items-center gap-[11px]">
@@ -83,8 +85,8 @@ export default function Footer() {
 						<h4 className="mb-4 text-[11px] font-bold tracking-[0.1em] text-white uppercase">Locations</h4>
 						<div className="flex flex-col gap-2.5">
 							{locations.map((l) => (
-								<Link key={l} href="/service-areas" className="text-sm text-ink-400 transition-colors duration-150 hover:text-pink-500">
-									{l}
+								<Link key={l.href} href={l.href} className="text-sm text-ink-400 transition-colors duration-150 hover:text-pink-500">
+									{l.label}
 								</Link>
 							))}
 						</div>
@@ -111,7 +113,13 @@ export default function Footer() {
 				</div>
 				<div className="flex flex-wrap items-center justify-between gap-3">
 					<div className="text-xs text-ink-500">© 2026 Cleaning Paradise LLC. All rights reserved.</div>
-					<div className="text-xs text-ink-500">cleaningparadisellc.com · Privacy · Terms · Sitemap</div>
+					<div className="flex flex-wrap items-center gap-1.5 text-xs text-ink-500">
+						<Link href="/privacy" className="hover:text-pink-500">Privacy</Link>
+						<span aria-hidden>·</span>
+						<Link href="/terms" className="hover:text-pink-500">Terms</Link>
+						<span aria-hidden>·</span>
+						<a href="/sitemap.xml" className="hover:text-pink-500">Sitemap</a>
+					</div>
 				</div>
 			</div>
 		</footer>

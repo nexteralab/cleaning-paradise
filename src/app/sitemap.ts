@@ -15,7 +15,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		"/cleaning-services-in-wa",
 		"/contact",
 		"/locations",
-		"/service-areas",
+		"/privacy",
+		"/terms",
 	];
 
 	return [

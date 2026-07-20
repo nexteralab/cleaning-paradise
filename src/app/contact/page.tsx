@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CalendarCheck, Clock, Gift, Mail, MapPin, Phone } from "lucide-react";
+import { CalendarCheck, Clock, Gift, Mail, MapPin, Music, Phone, Star } from "lucide-react";
 import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
@@ -60,7 +60,7 @@ export default function ContactPage() {
 						<div className="rounded-[22px] border border-[#EAEAF2] bg-white px-7 py-[26px]">
 							<h3 className="mb-[18px] text-[15px] font-semibold text-ink-900">Reach us directly</h3>
 							<div className="flex flex-col gap-4">
-								<a href="tel:+14256100241" className="flex items-start gap-[13px] no-underline">
+								<div className="flex items-start gap-[13px]">
 									<div className="flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-[11px] bg-pink-50">
 										<Phone size={17} className="text-pink-500" />
 									</div>
@@ -68,10 +68,14 @@ export default function ContactPage() {
 										<div className="mb-0.5 text-[11px] font-semibold tracking-[0.05em] text-[#A0A0AE] uppercase">
 											Phone
 										</div>
-										<div className="text-sm font-semibold text-ink-900">(425) 610-0241</div>
-										<div className="text-[13px] text-[#808098]">(425) 480-8629</div>
+										<a href="tel:+14256100241" className="block text-sm font-semibold text-ink-900 no-underline hover:text-pink-500">
+											(425) 610-0241
+										</a>
+										<a href="tel:+14254808629" className="block text-[13px] text-[#808098] no-underline hover:text-pink-500">
+											(425) 480-8629
+										</a>
 									</div>
-								</a>
+								</div>
 								<a href="mailto:cleaning.paradise.llc@gmail.com" className="flex items-start gap-[13px] no-underline">
 									<div className="flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-[11px] bg-blue-50">
 										<Mail size={17} className="text-blue-600" />
@@ -128,11 +132,11 @@ export default function ContactPage() {
 										<path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z" />
 									</svg>
 								</a>
-								<a href="https://www.tiktok.com/@cleaningparadisellc" target="_blank" rel="noopener" aria-label="TikTok" className={`${socialClass} text-[13px] font-bold`}>
-									TT
+								<a href="https://www.tiktok.com/@cleaningparadisellc" target="_blank" rel="noopener" aria-label="TikTok" className={socialClass}>
+									<Music size={17} />
 								</a>
-								<a href="https://www.yelp.com/biz/cleaning-paradise-lynnwood-2" target="_blank" rel="noopener" aria-label="Yelp" className={`${socialClass} text-[13px] font-bold`}>
-									Y
+								<a href="https://www.yelp.com/biz/cleaning-paradise-lynnwood-2" target="_blank" rel="noopener" aria-label="Yelp" className={socialClass}>
+									<Star size={17} />
 								</a>
 							</div>
 						</div>
@@ -156,6 +160,19 @@ export default function ContactPage() {
 							</p>
 						</div>
 					</div>
+				</div>
+			</section>
+
+			{/* FORM + SIDEBAR */}
+			<section className="bg-white px-6 pt-[clamp(40px,5vw,72px)] pb-[clamp(56px,7vw,96px)]">
+				<div className="mx-auto grid max-w-[1180px] grid-cols-1 items-start gap-[clamp(32px,4vw,56px)] lg:grid-cols-[1.55fr_1fr]">
+					<iframe
+						title="Request a quote"
+						src="https://clienthub.getjobber.com/hubs/98ea9ab0-e758-47b5-8a7c-8592cc42069e/public/requests/740311/new?source=social_media"
+						width="100%"
+						height="900"
+						className="max-w-[640px] border-none"
+					/>
 				</div>
 			</section>
 		</div>

@@ -135,30 +135,62 @@ const frequencies = ["Weekly", "Biweekly", "Monthly", "One-time"];
 export function QuoteForm({ defaultService }: { defaultService: string }) {
 	const [freq, setFreq] = useState("Weekly");
 	const [sent, setSent] = useState(false);
+	const [submitting, setSubmitting] = useState(false);
+	const [error, setError] = useState("");
 
 	return (
 		<div className="rounded-3xl border border-[#EFEFF4] bg-white p-8 shadow-[0_20px_60px_rgba(30,62,162,0.11)] lg:sticky lg:top-[100px]">
 			<h3 className="mb-1 text-[22px] font-semibold text-ink-900">Get a free quote</h3>
 			<p className="mb-6 text-[13px] text-[#808098]">No obligation — we respond within 2 hours.</p>
 			<form
-				onSubmit={(e) => {
+				onSubmit={async (e) => {
 					e.preventDefault();
-					e.currentTarget.reset();
-					setFreq("Weekly");
-					setSent(true);
+					setError("");
+					setSubmitting(true);
+					const form = e.currentTarget;
+					const fd = new FormData(form);
+					const service = fd.get("service");
+					const payload = {
+						firstName: fd.get("name"),
+						email: fd.get("email"),
+						phone: fd.get("phone"),
+						service,
+						services: service ? [service] : [],
+						frequency: freq,
+						sqft: fd.get("sqft"),
+						notes: fd.get("notes"),
+						promo: true,
+						source: "service-quote",
+					};
+					try {
+						const res = await fetch("/api/contact", {
+							method: "POST",
+							headers: { "Content-Type": "application/json" },
+							body: JSON.stringify(payload),
+						});
+						if (!res.ok) throw new Error();
+						form.reset();
+						setFreq("Weekly");
+						setSent(true);
+					} catch {
+						setError("Something went wrong. Please call (425) 610-0241.");
+					} finally {
+						setSubmitting(false);
+					}
 				}}
 				className="flex flex-col gap-[13px]"
 			>
 				<div className="flex gap-2.5">
-					<input name="name" placeholder="Your name" className={`${inputClass} min-w-0 flex-1`} />
+					<input name="name" required autoComplete="name" placeholder="Your name" className={`${inputClass} min-w-0 flex-1`} />
 					<input
 						name="phone"
 						type="tel"
+						autoComplete="tel"
 						placeholder="Phone"
 						className={`${inputClass} min-w-0 flex-1`}
 					/>
 				</div>
-				<input name="email" type="email" placeholder="Email address" className={inputClass} />
+				<input name="email" type="email" required autoComplete="email" placeholder="Email address" className={inputClass} />
 				<select
 					name="service"
 					defaultValue={defaultService}
@@ -204,11 +236,13 @@ export function QuoteForm({ defaultService }: { defaultService: string }) {
 					placeholder="Special requests — pets, allergies, areas to focus on…"
 					className={`${inputClass} resize-y`}
 				/>
+				{error && <p className="text-center text-[13px] text-pink-600">{error}</p>}
 				<button
 					type="submit"
-					className="flex cursor-pointer items-center justify-center gap-2 rounded-[14px] border-none bg-pink-500 p-[15px] text-[15px] font-bold text-white transition-all duration-200 ease-(--ease-out) hover:bg-pink-600 hover:shadow-[0_8px_28px_rgba(255,80,181,.36)]"
+					disabled={submitting}
+					className="flex cursor-pointer items-center justify-center gap-2 rounded-[14px] border-none bg-pink-500 p-[15px] text-[15px] font-bold text-white transition-all duration-200 ease-(--ease-out) hover:bg-pink-600 hover:shadow-[0_8px_28px_rgba(255,80,181,.36)] disabled:opacity-60"
 				>
-					Get my free quote <ArrowRight size={16} />
+					{submitting ? "Sending…" : "Get my free quote"} <ArrowRight size={16} />
 				</button>
 				<p className="flex items-center justify-center gap-[5px] text-center text-[11.5px] text-[#A0A0AE]">
 					<ShieldCheck size={13} />

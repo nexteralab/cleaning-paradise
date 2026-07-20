@@ -106,11 +106,11 @@ export default function CleaningServicesInWaPage() {
 							<div className="mb-6 inline-flex items-center gap-2 rounded-full bg-white/[0.18] px-4 py-[7px] text-[11.5px] font-bold tracking-[0.08em] text-white uppercase backdrop-blur-[6px]">
 								<Sparkles size={13} />6 Professional Services
 							</div>
-							<h1 className="mb-3 text-[clamp(38px,5.2vw,70px)] leading-[1.0] font-semibold tracking-[-0.025em] text-white">
-								The clean you deserve,
-							</h1>
-							<h1 className="mb-[22px] font-serif text-[clamp(38px,5.2vw,70px)] leading-[1.1] font-normal tracking-[-0.015em] text-white italic">
-								every single time.
+							<h1 className="mb-[22px] text-[clamp(38px,5.2vw,70px)] leading-[1.0] font-semibold tracking-[-0.025em] text-white">
+								<span className="block">The clean you deserve,</span>
+								<span className="block font-serif font-normal italic tracking-[-0.015em]">
+									every single time.
+								</span>
 							</h1>
 							<p className="mb-[34px] max-w-[520px] text-[clamp(15px,1.4vw,18px)] leading-[1.72] text-white/[0.88]">
 								From weekly home maintenance to move-out deep cleans and commercial spaces — Cleaning
