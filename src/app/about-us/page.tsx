@@ -125,7 +125,7 @@ const reviews = [
 
 function Kicker({ children }: { children: React.ReactNode }) {
 	return (
-		<div className="text-[12px] font-bold text-pink-500 uppercase tracking-[.12em] mb-5">
+		<div className="text-[13px] font-bold text-pink-500 uppercase tracking-[.12em] mb-5">
 			{children}
 		</div>
 	);
@@ -136,14 +136,14 @@ export default function AboutPage() {
 		<div className="relative w-full overflow-x-clip bg-white text-ink-800">
 			{/* ============ HERO ============ */}
 			<section className="px-10 pt-[120px] pb-20 bg-white">
-				<div className="max-w-[1240px] mx-auto">
+				<div className="max-w-[1360px] mx-auto">
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center mb-14">
 						{/* Left: text */}
 						<Reveal>
-							<div className="text-[12px] font-bold text-pink-500 uppercase tracking-[.12em] mb-[22px]">
+							<div className="text-[13px] font-bold text-pink-500 uppercase tracking-[.12em] mb-[22px]">
 								About Us
 							</div>
-							<h1 className="font-serif text-[clamp(48px,6vw,84px)] font-normal leading-[1.08] text-ink-900 tracking-[-0.025em] mb-7">
+							<h1 className="font-heading text-[clamp(48px,6vw,84px)] font-normal leading-[1.08] text-ink-900 tracking-[-0.025em] mb-7">
 								We clean so
 								<br />
 								you can <span className="italic">live freely</span>
@@ -169,7 +169,7 @@ export default function AboutPage() {
 					<div className="border-t border-ink-200 pt-10 grid grid-cols-2 md:grid-cols-4 gap-8">
 						{stats.map((s, i) => (
 							<Reveal key={s.label} delay={i * 80}>
-								<div className="font-serif text-[52px] font-normal text-ink-900 leading-none tracking-[-0.02em]">
+								<div className="font-heading text-[52px] font-normal text-ink-900 leading-none tracking-[-0.02em]">
 									<CountUp value={s.value} />
 								</div>
 								<div className="text-[13px] font-semibold text-[#808098] mt-1.5">
@@ -183,7 +183,7 @@ export default function AboutPage() {
 
 			{/* ============ OUR STORY ============ */}
 			<section id="story" className="px-10 py-24 bg-white border-t border-ink-200">
-				<div className="max-w-[1240px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
+				<div className="max-w-[1360px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
 					{/* Left: image */}
 					<Reveal className="relative">
 						<div className="rounded-[20px] overflow-hidden aspect-[4/5]">
@@ -195,7 +195,7 @@ export default function AboutPage() {
 						</div>
 						{/* year badge */}
 						<div className="absolute -bottom-5 -right-5 bg-ink-900 rounded-2xl px-6 py-[18px]">
-							<div className="font-serif text-4xl font-normal text-white leading-none">
+							<div className="font-heading text-4xl font-normal text-white leading-none">
 								2020
 							</div>
 							<div className="text-[11px] font-semibold text-ink-400 mt-[3px] uppercase tracking-[.07em]">
@@ -207,7 +207,7 @@ export default function AboutPage() {
 					{/* Right: text */}
 					<Reveal delay={120}>
 						<Kicker>Our story</Kicker>
-						<h2 className="font-serif text-[clamp(36px,4vw,56px)] font-normal text-ink-900 tracking-[-0.02em] leading-[1.15] mb-8">
+						<h2 className="font-heading text-[clamp(36px,4vw,56px)] font-normal text-ink-900 tracking-[-0.02em] leading-[1.15] mb-8">
 							From a single mop to Seattle&apos;s most trusted cleaning crew
 						</h2>
 						<div className="flex flex-col gap-5">
@@ -238,10 +238,10 @@ export default function AboutPage() {
 
 			{/* ============ VALUES ============ */}
 			<section className="px-10 py-24 bg-white border-t border-ink-200">
-				<div className="max-w-[1240px] mx-auto">
+				<div className="max-w-[1360px] mx-auto">
 					<Reveal className="mb-16">
 						<Kicker>What drives us</Kicker>
-						<h2 className="font-serif text-[clamp(40px,5vw,68px)] font-normal text-ink-900 tracking-[-0.025em] leading-[1.08] max-w-[700px]">
+						<h2 className="font-heading text-[clamp(40px,5vw,68px)] font-normal text-ink-900 tracking-[-0.025em] leading-[1.08] max-w-[700px]">
 							Our mission is a cleaner, happier home for every Seattle family
 						</h2>
 					</Reveal>
@@ -262,10 +262,10 @@ export default function AboutPage() {
 											className={v.color === "pink" ? "text-pink-500" : "text-blue-600"}
 										/>
 									</div>
-									<h3 className="font-serif text-[26px] font-normal text-ink-900 mb-3 leading-[1.2]">
+									<h3 className="font-heading text-[26px] font-normal text-ink-900 mb-3 leading-[1.2]">
 										{v.title}
 									</h3>
-									<p className="text-[14.5px] text-ink-600 leading-[1.8]">{v.text}</p>
+									<p className="text-[15.5px] text-ink-600 leading-[1.8]">{v.text}</p>
 								</Reveal>
 							);
 						})}
@@ -275,19 +275,19 @@ export default function AboutPage() {
 
 			{/* ============ TEAM ============ */}
 			<section className="px-10 py-24 bg-white border-t border-ink-200">
-				<div className="max-w-[1240px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
+				<div className="max-w-[1360px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-24 items-center">
 					{/* Left: text */}
 					<Reveal>
 						<Kicker>The team</Kicker>
-						<h2 className="font-serif text-[clamp(36px,4vw,54px)] font-normal text-ink-900 tracking-[-0.02em] leading-[1.12] mb-7">
+						<h2 className="font-heading text-[clamp(36px,4vw,54px)] font-normal text-ink-900 tracking-[-0.02em] leading-[1.12] mb-7">
 							Real people who genuinely care about your home
 						</h2>
-						<p className="text-base text-[#5A5A6E] leading-[1.85] mb-4">
+						<p className="text-[17px] text-[#5A5A6E] leading-[1.85] mb-4">
 							Our team is the heart of Cleaning Paradise. Every cleaner goes
 							through a thorough hiring process — background check, hands-on
 							training, and a probationary period with senior cleaners.
 						</p>
-						<p className="text-base text-[#5A5A6E] leading-[1.85] mb-9">
+						<p className="text-[17px] text-[#5A5A6E] leading-[1.85] mb-9">
 							We&apos;re a bilingual team (English and Spanish). Many of our
 							team members have been with us for years — this is a career, not
 							just a job.
@@ -324,11 +324,11 @@ export default function AboutPage() {
 
 			{/* ============ REVIEWS ============ */}
 			<section className="px-10 py-24 bg-white border-t border-ink-200">
-				<div className="max-w-[1240px] mx-auto">
+				<div className="max-w-[1360px] mx-auto">
 					<Reveal className="mb-14 flex items-end justify-between gap-8 flex-wrap">
 						<div>
 							<Kicker>What clients say</Kicker>
-							<h2 className="font-serif text-[clamp(36px,4.5vw,60px)] font-normal text-ink-900 tracking-[-0.02em] leading-[1.08]">
+							<h2 className="font-heading text-[clamp(36px,4.5vw,60px)] font-normal text-ink-900 tracking-[-0.02em] leading-[1.08]">
 								Rated by real
 								<br />
 								Seattle families
@@ -354,7 +354,7 @@ export default function AboutPage() {
 								<div className="text-pink-500 text-[15px] tracking-[2px] mb-4">
 									★★★★★
 								</div>
-								<p className="font-serif text-xl font-normal leading-[1.55] text-ink-900 mb-6 italic">
+								<p className="font-heading text-xl font-normal leading-[1.55] text-ink-900 mb-6 italic">
 									{r.quote}
 								</p>
 								<div className="flex items-center gap-3 pt-5 border-t border-ink-200">
@@ -378,9 +378,9 @@ export default function AboutPage() {
 
 			{/* ============ CTA ============ */}
 			<section className="px-10 py-24 bg-white border-t border-ink-200">
-				<Reveal className="max-w-[1240px] mx-auto flex items-center justify-between gap-12 flex-wrap">
+				<Reveal className="max-w-[1360px] mx-auto flex items-center justify-between gap-12 flex-wrap">
 					<div>
-						<h2 className="font-serif text-[clamp(40px,5vw,66px)] font-normal text-ink-900 tracking-[-0.025em] leading-[1.08] mb-4">
+						<h2 className="font-heading text-[clamp(40px,5vw,66px)] font-normal text-ink-900 tracking-[-0.025em] leading-[1.08] mb-4">
 							Ready for a spotless home?
 						</h2>
 						<p className="text-[17px] text-ink-600 leading-[1.7] max-w-[480px]">
@@ -405,7 +405,6 @@ export default function AboutPage() {
 					</div>
 				</Reveal>
 			</section>
-			<h1>h1</h1>
 		</div>
 	);
 }

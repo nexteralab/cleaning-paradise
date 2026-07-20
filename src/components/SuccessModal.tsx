@@ -53,7 +53,7 @@ export default function SuccessModal({
 				<div className="mx-auto mb-[22px] flex h-[68px] w-[68px] items-center justify-center rounded-full bg-pink-50">
 					<Check size={32} className="text-pink-500" />
 				</div>
-				<h2 className="mb-2.5 font-serif text-[clamp(26px,3vw,34px)] font-normal text-ink-900">
+				<h2 className="mb-2.5 font-heading text-[clamp(26px,3vw,34px)] font-normal text-ink-900">
 					{title}
 				</h2>
 				<p className="mx-auto mb-7 max-w-[340px] text-[15px] leading-[1.7] text-ink-600">{message}</p>

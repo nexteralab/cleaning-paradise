@@ -112,7 +112,9 @@ export default function Footer() {
 					</div>
 				</div>
 				<div className="flex flex-wrap items-center justify-between gap-3">
-					<div className="text-xs text-ink-500">© 2026 Cleaning Paradise LLC. All rights reserved.</div>
+					<div className="text-xs text-ink-500">
+						© 2026 Cleaning Paradise LLC. All rights reserved. · Licensed, Insured &amp; Bonded{/* TODO: agregar UBI/license # cuando el cliente lo pase (item 18) */}
+					</div>
 					<div className="flex flex-wrap items-center gap-1.5 text-xs text-ink-500">
 						<Link href="/privacy" className="hover:text-pink-500">Privacy</Link>
 						<span aria-hidden>·</span>

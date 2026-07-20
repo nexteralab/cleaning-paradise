@@ -40,7 +40,7 @@ export async function generateMetadata({
 type HeroBadge = { label: string; classes: string; dot?: string };
 
 const heroBadges: HeroBadge[] = [
-	{ label: "Licensed & insured", classes: "bg-blue-50 text-blue-600", dot: "bg-blue-600" },
+	{ label: "Licensed, insured & bonded", classes: "bg-blue-50 text-blue-600", dot: "bg-blue-600" },
 	{ label: "4.9★ on Google", classes: "bg-pink-500/15 text-pink-500", dot: "bg-pink-500" },
 	{ label: "Same-week availability", classes: "bg-ink-100 text-ink-600", dot: "bg-ink-500" },
 ];
@@ -173,7 +173,7 @@ export default async function LocationPage({
 				<div className="px-[clamp(28px,5vw,72px)] pt-[clamp(96px,9vw,116px)] pb-[clamp(44px,6vw,72px)]">
 					{/* Mobile DOM order (grid-cols-1): h1 → slider → description/buttons.
 					    Desktop: copy stacked left, slider right (col/row placement). */}
-					<div className="mx-auto grid max-w-[1240px] grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-x-[clamp(32px,5vw,60px)] md:gap-y-0">
+					<div className="mx-auto grid max-w-[1360px] grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-x-[clamp(32px,5vw,60px)] md:gap-y-0">
 						{/* h1 block */}
 						<Reveal className="md:col-start-1 md:row-start-1 md:self-end">
 							<div className="mb-[22px]">
@@ -257,7 +257,7 @@ export default async function LocationPage({
 						<Reveal>
 							<h2 className="mb-[clamp(36px,5vw,60px)] leading-[1.1] tracking-[-0.02em] text-white">
 								<span className="text-[clamp(30px,3.8vw,54px)] font-bold">Trusted.</span>
-								<span className="font-serif text-[clamp(30px,3.8vw,54px)] font-normal italic"> Spotless.</span>
+								<span className="font-heading text-[clamp(30px,3.8vw,54px)] font-normal italic"> Spotless.</span>
 								<span className="text-[clamp(30px,3.8vw,54px)] font-bold"> Proven.</span>
 							</h2>
 						</Reveal>
@@ -292,7 +292,7 @@ export default async function LocationPage({
 
 			{/* ===== SERVICES ===== */}
 			<section id="services" className="bg-ink-50 py-[clamp(64px,8vw,104px)]">
-				<div className="mx-auto max-w-[1240px] px-10 max-md:px-5">
+				<div className="mx-auto max-w-[1360px] px-10 max-md:px-5">
 					<Reveal className="mb-12 text-center">
 						<div className="mb-4">
 							<span className="inline-flex items-center rounded-full bg-pink-500/15 px-4 py-2 text-[11.5px] font-semibold tracking-[0.06em] text-pink-500 uppercase">
@@ -300,7 +300,7 @@ export default async function LocationPage({
 							</span>
 						</div>
 						<h2 className="mb-3.5 text-[clamp(30px,3.4vw,46px)] leading-[1.12] font-normal tracking-[-0.025em] text-ink-900">
-							<span className="font-serif italic">Cleaning </span>for every home
+							<span className="font-heading italic">Cleaning </span>for every home
 						</h2>
 						<p className="mx-auto max-w-[560px] text-[15.5px] leading-[1.7] text-ink-600">
 							Whether you need a one-time deep-clean before a home inspection, recurring housekeeping
@@ -352,10 +352,10 @@ export default async function LocationPage({
 			<section id="faq" className="bg-ink-50 py-24">
 				<div className="mx-auto max-w-[820px] px-10 max-md:px-5">
 					<Reveal className="mb-11 text-center">
-						<div className="mb-[13px] text-xs font-bold tracking-[0.1em] text-pink-500 uppercase">
+						<div className="mb-[13px] text-[13px] font-bold tracking-[0.1em] text-pink-500 uppercase">
 							FAQ
 						</div>
-						<h2 className="font-serif text-[clamp(36px,4vw,56px)] leading-[1.15] font-normal tracking-[-0.02em] text-ink-900">
+						<h2 className="font-heading text-[clamp(36px,4vw,56px)] leading-[1.15] font-normal tracking-[-0.02em] text-ink-900">
 							Questions About Our {loc.name} Cleaning Services
 						</h2>
 					</Reveal>
@@ -367,7 +367,7 @@ export default async function LocationPage({
 
 			{/* ===== MAP / CITY SELECTOR ===== */}
 			<section id="areas" className="bg-white py-[clamp(64px,8vw,104px)]">
-				<div className="mx-auto max-w-[1240px] px-10 max-md:px-5">
+				<div className="mx-auto max-w-[1360px] px-10 max-md:px-5">
 					<Reveal className="mb-[34px] text-center">
 						<div className="mb-4">
 							<span className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-4 py-2 text-[11.5px] font-semibold tracking-[0.06em] text-blue-600 uppercase">
@@ -376,7 +376,7 @@ export default async function LocationPage({
 							</span>
 						</div>
 						<h2 className="mb-3.5 text-[clamp(30px,3.4vw,46px)] leading-[1.12] font-medium tracking-[-0.025em] text-ink-900">
-							Cleaning in your <span className="font-serif font-normal italic">neighborhood</span>
+							Cleaning in your <span className="font-heading font-normal italic">neighborhood</span>
 						</h2>
 						<p className="mx-auto max-w-[560px] text-[16.5px] leading-[1.7] text-ink-600">
 							Pick your city to see local availability, ratings and the neighborhoods our teams cover
@@ -392,12 +392,12 @@ export default async function LocationPage({
 
 			{/* ===== BLOG INVITATION ===== */}
 			<section id="blog" className="bg-pink-50 py-[clamp(64px,8vw,104px)]">
-				<div className="mx-auto max-w-[1240px] px-10 max-md:px-5">
+				<div className="mx-auto max-w-[1360px] px-10 max-md:px-5">
 					<Reveal className="mb-[52px] text-center">
-						<div className="mb-3.5 text-xs font-bold tracking-[0.1em] text-pink-500 uppercase">
+						<div className="mb-3.5 text-[13px] font-bold tracking-[0.1em] text-pink-500 uppercase">
 							From the blog
 						</div>
-						<h2 className="mb-4 font-serif text-[clamp(36px,4.5vw,60px)] leading-[1.15] font-normal tracking-[-0.025em] text-ink-900">
+						<h2 className="mb-4 font-heading text-[clamp(36px,4.5vw,60px)] leading-[1.15] font-normal tracking-[-0.025em] text-ink-900">
 							Cleaning Tips &amp; <span className="italic">Local Stories</span>
 						</h2>
 						<p className="mx-auto max-w-[540px] text-[16.5px] leading-[1.7] text-ink-600">
@@ -432,7 +432,7 @@ export default async function LocationPage({
 										<div className="mb-2 text-[11.5px] font-bold tracking-[0.06em] text-[#A0A0AE] uppercase">
 											{post.category}
 										</div>
-										<h3 className="mb-2.5 font-serif text-2xl leading-[1.3] font-normal tracking-[-0.01em] text-ink-900">
+										<h3 className="mb-2.5 font-heading text-2xl leading-[1.3] font-normal tracking-[-0.01em] text-ink-900">
 											{post.title}
 										</h3>
 										<div className="flex items-center gap-[7px] text-[13px] text-[#808098]">

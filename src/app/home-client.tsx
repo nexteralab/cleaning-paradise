@@ -70,10 +70,10 @@ export function HeroSection() {
 								<MapPin size={13} />
 								Serving Greater Seattle
 							</div>
-							<h1 className="font-heading italic text-[clamp(34px,3.8vw,52px)] font-semibold leading-[1.1] text-white tracking-[-0.025em] [text-shadow:0_4px_24px_rgba(0,0,0,0.35)] max-w-[620px] mb-4">
+							<h1 className="font-heading italic text-[clamp(2.75rem,6vw,4.5rem)] font-semibold leading-[1.1] text-white tracking-[-0.025em] [text-shadow:0_4px_24px_rgba(0,0,0,0.35)] max-w-[620px] mb-4">
 								House Cleaning Services in Seattle, WA
 							</h1>
-							<p className="text-[clamp(16px,1.3vw,17px)] text-white md:text-white/[0.88] leading-[1.72] max-w-[560px] [text-shadow:0_4px_40px_rgba(0,0,0,0.28)]">
+							<p className="text-[clamp(17px,1.35vw,18px)] text-white md:text-white/[0.88] leading-[1.72] max-w-[560px] [text-shadow:0_4px_40px_rgba(0,0,0,0.28)]">
 								Spotless homes, reliable maids, and a housekeeping experience that makes coming home the best
 								part of your day. Serving Seattle, Lynnwood, Bellevue, Kirkland, and surrounding communities.
 							</p>
@@ -216,7 +216,7 @@ export function BookingForm({ className = "" }: { className?: string }) {
 				</button>
 				<div className="flex items-center justify-center gap-1.5 text-[11.5px] text-[#A0A0AE]">
 					<ShieldCheck size={13} />
-					Licensed &amp; insured · 100% satisfaction guarantee
+					Licensed, Insured &amp; Bonded · 100% satisfaction guarantee
 				</div>
 			</form>
 			<SuccessModal open={sent} onClose={() => setSent(false)} />
@@ -372,12 +372,12 @@ export function ServicesSection() {
 				</div>
 
 				{/* meta bar */}
-				<div className="hidden lg:flex absolute top-9 left-[max(40px,calc(50%_-_580px))] right-[max(40px,calc(50%_-_580px))] justify-between items-center z-10">
-					<span className="font-sans text-[11px] font-bold text-pink-500 uppercase tracking-[0.13em]">
+				<div className="hidden lg:flex absolute top-9 left-[max(40px,calc(50%_-_680px))] right-[max(40px,calc(50%_-_680px))] justify-between items-center z-10">
+					<span className="font-sans text-[13px] font-bold text-pink-500 uppercase tracking-[0.13em]">
 						Our Services
 					</span>
 					<span className="font-sans text-sm text-[#C0C0D0]">
-						<span className="font-serif italic text-[22px] text-pink-500">
+						<span className="font-heading italic text-[22px] text-pink-500">
 							{String(active + 1).padStart(2, "0")}
 						</span>{" "}
 						/ 06
@@ -385,7 +385,7 @@ export function ServicesSection() {
 				</div>
 
 				{/* two-column grid */}
-				<div className="flex flex-col px-6 pt-[60px] pb-10 lg:absolute lg:inset-0 lg:flex-row lg:items-center lg:px-[max(40px,calc(50%_-_580px))] lg:pt-20 lg:pb-11">
+				<div className="flex flex-col px-6 pt-[60px] pb-10 lg:absolute lg:inset-0 lg:flex-row lg:items-center lg:px-[max(40px,calc(50%_-_680px))] lg:pt-20 lg:pb-11">
 					{/* LEFT: nav + expanded content */}
 					<div className="lg:flex-[1.15] min-w-0 flex flex-col justify-center lg:pr-[6vw]">
 						{SERVICES.map((svc, i) => {
@@ -439,7 +439,7 @@ export function ServicesSection() {
 											<h3 className="font-heading text-[clamp(28px,2.8vw,46px)] font-normal text-ink-900 tracking-[-0.025em] leading-[1.1] mb-3">
 												{svc.title}
 											</h3>
-											<p className="font-sans text-[14.5px] text-ink-600 leading-[1.78] mb-4 max-w-[440px]">
+											<p className="font-sans text-[15.5px] text-ink-600 leading-[1.78] mb-4 max-w-[440px]">
 												{svc.desc}
 											</p>
 											<span
@@ -547,7 +547,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 				className="overflow-hidden transition-[max-height,opacity] duration-[350ms] ease-[var(--ease-out)]"
 				style={{ maxHeight: open ? 600 : 0, opacity: open ? 1 : 0 }}
 			>
-				<p className="px-[26px] pb-6 text-[14.5px] text-ink-600 leading-[1.7]">{a}</p>
+				<p className="px-[26px] pb-6 text-[15.5px] text-ink-600 leading-[1.7]">{a}</p>
 			</div>
 		</div>
 	);
@@ -556,9 +556,9 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 export function FaqSection() {
 	return (
 		<section id="faq" className="py-24 bg-white">
-			<div className="max-w-[820px] mx-auto px-10 max-md:px-6">
+			<div className="max-w-[1360px] mx-auto px-10 max-md:px-6">
 				<div className="text-center mb-11">
-					<div className="text-xs font-bold text-pink-500 uppercase tracking-[0.1em] mb-[13px]">FAQ</div>
+					<div className="text-[13px] font-bold text-pink-500 uppercase tracking-[0.1em] mb-[13px]">FAQ</div>
 					<h2 className="font-heading text-[clamp(40px,4.5vw,60px)] font-normal text-ink-900 tracking-[-0.02em]">
 						Questions About Our Seattle Cleaning Services
 					</h2>

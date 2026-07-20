@@ -85,7 +85,7 @@ const coverageCities = [
 function Eyebrow({ children, className = "" }: { children: React.ReactNode; className?: string }) {
 	return (
 		<div
-			className={`text-xs font-bold tracking-[.1em] text-pink-500 uppercase ${className}`}
+			className={`text-[13px] font-bold tracking-[.1em] text-pink-500 uppercase ${className}`}
 		>
 			{children}
 		</div>
@@ -101,7 +101,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 		<div className="relative w-full overflow-x-clip">
 			{/* ═══ HERO ═══ */}
 			<section className="bg-white px-6 pt-[clamp(120px,11vw,160px)] pb-[clamp(60px,7vw,88px)]">
-				<div className="mx-auto grid max-w-[1240px] grid-cols-1 items-center gap-[clamp(32px,5vw,72px)] md:grid-cols-2">
+				<div className="mx-auto grid max-w-[1360px] grid-cols-1 items-center gap-[clamp(32px,5vw,72px)] md:grid-cols-2">
 					{/* LEFT: text */}
 					<div>
 						<Link
@@ -111,7 +111,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 							<ArrowLeft size={13} />
 							All Services
 						</Link>
-						<h1 className="mb-4 font-serif text-[clamp(34px,3.8vw,58px)] leading-[1.1] font-normal tracking-[-0.02em] text-ink-900 text-pretty">
+						<h1 className="mb-4 font-heading text-[clamp(34px,3.8vw,58px)] leading-[1.1] font-normal tracking-[-0.02em] text-ink-900 text-pretty">
 							{service.heroTitle.map((part, i) => (
 								<span key={i}>
 									{part.brBefore && <br />}
@@ -175,7 +175,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
 			{/* ═══ INTRO TEXT + IMAGE ═══ */}
 			<section className="bg-white px-6 py-[clamp(64px,7vw,96px)]">
-				<div className="mx-auto grid max-w-[1240px] grid-cols-1 items-center gap-[clamp(40px,6vw,80px)] md:grid-cols-2">
+				<div className="mx-auto grid max-w-[1360px] grid-cols-1 items-center gap-[clamp(40px,6vw,80px)] md:grid-cols-2">
 					{/* LEFT: image */}
 					<div className="h-[clamp(380px,48vw,560px)] overflow-hidden rounded-[26px] shadow-[0_32px_80px_rgba(30,62,162,0.12)]">
 						<img
@@ -189,7 +189,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 					<div>
 						<Eyebrow className="mb-[18px]">{service.introEyebrow}</Eyebrow>
 						{service.introTitle && (
-							<h2 className="mb-[22px] font-serif text-[clamp(28px,3.2vw,44px)] leading-[1.15] font-normal tracking-[-0.02em] text-ink-900">
+							<h2 className="mb-[22px] font-heading text-[clamp(28px,3.2vw,44px)] leading-[1.15] font-normal tracking-[-0.02em] text-ink-900">
 								{service.introTitle}
 							</h2>
 						)}
@@ -241,7 +241,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
 			{/* ═══ CALLOUT ═══ */}
 			<section className="px-6 pt-[clamp(36px,4vw,52px)]">
-				<div className="mx-auto max-w-[1240px]">
+				<div className="mx-auto max-w-[1360px]">
 					<div className="mb-2 flex items-start gap-4 rounded-[18px] border-[1.5px] border-ink-200 bg-[#FAFAFA] px-[26px] py-[22px]">
 						<div className="mt-0.5 flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-xl bg-blue-50">
 							<Sparkles size={18} className="text-blue-600" />
@@ -265,11 +265,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
 			{/* ═══ CUSTOMIZATION + QUOTE FORM ═══ */}
 			<section id="quote" className="px-6 py-[clamp(52px,6vw,88px)]">
-				<div className="mx-auto grid max-w-[1240px] grid-cols-1 items-start gap-[clamp(40px,6vw,88px)] lg:grid-cols-[1fr_minmax(300px,440px)]">
+				<div className="mx-auto grid max-w-[1360px] grid-cols-1 items-start gap-[clamp(40px,6vw,88px)] lg:grid-cols-[1fr_minmax(300px,440px)]">
 					{/* LEFT */}
 					<div>
 						<Eyebrow className="mb-3.5">{service.customEyebrow}</Eyebrow>
-						<h2 className="mb-[22px] font-serif text-[clamp(28px,3.2vw,48px)] leading-[1.15] font-normal tracking-[-0.02em] text-ink-900">
+						<h2 className="mb-[22px] font-heading text-[clamp(28px,3.2vw,48px)] leading-[1.15] font-normal tracking-[-0.02em] text-ink-900">
 							{service.customTitle}
 						</h2>
 						{service.customParas.map((para, i) => (
@@ -310,11 +310,11 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
 			{/* ═══ COVERAGE AREA ═══ */}
 			<section className="bg-blue-600 px-6 py-[clamp(52px,6vw,88px)]">
-				<div className="mx-auto max-w-[1240px]">
-					<div className="mb-3.5 text-xs font-bold tracking-[.1em] text-white/52 uppercase">
+				<div className="mx-auto max-w-[1360px]">
+					<div className="mb-3.5 text-[13px] font-bold tracking-[.1em] text-white/52 uppercase">
 						Service area
 					</div>
-					<h2 className="mb-3 font-serif text-[clamp(26px,3vw,42px)] leading-[1.2] font-normal text-white">
+					<h2 className="mb-3 font-heading text-[clamp(26px,3vw,42px)] leading-[1.2] font-normal text-white">
 						Proudly serving Seattle, WA and nearby communities
 					</h2>
 					<p className="mb-8 text-[15px] leading-[1.75] text-white/65">{service.coverageText}</p>
@@ -333,10 +333,10 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
 			{/* ═══ FAQ ═══ */}
 			<section className="bg-pink-50 px-6 py-[clamp(52px,6vw,88px)]">
-				<div className="mx-auto max-w-[1240px]">
+				<div className="mx-auto max-w-[1360px]">
 					<div className="mb-11">
 						<Eyebrow className="mb-3.5">Frequently asked</Eyebrow>
-						<h2 className="font-serif text-[clamp(26px,3vw,42px)] leading-[1.2] font-normal tracking-[-0.015em] text-ink-900">
+						<h2 className="font-heading text-[clamp(26px,3vw,42px)] leading-[1.2] font-normal tracking-[-0.015em] text-ink-900">
 							{service.faqHeading}
 						</h2>
 					</div>

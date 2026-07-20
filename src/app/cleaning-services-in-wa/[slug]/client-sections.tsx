@@ -246,7 +246,7 @@ export function QuoteForm({ defaultService }: { defaultService: string }) {
 				</button>
 				<p className="flex items-center justify-center gap-[5px] text-center text-[11.5px] text-[#A0A0AE]">
 					<ShieldCheck size={13} />
-					Licensed &amp; insured · 100% satisfaction guarantee
+					Licensed, Insured &amp; Bonded · 100% satisfaction guarantee
 				</p>
 			</form>
 			<SuccessModal open={sent} onClose={() => setSent(false)} />

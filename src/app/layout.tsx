@@ -1,17 +1,10 @@
 import type { Metadata } from "next";
-import { Instrument_Serif, Lora, Poppins } from "next/font/google";
+import { Lora, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MusicPlayer from "@/components/MusicPlayer";
 import ChatBot from "@/components/chatbot/ChatBot";
-
-const instrumentSerif = Instrument_Serif({
-	variable: "--font-instrument-serif",
-	subsets: ["latin"],
-	weight: "400",
-	style: ["normal", "italic"],
-});
 
 const lora = Lora({
 	variable: "--font-lora",
@@ -111,7 +104,7 @@ export default function RootLayout({
 					dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
 				/>
 			</head>
-			<body className={`${instrumentSerif.variable} ${lora.variable} ${poppins.variable} antialiased`}>
+			<body className={`${lora.variable} ${poppins.variable} antialiased`}>
 				<a
 					href="#main"
 					className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[10000] focus:rounded-lg focus:bg-ink-900 focus:px-4 focus:py-2 focus:text-white"

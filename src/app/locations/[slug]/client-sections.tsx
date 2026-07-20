@@ -128,8 +128,8 @@ const faqs: { q: string; a: string }[] = [
 		a: "First visits typically take a bit longer as our team gets familiar with your home's layout and specific needs. We'll walk through expectations with you beforehand, bring all equipment and products, and leave you with a spotless space — guaranteed.",
 	},
 	{
-		q: "Are you licensed and insured?",
-		a: "Yes — Cleaning Paradise LLC is fully licensed and insured in the state of Washington. Every member of our team is background-checked and trained before their first visit. Your home and belongings are protected.",
+		q: "Are you licensed, insured and bonded?",
+		a: "Yes — Cleaning Paradise LLC is fully licensed, insured and bonded in the state of Washington. Every member of our team is background-checked and trained before their first visit. Your home and belongings are protected.",
 	},
 	{
 		q: "Can I set up recurring service?",
@@ -235,7 +235,7 @@ export function CitySelector({ initial }: { initial: string }) {
 				<div className="flex flex-[1_1_320px] flex-col rounded-3xl border border-[#FCD9EE] bg-pink-50 p-[clamp(26px,3vw,38px)]">
 					<div className="mb-2 flex items-center gap-2">
 						<MapPin size={17} className="text-pink-500" />
-						<span className="text-[11.5px] font-bold tracking-[0.13em] text-pink-500 uppercase">
+						<span className="text-[13px] font-bold tracking-[0.13em] text-pink-500 uppercase">
 							Now serving
 						</span>
 					</div>

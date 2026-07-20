@@ -62,7 +62,7 @@ const featuresLeft: Feature[] = [
   {
     icon: <ShieldCheck size={24} />,
     iconClasses: "bg-blue-50 text-blue-600",
-    title: "Licensed & Insured",
+    title: "Licensed, Insured & Bonded",
     description:
       "Full background checks and bonding for every team member. Your home is in safe hands.",
   },
@@ -146,7 +146,7 @@ function CityCard({ city }: { city: City }) {
   );
 
   const heading = (
-    <h3 className="font-serif text-[26px] text-ink-900 tracking-[-0.01em] mb-2.5">{city.name}</h3>
+    <h3 className="font-heading text-[26px] text-ink-900 tracking-[-0.01em] mb-2.5">{city.name}</h3>
   );
   const copy = (
     <p className="text-sm text-ink-600 leading-[1.6] mb-[18px]">{city.description}</p>
@@ -204,7 +204,7 @@ export default function LocationsPage() {
             quote today.
           </p>
           <div className="text-[15px] text-[#808098] mt-4">
-            ✓ Same-week availability · ✓ Licensed & Insured · ✓ 100% satisfaction guarantee
+            ✓ Same-week availability · ✓ Licensed, Insured & Bonded · ✓ 100% satisfaction guarantee
           </div>
         </Reveal>
       </section>
@@ -213,7 +213,7 @@ export default function LocationsPage() {
       <section className="py-24 px-10 bg-white max-md:px-5">
         <div className="max-w-[1360px] mx-auto">
           <Reveal className="text-center mb-16">
-            <h2 className="font-serif text-[40px] text-ink-800 tracking-[-0.01em] leading-[1.05] mb-4">
+            <h2 className="font-heading text-[40px] text-ink-800 tracking-[-0.01em] leading-[1.05] mb-4">
               Choose Your Location
             </h2>
             <p className="text-base text-ink-600 max-w-[600px] mx-auto">
@@ -236,7 +236,7 @@ export default function LocationsPage() {
       <section className="py-20 px-10 bg-white border-t border-ink-200 max-md:px-5">
         <div className="max-w-[1000px] mx-auto">
           <Reveal>
-            <h2 className="font-serif text-4xl text-ink-900 tracking-[-0.01em] mb-7">
+            <h2 className="font-heading text-4xl text-ink-900 tracking-[-0.01em] mb-7">
               Why Choose Cleaning Paradise for Your Local Cleaning Needs
             </h2>
           </Reveal>
@@ -259,7 +259,7 @@ export default function LocationsPage() {
       {/* CTA Section */}
       <section className="bg-white py-20 px-10 text-center border-t border-ink-200 max-md:px-5">
         <Reveal className="max-w-[800px] mx-auto">
-          <h2 className="font-serif text-[clamp(40px,5vw,64px)] font-normal text-ink-900 tracking-[-0.02em] leading-[1.1] mb-[18px]">
+          <h2 className="font-heading text-[clamp(40px,5vw,64px)] font-normal text-ink-900 tracking-[-0.02em] leading-[1.1] mb-[18px]">
             Ready to Get Your Home Clean?
           </h2>
           <p className="text-[17px] text-ink-600 leading-[1.7] mb-8">

@@ -263,7 +263,7 @@ export default function ContactForm() {
 				</button>
 				<p className="flex items-center justify-center gap-[5px] text-center text-[11.5px] text-[#A0A0AE]">
 					<ShieldCheck size={13} />
-					Licensed &amp; insured · We respond within one business day
+					Licensed, Insured &amp; Bonded · We respond within one business day
 				</p>
 				<p className="text-center text-[11px] text-[#A0A0AE]">
 					By submitting, you agree to our{" "}

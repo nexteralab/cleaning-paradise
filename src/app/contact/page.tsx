@@ -16,12 +16,12 @@ export default function ContactPage() {
 		<div className="relative w-full overflow-x-clip">
 			{/* HERO / INTRO */}
 			<section className="bg-pink-50 px-6 pt-[clamp(120px,11vw,150px)] pb-[clamp(36px,4vw,52px)]">
-				<div className="mx-auto max-w-[1180px]">
+				<div className="mx-auto max-w-[1360px]">
 					<div className="mb-5 inline-flex items-center gap-[7px] rounded-full bg-white px-[15px] py-[7px] text-[11px] font-bold tracking-[0.08em] text-pink-500 uppercase shadow-[0_4px_16px_rgba(255,80,181,0.14)]">
 						<CalendarCheck size={13} />
 						Free quote · No obligation
 					</div>
-					<h1 className="mb-[18px] max-w-[820px] font-serif text-[clamp(38px,5.4vw,72px)] leading-[1.04] font-normal tracking-[-0.025em] text-ink-900">
+					<h1 className="mb-[18px] max-w-[820px] font-heading text-[clamp(38px,5.4vw,72px)] leading-[1.04] font-normal tracking-[-0.025em] text-ink-900">
 						Let&apos;s get your home on the schedule
 					</h1>
 					<p className="max-w-[640px] text-[clamp(15px,1.4vw,18px)] leading-[1.75] text-ink-600">
@@ -38,7 +38,7 @@ export default function ContactPage() {
 
 			{/* FORM + SIDEBAR */}
 			<section className="bg-white px-6 pt-[clamp(40px,5vw,72px)] pb-[clamp(56px,7vw,96px)]">
-				<div className="mx-auto grid max-w-[1180px] grid-cols-1 items-start gap-[clamp(32px,4vw,56px)] lg:grid-cols-[1.55fr_1fr]">
+				<div className="mx-auto grid max-w-[1360px] grid-cols-1 items-start gap-[clamp(32px,4vw,56px)] lg:grid-cols-[1.55fr_1fr]">
 					{/* LEFT: Request form */}
 					<ContactForm />
 
@@ -50,7 +50,7 @@ export default function ContactPage() {
 								<Gift size={12} />
 								First-time client
 							</div>
-							<div className="mb-2 font-serif text-[44px] leading-none">30% off</div>
+							<div className="mb-2 font-heading text-[44px] leading-none">30% off</div>
 							<p className="text-[13.5px] leading-[1.6] text-white/[0.92]">
 								Your first cleaning service. Just mention this offer when you request your quote.
 							</p>
@@ -160,19 +160,6 @@ export default function ContactPage() {
 							</p>
 						</div>
 					</div>
-				</div>
-			</section>
-
-			{/* FORM + SIDEBAR */}
-			<section className="bg-white px-6 pt-[clamp(40px,5vw,72px)] pb-[clamp(56px,7vw,96px)]">
-				<div className="mx-auto grid max-w-[1180px] grid-cols-1 items-start gap-[clamp(32px,4vw,56px)] lg:grid-cols-[1.55fr_1fr]">
-					<iframe
-						title="Request a quote"
-						src="https://clienthub.getjobber.com/hubs/98ea9ab0-e758-47b5-8a7c-8592cc42069e/public/requests/740311/new?source=social_media"
-						width="100%"
-						height="900"
-						className="max-w-[640px] border-none"
-					/>
 				</div>
 			</section>
 		</div>

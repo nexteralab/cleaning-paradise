@@ -90,7 +90,7 @@ export default function BlogPage() {
 										<div className="mb-2 text-xs font-semibold uppercase tracking-[.06em] text-[#A0A0AE]">
 											{post.kicker}
 										</div>
-										<h3 className="mb-3 font-serif text-[28px] font-normal leading-[1.3] tracking-[-0.01em] text-ink-900">
+										<h3 className="mb-3 font-heading text-[28px] font-normal leading-[1.3] tracking-[-0.01em] text-ink-900">
 											{post.title}
 										</h3>
 										<p className="mb-[18px] text-[15px] leading-[1.65] text-ink-600">
@@ -111,7 +111,7 @@ export default function BlogPage() {
 			{/* Newsletter CTA */}
 			<section className="bg-pink-50 px-6 py-20 md:px-10">
 				<div className="mx-auto max-w-[1360px] text-center">
-					<h2 className="mb-4 font-serif text-[40px] leading-[1.2] tracking-[-0.01em] text-ink-900">
+					<h2 className="mb-4 font-heading text-[40px] leading-[1.2] tracking-[-0.01em] text-ink-900">
 						Stay Updated
 					</h2>
 					<p className="mb-7 text-base leading-[1.7] text-ink-600">

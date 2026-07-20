@@ -67,8 +67,8 @@ const serviceCards: ServiceCard[] = [
 const whyItems: { icon: LucideIcon; title: string; description: string }[] = [
 	{
 		icon: ShieldCheck,
-		title: "Licensed & Insured",
-		description: "Fully licensed in WA State and insured for your complete peace of mind.",
+		title: "Licensed, Insured & Bonded",
+		description: "Fully licensed, insured and bonded in WA State for your complete peace of mind.",
 	},
 	{
 		icon: Star,
@@ -108,11 +108,11 @@ export default function CleaningServicesInWaPage() {
 							</div>
 							<h1 className="mb-[22px] text-[clamp(38px,5.2vw,70px)] leading-[1.0] font-semibold tracking-[-0.025em] text-white">
 								<span className="block">The clean you deserve,</span>
-								<span className="block font-serif font-normal italic tracking-[-0.015em]">
+								<span className="block font-heading font-normal italic tracking-[-0.015em]">
 									every single time.
 								</span>
 							</h1>
-							<p className="mb-[34px] max-w-[520px] text-[clamp(15px,1.4vw,18px)] leading-[1.72] text-white/[0.88]">
+							<p className="mb-[34px] max-w-[520px] text-[clamp(17px,1.4vw,18px)] leading-[1.72] text-white/[0.88]">
 								From weekly home maintenance to move-out deep cleans and commercial spaces — Cleaning
 								Paradise has the right service for you, with 100% satisfaction guaranteed.
 							</p>
@@ -137,12 +137,12 @@ export default function CleaningServicesInWaPage() {
 
 			{/* SERVICES GRID */}
 			<section id="services" className="bg-white pt-[88px] pb-24">
-				<div className="mx-auto max-w-[1240px] px-10">
+				<div className="mx-auto max-w-[1360px] px-10">
 					<Reveal className="mb-[60px] text-center">
-						<div className="mb-3.5 text-xs font-bold tracking-[0.1em] text-pink-500 uppercase">
+						<div className="mb-3.5 text-[13px] font-bold tracking-[0.1em] text-pink-500 uppercase">
 							What we offer
 						</div>
-						<h2 className="mb-3.5 font-serif text-[clamp(36px,4vw,56px)] leading-[1.1] font-normal tracking-[-0.02em] text-ink-900">
+						<h2 className="mb-3.5 font-heading text-[clamp(36px,4vw,56px)] leading-[1.1] font-normal tracking-[-0.02em] text-ink-900">
 							Choose your service
 						</h2>
 						<p className="mx-auto max-w-[480px] text-[17px] leading-[1.65] text-ink-600">
@@ -163,7 +163,7 @@ export default function CleaningServicesInWaPage() {
 											<h3 className="mb-3.5 text-2xl font-bold tracking-[-0.01em] text-blue-600">
 												{card.title}
 											</h3>
-											<p className="flex-1 text-[15px] leading-[1.6] text-[#3f4f8f]">
+											<p className="flex-1 text-[15.5px] leading-[1.6] text-[#3f4f8f]">
 												{card.description}
 											</p>
 										</div>
@@ -186,12 +186,12 @@ export default function CleaningServicesInWaPage() {
 
 			{/* WHY CLEANING PARADISE */}
 			<section className="bg-blue-600 py-[88px]">
-				<div className="mx-auto max-w-[1240px] px-10">
+				<div className="mx-auto max-w-[1360px] px-10">
 					<Reveal className="mb-14 text-center">
-						<div className="mb-3.5 text-xs font-bold tracking-[0.1em] text-white/60 uppercase">
+						<div className="mb-3.5 text-[13px] font-bold tracking-[0.1em] text-white/60 uppercase">
 							Why choose us
 						</div>
-						<h2 className="font-serif text-[clamp(34px,4vw,52px)] leading-[1.1] font-normal tracking-[-0.02em] text-white">
+						<h2 className="font-heading text-[clamp(34px,4vw,52px)] leading-[1.1] font-normal tracking-[-0.02em] text-white">
 							The Cleaning Paradise difference
 						</h2>
 					</Reveal>
@@ -219,7 +219,7 @@ export default function CleaningServicesInWaPage() {
 			{/* CTA */}
 			<section className="bg-white px-[max(40px,calc(50%-580px))] py-[88px]">
 				<Reveal className="text-center">
-					<h2 className="mb-4 font-serif text-[clamp(36px,5vw,62px)] leading-[1.1] font-normal text-ink-900 italic">
+					<h2 className="mb-4 font-heading text-[clamp(36px,5vw,62px)] leading-[1.1] font-normal text-ink-900 italic">
 						Ready for a spotless home?
 					</h2>
 					<p className="mx-auto mb-9 max-w-[460px] text-[17px] leading-[1.65] text-ink-600">

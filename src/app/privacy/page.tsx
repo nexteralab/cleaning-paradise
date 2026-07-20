@@ -14,7 +14,7 @@ const UPDATED = "July 2026";
 export default function PrivacyPage() {
 	return (
 		<article className="mx-auto max-w-[760px] px-6 pt-[clamp(120px,12vw,160px)] pb-24">
-			<h1 className="mb-3 font-serif text-[clamp(34px,5vw,52px)] leading-[1.1] font-normal tracking-[-0.02em] text-ink-900">
+			<h1 className="mb-3 font-heading text-[clamp(34px,5vw,52px)] leading-[1.1] font-normal tracking-[-0.02em] text-ink-900">
 				Privacy Policy
 			</h1>
 			<p className="mb-10 text-sm text-ink-500">Last updated: {UPDATED}</p>

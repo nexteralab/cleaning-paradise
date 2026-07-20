@@ -52,11 +52,11 @@ export default function WhyChooseUs({
 }) {
 	return (
 		<section id="why" className="py-24 bg-white border-t border-ink-200">
-			<div className="max-w-[1240px] mx-auto px-10 max-md:px-6">
+			<div className="max-w-[1360px] mx-auto px-10 max-md:px-6">
 				{/* Header: asymmetric split */}
 				<Reveal className="grid md:grid-cols-[1.05fr_0.95fr] gap-14 items-end mb-[62px]">
 					<div>
-						<div className="inline-flex items-center gap-[11px] text-xs font-bold text-pink-500 uppercase tracking-[0.14em] mb-[22px]">
+						<div className="inline-flex items-center gap-[11px] text-[13px] font-bold text-pink-500 uppercase tracking-[0.14em] mb-[22px]">
 							<span className="w-7 h-[1.5px] bg-pink-500 inline-block" />
 							Why choose us
 						</div>
@@ -70,7 +70,7 @@ export default function WhyChooseUs({
 							</span>
 						</h2>
 					</div>
-					<p className="text-[16.5px] text-ink-600 leading-[1.95] pb-2.5">{intro}</p>
+					<p className="text-[17px] text-ink-600 leading-[1.95] pb-2.5">{intro}</p>
 				</Reveal>
 
 				{/* Photo strip */}
@@ -99,7 +99,7 @@ export default function WhyChooseUs({
 								<h3 className="font-sans text-xl font-semibold text-ink-900 leading-[1.4] tracking-[-0.01em] mb-3.5">
 									{f.title}
 								</h3>
-								<p className="text-[14.5px] text-ink-600 leading-[1.95]">{f.desc}</p>
+								<p className="text-[15.5px] text-ink-600 leading-[1.95]">{f.desc}</p>
 							</div>
 						</Reveal>
 					))}

@@ -25,7 +25,7 @@ const STATS: { value: string; label: string; color: string }[] = [
 function TrustSection() {
 	return (
 		<section className="pt-[70px] pb-16 bg-white">
-			<div className="max-w-[1240px] mx-auto px-10 max-md:px-6">
+			<div className="max-w-[1360px] mx-auto px-10 max-md:px-6">
 				<Reveal className="text-center mb-[42px]">
 					<p className="font-sans text-[30px] max-md:text-[24px] text-ink-800 tracking-[-0.01em] mx-auto">
 						Over 450 Seattle-area households trust our maids and housekeepers to keep their homes spotless,
@@ -51,9 +51,9 @@ function TrustSection() {
 export function TestimonialsSection() {
 	return (
 		<section className="py-24 bg-white border-t border-ink-200">
-			<div className="max-w-[1240px] mx-auto px-10 max-md:px-6">
+			<div className="max-w-[1360px] mx-auto px-10 max-md:px-6">
 				<Reveal className="text-center mb-12">
-					<div className="text-xs font-bold text-pink-500 uppercase tracking-[0.1em] mb-[13px]">Testimonials</div>
+					<div className="text-[13px] font-bold text-pink-500 uppercase tracking-[0.1em] mb-[13px]">Testimonials</div>
 					<h2 className="font-heading text-[clamp(40px,4.5vw,60px)] font-normal text-ink-900 tracking-[-0.02em] mb-4">
 						Rated by real Seattle-area clients
 					</h2>
@@ -111,11 +111,11 @@ export function TestimonialsSection() {
 function GallerySection() {
 	return (
 		<section id="gallery" className="py-24 bg-pink-50">
-			<div className="max-w-[1240px] mx-auto px-10 max-md:px-6">
+			<div className="max-w-[1360px] mx-auto px-10 max-md:px-6">
 				{/* header */}
 				<Reveal className="flex items-end justify-between flex-wrap gap-6 mb-10">
 					<div>
-						<div className="text-xs font-bold text-pink-500 uppercase tracking-[0.1em] mb-3">Our work</div>
+						<div className="text-[13px] font-bold text-pink-500 uppercase tracking-[0.1em] mb-3">Our work</div>
 						<h2 className="font-heading text-[clamp(36px,4vw,56px)] font-normal text-ink-900 tracking-[-0.02em] leading-[1.12]">
 							Real homes. Real results.
 						</h2>
@@ -156,10 +156,10 @@ function GallerySection() {
 					</Reveal>
 					{/* blog CTA card */}
 					<Reveal delay={200} className="lg:col-start-3 lg:row-start-2 rounded-[22px] overflow-hidden bg-[linear-gradient(135deg,#FF50B5_0%,#E0389C_100%)] flex flex-col items-start justify-end p-[26px] shadow-[0_12px_32px_rgba(255,80,181,0.30)]">
-						<div className="text-[11px] font-bold text-white/75 uppercase tracking-[0.1em] mb-2">
+						<div className="text-[13px] font-bold text-white/75 uppercase tracking-[0.1em] mb-2">
 							From our blog
 						</div>
-						<p className="font-serif text-xl font-normal text-white leading-[1.3] mb-4">
+						<p className="font-heading text-xl font-normal text-white leading-[1.3] mb-4">
 							Tips, guides &amp; local cleaning stories
 						</p>
 						<Link

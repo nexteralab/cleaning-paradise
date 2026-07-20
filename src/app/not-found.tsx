@@ -21,7 +21,7 @@ export default function NotFound() {
 				<div className="mb-4 text-[13px] font-bold tracking-[0.12em] text-pink-500 uppercase">
 					404 — Page not found
 				</div>
-				<h1 className="mb-4 font-serif text-[clamp(34px,5vw,56px)] leading-[1.1] font-normal tracking-[-0.02em] text-ink-900">
+				<h1 className="mb-4 font-heading text-[clamp(34px,5vw,56px)] leading-[1.1] font-normal tracking-[-0.02em] text-ink-900">
 					This page took the day off
 				</h1>
 				<p className="mx-auto mb-9 max-w-[440px] text-[15.5px] leading-[1.7] text-ink-600">

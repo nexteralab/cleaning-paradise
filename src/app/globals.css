@@ -67,7 +67,7 @@
 	--color-ink-700: var(--neutral-700);
 	--color-ink-800: var(--neutral-800);
 	--color-ink-900: var(--neutral-900);
-	--font-serif: var(--font-instrument-serif), serif;
+	/* Un solo pairing: Lora (display/headings) + Poppins (body/UI). */
 	--font-heading: var(--font-lora), serif;
 	--font-sans: var(--font-poppins), system-ui, sans-serif;
 	--shadow-xs: 0 1px 2px 0 rgba(30, 62, 162, 0.06);

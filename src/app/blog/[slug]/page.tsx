@@ -25,7 +25,7 @@ function Block({ block, index }: { block: PostBlock; index: number }) {
 		case "heading":
 			return (
 				<h2
-					className={`mb-4 font-serif text-[clamp(24px,2.6vw,34px)] font-normal leading-[1.25] tracking-[-0.015em] text-ink-900 ${
+					className={`mb-4 font-heading text-[clamp(24px,2.6vw,34px)] font-normal leading-[1.25] tracking-[-0.015em] text-ink-900 ${
 						index > 0 ? "mt-3" : ""
 					}`}
 				>
@@ -41,7 +41,7 @@ function Block({ block, index }: { block: PostBlock; index: number }) {
 		case "quote":
 			return (
 				<blockquote className="mb-9 mt-3 rounded-r-2xl border-l-4 border-pink-500 bg-pink-50 px-7 py-5">
-					<p className="font-serif text-[22px] italic leading-[1.5] text-ink-800">
+					<p className="font-heading text-[22px] italic leading-[1.5] text-ink-800">
 						{block.text}
 					</p>
 					<cite className="mt-2.5 block text-[13px] not-italic text-[#A0A0AE]">
@@ -107,7 +107,7 @@ export default async function BlogPostPage({ params }: Params) {
 								<CategoryIcon size={12} />
 								{post.category}
 							</div>
-							<h1 className="mb-4 text-pretty font-serif text-[clamp(28px,4vw,58px)] font-normal leading-[1.15] tracking-[-0.02em] text-white">
+							<h1 className="mb-4 text-pretty font-heading text-[clamp(28px,4vw,58px)] font-normal leading-[1.15] tracking-[-0.02em] text-white">
 								{post.title}
 							</h1>
 							<div className="flex flex-wrap items-center gap-5">
@@ -156,10 +156,10 @@ export default async function BlogPostPage({ params }: Params) {
 					{/* CTA card */}
 					<div className="mb-[60px] mt-4 flex flex-wrap items-center justify-between gap-6 rounded-3xl bg-[linear-gradient(135deg,#FF50B5_0%,#E0389C_100%)] p-[clamp(28px,4vw,44px)]">
 						<div>
-							<p className="mb-2 text-xs font-bold uppercase tracking-[.1em] text-white/75">
+							<p className="mb-2 text-[13px] font-bold uppercase tracking-[.1em] text-white/75">
 								Ready for a fresh start?
 							</p>
-							<h3 className="font-serif text-[clamp(22px,2.4vw,30px)] leading-[1.25] text-white">
+							<h3 className="font-heading text-[clamp(22px,2.4vw,30px)] leading-[1.25] text-white">
 								Book a Spring Deep Clean
 							</h3>
 							<p className="mt-2 text-sm leading-[1.6] text-white/[.82]">
@@ -217,7 +217,7 @@ export default async function BlogPostPage({ params }: Params) {
 									>
 										{rel.category}
 									</div>
-									<p className="font-serif text-lg leading-[1.35] text-ink-900">
+									<p className="font-heading text-lg leading-[1.35] text-ink-900">
 										{rel.title}
 									</p>
 								</div>
