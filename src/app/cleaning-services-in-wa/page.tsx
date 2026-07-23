@@ -45,7 +45,7 @@ const serviceCards: ServiceCard[] = [
 		href: "/cleaning-services-in-wa/commercial-cleaning",
 	},
 	{
-		img: "/img/aw1a0626-scaled-mr6t6wy8.jpg",
+		img: "/img/aw1a0626-scaled.jpg",
 		title: "Move In / Out",
 		description: "Detailed cleaning before you hand over the keys or settle into your new home.",
 		href: "/cleaning-services-in-wa/move-in-out",

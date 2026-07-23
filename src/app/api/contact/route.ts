@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { sendLeadEmails, type Lead } from "@/lib/email";
+import { supabaseInsert } from "@/lib/supabase";
 
 // Public endpoint — the contact & quote forms POST here to create a lead.
 export async function POST(req: Request) {
@@ -69,6 +70,31 @@ export async function POST(req: Request) {
 		source: s("source") ?? "contact",
 	};
 	ctx.waitUntil(sendLeadEmails(env, lead));
+
+	// Mirror the lead to Supabase (team dashboard). D1 above stays the source
+	// of truth — this failing never affects the response or the emails.
+	ctx.waitUntil(
+		supabaseInsert(env, "leads", {
+			first_name: firstName,
+			last_name: s("lastName"),
+			email,
+			phone: s("phone"),
+			street: s("street"),
+			unit: s("unit"),
+			city: s("city"),
+			zip: s("zip"),
+			services,
+			service: s("service"),
+			date: s("date"),
+			time: s("time"),
+			frequency: s("frequency"),
+			sqft: s("sqft"),
+			pets: s("pets"),
+			notes: s("notes"),
+			promo: !!body.promo,
+			source: s("source") ?? "contact",
+		}),
+	);
 
 	return NextResponse.json({ ok: true });
 }

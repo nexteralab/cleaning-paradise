@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Calendar } from "lucide-react";
-import { postList } from "./posts";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
+import { getPublishedPosts, categoryIcon, formatDate } from "@/lib/blog";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
 	title: "Cleaning Tips & Local Stories | Cleaning Paradise",
@@ -17,7 +20,10 @@ const categories = [
 	{ label: "Eco-Friendly", href: "#eco", active: false },
 ];
 
-export default function BlogPage() {
+export default async function BlogPage() {
+	const { env } = await getCloudflareContext({ async: true });
+	const postList = await getPublishedPosts(env);
+
 	return (
 		<div className="relative w-full overflow-x-clip">
 			{/* HERO: Giant Display Text */}
@@ -64,7 +70,7 @@ export default function BlogPage() {
 				<div className="mx-auto max-w-[1360px]">
 					<div className="mb-[60px] grid grid-cols-1 gap-9 md:grid-cols-2 lg:grid-cols-3">
 						{postList.map((post) => {
-							const Icon = post.categoryIcon;
+							const Icon = categoryIcon(post.category);
 							const accentText =
 								post.accent === "pink" ? "text-pink-500" : "text-blue-600";
 							return (
@@ -75,7 +81,7 @@ export default function BlogPage() {
 								>
 									<div className="relative mb-6 h-[360px] w-full overflow-hidden rounded-[20px] bg-[#f0f0f5]">
 										<img
-											src={post.image}
+											src={post.cover_url ?? "/img/aw1a0547.jpg"}
 											alt={post.title}
 											className="block h-full w-full object-cover"
 										/>
@@ -98,7 +104,7 @@ export default function BlogPage() {
 										</p>
 										<div className="flex items-center gap-2 text-[13px] text-[#808098]">
 											<Calendar size={14} className={accentText} />
-											{post.date}
+											{formatDate(post.published_at)}
 										</div>
 									</div>
 								</Link>

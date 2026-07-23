@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import { FaqAccordion, QuoteForm } from "./client-sections";
 import { services, serviceSlugs, type IconName, type ServiceContent } from "./services-data";
+import JsonLd from "@/components/JsonLd";
 import { TestimonialsSection } from "@/app/page";
 
 const icons: Record<IconName, LucideIcon> = {
@@ -97,8 +98,54 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 	const service: ServiceContent | undefined = services[slug];
 	if (!service) notFound();
 
+	const serviceName = service.heroTitle.map((p) => p.text).join(" ").replace(/\s+/g, " ").trim();
+	const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://cleaningparadisellc.com";
+
 	return (
 		<div className="relative w-full overflow-x-clip">
+			<JsonLd
+				data={{
+					"@context": "https://schema.org",
+					"@type": "Service",
+					name: serviceName,
+					description: service.metaDescription,
+					url: `${base}/cleaning-services-in-wa/${service.slug}`,
+					provider: {
+						"@type": "HouseCleaningService",
+						name: "Cleaning Paradise LLC",
+						telephone: "+1-425-610-0241",
+						url: base,
+					},
+					areaServed: ["Seattle", "Bellevue", "Kirkland", "Lynnwood", "Shoreline", "Edmonds"].map(
+						(name) => ({ "@type": "City", name }),
+					),
+				}}
+			/>
+			<JsonLd
+				data={{
+					"@context": "https://schema.org",
+					"@type": "FAQPage",
+					mainEntity: service.faqs.map((f) => ({
+						"@type": "Question",
+						name: f.q,
+						acceptedAnswer: {
+							"@type": "Answer",
+							text: f.a.map((part) => (typeof part === "string" ? part : part.label)).join(""),
+						},
+					})),
+				}}
+			/>
+			<JsonLd
+				data={{
+					"@context": "https://schema.org",
+					"@type": "BreadcrumbList",
+					itemListElement: [
+						{ "@type": "ListItem", position: 1, name: "Home", item: base },
+						{ "@type": "ListItem", position: 2, name: "Cleaning Services", item: `${base}/cleaning-services-in-wa` },
+						{ "@type": "ListItem", position: 3, name: serviceName },
+					],
+				}}
+			/>
 			{/* ═══ HERO ═══ */}
 			<section className="bg-white px-6 pt-[clamp(120px,11vw,160px)] pb-[clamp(60px,7vw,88px)]">
 				<div className="mx-auto grid max-w-[1360px] grid-cols-1 items-center gap-[clamp(32px,5vw,72px)] md:grid-cols-2">
@@ -199,12 +246,17 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 						{service.introParas.map((para, i) => (
 							<p
 								key={i}
-								className={`text-[clamp(15px,1.3vw,17px)] leading-[1.85] text-ink-600 ${i === service.introParas.length - 1 ? "mb-8" : "mb-6"
-									}`}
+								className="mb-6 text-[clamp(15px,1.3vw,17px)] leading-[1.85] text-ink-600"
 							>
 								{para}
 							</p>
 						))}
+						<Link
+							href="/contact"
+							className="mb-8 inline-flex items-center gap-2 rounded-full bg-pink-500 px-7 py-3 text-[14.5px] font-bold text-white no-underline transition-all duration-200 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-0.5 hover:bg-pink-600 hover:shadow-[0_10px_28px_rgba(255,80,181,0.36)]"
+						>
+							Get a free quote <ArrowRight size={15} />
+						</Link>
 						<div className="flex flex-wrap gap-2">
 							{service.frequencyChips.map((chip) => (
 								<span

@@ -15,7 +15,7 @@ import {
 	Star,
 	Home,
 } from "lucide-react";
-import { locations, locationSlugs } from "../locations-data";
+import { locations, locationSlugs, locationFaqs } from "../locations-data";
 
 /* ─── Hero before / after slider (per-city images) ─── */
 
@@ -44,6 +44,21 @@ export function HeroSlider({
 		<div className="min-w-[300px] max-w-[680px] flex-[1_1_480px]">
 			<div
 				ref={ref}
+				role="slider"
+				tabIndex={0}
+				aria-label="Compare before and after cleaning"
+				aria-valuemin={0}
+				aria-valuemax={100}
+				aria-valuenow={Math.round(pct)}
+				onKeyDown={(e) => {
+					if (e.key === "ArrowLeft" || e.key === "ArrowDown") {
+						e.preventDefault();
+						setPct((p) => Math.max(0, p - 5));
+					} else if (e.key === "ArrowRight" || e.key === "ArrowUp") {
+						e.preventDefault();
+						setPct((p) => Math.min(100, p + 5));
+					}
+				}}
 				onPointerDown={(e) => {
 					dragging.current = true;
 					e.currentTarget.setPointerCapture(e.pointerId);
@@ -114,35 +129,12 @@ export function HeroSlider({
 
 /* ─── FAQ accordion ─── */
 
-const faqs: { q: string; a: string }[] = [
-	{
-		q: "How is the cost calculated?",
-		a: "Pricing is based on the size of your home and how often you'd like us to clean. We provide a detailed quote before any work begins — no surprises, no guesswork. Most standard cleans start at $55/hr per person.",
-	},
-	{
-		q: "What's the difference between standard and deep cleaning?",
-		a: "Standard cleaning covers recurring maintenance: vacuuming, mopping, wiping surfaces, sanitizing bathrooms and kitchens, and taking out trash. Deep cleaning goes further — inside appliances, behind furniture, grout lines, and baseboards. Our team can help you decide which fits your current situation.",
-	},
-	{
-		q: "What should I expect on the first visit?",
-		a: "First visits typically take a bit longer as our team gets familiar with your home's layout and specific needs. We'll walk through expectations with you beforehand, bring all equipment and products, and leave you with a spotless space — guaranteed.",
-	},
-	{
-		q: "Are you licensed, insured and bonded?",
-		a: "Yes — Cleaning Paradise LLC is fully licensed, insured and bonded in the state of Washington. Every member of our team is background-checked and trained before their first visit. Your home and belongings are protected.",
-	},
-	{
-		q: "Can I set up recurring service?",
-		a: "Absolutely. We offer weekly, biweekly, and monthly plans — with discounts for recurring bookings. Our most popular option is biweekly, which keeps your home consistently clean without the cost of weekly visits. Get a free quote and we'll recommend the right frequency for your home.",
-	},
-];
-
 export function FaqAccordion() {
 	const [open, setOpen] = useState<number | null>(null);
 
 	return (
 		<div className="flex flex-col gap-3.5">
-			{faqs.map((item, i) => {
+			{locationFaqs.map((item, i) => {
 				const isOpen = open === i;
 				return (
 					<div

@@ -28,7 +28,14 @@ export const metadata: Metadata = {
 	metadataBase: new URL(SITE_URL),
 	title: TITLE,
 	description: DESCRIPTION,
-	icons: { icon: "/favicon.png", apple: "/apple-icon.png" },
+	icons: {
+		icon: [
+			{ url: "/favicon.ico", sizes: "32x32" },
+			{ url: "/favicon.png", type: "image/png", sizes: "64x64" },
+		],
+		apple: "/apple-icon.png",
+	},
+	manifest: "/site.webmanifest",
 	openGraph: {
 		type: "website",
 		siteName: "Cleaning Paradise",

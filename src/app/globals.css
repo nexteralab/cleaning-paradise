@@ -97,3 +97,108 @@ body {
 		transform: translateX(-50%);
 	}
 }
+
+/* ============ BLOG: markdown body (replica los estilos de los antiguos PostBlock) ============ */
+.prose-blog h2 {
+	font-family: var(--font-heading);
+	font-size: clamp(24px, 2.6vw, 34px);
+	font-weight: 400;
+	line-height: 1.25;
+	letter-spacing: -0.015em;
+	color: var(--color-ink-900);
+	margin: 12px 0 16px;
+}
+.prose-blog h2:first-child {
+	margin-top: 0;
+}
+.prose-blog p {
+	font-size: 16px;
+	line-height: 1.85;
+	color: var(--color-ink-600);
+	margin-bottom: 24px;
+}
+.prose-blog a {
+	color: var(--color-pink-500, #ff50b5);
+	font-weight: 600;
+}
+.prose-blog blockquote {
+	border-left: 4px solid #ff50b5;
+	background: var(--color-pink-50, #fff0f8);
+	border-radius: 0 16px 16px 0;
+	padding: 20px 28px;
+	margin: 12px 0 36px;
+}
+.prose-blog blockquote p {
+	font-family: var(--font-heading);
+	font-size: 22px;
+	font-style: italic;
+	line-height: 1.5;
+	color: var(--color-ink-800);
+	margin-bottom: 0;
+}
+/* línea de cita ("— autor") al final del blockquote */
+.prose-blog blockquote p:last-child:not(:first-child) {
+	font-family: var(--font-sans);
+	font-size: 13px;
+	font-style: normal;
+	color: #a0a0ae;
+	margin-top: 10px;
+}
+.prose-blog img {
+	width: 100%;
+	max-height: clamp(240px, 36vw, 440px);
+	object-fit: cover;
+	border-radius: 20px;
+	margin: 0 0 36px;
+}
+.prose-blog ol {
+	list-style: none;
+	counter-reset: prose-num;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	padding-left: 4px;
+	margin-bottom: 32px;
+}
+.prose-blog ol li {
+	counter-increment: prose-num;
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+	font-size: 15.5px;
+	line-height: 1.7;
+	color: var(--color-ink-600);
+}
+.prose-blog ol li::before {
+	content: counter(prose-num);
+	flex-shrink: 0;
+	margin-top: 2px;
+	width: 22px;
+	height: 22px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 9999px;
+	background: #ff50b5;
+	color: #fff;
+	font-size: 12px;
+	font-weight: 700;
+}
+.prose-blog ul {
+	list-style: disc;
+	padding-left: 22px;
+	margin-bottom: 24px;
+	color: var(--color-ink-600);
+	font-size: 15.5px;
+	line-height: 1.7;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+/* A11y: foco visible consistente en todo el sitio (solo teclado, no click) */
+:focus-visible {
+	outline: 2px solid #ff50b5;
+	outline-offset: 2px;
+	border-radius: 4px;
+}

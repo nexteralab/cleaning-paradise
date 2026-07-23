@@ -3,8 +3,9 @@
 interface CloudflareEnv {
 	DB: D1Database;
 	BUCKET: R2Bucket;
-	ADMIN_PASSWORD: string;
-	AUTH_SECRET: string;
+	// Supabase (optional — mirror of leads is skipped if unset).
+	SUPABASE_URL?: string;
+	SUPABASE_SERVICE_ROLE_KEY?: string;
 	// Resend transactional email (optional — email is skipped if unset).
 	RESEND_API_KEY?: string;
 	EMAIL_FROM?: string;

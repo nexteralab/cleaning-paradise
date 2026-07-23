@@ -14,10 +14,12 @@ import {
 	type LucideIcon,
 } from "lucide-react";
 import { CitySelector, FaqAccordion, HeroSlider } from "./client-sections";
+import JsonLd from "@/components/JsonLd";
 import Reveal from "@/components/Reveal";
+import BgVideo from "@/components/BgVideo";
 import CountUp from "@/components/CountUp";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import { locations, locationSlugs } from "../locations-data";
+import { locations, locationSlugs, locationFaqs } from "../locations-data";
 
 export function generateStaticParams() {
 	return locationSlugs.map((slug) => ({ slug }));
@@ -58,7 +60,7 @@ const services: Service[] = [
 		title: "Standard Cleaning",
 		description:
 			"Recurring upkeep for kitchens, baths, living areas and bedrooms — week after week.",
-		img: "/img/move-in.jpg",
+		img: "/img/cleaning.webp",
 		alt: "Standard cleaning",
 		href: "/cleaning-services-in-wa/standard-cleaning",
 	},
@@ -82,7 +84,7 @@ const services: Service[] = [
 		title: "Move In / Out",
 		description:
 			"Detailed cleaning before you hand over the keys or settle into your new home.",
-		img: "/img/aw1a0626-scaled.jpg",
+		img: "/img/move-in.jpg",
 		alt: "Move in / out",
 		href: "/cleaning-services-in-wa/move-in-out",
 	},
@@ -166,8 +168,32 @@ export default async function LocationPage({
 	const loc = locations[slug];
 	if (!loc) notFound();
 
+	const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://cleaningparadisellc.com";
+
 	return (
 		<div className="relative w-full overflow-x-clip">
+			<JsonLd
+				data={{
+					"@context": "https://schema.org",
+					"@type": "FAQPage",
+					mainEntity: locationFaqs.map((f) => ({
+						"@type": "Question",
+						name: f.q,
+						acceptedAnswer: { "@type": "Answer", text: f.a },
+					})),
+				}}
+			/>
+			<JsonLd
+				data={{
+					"@context": "https://schema.org",
+					"@type": "BreadcrumbList",
+					itemListElement: [
+						{ "@type": "ListItem", position: 1, name: "Home", item: base },
+						{ "@type": "ListItem", position: 2, name: "Locations", item: `${base}/locations` },
+						{ "@type": "ListItem", position: 3, name: `${loc.name}, WA` },
+					],
+				}}
+			/>
 			{/* ===== HERO / BEFORE-AFTER ===== */}
 			<section id="top" className="bg-white p-6">
 				<div className="px-[clamp(28px,5vw,72px)] pt-[clamp(96px,9vw,116px)] pb-[clamp(44px,6vw,72px)]">
@@ -242,14 +268,11 @@ export default async function LocationPage({
 			{/* ===== STATS ===== */}
 			<section className="p-6">
 				<div className="relative overflow-hidden rounded-[28px] bg-[#0d1020]">
-					{/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-					<video
-						src="/video/kirkland-bg.mp4"
-						muted
-						loop
-						playsInline
-						autoPlay
-						preload="metadata"
+					{/* ponytail: video compartido — cuando llegue media por ciudad (D8),
+					    agregar campo `video` en locations-data y usar loc.video aquí. */}
+					<BgVideo
+						src={loc.video ?? "/video/kirkland-bg.mp4"}
+						poster={loc.img}
 						className="absolute inset-0 h-full w-full object-cover opacity-[0.52]"
 					/>
 					<div className="pointer-events-none absolute inset-0 bg-[rgba(12,17,38,0.48)]" />

@@ -1,12 +1,15 @@
 import type { MetadataRoute } from "next";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { serviceSlugs } from "./cleaning-services-in-wa/[slug]/services-data";
 import { locationSlugs } from "./locations/locations-data";
-import { posts } from "./blog/posts";
+import { getPublishedPosts } from "@/lib/blog";
 
 const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://cleaningparadisellc.com";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	const now = new Date();
+	const { env } = await getCloudflareContext({ async: true });
+	const posts = await getPublishedPosts(env);
 
 	const staticPaths = [
 		"",
@@ -38,9 +41,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 			changeFrequency: "monthly" as const,
 			priority: 0.7,
 		})),
-		...Object.keys(posts).map((s) => ({
-			url: `${base}/blog/${s}`,
-			lastModified: now,
+		...posts.map((p) => ({
+			url: `${base}/blog/${p.slug}`,
+			lastModified: p.updated_at ? new Date(p.updated_at) : now,
 			changeFrequency: "monthly" as const,
 			priority: 0.6,
 		})),

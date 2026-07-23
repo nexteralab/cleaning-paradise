@@ -2,101 +2,60 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Calendar, Clock, User } from "lucide-react";
-import { posts, type PostBlock } from "../posts";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
+import { marked } from "marked";
+import { getPublishedPost, getPublishedPosts, categoryIcon, formatDate } from "@/lib/blog";
+import JsonLd from "@/components/JsonLd";
+
+export const dynamic = "force-dynamic";
 
 type Params = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-	return Object.keys(posts).map((slug) => ({ slug }));
-}
-
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
 	const { slug } = await params;
-	const post = posts[slug];
+	const { env } = await getCloudflareContext({ async: true });
+	const post = await getPublishedPost(env, slug);
 	if (!post) return { title: "Post Not Found | Cleaning Paradise Blog" };
 	return {
-		title: `${post.title} | Cleaning Paradise Blog`,
-		description: post.lead,
+		title: post.meta_title ?? `${post.title} | Cleaning Paradise Blog`,
+		description: post.meta_description ?? post.lead,
 	};
-}
-
-function Block({ block, index }: { block: PostBlock; index: number }) {
-	switch (block.type) {
-		case "heading":
-			return (
-				<h2
-					className={`mb-4 font-heading text-[clamp(24px,2.6vw,34px)] font-normal leading-[1.25] tracking-[-0.015em] text-ink-900 ${
-						index > 0 ? "mt-3" : ""
-					}`}
-				>
-					{block.text}
-				</h2>
-			);
-		case "paragraph":
-			return (
-				<p className="mb-6 text-base leading-[1.85] text-ink-600">
-					{block.text}
-				</p>
-			);
-		case "quote":
-			return (
-				<blockquote className="mb-9 mt-3 rounded-r-2xl border-l-4 border-pink-500 bg-pink-50 px-7 py-5">
-					<p className="font-heading text-[22px] italic leading-[1.5] text-ink-800">
-						{block.text}
-					</p>
-					<cite className="mt-2.5 block text-[13px] not-italic text-[#A0A0AE]">
-						{block.cite}
-					</cite>
-				</blockquote>
-			);
-		case "image":
-			return (
-				<div className="mb-9 h-[clamp(240px,36vw,440px)] overflow-hidden rounded-[20px]">
-					<img
-						src={block.src}
-						alt={block.alt}
-						className="block h-full w-full object-cover"
-					/>
-				</div>
-			);
-		case "numberedList":
-			return (
-				<ul className="mb-8 flex flex-col gap-3 pl-1">
-					{block.items.map((item, i) => (
-						<li
-							key={i}
-							className="flex items-start gap-3 text-[15.5px] leading-[1.7] text-ink-600"
-						>
-							<span className="mt-0.5 flex h-[22px] w-[22px] shrink-0 items-center justify-center rounded-full bg-pink-500 text-xs font-bold text-white">
-								{i + 1}
-							</span>
-							{item}
-						</li>
-					))}
-				</ul>
-			);
-	}
 }
 
 export default async function BlogPostPage({ params }: Params) {
 	const { slug } = await params;
-	const post = posts[slug];
+	const { env } = await getCloudflareContext({ async: true });
+	const post = await getPublishedPost(env, slug);
 	if (!post) notFound();
 
-	const CategoryIcon = post.categoryIcon;
-	const relatedSlugs =
-		post.related ?? Object.keys(posts).filter((s) => s !== slug).slice(0, 3);
-	const related = relatedSlugs
-		.map((s) => posts[s])
-		.filter((p) => p !== undefined);
+	const CategoryIcon = categoryIcon(post.category);
+	const all = await getPublishedPosts(env);
+	const related = all.filter((p) => p.slug !== slug).slice(0, 3);
+
+	// ponytail: HTML sin sanitizar — el markdown solo lo escribe el equipo
+	// autenticado en /admin. Si algún día hay autores externos, agregar DOMPurify.
+	const html = await marked.parse(post.content);
+
+	const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://cleaningparadisellc.com";
 
 	return (
 		<div className="relative w-full overflow-x-clip">
+			<JsonLd
+				data={{
+					"@context": "https://schema.org",
+					"@type": "BreadcrumbList",
+					itemListElement: [
+						{ "@type": "ListItem", position: 1, name: "Home", item: base },
+						{ "@type": "ListItem", position: 2, name: "Blog", item: `${base}/blog` },
+						{ "@type": "ListItem", position: 3, name: post.title },
+					],
+				}}
+			/>
 			{/* HERO IMAGE */}
 			<section className="px-6 pt-6">
 				<div className="relative mx-auto aspect-[16/9] max-h-[520px] w-full max-w-[1080px] overflow-hidden rounded-3xl bg-[#0d1020]">
 					<img
-						src={post.image}
+						src={post.cover_url ?? "/img/aw1a0547.jpg"}
 						alt={post.title}
 						className="h-full w-full object-cover opacity-[0.82]"
 					/>
@@ -113,12 +72,12 @@ export default async function BlogPostPage({ params }: Params) {
 							<div className="flex flex-wrap items-center gap-5">
 								<div className="flex items-center gap-2 text-[13px] text-white/[.78]">
 									<Calendar size={14} />
-									{post.date}
+									{formatDate(post.published_at)}
 								</div>
-								{post.readTime && (
+								{post.read_time_minutes != null && (
 									<div className="flex items-center gap-2 text-[13px] text-white/[.78]">
 										<Clock size={14} />
-										{post.readTime}
+										{post.read_time_minutes} min read
 									</div>
 								)}
 								<div className="flex items-center gap-2 text-[13px] text-white/[.78]">
@@ -148,10 +107,8 @@ export default async function BlogPostPage({ params }: Params) {
 						{post.lead}
 					</p>
 
-					{/* Article blocks */}
-					{post.body.map((block, i) => (
-						<Block key={i} block={block} index={i} />
-					))}
+					{/* Article body (markdown) */}
+					<div className="prose-blog" dangerouslySetInnerHTML={{ __html: html }} />
 
 					{/* CTA card */}
 					<div className="mb-[60px] mt-4 flex flex-wrap items-center justify-between gap-6 rounded-3xl bg-[linear-gradient(135deg,#FF50B5_0%,#E0389C_100%)] p-[clamp(28px,4vw,44px)]">
@@ -160,7 +117,7 @@ export default async function BlogPostPage({ params }: Params) {
 								Ready for a fresh start?
 							</p>
 							<h3 className="font-heading text-[clamp(22px,2.4vw,30px)] leading-[1.25] text-white">
-								Book a Spring Deep Clean
+								Book a Deep Clean
 							</h3>
 							<p className="mt-2 text-sm leading-[1.6] text-white/[.82]">
 								Same-week availability across Greater Seattle.
@@ -204,7 +161,7 @@ export default async function BlogPostPage({ params }: Params) {
 							>
 								<div className="h-[180px] w-full overflow-hidden rounded-2xl bg-[#f0f0f5]">
 									<img
-										src={rel.image}
+										src={rel.cover_url ?? "/img/aw1a0547.jpg"}
 										alt={rel.title}
 										className="block h-full w-full object-cover"
 									/>

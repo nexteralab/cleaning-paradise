@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight, ChevronRight, MapPin, Plus, ShieldCheck } from "lucide-react";
 import SuccessModal from "@/components/SuccessModal";
 import Reveal from "@/components/Reveal";
+import BgVideo from "@/components/BgVideo";
 
 /* ============ HERO: full-screen video card + booking form ============ */
 
@@ -12,47 +13,13 @@ const inputClasses =
 	"font-sans text-[14px] text-ink-900 bg-white border-[1.5px] border-ink-200 rounded-[12px] px-3.5 py-3 outline-none transition-[border-color] duration-200 focus:border-pink-500";
 
 export function HeroSection() {
-	const videoRef = useRef<HTMLVideoElement | null>(null);
-
-	useEffect(() => {
-		const el = videoRef.current;
-		if (!el) return;
-		el.muted = true;
-		el.defaultMuted = true;
-		const tryPlay = () => {
-			if (!el.isConnected) return;
-			el.play()?.catch(() => {});
-		};
-		const events = ["loadeddata", "canplay", "canplaythrough"];
-		events.forEach((ev) => el.addEventListener(ev, tryPlay));
-		let tries = 0;
-		const t = setInterval(() => {
-			tries++;
-			if (!el.paused || tries > 25) {
-				clearInterval(t);
-				return;
-			}
-			tryPlay();
-		}, 200);
-		tryPlay();
-		return () => {
-			clearInterval(t);
-			events.forEach((ev) => el.removeEventListener(ev, tryPlay));
-		};
-	}, []);
-
 	return (
 		<section id="top" className="bg-white p-4 md:p-6">
 			<div className="relative w-full h-full min-h-[85vh] rounded-[30px] overflow-hidden shadow-[0_30px_70px_rgba(30,62,162,0.18)]">
-				{/* background video */}
-				<video
-					ref={videoRef}
+				{/* background video (imagen estática en móvil) */}
+				<BgVideo
 					src="/video/cleaning-paradise-bg.mp4"
-					autoPlay
-					muted
-					loop
-					playsInline
-					preload="metadata"
+					poster="/img/aw1a0732.jpg"
 					className="absolute inset-0 w-full h-full object-cover"
 				/>
 				{/* legibility overlay */}
@@ -395,8 +362,22 @@ export function ServicesSection() {
 							return (
 								<div
 									key={svc.num}
+									role="button"
+									tabIndex={0}
+									aria-expanded={on}
+									aria-label={`View ${svc.title}`}
 									onClick={(e) => {
 										if ((e.target as HTMLElement).closest("a")) return;
+										if (window.innerWidth < 1024) {
+											window.location.href = `/cleaning-services-in-wa/${svc.slug}`;
+											return;
+										}
+										scrollToRow(i);
+									}}
+									onKeyDown={(e) => {
+										if (e.key !== "Enter" && e.key !== " ") return;
+										if ((e.target as HTMLElement).closest("a")) return;
+										e.preventDefault();
 										if (window.innerWidth < 1024) {
 											window.location.href = `/cleaning-services-in-wa/${svc.slug}`;
 											return;

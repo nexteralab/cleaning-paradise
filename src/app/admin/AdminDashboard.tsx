@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { LogOut, Trash2, Upload, Download, Mail, Phone } from "lucide-react";
+import { Trash2, Mail, Phone } from "lucide-react";
 
 export type Lead = {
 	id: number;
@@ -26,8 +25,6 @@ export type Lead = {
 	created_at: string;
 };
 
-export type StoredFile = { key: string; size: number; uploaded: string };
-
 const STATUSES = ["new", "contacted", "won", "lost"];
 const statusColor: Record<string, string> = {
 	new: "bg-pink-50 text-pink-600",
@@ -36,15 +33,8 @@ const statusColor: Record<string, string> = {
 	lost: "bg-ink-100 text-ink-500",
 };
 
-function fmtBytes(n: number) {
-	if (n < 1024) return `${n} B`;
-	if (n < 1024 * 1024) return `${(n / 1024).toFixed(1)} KB`;
-	return `${(n / 1024 / 1024).toFixed(1)} MB`;
-}
-
-export default function AdminDashboard({ leads, files }: { leads: Lead[]; files: StoredFile[] }) {
+export default function AdminDashboard({ leads }: { leads: Lead[] }) {
 	const router = useRouter();
-	const [busy, setBusy] = useState(false);
 
 	async function updateStatus(id: number, status: string) {
 		await fetch("/api/admin/leads", {
@@ -61,49 +51,17 @@ export default function AdminDashboard({ leads, files }: { leads: Lead[]; files:
 		router.refresh();
 	}
 
-	async function uploadFile(e: React.ChangeEvent<HTMLInputElement>) {
-		const file = e.target.files?.[0];
-		if (!file) return;
-		setBusy(true);
-		const fd = new FormData();
-		fd.append("file", file);
-		await fetch("/api/admin/files", { method: "POST", body: fd });
-		setBusy(false);
-		e.target.value = "";
-		router.refresh();
-	}
-
-	async function deleteFile(key: string) {
-		if (!confirm(`Delete ${key}?`)) return;
-		await fetch(`/api/admin/files?key=${encodeURIComponent(key)}`, { method: "DELETE" });
-		router.refresh();
-	}
-
-	async function logout() {
-		await fetch("/api/admin/login", { method: "DELETE" });
-		router.push("/admin/login");
-		router.refresh();
-	}
-
 	const counts = STATUSES.reduce<Record<string, number>>((acc, s) => {
 		acc[s] = leads.filter((l) => l.status === s).length;
 		return acc;
 	}, {});
 
 	return (
-		<div className="min-h-screen bg-ink-50 px-4 py-8 md:px-8">
+		<div className="px-4 py-8 md:px-8">
 			<div className="mx-auto max-w-6xl">
-				<div className="mb-8 flex items-center justify-between">
-					<div>
-						<h1 className="text-2xl font-semibold text-ink-900">Leads &amp; Storage</h1>
-						<p className="text-sm text-ink-600">Cleaning Paradise CMS</p>
-					</div>
-					<button
-						onClick={logout}
-						className="inline-flex items-center gap-2 rounded-xl border border-ink-200 bg-white px-4 py-2 text-sm font-medium text-ink-700 hover:bg-ink-100"
-					>
-						<LogOut size={15} /> Log out
-					</button>
+				<div className="mb-8">
+					<h1 className="text-2xl font-semibold text-ink-900">Leads</h1>
+					<p className="text-sm text-ink-600">Cleaning Paradise CMS</p>
 				</div>
 
 				{/* Stat tiles */}
@@ -172,51 +130,6 @@ export default function AdminDashboard({ leads, files }: { leads: Lead[]; files:
 												<Trash2 size={15} />
 											</button>
 										</div>
-									</div>
-								</div>
-							))}
-						</div>
-					)}
-				</section>
-
-				{/* Storage */}
-				<section className="overflow-hidden rounded-2xl border border-ink-200 bg-white">
-					<div className="flex items-center justify-between border-b border-ink-200 px-5 py-4">
-						<h2 className="font-semibold text-ink-900">Storage ({files.length})</h2>
-						<label className="inline-flex cursor-pointer items-center gap-2 rounded-xl bg-ink-900 px-4 py-2 text-sm font-medium text-white hover:bg-[#2A2A3C]">
-							<Upload size={15} /> {busy ? "Uploading…" : "Upload"}
-							<input type="file" onChange={uploadFile} disabled={busy} className="hidden" />
-						</label>
-					</div>
-					{files.length === 0 ? (
-						<p className="px-5 py-10 text-center text-sm text-ink-500">No files yet.</p>
-					) : (
-						<div className="divide-y divide-ink-100">
-							{files.map((f) => (
-								<div key={f.key} className="flex items-center justify-between gap-3 px-5 py-3">
-									<div className="min-w-0">
-										<div className="truncate text-sm font-medium text-ink-800">{f.key}</div>
-										<div className="text-xs text-ink-500">
-											{fmtBytes(f.size)} · {new Date(f.uploaded).toLocaleString()}
-										</div>
-									</div>
-									<div className="flex items-center gap-2">
-										<a
-											href={`/api/admin/files?key=${encodeURIComponent(f.key)}`}
-											target="_blank"
-											rel="noopener"
-											aria-label="Download"
-											className="rounded-lg border border-ink-200 p-2 text-ink-500 hover:bg-ink-100"
-										>
-											<Download size={15} />
-										</a>
-										<button
-											onClick={() => deleteFile(f.key)}
-											aria-label="Delete file"
-											className="rounded-lg border border-ink-200 p-2 text-ink-400 hover:bg-pink-50 hover:text-pink-600"
-										>
-											<Trash2 size={15} />
-										</button>
 									</div>
 								</div>
 							))}

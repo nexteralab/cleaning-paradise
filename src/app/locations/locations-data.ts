@@ -2,10 +2,36 @@
 // pages AND the map/city selector. Add a city here and its page + map pin
 // appear automatically.
 
+// FAQs de las páginas de ciudad — módulo plano (sin "use client") para poder
+// usarlas también en el JSON-LD del server component.
+export const locationFaqs: { q: string; a: string }[] = [
+	{
+		q: "How is the cost calculated?",
+		a: "Pricing is based on the size of your home and how often you'd like us to clean. We provide a detailed quote before any work begins — no surprises, no guesswork. Most standard cleans start at $55/hr per person.",
+	},
+	{
+		q: "What's the difference between standard and deep cleaning?",
+		a: "Standard cleaning covers recurring maintenance: vacuuming, mopping, wiping surfaces, sanitizing bathrooms and kitchens, and taking out trash. Deep cleaning goes further — inside appliances, behind furniture, grout lines, and baseboards. Our team can help you decide which fits your current situation.",
+	},
+	{
+		q: "What should I expect on the first visit?",
+		a: "First visits typically take a bit longer as our team gets familiar with your home's layout and specific needs. We'll walk through expectations with you beforehand, bring all equipment and products, and leave you with a spotless space — guaranteed.",
+	},
+	{
+		q: "Are you licensed, insured and bonded?",
+		a: "Yes — Cleaning Paradise LLC is fully licensed, insured and bonded in the state of Washington. Every member of our team is background-checked and trained before their first visit. Your home and belongings are protected.",
+	},
+	{
+		q: "Can I set up recurring service?",
+		a: "Absolutely. We offer weekly, biweekly, and monthly plans — with discounts for recurring bookings. Our most popular option is biweekly, which keeps your home consistently clean without the cost of weekly visits. Get a free quote and we'll recommend the right frequency for your home.",
+	},
+];
+
 export type Location = {
 	slug: string;
 	name: string; // display name, e.g. "Mercer Island"
 	img: string; // card thumbnail for the /locations listing
+	video?: string; // per-city bg video (D8) — fallback compartido si falta
 	before: string;
 	after: string;
 	beforeAlt: string;

@@ -4,9 +4,11 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Lock, Eye, EyeOff, ArrowLeft } from "lucide-react";
+import { supabaseBrowser } from "@/lib/supabase/browser";
 
 export default function AdminLogin() {
 	const router = useRouter();
+	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [showPassword, setShowPassword] = useState(false);
 	const [error, setError] = useState("");
@@ -16,17 +18,13 @@ export default function AdminLogin() {
 		e.preventDefault();
 		setLoading(true);
 		setError("");
-		const res = await fetch("/api/admin/login", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ password }),
-		});
+		const { error } = await supabaseBrowser().auth.signInWithPassword({ email, password });
 		setLoading(false);
-		if (res.ok) {
+		if (!error) {
 			router.push("/admin");
 			router.refresh();
 		} else {
-			setError("Incorrect password");
+			setError("Invalid email or password");
 		}
 	}
 
@@ -40,11 +38,22 @@ export default function AdminLogin() {
 					<Lock size={20} />
 				</div>
 				<h1 className="mb-1 text-xl font-semibold text-ink-900">Admin access</h1>
-				<p className="mb-6 text-sm text-ink-600">Enter the admin password to continue.</p>
+				<p className="mb-6 text-sm text-ink-600">Sign in with your team account.</p>
+				<input
+					type="email"
+					autoFocus
+					required
+					autoComplete="email"
+					value={email}
+					onChange={(e) => setEmail(e.target.value)}
+					placeholder="Email"
+					className="mb-3 w-full rounded-xl border-[1.5px] border-ink-200 bg-ink-50 px-3.5 py-3 text-sm text-ink-900 outline-none focus:border-pink-500 focus:bg-white"
+				/>
 				<div className="relative mb-3">
 					<input
 						type={showPassword ? "text" : "password"}
-						autoFocus
+						required
+						autoComplete="current-password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 						placeholder="Password"
@@ -65,7 +74,7 @@ export default function AdminLogin() {
 					disabled={loading}
 					className="w-full rounded-xl bg-ink-900 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#2A2A3C] disabled:opacity-60"
 				>
-					{loading ? "Checking…" : "Log in"}
+					{loading ? "Signing in…" : "Sign in"}
 				</button>
 				<Link
 					href="/"

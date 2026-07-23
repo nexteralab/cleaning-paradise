@@ -6,6 +6,7 @@ import ReviewCard from "@/components/ReviewCard";
 import { reviews } from "@/lib/reviews";
 import { ArrowRight, Star } from "lucide-react";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import JsonLd from "@/components/JsonLd";
 import { FaqSection, HeroSection, ServicesSection } from "./home-client";
 
 export const metadata: Metadata = {
@@ -258,9 +259,33 @@ function GallerySection() {
 	);
 }
 
+// Texto plano de las FAQs del home (los componentes en home-client.tsx llevan
+// links JSX, no serializables). Mantener en sync con FAQS de home-client.tsx.
+const FAQ_JSONLD = [
+	["What areas do you serve?", "Looking for maid service or cleaning near me? We provide maid and housekeeping services across Lynnwood, Seattle, Bellevue, Kirkland, Edmonds, Bothell, Shoreline, and Mercer Island. Visit our locations page to see details for your city."],
+	["How is the price for maid service calculated?", "Every home is different, so we don't use a one size fits all price. We look at your home's size, its condition, and how often you'd like our maids to come, then put together a custom quote just for you. Getting that quote is fast and free, no guessing, no surprises when the invoice arrives."],
+	["Do you bring your own cleaning supplies and equipment?", "Yes. Every maid arrives with all the supplies, tools, and equipment needed to get your home spotless, including vacuums, mops, and eco friendly products. You don't need to provide anything. If you prefer we use a specific product you already own, just mention it when booking and we'll gladly use it."],
+	["What if I have pets at home during the cleaning?", "No problem at all. Our housekeepers are comfortable working around cats, dogs, and other pets. Just let us know when booking if your pet needs extra space or has any sensitivities, and we'll plan the visit around them. All our products are pet safe, so your furry family members stay protected too."],
+	["What payment methods do you accept?", "We accept all major credit and debit cards, along with payments through Jobber, our online booking and invoicing platform. You'll get a clear quote before the cleaning starts, and payment is processed securely once the job is done. No cash needed, no surprises on the invoice."],
+	["Do you offer same day cleaning service?", "We do our best to accommodate same day requests whenever our schedule allows, especially for standard cleaning visits. For deep cleaning, move in or move out cleaning, or larger jobs, we recommend booking a day or two ahead to guarantee availability. Get in touch and we'll let you know the soonest opening."],
+	["Do I need to be home during the cleaning?", "Not at all. Many of our clients give us a key, a code, or arrange access another way so we can clean while they're at work or running errands. Your home and belongings are always treated with care and respect, whether you're there or not."],
+	["What's the difference between regular maid service and deep cleaning?", "Standard cleaning covers your home's recurring maintenance: vacuuming, mopping, wiping surfaces, sanitizing bathrooms and kitchens, and taking out trash. Deep cleaning goes further, including inside appliances, behind furniture, grout lines, baseboards, and every surface you'd normally skip."],
+] as const;
+
 export default function Home() {
 	return (
 		<div className="relative w-full overflow-x-clip bg-white text-ink-800">
+			<JsonLd
+				data={{
+					"@context": "https://schema.org",
+					"@type": "FAQPage",
+					mainEntity: FAQ_JSONLD.map(([q, a]) => ({
+						"@type": "Question",
+						name: q,
+						acceptedAnswer: { "@type": "Answer", text: a },
+					})),
+				}}
+			/>
 			<HeroSection />
 			<TrustSection />
 			<ServicesSection />
