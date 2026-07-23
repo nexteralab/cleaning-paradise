@@ -3,7 +3,8 @@
 // All calls use the service role key (server-only); RLS has no public policies.
 
 function creds(env: CloudflareEnv): { url: string; key: string } | null {
-	const url = env.SUPABASE_URL;
+	// La URL no es secreta — cae a la NEXT_PUBLIC_ (incrustada en build) si no hay var de runtime.
+	const url = env.SUPABASE_URL ?? process.env.NEXT_PUBLIC_SUPABASE_URL;
 	const key = env.SUPABASE_SERVICE_ROLE_KEY;
 	if (!url || !key) {
 		// Supabase is optional — a missing key must never break the caller.
