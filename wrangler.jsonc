@@ -44,6 +44,12 @@
 			"remote": true
 		}
 	],
+	// Valores públicos de runtime. Los secretos (SUPABASE_SERVICE_ROLE_KEY,
+	// RESEND_API_KEY) van como Secrets del Worker — sobreviven cada deploy.
+	"vars": {
+		"EMAIL_FROM": "Cleaning Paradise <noreply@thenexteralab.com>",
+		"LEAD_NOTIFY_TO": "cleaning.paradise.llc@gmail.com"
+	},
 	"observability": {
 		"enabled": true
 	},
