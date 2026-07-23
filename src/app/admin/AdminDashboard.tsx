@@ -13,13 +13,13 @@ export type Lead = {
 	unit: string | null;
 	city: string | null;
 	zip: string | null;
-	services: string | null;
+	services: string[] | null;
 	service: string | null;
 	date: string | null;
 	time: string | null;
 	frequency: string | null;
 	notes: string | null;
-	promo: number;
+	promo: boolean;
 	source: string;
 	status: string;
 	created_at: string;
@@ -142,13 +142,7 @@ export default function AdminDashboard({ leads }: { leads: Lead[] }) {
 }
 
 function LeadDetails({ lead }: { lead: Lead }) {
-	const services = (() => {
-		try {
-			return lead.services ? (JSON.parse(lead.services) as string[]) : [];
-		} catch {
-			return [];
-		}
-	})();
+	const services = lead.services ?? [];
 	const addr = [lead.street, lead.unit, lead.city, lead.zip].filter(Boolean).join(", ");
 	const sched = [lead.frequency, lead.date, lead.time].filter(Boolean).join(" · ");
 

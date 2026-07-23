@@ -32,14 +32,6 @@
 			"service": "cleaning-paradise"
 		}
 	],
-	// Leads database — run: wrangler d1 create cleaning-paradise-db, then paste the database_id below
-	"d1_databases": [
-		{
-			"binding": "DB",
-			"database_name": "cleaning-paradise-db",
-			"database_id": "5944ea48-60b8-4785-ba13-0f87b5bff40d"
-		}
-	],
 	// File/image storage — run: wrangler r2 bucket create cleaning-paradise-files
 	"r2_buckets": [
 		{

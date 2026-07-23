@@ -22,30 +22,29 @@ export async function POST(req: Request) {
 	const services = Array.isArray(body.services) ? (body.services as string[]) : [];
 
 	const { env, ctx } = await getCloudflareContext({ async: true });
-	await env.DB.prepare(
-		`INSERT INTO leads
-			(first_name, last_name, email, phone, street, unit, city, zip, services, service, date, time, frequency, notes, promo, source)
-		 VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
-	)
-		.bind(
-			firstName,
-			s("lastName"),
-			email,
-			s("phone"),
-			s("street"),
-			s("unit"),
-			s("city"),
-			s("zip"),
-			JSON.stringify(services),
-			s("service"),
-			s("date"),
-			s("time"),
-			s("frequency"),
-			s("notes"),
-			body.promo ? 1 : 0,
-			s("source") ?? "contact",
-		)
-		.run();
+	const saved = await supabaseInsert(env, "leads", {
+		first_name: firstName,
+		last_name: s("lastName"),
+		email,
+		phone: s("phone"),
+		street: s("street"),
+		unit: s("unit"),
+		city: s("city"),
+		zip: s("zip"),
+		services,
+		service: s("service"),
+		date: s("date"),
+		time: s("time"),
+		frequency: s("frequency"),
+		sqft: s("sqft"),
+		pets: s("pets"),
+		notes: s("notes"),
+		promo: !!body.promo,
+		source: s("source") ?? "contact",
+	});
+	if (!saved) {
+		return NextResponse.json({ error: "could not save lead" }, { status: 502 });
+	}
 
 	// Fire notification + confirmation emails without blocking the response.
 	// The lead is already saved, so email failures never lose the lead.
@@ -70,31 +69,6 @@ export async function POST(req: Request) {
 		source: s("source") ?? "contact",
 	};
 	ctx.waitUntil(sendLeadEmails(env, lead));
-
-	// Mirror the lead to Supabase (team dashboard). D1 above stays the source
-	// of truth — this failing never affects the response or the emails.
-	ctx.waitUntil(
-		supabaseInsert(env, "leads", {
-			first_name: firstName,
-			last_name: s("lastName"),
-			email,
-			phone: s("phone"),
-			street: s("street"),
-			unit: s("unit"),
-			city: s("city"),
-			zip: s("zip"),
-			services,
-			service: s("service"),
-			date: s("date"),
-			time: s("time"),
-			frequency: s("frequency"),
-			sqft: s("sqft"),
-			pets: s("pets"),
-			notes: s("notes"),
-			promo: !!body.promo,
-			source: s("source") ?? "contact",
-		}),
-	);
 
 	return NextResponse.json({ ok: true });
 }
