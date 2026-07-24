@@ -272,7 +272,6 @@ export default async function LocationPage({
 					    agregar campo `video` en locations-data y usar loc.video aquí. */}
 					<BgVideo
 						src={loc.video ?? "/video/kirkland-bg.mp4"}
-						poster={loc.img}
 						className="absolute inset-0 h-full w-full object-cover opacity-[0.52]"
 					/>
 					<div className="pointer-events-none absolute inset-0 bg-[rgba(12,17,38,0.48)]" />

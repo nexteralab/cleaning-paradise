@@ -27,9 +27,9 @@ export const contact: Template = {
 				heading: "New contact request",
 				intro: "A new quote request came in through the <strong>Contact</strong> page.",
 				bodyHtml: detailsHtml(f),
-				footerHtml: lead.promo ? highlightHtml("Customer opted into the 30% first-clean discount.") : "",
+				footerHtml: lead.promo ? highlightHtml("Customer opted into the 10% first-clean discount.") : "",
 			}),
-			text: `New contact request\n\n${detailsText(f)}${lead.promo ? "\n\nOpted into 30% first-clean discount." : ""}`,
+			text: `New contact request\n\n${detailsText(f)}${lead.promo ? "\n\nOpted into 10% first-clean discount." : ""}`,
 		};
 	},
 	confirm: (lead) => {
@@ -46,7 +46,7 @@ export const contact: Template = {
 					"We received your request and a member of our team will reach out within <strong>one business day</strong> with a quote and available times.",
 				bodyHtml: detailsHtml(recap),
 				footerHtml: lead.promo
-					? highlightHtml("Your 30% first-clean discount is noted — we'll apply it to your quote.")
+					? highlightHtml("Your 10% first-clean discount is noted — we'll apply it to your quote.")
 					: "",
 			}),
 			text: `Thanks, ${lead.firstName}!\n\nWe received your request and will reach out within one business day.\n\n${detailsText(recap)}`,

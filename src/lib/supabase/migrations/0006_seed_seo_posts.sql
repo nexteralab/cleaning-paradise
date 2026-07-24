@@ -34,7 +34,7 @@ A suspiciously low flat rate usually means one of three things: the crew will ru
 
 ## Get your exact number
 
-The fastest way to find out what your home costs to clean is to [request a free quote](/contact) — tell us your home's size, condition, and how often you'd like us to come, and we'll reply within one business day with a custom price. First-time clients get 30% off their first clean.$md$,
+The fastest way to find out what your home costs to clean is to [request a free quote](/contact) — tell us your home's size, condition, and how often you'd like us to come, and we'll reply within one business day with a custom price. First-time clients get 10% off their first clean.$md$,
 	'/img/aw1a0626-scaled.jpg',
 	array['Pricing', 'House Cleaning', 'Seattle', 'Cost Guide'],
 	'How Much Does House Cleaning Cost in Seattle, WA? (2026)',

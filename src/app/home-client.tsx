@@ -15,10 +15,9 @@ const inputClasses =
 export function HeroSection() {
 	return (
 		<section id="top" className="bg-white p-4 md:p-6">
-			<div className="relative w-full h-full min-h-[85vh] rounded-[30px] overflow-hidden shadow-[0_30px_70px_rgba(30,62,162,0.18)]">
+			<div className="relative w-full h-full min-h-[85vh] rounded-[30px] overflow-hidden bg-[#131320] shadow-[0_30px_70px_rgba(30,62,162,0.18)]">
 				<BgVideo
 					src="/video/cleaning-paradise-bg.mp4"
-					poster="/img/aw1a0732.jpg"
 					className="absolute inset-0 w-full h-full object-cover"
 				/>
 				{/* legibility overlay */}
@@ -105,8 +104,9 @@ export function BookingForm({ className = "" }: { className?: string }) {
 			>
 				<div>
 					<h3 className="font-sans text-[27px] text-ink-900 tracking-[-0.01em] mb-[3px]">Get your free quote</h3>
-					<p className="text-[13px] text-[#808098]">
-						Reply within one business day — plus <strong className="font-semibold text-pink-500">30% off</strong> your first clean.
+					<p className="flex items-center gap-2.5 rounded-2xl bg-pink-50 px-4 py-3 text-[13px] text-pink-400">
+						<strong className="font-bold tracking-wide text-pink-500 whitespace-nowrap">10% OFF</strong>
+						Book your first cleaning this month and save.
 					</p>
 				</div>
 

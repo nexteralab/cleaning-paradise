@@ -175,7 +175,7 @@ function LeadDetails({ lead }: { lead: Lead }) {
 			)}
 			<div className="text-[11px] text-ink-400">
 				{new Date(lead.created_at).toLocaleString()}
-				{lead.promo ? " · wants 30% promo" : ""}
+				{lead.promo ? " · wants 10% promo" : ""}
 			</div>
 		</div>
 	);

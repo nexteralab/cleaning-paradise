@@ -22,7 +22,7 @@ export const homeHero: Template = {
 				heading: "New homepage lead",
 				intro: "A quick quote request came in through the <strong>homepage hero</strong> form.",
 				bodyHtml: detailsHtml(f),
-				footerHtml: highlightHtml("Homepage leads include the 30% first-clean offer."),
+				footerHtml: highlightHtml("Homepage leads include the 10% first-clean offer."),
 			}),
 			text: `New homepage lead\n\n${detailsText(f)}`,
 		};
@@ -41,7 +41,7 @@ export const homeHero: Template = {
 				bodyHtml: detailsHtml(recap),
 				footerHtml: highlightHtml("Your 10% off first-clean discount is reserved."),
 			}),
-			text: `Thanks, ${lead.firstName}!\n\nWe got your request and will reply within one business day with your free quote. Your 30% first-clean discount is reserved.`,
+			text: `Thanks, ${lead.firstName}!\n\nWe got your request and will reply within one business day with your free quote. Your 10% first-clean discount is reserved.`,
 		};
 	},
 };

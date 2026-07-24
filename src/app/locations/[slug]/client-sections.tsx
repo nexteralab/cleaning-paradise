@@ -288,9 +288,9 @@ export function CitySelector({ initial }: { initial: string }) {
 					/>
 					{/* radius rings */}
 					<div className="pointer-events-none absolute inset-0">
-						<div className="absolute left-[40%] top-[30%] w-[66%] -translate-x-1/2 -translate-y-1/2 rounded-full border-[1.5px] border-dashed border-pink-500/[0.28] pb-[66%]" />
-						<div className="absolute left-[40%] top-[30%] w-[42%] -translate-x-1/2 -translate-y-1/2 rounded-full border-[1.5px] border-dashed border-pink-500/[0.34] pb-[42%]" />
-						<div className="absolute left-[40%] top-[30%] w-[20%] -translate-x-1/2 -translate-y-1/2 rounded-full border-[1.5px] border-dashed border-pink-500/[0.42] pb-[20%]" />
+						<div className="absolute left-[40%] top-[10%] w-[66%] -translate-x-1/2 -translate-y-1/2 rounded-full border-[1.5px] border-dashed border-pink-500/[0.28] pb-[66%]" />
+						<div className="absolute left-[40%] top-[10%] w-[42%] -translate-x-1/2 -translate-y-1/2 rounded-full border-[1.5px] border-dashed border-pink-500/[0.34] pb-[42%]" />
+						<div className="absolute left-[40%] top-[10%] w-[20%] -translate-x-1/2 -translate-y-1/2 rounded-full border-[1.5px] border-dashed border-pink-500/[0.42] pb-[20%]" />
 					</div>
 					<div className="absolute top-4 left-4 z-[4] flex items-center gap-[7px] rounded-full bg-white/90 px-[13px] py-[7px] text-xs font-semibold text-blue-600 shadow-[0_4px_14px_rgba(30,62,162,0.12)] backdrop-blur-[6px]">
 						<Navigation size={13} />
