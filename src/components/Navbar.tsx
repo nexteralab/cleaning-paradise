@@ -109,12 +109,13 @@ export default function Navbar() {
 								</motion.div>
 							);
 						})}
-						<a
-							href="tel:+14256100241"
-							className="mt-1 rounded-xl bg-black px-5 py-2.5 text-center text-sm font-medium text-white"
+						<Link
+							href="/contact"
+							onClick={() => setOpen(false)}
+							className="rounded-xl bg-pink-500 px-5 py-2.5 text-center text-sm font-medium text-white"
 						>
-							(425) 610-0241
-						</a>
+							Get a Quote
+						</Link>
 					</motion.div>
 				)}
 			</AnimatePresence>

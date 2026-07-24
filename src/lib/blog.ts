@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { supabaseSelect } from "./supabase";
 
+
 export type Post = {
 	id: string;
 	title: string;

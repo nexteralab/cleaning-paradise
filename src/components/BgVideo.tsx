@@ -1,9 +1,8 @@
 "use client";
 
-// Video de fondo con poster y fallback móvil: en pantallas < md renderiza solo
-// la imagen (evita descargar MB de video en celular); en desktop monta el video
-// con la lógica de autoplay-con-reintentos que vivía en el hero del home.
-import { useEffect, useRef, useState } from "react";
+// Video de fondo con poster mientras carga. Autoplay con reintentos
+// (iOS/Android a veces ignoran el primer play()).
+import { useEffect, useRef } from "react";
 
 export default function BgVideo({
 	src,
@@ -15,18 +14,8 @@ export default function BgVideo({
 	className?: string;
 }) {
 	const videoRef = useRef<HTMLVideoElement | null>(null);
-	const [desktop, setDesktop] = useState(false);
 
 	useEffect(() => {
-		const mq = window.matchMedia("(min-width: 768px)");
-		setDesktop(mq.matches);
-		const onChange = (e: MediaQueryListEvent) => setDesktop(e.matches);
-		mq.addEventListener("change", onChange);
-		return () => mq.removeEventListener("change", onChange);
-	}, []);
-
-	useEffect(() => {
-		if (!desktop) return;
 		const el = videoRef.current;
 		if (!el) return;
 		el.muted = true;
@@ -51,11 +40,8 @@ export default function BgVideo({
 			clearInterval(t);
 			events.forEach((ev) => el.removeEventListener(ev, tryPlay));
 		};
-	}, [desktop]);
+	}, []);
 
-	if (!desktop) {
-		return <img src={poster} alt="" aria-hidden className={className} />;
-	}
 	return (
 		<video
 			ref={videoRef}
@@ -65,7 +51,7 @@ export default function BgVideo({
 			muted
 			loop
 			playsInline
-			preload="metadata"
+			preload="auto"
 			className={className}
 		/>
 	);

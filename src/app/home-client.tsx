@@ -16,7 +16,6 @@ export function HeroSection() {
 	return (
 		<section id="top" className="bg-white p-4 md:p-6">
 			<div className="relative w-full h-full min-h-[85vh] rounded-[30px] overflow-hidden shadow-[0_30px_70px_rgba(30,62,162,0.18)]">
-				{/* background video (imagen estática en móvil) */}
 				<BgVideo
 					src="/video/cleaning-paradise-bg.mp4"
 					poster="/img/aw1a0732.jpg"
@@ -38,7 +37,7 @@ export function HeroSection() {
 								<MapPin size={13} />
 								Serving Greater Seattle
 							</div>
-							<h1 className="font-heading italic text-[clamp(2.75rem,6vw,4.5rem)] font-semibold leading-[1.1] text-white tracking-[-0.025em] [text-shadow:0_4px_24px_rgba(0,0,0,0.35)] max-w-[620px] mb-4">
+							<h1 className="font-heading text-[clamp(2.75rem,6vw,4.5rem)] font-semibold leading-[1.1] text-white tracking-[-0.025em] [text-shadow:0_4px_24px_rgba(0,0,0,0.35)] max-w-[620px] mb-4">
 								House Cleaning Services in Seattle, WA
 							</h1>
 							<p className="text-[clamp(17px,1.35vw,18px)] text-white md:text-white/[0.88] leading-[1.72] max-w-[560px] [text-shadow:0_4px_40px_rgba(0,0,0,0.28)]">

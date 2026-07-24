@@ -247,7 +247,7 @@ export default function ContactForm() {
 							className="h-4 w-4 cursor-pointer accent-pink-500"
 						/>
 						<span>
-							Apply my <strong className="font-semibold text-pink-500">30% off first-time</strong>{" "}
+							Apply my <strong className="font-semibold text-pink-500">10% off first-time</strong>{" "}
 							discount
 						</span>
 					</label>

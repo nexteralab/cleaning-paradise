@@ -39,7 +39,7 @@ export const homeHero: Template = {
 				intro:
 					"We got your request and we'll get back to you within <strong>one business day</strong> with your free, no-obligation quote.",
 				bodyHtml: detailsHtml(recap),
-				footerHtml: highlightHtml("Your 30% off first-clean discount is reserved."),
+				footerHtml: highlightHtml("Your 10% off first-clean discount is reserved."),
 			}),
 			text: `Thanks, ${lead.firstName}!\n\nWe got your request and will reply within one business day with your free quote. Your 30% first-clean discount is reserved.`,
 		};
