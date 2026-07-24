@@ -60,12 +60,25 @@ export async function generateMetadata({
 }
 
 const galleryImages: { src: string; alt: string; wide: boolean }[] = [
-	{ src: "/img/aw1a0562-mr2ei5id.jpg", alt: "Cleaning result", wide: true },
-	{ src: "/img/deep-cleaning-mr2ehsjj.jpg", alt: "Deep cleaning", wide: false },
-	{ src: "/img/aw1a0630-mr2eiji3.jpg", alt: "Cleaning team", wide: true },
-	{ src: "/img/svc-move.jpg", alt: "Move cleaning", wide: false },
-	{ src: "/img/svc-deep.jpg", alt: "Service", wide: true },
-	{ src: "/img/svc-carpet.jpg", alt: "Carpet cleaning", wide: false },
+	{
+		src: "/img/shower-glass-deep-cleaning-seattle-wa.jpg",
+		alt: "Maid polishing a glass shower door during a deep cleaning in Seattle, WA",
+		wide: true,
+	},
+	{
+		src: "/img/bathroom-mirror-cleaning-bellevue-wa.jpg",
+		alt: "Cleaning Paradise housekeeper wiping a bathroom mirror in Bellevue, WA",
+		wide: false,
+	},
+	{
+		src: "/img/house-cleaning-team-playroom-lynnwood-wa.jpg",
+		alt: "House cleaning team tidying a kids' playroom in Lynnwood, WA",
+		wide: true,
+	},
+	// ponytail: svc-* son gráficos placeholder (no fotos) — alt vacío hasta tener material real (D8).
+	{ src: "/img/svc-move.jpg", alt: "", wide: false },
+	{ src: "/img/svc-deep.jpg", alt: "", wide: true },
+	{ src: "/img/svc-carpet.jpg", alt: "", wide: false },
 ];
 
 const coverageCities = [
@@ -158,7 +171,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 							<ArrowLeft size={13} />
 							All Services
 						</Link>
-						<h1 className="mb-4 font-heading text-[clamp(34px,3.8vw,58px)] leading-[1.1] font-normal tracking-[-0.02em] text-ink-900 text-pretty">
+						<h1 className="mb-4 font-heading text-[clamp(48px,6vw,74px)] leading-[1.1] font-normal tracking-[-0.02em] text-ink-900 text-pretty">
 							{service.heroTitle.map((part, i) => (
 								<span key={i}>
 									{part.brBefore && <br />}

@@ -76,7 +76,7 @@ const services: Service[] = [
 		title: "Commercial Cleaning",
 		description:
 			"Offices and workspaces across the metro — productive, hygienic and client-ready.",
-		img: "/img/comercial-cleaning.webp",
+		img: "/img/commercial-cleaning.webp",
 		alt: "Commercial cleaning",
 		href: "/cleaning-services-in-wa/commercial-cleaning",
 	},

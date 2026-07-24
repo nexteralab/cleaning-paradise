@@ -97,7 +97,7 @@ export const services: Record<string, ServiceContent> = {
 		slug: "standard-cleaning",
 		metaTitle: "Standard Cleaning Services in Seattle, WA | Cleaning Paradise",
 		metaDescription:
-			"Local, background-checked maids providing dependable house cleaning services across Seattle, WA on your schedule, your way.",
+			"Get your home professionally maintained with our top-rated standard cleaning services in the Seattle area; book your first session today.",
 		badgeIcon: "house",
 		heroImage: "/img/aw1a0685.jpg",
 		heroImageAlt: "Professional maid cleaning a kitchen counter in Seattle",
@@ -105,7 +105,7 @@ export const services: Record<string, ServiceContent> = {
 			{ text: "Standard Cleaning Services" }
 		],
 		heroSubtitle:
-			"Local, background-checked maids providing dependable house cleaning services across Seattle, WA. On your schedule and your way.",
+			"Get your home professionally maintained with our top-rated standard cleaning services in the Seattle area; book your first session today.",
 		introEyebrow: "Professional housekeeping",
 		introTitle: "What Our Standard Cleaning Service Covers",
 		introImage: "/img/cleaning.webp", // Imagen del segundo cuadro
@@ -176,7 +176,7 @@ export const services: Record<string, ServiceContent> = {
 		metaDescription:
 			"From kitchen surface sanitization to full bathroom disinfection, our deep clean service removes what everyday cleaning leaves behind.",
 		badgeIcon: "sparkles",
-		heroImage: "/img/aw1a0630-mr2eiji3.jpg",
+		heroImage: "/img/house-cleaning-team-playroom-lynnwood-wa.jpg",
 		heroImageAlt: "Deep cleaning and sanitization service in Seattle",
 		heroTitle: [{ text: "Deep Cleaning & Sanitization" }],
 		heroSubtitle:
@@ -264,7 +264,7 @@ export const services: Record<string, ServiceContent> = {
 		metaDescription:
 			"Professional office and commercial cleaning for businesses across Seattle, WA — flexible schedules, insured crews, spotless results.",
 		badgeIcon: "building-2",
-		heroImage: "/img/comercial-cleaning-mr6t64gm.webp",
+		heroImage: "/img/commercial-cleaning-office.webp",
 		heroImageAlt: "Commercial cleaning service in Seattle",
 		heroTitle: [
 			{ text: "Commercial Cleaning & Janitorial Services" }
@@ -273,7 +273,7 @@ export const services: Record<string, ServiceContent> = {
 			"Keep your office, retail space or facility spotless with flexible janitorial service scheduled before, during or after business hours.",
 		introEyebrow: "Commercial & janitorial",
 		introTitle: "What Our Commercial Cleaning Service Covers",
-		introImage: "/img/comercial-cleaning-mr.png",
+		introImage: "/img/commercial-cleaning-window.png",
 		introImageAlt: "Commercial cleaning service Seattle",
 		introLead:
 			"Cleaning Paradise provides dependable commercial cleaning services across Seattle, WA. From daily janitorial service for offices to recurring care for retail spaces, medical offices and multi unit facilities, our team shows up on time, follows your protocols and respects your workspace on every visit. Businesses searching for a cleaning office service near them trust us because we deliver consistent results without the back and forth.",

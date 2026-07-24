@@ -39,7 +39,7 @@ const serviceCards: ServiceCard[] = [
 		href: "/cleaning-services-in-wa/deep-cleaning",
 	},
 	{
-		img: "/img/comercial-cleaning-mr6t64gm.webp",
+		img: "/img/commercial-cleaning-office.webp",
 		title: "Commercial Cleaning",
 		description: "Offices and workspaces across the metro — productive, hygienic and client-ready.",
 		href: "/cleaning-services-in-wa/commercial-cleaning",

@@ -236,7 +236,7 @@ const SERVICES: Service[] = [
 		desc: "Professional janitorial services for offices and commercial spaces in Seattle WA. We keep your workspace spotless, hygienic, and ready for business every day",
 		tags: ["Weekly", "Biweekly", "Monthly"],
 		accent: "pink",
-		img: "/img/comercial-cleaning.webp",
+		img: "/img/commercial-cleaning.webp",
 		alt: "Commercial Cleaning",
 	},
 	{
@@ -333,9 +333,9 @@ export function ServicesSection() {
 
 				{/* meta bar */}
 				<div className="hidden lg:flex absolute top-9 left-[max(40px,calc(50%_-_680px))] right-[max(40px,calc(50%_-_680px))] justify-between items-center z-10">
-					<span className="font-sans text-[13px] font-bold text-pink-500 uppercase tracking-[0.13em]">
+					<h2 className="font-heading text-[clamp(40px,4.5vw,60px)] font-normal leading-[1.12] tracking-[-0.025em] text-[#131320]">
 						Our Services
-					</span>
+					</h2>
 					<span className="font-sans text-sm text-[#C0C0D0]">
 						<span className="font-heading italic text-[22px] text-pink-500">
 							{String(active + 1).padStart(2, "0")}
@@ -344,8 +344,13 @@ export function ServicesSection() {
 					</span>
 				</div>
 
+				{/* título en móvil (en desktop vive en la meta bar de arriba) */}
+				<h2 className="lg:hidden px-6 pt-[60px] font-heading text-[clamp(40px,4.5vw,60px)] font-normal leading-[1.12] tracking-[-0.025em] text-[#131320]">
+					Our Services
+				</h2>
+
 				{/* two-column grid */}
-				<div className="flex flex-col px-6 pt-[60px] pb-10 lg:absolute lg:inset-0 lg:flex-row lg:items-center lg:px-[max(40px,calc(50%_-_680px))] lg:pt-20 lg:pb-11">
+				<div className="flex flex-col px-6 pt-8 pb-10 lg:absolute lg:inset-0 lg:flex-row lg:items-center lg:px-[max(40px,calc(50%_-_680px))] lg:pt-20 lg:pb-11">
 					{/* LEFT: nav + expanded content */}
 					<div className="lg:flex-[1.15] min-w-0 flex flex-col justify-center lg:pr-[6vw]">
 						{SERVICES.map((svc, i) => {
