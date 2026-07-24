@@ -107,7 +107,7 @@ export default function CleaningServicesInWaPage() {
 								<Sparkles size={13} />6 Professional Services
 							</div>
 							<h1 className="mb-[22px] text-[clamp(38px,5.2vw,70px)] leading-[1.0] font-semibold tracking-[-0.025em] text-white">
-								<span className="block">The clean you deserve,</span>
+								<span className="block font-heading">The clean you deserve,</span>
 								<span className="block font-heading font-normal italic tracking-[-0.015em]">
 									every single time.
 								</span>

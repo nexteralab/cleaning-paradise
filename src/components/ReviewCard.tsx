@@ -34,7 +34,18 @@ export default function ReviewCard({ review }: { review: Review }) {
 
 	return (
 		<div className="flex flex-col rounded-[22px] bg-white px-7 py-[30px] shadow-[0_8px_24px_rgba(30,62,162,0.06)]">
-			<div className="mb-3.5 text-[15px] tracking-[2px] text-pink-500">★★★★★</div>
+			<div className="flex items-center justify-between gap-2 mb-4">
+				<div className="flex items-center gap-3">
+					<div className="flex h-[42px] w-[42px] items-center justify-center rounded-full bg-pink-100 text-[13px] font-bold text-pink-700">
+						{initials(review.name)}
+					</div>
+					<div>
+						<div className="text-sm font-semibold text-ink-800">{review.name}</div>
+						<div className="text-xs text-[#808098]">{review.location}</div>
+					</div>
+				</div>
+				<div className="mb-3.5 text-[15px] tracking-[2px] text-pink-500">★★★★★</div>
+			</div>
 			<motion.div
 				className="relative overflow-hidden"
 				initial={false}
@@ -46,9 +57,8 @@ export default function ReviewCard({ review }: { review: Review }) {
 				</p>
 				{/* fade hint at the bottom while collapsed */}
 				<div
-					className={`pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-white transition-opacity duration-300 ${
-						collapsed ? "opacity-100" : "opacity-0"
-					}`}
+					className={`pointer-events-none absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-white transition-opacity duration-300 ${collapsed ? "opacity-100" : "opacity-0"
+						}`}
 				/>
 			</motion.div>
 			{(overflowing || expanded) && (
@@ -73,15 +83,6 @@ export default function ReviewCard({ review }: { review: Review }) {
 					))}
 				</div>
 			)}
-			<div className="mt-[18px] flex items-center gap-3">
-				<div className="flex h-[42px] w-[42px] items-center justify-center rounded-full bg-pink-100 text-[13px] font-bold text-pink-700">
-					{initials(review.name)}
-				</div>
-				<div>
-					<div className="text-sm font-semibold text-ink-800">{review.name}</div>
-					<div className="text-xs text-[#808098]">{review.location}</div>
-				</div>
-			</div>
 		</div>
 	);
 }

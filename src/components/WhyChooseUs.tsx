@@ -51,7 +51,7 @@ export default function WhyChooseUs({
 	intro?: string;
 }) {
 	return (
-		<section id="why" className="py-24 bg-white border-t border-ink-200">
+		<section id="why" className="py-12 bg-white border-ink-200">
 			<div className="max-w-[1360px] mx-auto px-10 max-md:px-6">
 				{/* Header: asymmetric split */}
 				<Reveal className="grid md:grid-cols-[1.05fr_0.95fr] gap-14 items-end mb-[62px]">

@@ -23,8 +23,8 @@ export const metadata: Metadata = {
 
 const stats = [
 	{ value: "100+", label: "Homes Cleaned" },
-	{ value: "10+", label: "Years of Experience" },
-	{ value: "39", label: "5-Star Reviews" },
+	{ value: "5+", label: "Years of Experience" },
+	{ value: "111", label: "5-Star Reviews" },
 	{ value: "100%", label: "Satisfaction Guarantee" },
 ];
 
@@ -41,49 +41,49 @@ const values: {
 	text: string;
 	className: string;
 }[] = [
-	{
-		icon: ShieldCheck,
-		color: "pink",
-		title: "Trust above all",
-		text: "Every team member is background-checked, trained, and held to our standards. You let us into your home — that's something we take seriously.",
-		className: "py-10 border-b border-ink-200 md:pr-10 md:border-r",
-	},
-	{
-		icon: Sparkles,
-		color: "pink",
-		title: "Detail-obsessed",
-		text: "We don't cut corners — literally. Baseboards, grout lines, behind appliances. The spots others skip are exactly where we focus.",
-		className: "py-10 border-b border-ink-200 md:px-10 md:border-r",
-	},
-	{
-		icon: Leaf,
-		color: "pink",
-		title: "Eco-conscious",
-		text: "Biodegradable, non-toxic products safe for kids, pets, and the planet. Clean shouldn't come with a chemical smell or a guilty conscience.",
-		className: "py-10 border-b border-ink-200 md:pl-10",
-	},
-	{
-		icon: Clock,
-		color: "blue",
-		title: "Always on time",
-		text: "We respect your schedule. We show up when we say we will, work efficiently, and never leave your day hanging.",
-		className: "py-10 border-b border-ink-200 md:border-b-0 md:pb-0 md:pr-10 md:border-r",
-	},
-	{
-		icon: Users,
-		color: "blue",
-		title: "Community first",
-		text: "Our team lives in the same neighborhoods we clean. We're invested in making Greater Seattle a better place to call home.",
-		className: "py-10 border-b border-ink-200 md:border-b-0 md:pb-0 md:px-10 md:border-r",
-	},
-	{
-		icon: BadgeCheck,
-		color: "blue",
-		title: "Guaranteed results",
-		text: "Not satisfied? We come back and fix it at no extra cost. 100% guarantee — no fine print.",
-		className: "pt-10 md:pl-10",
-	},
-];
+		{
+			icon: ShieldCheck,
+			color: "pink",
+			title: "Trust above all",
+			text: "Every team member is background-checked, trained, and held to our standards. You let us into your home — that's something we take seriously.",
+			className: "py-10 border-b border-ink-200 md:pr-10 md:border-r",
+		},
+		{
+			icon: Sparkles,
+			color: "pink",
+			title: "Detail-obsessed",
+			text: "We don't cut corners — literally. Baseboards, grout lines, behind appliances. The spots others skip are exactly where we focus.",
+			className: "py-10 border-b border-ink-200 md:px-10 md:border-r",
+		},
+		{
+			icon: Leaf,
+			color: "pink",
+			title: "Eco-conscious",
+			text: "Biodegradable, non-toxic products safe for kids, pets, and the planet. Clean shouldn't come with a chemical smell or a guilty conscience.",
+			className: "py-10 border-b border-ink-200 md:pl-10",
+		},
+		{
+			icon: Clock,
+			color: "blue",
+			title: "Always on time",
+			text: "We respect your schedule. We show up when we say we will, work efficiently, and never leave your day hanging.",
+			className: "py-10 border-b border-ink-200 md:border-b-0 md:pb-0 md:pr-10 md:border-r",
+		},
+		{
+			icon: Users,
+			color: "blue",
+			title: "Community first",
+			text: "Our team lives in the same neighborhoods we clean. We're invested in making Greater Seattle a better place to call home.",
+			className: "py-10 border-b border-ink-200 md:border-b-0 md:pb-0 md:px-10 md:border-r",
+		},
+		{
+			icon: BadgeCheck,
+			color: "blue",
+			title: "Guaranteed results",
+			text: "Not satisfied? We come back and fix it at no extra cost. 100% guarantee — no fine print.",
+			className: "pt-10 md:pl-10",
+		},
+	];
 
 const teamChecklist = [
 	"Background-checked & fully insured",
@@ -144,9 +144,7 @@ export default function AboutPage() {
 								About Us
 							</div>
 							<h1 className="font-heading text-[clamp(48px,6vw,84px)] font-normal leading-[1.08] text-ink-900 tracking-[-0.025em] mb-7">
-								We clean so
-								<br />
-								you can <span className="italic">live freely</span>
+								We clean so you can live freely
 							</h1>
 							<p className="text-[18px] text-ink-600 leading-[1.8]">
 								Cleaning Paradise was born from a simple belief: every family
@@ -253,9 +251,8 @@ export default function AboutPage() {
 							return (
 								<Reveal key={v.title} delay={(i % 3) * 90} className={v.className}>
 									<div
-										className={`w-11 h-11 rounded-xl flex items-center justify-center mb-5 ${
-											v.color === "pink" ? "bg-pink-50" : "bg-blue-50"
-										}`}
+										className={`w-11 h-11 rounded-xl flex items-center justify-center mb-5 ${v.color === "pink" ? "bg-pink-50" : "bg-blue-50"
+											}`}
 									>
 										<Icon
 											size={22}

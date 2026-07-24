@@ -195,7 +195,7 @@ export default function LocationsPage() {
             <MapPin size={13} />
             Serving Greater Seattle
           </div>
-          <h1 className="font-heading italic text-[clamp(56px,7vw,88px)] font-normal leading-[1.06] text-ink-900 tracking-[-0.025em] mb-6">
+          <h1 className="font-heading text-[clamp(56px,7vw,88px)] font-normal leading-[1.06] text-ink-900 tracking-[-0.025em] mb-6">
             Professional Cleaning in Your City
           </h1>
           <p className="text-lg text-ink-600 leading-[1.7] mb-2">

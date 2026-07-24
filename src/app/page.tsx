@@ -119,7 +119,97 @@ function TrustSection() {
 						</Reveal>
 					))}
 				</div>
-				<ReviewsMarquee />
+			</div>
+		</section>
+	);
+}
+
+
+/* ============ HOW IT WORKS ============ */
+
+// Copiado 1:1 del HTML de referencia (cleaningparadisellc.com.dc.html):
+// asterisco "dibujado a mano" distinto por paso, con su rotación propia.
+const STEPS: { step: string; title: string; desc: string; rotate: number; paths: string[] }[] = [
+	{
+		step: "Step 01",
+		title: "Get your quote",
+		desc: "Tell us your home's size and the service you need. We send a clear quote in minutes, no obligation.",
+		rotate: -4,
+		paths: [
+			"M29 3 C32 13 27 21 31 29 C28 20 32 13 29 3",
+			"M32 57 C28 47 33 39 29 31 C33 40 28 47 32 57",
+			"M7 10 C16 18 19 22 30 30 C20 23 16 19 7 10",
+			"M53 50 C44 42 41 38 30 30 C40 37 44 41 53 50",
+			"M52 9 C42 18 39 21 30 30 C40 22 43 18 52 9",
+			"M8 51 C17 42 22 39 30 30 C21 38 17 43 8 51",
+			"M2 28 C13 30 19 29 30 30 C18 29 13 31 2 28",
+			"M58 32 C47 29 41 31 30 30 C42 31 47 28 58 32",
+		],
+	},
+	{
+		step: "Step 02",
+		title: "We clean",
+		desc: "Our team arrives on time with professional equipment and eco-friendly products. You relax, we handle everything.",
+		rotate: 6,
+		paths: [
+			"M31 2 C28 12 33 20 30 29 C34 21 27 13 31 2",
+			"M28 58 C31 48 26 40 30 31 C25 39 32 47 28 58",
+			"M9 8 C18 17 20 21 30 30 C19 22 17 17 9 8",
+			"M52 52 C42 44 40 40 30 30 C41 39 43 43 52 52",
+			"M50 7 C41 17 38 20 30 30 C39 20 42 18 50 7",
+			"M10 53 C19 43 23 40 30 30 C22 39 18 44 10 53",
+			"M3 32 C14 28 20 31 30 30 C19 32 13 29 3 32",
+			"M57 27 C46 32 40 28 30 30 C41 27 47 31 57 27",
+		],
+	},
+	{
+		step: "Step 03",
+		title: "Walkthrough & sign-off",
+		desc: "We walk through every room together. If anything's not perfect, we fix it at no cost. 100% guaranteed.",
+		rotate: 2,
+		paths: [
+			"M30 4 C33 15 28 19 31 30 C29 20 32 14 30 4",
+			"M30 56 C27 45 32 41 29 30 C31 40 28 46 30 56",
+			"M8 13 C17 20 22 24 30 30 C21 24 16 19 8 13",
+			"M50 47 C41 40 38 36 30 30 C40 37 43 41 50 47",
+			"M53 13 C43 20 40 24 30 30 C41 23 44 19 53 13",
+			"M7 46 C16 39 21 37 30 30 C20 36 17 41 7 46",
+			"M5 29 C15 31 20 28 30 30 C19 29 14 32 5 29",
+			"M55 31 C45 28 41 32 30 30 C41 31 46 27 55 31",
+		],
+	},
+];
+
+function HowItWorksSection() {
+	return (
+		<section
+			id="process"
+			className="relative overflow-hidden bg-[#EEF2FF] py-[130px] [clip-path:polygon(0_9%,100%_0%,100%_91%,0%_100%)]"
+		>
+			<div className="relative z-[1] mx-auto max-w-[1400px] px-[clamp(20px,4vw,64px)]">
+				<Reveal>
+					<h2 className="font-heading text-[clamp(40px,4.5vw,60px)] font-normal leading-[1.12] tracking-[-0.025em] text-[#131320] mb-16">
+						How It Works
+					</h2>
+				</Reveal>
+				<div className="grid grid-cols-[repeat(auto-fit,minmax(340px,1fr))] max-md:grid-cols-1 gap-11">
+					{STEPS.map((s, i) => (
+						<Reveal key={s.step} delay={i * 120}>
+							<div className="group">
+								<div className="mb-[18px] inline-flex transition-transform duration-[350ms] ease-[cubic-bezier(.16,1,.3,1)] group-hover:-translate-y-1.5 group-hover:scale-[1.06]">
+									<svg viewBox="0 0 60 60" width="40" height="40" style={{ transform: `rotate(${s.rotate}deg)` }} aria-hidden>
+										{s.paths.map((d) => (
+											<path key={d} d={d} fill="none" stroke="#1E3EA2" strokeWidth="5.5" strokeLinecap="round" strokeLinejoin="round" />
+										))}
+									</svg>
+								</div>
+								<div className="mb-2 font-sans text-xs font-bold uppercase tracking-[0.14em] text-[#606078]">{s.step}</div>
+								<h3 className="mb-3.5 font-sans text-[22px] font-semibold leading-[1.35] text-[#131320]">{s.title}</h3>
+								<p className="max-w-[320px] text-[14.5px] leading-[1.85] text-[#606078]">{s.desc}</p>
+							</div>
+						</Reveal>
+					))}
+				</div>
 			</div>
 		</section>
 	);
@@ -142,13 +232,26 @@ export function TestimonialsSection() {
 						<span className="text-sm font-semibold text-ink-800">111 verified reviews on Thumbtack</span>
 					</div>
 				</Reveal>
-				<div className="grid grid-cols-1 md:grid-cols-3 gap-[22px] mb-[34px] items-start">
-					{reviews.map((r, i) => (
-						<Reveal key={r.name} delay={i * 90} className="h-full">
-							<ReviewCard review={r} />
-						</Reveal>
-					))}
+			</div>
+			{/* ponytail: mismo marquee CSS que ReviewsMarquee — track ×2, hover pausa.
+			    Full-bleed: fuera del max-w para que el tren cruce toda la pantalla. */}
+			<Reveal>
+				<div className="group mb-[34px] w-full overflow-hidden pt-2 pb-6">
+					{/* pr en cada card (no gap/px en el track): así -50% calza exacto y el loop es invisible */}
+					<div className="flex w-max items-start animate-[galleryScrollH_70s_linear_infinite] group-hover:[animation-play-state:paused]">
+						{[...reviews, ...reviews].map((r, i) => (
+							<div
+								key={i}
+								aria-hidden={i >= reviews.length}
+								className="w-[min(410px,85vw)] shrink-0 pr-[22px]"
+							>
+								<ReviewCard review={r} />
+							</div>
+						))}
+					</div>
 				</div>
+			</Reveal>
+			<div className="max-w-[1360px] mx-auto px-10 max-md:px-6">
 				<div className="text-center">
 					<Link
 						href="/contact"
@@ -289,9 +392,10 @@ export default function Home() {
 			<HeroSection />
 			<TrustSection />
 			<ServicesSection />
+			<HowItWorksSection />
 			<WhyChooseUs />
 			<TestimonialsSection />
-			<GallerySection />
+			{/* <GallerySection /> */}
 			<FaqSection />
 		</div>
 	);

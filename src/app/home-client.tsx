@@ -330,13 +330,6 @@ export function ServicesSection() {
 	return (
 		<section id="services" ref={sectionRef} className="relative bg-white lg:h-[440vh]">
 			<div className="bg-white lg:sticky lg:top-0 lg:h-screen lg:overflow-hidden">
-				{/* progress bar */}
-				<div className="hidden lg:block absolute top-0 left-0 right-0 h-0.5 bg-[#F0F0F4] z-10">
-					<div
-						className="absolute top-0 left-0 h-full bg-[linear-gradient(90deg,#FF50B5,#1E3EA2)] transition-[width] duration-[220ms] ease-linear"
-						style={{ width: `${progress.toFixed(2)}%` }}
-					/>
-				</div>
 
 				{/* meta bar */}
 				<div className="hidden lg:flex absolute top-9 left-[max(40px,calc(50%_-_680px))] right-[max(40px,calc(50%_-_680px))] justify-between items-center z-10">
@@ -582,7 +575,7 @@ export function FaqSection() {
 		<section id="faq" className="py-24 bg-white">
 			<div className="max-w-[1360px] mx-auto px-10 max-md:px-6 grid grid-cols-1 lg:grid-cols-[0.85fr_1.5fr] gap-[clamp(36px,4vw,64px)] items-start">
 				{/* left: photo + CTA card */}
-				<div className="flex flex-col gap-6 lg:sticky lg:top-[100px]">
+				<div className="flex flex-col gap-6 lg:top-[100px]">
 					<Reveal>
 						<img
 							src="/img/group.webp"
