@@ -111,9 +111,10 @@ export const services: Record<string, ServiceContent> = {
 		introImage: "/img/cleaning.webp", // Imagen del segundo cuadro
 		introImageAlt: "Professional maid service Seattle",
 		introLead:
-			"Standard Cleaning from Cleaning Paradise is what keeps your home feeling good every day. Our trained housekeepers take care of the essentials: dusting, vacuuming, mopping, kitchen wipe-downs and bathroom sanitization. You come home to a space that is genuinely spotless, not just straightened up.",
+			"Standard Cleaning from Cleaning Paradise keeps your home feeling good every day. Trusted by hundreds of Seattle residents and backed by verified five-star reviews for consistent quality and attention to detail.",
 		introParas: [
-			"Most of our clients choose recurring housekeeping because consistency is what actually keeps a home clean over time. We also offer standard cleaning services for seniors with gentler scheduling and extra care where it matters. No contracts, no surprise fees — just a professional maid service that works around your life.",
+			"Includes dusting, vacuuming, mopping, kitchen surface sanitization, and bathroom detailing by our vetted residential housekeepers. We have successfully helped over 500 households in King County maintain a pristine living environment with our customizable weekly and monthly cleaning schedules.",
+			"Perfect for busy professionals, families, and seniors in Shoreline, Bellevue, and Kirkland who need consistent, high-quality residential housekeeper support. We utilize eco-friendly products and provide a 100% satisfaction guarantee on every routine house cleaning visit.",
 		],
 		frequencyChips: defaultFrequencyChips,
 		callout: {

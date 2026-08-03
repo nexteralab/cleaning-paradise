@@ -207,32 +207,34 @@ export default function ContactForm() {
 					</div>
 				</div>
 
-				{/* Section 5: Details */}
+				{/* Section 5: Pets */}
 				<div>
-					<SectionHeading number={5}>Anything else we should know?</SectionHeading>
-					<div className="mb-3.5">
-						<label className={labelClass}>Do you have any pets?</label>
-						<div className="flex gap-2.5">
-							{(["yes", "no"] as const).map((value) => {
-								const active = pets === value;
-								return (
-									<button
-										key={value}
-										type="button"
-										onClick={() => setPets(value)}
-										aria-pressed={active}
-										className={`flex-1 cursor-pointer rounded-xl border-[1.5px] px-[15px] py-3 text-[13.5px] font-semibold capitalize transition-all duration-150 ${
-											active
-												? "border-pink-500 bg-pink-50 text-pink-500"
-												: "border-ink-200 bg-ink-50 text-ink-600"
-										}`}
-									>
-										{value}
-									</button>
-								);
-							})}
-						</div>
+					<SectionHeading number={5}>Do you have any pets?</SectionHeading>
+					<div className="flex gap-2.5">
+						{(["yes", "no"] as const).map((value) => {
+							const active = pets === value;
+							return (
+								<button
+									key={value}
+									type="button"
+									onClick={() => setPets(value)}
+									aria-pressed={active}
+									className={`flex-1 cursor-pointer rounded-xl border-[1.5px] px-[15px] py-3 text-[13.5px] font-semibold capitalize transition-all duration-150 ${
+										active
+											? "border-pink-500 bg-pink-50 text-pink-500"
+											: "border-ink-200 bg-ink-50 text-ink-600"
+									}`}
+								>
+									{value}
+								</button>
+							);
+						})}
 					</div>
+				</div>
+
+				{/* Section 6: Details */}
+				<div>
+					<SectionHeading number={6}>Anything else we should know?</SectionHeading>
 					<textarea
 						name="notes"
 						rows={4}

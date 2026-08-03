@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Music, Star, Phone, Mail, MapPin, Clock } from "lucide-react";
+import { locations, locationSlugs } from "@/app/locations/locations-data";
 
 const services = [
 	{ label: "Standard Cleaning", href: "/cleaning-services-in-wa/standard-cleaning" },
@@ -13,16 +14,11 @@ const services = [
 	{ label: "Carpet Cleaning", href: "/cleaning-services-in-wa/carpet-cleaning" },
 ];
 
-const locations = [
-	{ label: "Seattle", href: "/locations/seattle" },
-	{ label: "Bellevue", href: "/locations/bellevue" },
-	{ label: "Kirkland", href: "/locations/kirkland" },
-	{ label: "Lynnwood", href: "/locations/lynnwood" },
-	{ label: "Mercer Island", href: "/locations/mercer-island" },
-	{ label: "Shoreline", href: "/locations/shoreline" },
-	{ label: "Edmonds", href: "/locations/edmonds" },
-	{ label: "Mill Creek", href: "/locations/mill-creek" },
-];
+// Derivado de locations-data.ts — agregar una ciudad allí la muestra aquí.
+const footerLocations = locationSlugs.map((slug) => ({
+	label: locations[slug].name,
+	href: `/locations/${slug}`,
+}));
 
 const socialClass =
 	"flex h-[38px] w-[38px] items-center justify-center rounded-[11px] bg-white/[0.07] text-ink-400 transition-all duration-200 hover:bg-pink-500 hover:text-white";
@@ -42,7 +38,7 @@ export default function Footer() {
 							<span className="text-[21px] text-white">Cleaning Paradise</span>
 						</div>
 						<p className="mb-[18px] max-w-[300px] text-sm leading-[1.7] text-ink-400">
-							Professional residential and commercial cleaning based in Lynnwood, WA — serving
+							Professional residential and commercial cleaning based in Shoreline, WA — serving
 							Seattle and King &amp; Snohomish County. Your home, perfectly clean.
 						</p>
 						<div className="flex gap-2.5">
@@ -81,7 +77,7 @@ export default function Footer() {
 					<div>
 						<h4 className="mb-4 text-[11px] font-bold tracking-[0.1em] text-white uppercase">Locations</h4>
 						<div className="flex flex-col gap-2.5">
-							{locations.map((l) => (
+							{footerLocations.map((l) => (
 								<Link key={l.href} href={l.href} className="text-sm text-ink-400 transition-colors duration-150 hover:text-pink-500">
 									{l.label}
 								</Link>
@@ -100,7 +96,7 @@ export default function Footer() {
 						</a>
 						<div className="mb-[11px] flex items-center gap-[9px] text-sm text-ink-400">
 							<MapPin size={15} className="text-pink-500" />
-							Lynnwood, WA
+							Shoreline, WA
 						</div>
 						<div className="flex items-center gap-[9px] text-sm text-ink-400">
 							<Clock size={15} className="text-pink-500" />
@@ -118,6 +114,8 @@ export default function Footer() {
 						<Link href="/terms" className="hover:text-pink-500">Terms</Link>
 						<span aria-hidden>·</span>
 						<a href="/sitemap.xml" className="hover:text-pink-500">Sitemap</a>
+						<span aria-hidden>·</span>
+						<Link href="/admin" className="hover:text-pink-500">Admin</Link>
 					</div>
 				</div>
 			</div>

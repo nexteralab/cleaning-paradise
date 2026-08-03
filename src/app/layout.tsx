@@ -22,7 +22,7 @@ const poppins = Poppins({
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://cleaningparadisellc.com";
 const TITLE = "Cleaning Paradise | House Cleaning Services in Seattle, WA";
 const DESCRIPTION =
-	"Professional residential and commercial cleaning based in Lynnwood, WA — serving Seattle and King & Snohomish County. Your home, perfectly clean.";
+	"Professional residential and commercial cleaning based in Shoreline, WA — serving Seattle and King & Snohomish County. Your home, perfectly clean.";
 
 export const metadata: Metadata = {
 	metadataBase: new URL(SITE_URL),
@@ -67,7 +67,7 @@ const localBusinessJsonLd = {
 	priceRange: "$$",
 	address: {
 		"@type": "PostalAddress",
-		addressLocality: "Lynnwood",
+		addressLocality: "Shoreline",
 		addressRegion: "WA",
 		addressCountry: "US",
 	},
@@ -75,11 +75,11 @@ const localBusinessJsonLd = {
 		"Seattle",
 		"Bellevue",
 		"Kirkland",
-		"Lynnwood",
 		"Mercer Island",
 		"Shoreline",
 		"Edmonds",
-		"Mill Creek",
+		"Bothell",
+		"Mulkiteo"
 	].map((name) => ({ "@type": "City", name })),
 	openingHoursSpecification: {
 		"@type": "OpeningHoursSpecification",

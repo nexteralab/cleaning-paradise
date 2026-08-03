@@ -172,11 +172,11 @@ export const steps: Step[] = [
 			"Seattle",
 			"Bellevue",
 			"Kirkland",
-			"Lynnwood",
 			"Mercer Island",
 			"Shoreline",
 			"Edmonds",
 			"Bothell",
+			"Mulkiteo",
 			"Other",
 		],
 		validate: (raw) => {
@@ -184,11 +184,11 @@ export const steps: Step[] = [
 				"Seattle",
 				"Bellevue",
 				"Kirkland",
-				"Lynnwood",
 				"Mercer Island",
 				"Shoreline",
 				"Edmonds",
 				"Bothell",
+				"Mulkiteo",
 			];
 			const m = matchOption(raw, opts);
 			if (m) return { ok: true, value: m };

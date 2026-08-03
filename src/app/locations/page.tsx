@@ -5,15 +5,11 @@ import { locations, locationSlugs } from "./locations-data";
 import {
   MapPin,
   Sparkles,
-  ArrowRight,
   CheckCircle2,
   ShieldCheck,
   CalendarCheck,
   Award,
   DollarSign,
-  BookOpen,
-  Lightbulb,
-  Home,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -28,7 +24,6 @@ type City = {
   alt: string;
   description: string;
   href: string;
-  linkLabel: string;
 };
 
 // Derived from the single source of truth in locations-data.ts.
@@ -40,7 +35,6 @@ const cities: City[] = locationSlugs.map((slug) => {
     alt: `Cleaning Paradise team serving ${l.name}`,
     description: l.blurb,
     href: `/locations/${slug}`,
-    linkLabel: `View ${l.name} services`,
   };
 });
 
@@ -99,41 +93,6 @@ const featuresRight: Feature[] = [
   },
 ];
 
-type BlogCard = {
-  icon: React.ReactNode;
-  iconClasses: string;
-  hoverClasses: string;
-  title: string;
-  description: string;
-};
-
-const blogCards: BlogCard[] = [
-  {
-    icon: <BookOpen size={32} />,
-    iconClasses: "bg-pink-500/10 text-pink-500",
-    hoverClasses: "hover:border-pink-500 hover:bg-pink-50",
-    title: "Spring Cleaning Guide",
-    description:
-      "Learn how to refresh your home for spring with our seasonal deep clean checklist.",
-  },
-  {
-    icon: <Lightbulb size={32} />,
-    iconClasses: "bg-blue-600/10 text-blue-600",
-    hoverClasses: "hover:border-blue-600 hover:bg-blue-50",
-    title: "Eco-Friendly Cleaning",
-    description:
-      "Discover our sustainable cleaning practices and how we reduce environmental impact.",
-  },
-  {
-    icon: <Home size={32} />,
-    iconClasses: "bg-pink-500/10 text-pink-500",
-    hoverClasses: "hover:border-pink-500 hover:bg-pink-50",
-    title: "Move-In Checklist",
-    description:
-      "Everything you need to know about our move-in and move-out cleaning services.",
-  },
-];
-
 function CityCard({ city }: { city: City }) {
   const cardClasses =
     "block bg-white border-[1.5px] border-ink-200 rounded-[22px] overflow-hidden transition-all duration-300 ease-[cubic-bezier(.16,1,.3,1)] hover:border-pink-500 hover:shadow-[0_16px_40px_rgba(30,62,162,0.12)] hover:-translate-y-1";
@@ -153,19 +112,13 @@ function CityCard({ city }: { city: City }) {
   );
 
   return (
-    <div className={cardClasses}>
+    <Link href={city.href} className={cardClasses}>
       {media}
       <div className="p-7">
         {heading}
         {copy}
-        <Link
-          href={city.href}
-          className="inline-flex items-center gap-1.5 text-sm font-semibold text-pink-500 no-underline transition-all duration-200 hover:gap-2.5"
-        >
-          {city.linkLabel} <ArrowRight size={15} />
-        </Link>
       </div>
-    </div>
+    </Link>
   );
 }
 

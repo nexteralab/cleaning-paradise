@@ -159,21 +159,39 @@ export const locations: Record<string, Location> = {
 		homes: 65,
 		pin: { left: "23%", top: "37%" },
 	},
-	"mill-creek": {
-		slug: "mill-creek",
-		name: "Mill Creek",
+	bothell: {
+		slug: "bothell",
+		// ponytail: reusa mill-creek.png (sin foto propia aún) — cambiar cuando llegue bothell.png
+		name: "Bothell",
 		img: "/img/locations/mill-creek.png",
 		before: "/img/locations/living-room-before-house-cleaning.webp",
 		after: "/img/locations/living-room-after-house-cleaning.webp",
-		beforeAlt: "Toys and clutter in a living room before house cleaning in Mill Creek, WA",
-		afterAlt: "Clean and tidy living room after house cleaning in Mill Creek, WA",
+		beforeAlt: "Toys and clutter in a living room before house cleaning in Bothell, WA",
+		afterAlt: "Clean and tidy living room after house cleaning in Bothell, WA",
 		blurb:
-			"Quiet, well-kept neighborhoods just north of HQ — dependable recurring cleaning for growing families.",
-		hoods: "Mill Creek Town Center · Silver Firs · North Creek",
+			"Growing north-end community between Seattle and Everett — recurring and deep cleaning for family homes and new construction.",
+		hoods: "Canyon Park · North Creek · Downtown · Queensgate",
 		rating: "4.9",
-		resp: "Same day",
+		resp: "3 hrs",
+		homes: 85,
+		pin: { left: "56%", top: "30%" },
+	},
+	mukilteo: {
+		slug: "mukilteo",
+		// ponytail: reusa edmonds.png (ciudad costera vecina) — cambiar cuando llegue mukilteo.png
+		name: "Mukilteo",
+		img: "/img/locations/edmonds.png",
+		before: "/img/locations/nursery-before-house-cleaning.webp",
+		after: "/img/locations/nursery-after-house-cleaning.webp",
+		beforeAlt: "Toys scattered across a nursery before house cleaning in Mukilteo, WA",
+		afterAlt: "Tidy nursery after house cleaning in Mukilteo, WA",
+		blurb:
+			"Waterfront homes and quiet bluff neighborhoods north of Edmonds — detailed cleaning with easy ferry-side scheduling.",
+		hoods: "Old Town · Harbour Pointe · Japanese Gulch",
+		rating: "4.9",
+		resp: "3 hrs",
 		homes: 55,
-		pin: { left: "52%", top: "16%" },
+		pin: { left: "21%", top: "16%" },
 	},
 };
 

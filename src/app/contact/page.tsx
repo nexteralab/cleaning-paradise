@@ -106,7 +106,7 @@ export default function ContactPage() {
 										<div className="mb-0.5 text-[11px] font-semibold tracking-[0.05em] text-[#A0A0AE] uppercase">
 											Based in
 										</div>
-										<div className="text-sm font-semibold text-ink-900">Lynnwood, WA</div>
+										<div className="text-sm font-semibold text-ink-900">Shoreline, WA</div>
 										<div className="text-[13px] text-[#808098]">Serving King &amp; Snohomish County</div>
 									</div>
 								</div>

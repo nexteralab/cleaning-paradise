@@ -66,7 +66,7 @@ export function shell(opts: { heading: string; intro: string; bodyHtml: string; 
 				</td></tr>
 				<tr><td style="padding:20px 32px;border-top:1px solid #EEEEF4;">
 					<p style="margin:0;color:#9A9AB0;font-size:12px;line-height:1.6;">
-						Cleaning Paradise LLC · Lynnwood, WA · <a href="tel:+14256100241" style="color:${PINK};text-decoration:none;">${PHONE}</a><br>
+						Cleaning Paradise LLC · Shoreline, WA · <a href="tel:+14256100241" style="color:${PINK};text-decoration:none;">${PHONE}</a><br>
 						Mon–Sat, 7 AM – 7 PM
 					</p>
 				</td></tr>
