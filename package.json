@@ -10,13 +10,15 @@
     "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv ./cloudflare-env.d.ts"
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv ./cloudflare-env.d.ts",
+    "db": "wrangler d1 execute cleaning-db --local",
+    "db:prod": "wrangler d1 execute cleaning-db --remote",
+    "db:migrate": "wrangler d1 migrations apply cleaning-db --local",
+    "db:migrate:prod": "wrangler d1 migrations apply cleaning-db --remote"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.8.0",
     "@opennextjs/cloudflare": "^1.19.9",
-    "@supabase/ssr": "^0.12.3",
-    "@supabase/supabase-js": "^2.110.8",
     "@tiptap/extension-image": "^3.28.0",
     "@tiptap/extension-placeholder": "^3.28.0",
     "@tiptap/markdown": "^3.28.0",

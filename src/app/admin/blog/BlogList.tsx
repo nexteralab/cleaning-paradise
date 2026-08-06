@@ -33,7 +33,7 @@ export default function BlogList({ posts }: { posts: Post[] }) {
 				<section className="overflow-hidden rounded-2xl border border-ink-200 bg-white">
 					{posts.length === 0 ? (
 						<p className="px-5 py-10 text-center text-sm text-ink-500">
-							No posts yet — corre el seed de docs/supabase-setup.sql o crea el primero.
+							No posts yet — corre `npm run db:migrate` o crea el primero.
 						</p>
 					) : (
 						<div className="divide-y divide-ink-100">

@@ -1,40 +1,17 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { createServerClient } from "@supabase/ssr";
+import { SESSION_COOKIE } from "@/lib/auth";
 
-// Gate /admin pages and /api/admin endpoints with Supabase Auth.
-// Login route stays public. getUser() also refreshes expired tokens —
-// the setAll dance below propagates the refreshed cookies to the response.
+// Solo UX: si no hay cookie, mandar al login sin renderizar nada.
+// NO es el control de acceso — la firma se verifica en cada página y ruta con
+// getSessionUserId() (ver src/lib/session.ts), que corre en runtime node.
+// Acá no se pueden leer bindings de forma confiable en `next dev`.
 export const config = { matcher: ["/admin/:path*", "/api/admin/:path*"] };
 
-export async function middleware(req: NextRequest) {
+export function middleware(req: NextRequest) {
 	const path = req.nextUrl.pathname;
-	if (path === "/admin/login") {
+	if (path === "/admin/login" || req.cookies.has(SESSION_COOKIE)) {
 		return NextResponse.next();
 	}
-
-	let res = NextResponse.next({ request: req });
-	const supabase = createServerClient(
-		process.env.NEXT_PUBLIC_SUPABASE_URL!,
-		process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY!,
-		{
-			cookies: {
-				getAll: () => req.cookies.getAll(),
-				setAll: (cookiesToSet) => {
-					cookiesToSet.forEach(({ name, value }) => req.cookies.set(name, value));
-					res = NextResponse.next({ request: req });
-					cookiesToSet.forEach(({ name, value, options }) =>
-						res.cookies.set(name, value, options),
-					);
-				},
-			},
-		},
-	);
-
-	const {
-		data: { user },
-	} = await supabase.auth.getUser();
-	if (user) return res;
-
 	if (path.startsWith("/api/")) {
 		return NextResponse.json({ error: "unauthorized" }, { status: 401 });
 	}

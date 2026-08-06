@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Users, FileText, LogOut } from "lucide-react";
-import { supabaseBrowser } from "@/lib/supabase/browser";
+import { Users, FileText, LogOut, UserCog } from "lucide-react";
 
 const NAV = [
 	{ href: "/admin", label: "Leads", icon: Users },
 	{ href: "/admin/blog", label: "Blog", icon: FileText },
+	{ href: "/admin/profile", label: "Perfil", icon: UserCog },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
@@ -18,7 +18,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 	if (pathname === "/admin/login") return <>{children}</>;
 
 	async function logout() {
-		await supabaseBrowser().auth.signOut();
+		await fetch("/api/auth/logout", { method: "POST" });
 		router.push("/admin/login");
 		router.refresh();
 	}

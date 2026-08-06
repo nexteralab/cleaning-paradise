@@ -23,7 +23,7 @@ import {
 	Undo,
 	Redo,
 } from "lucide-react";
-import { uploadBlogImage } from "@/lib/supabase/storage";
+import { uploadBlogImage } from "@/lib/upload";
 
 const btn =
 	"flex h-8 w-8 items-center justify-center rounded-lg text-ink-500 transition-colors hover:bg-ink-100 hover:text-ink-900 disabled:opacity-40";
@@ -66,7 +66,7 @@ export default function MarkdownEditor({
 			const url = await uploadBlogImage(file);
 			editor.chain().focus().setImage({ src: url, alt: file.name }).run();
 		} catch {
-			alert("Image upload failed — ¿corriste la migración 0004 (bucket blog)?");
+			alert("Image upload failed");
 		}
 	}
 

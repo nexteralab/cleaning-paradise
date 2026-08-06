@@ -1,4 +1,4 @@
-// Blog data layer — posts live in Supabase (tabla `posts`, ver docs/supabase-setup.sql).
+// Blog data layer — posts viven en D1 (tabla `posts`, ver migrations/0001_posts.sql).
 // Los iconos de categoría no son serializables, así que viven aquí como mapa.
 import {
 	Briefcase,
@@ -9,7 +9,6 @@ import {
 	Truck,
 	type LucideIcon,
 } from "lucide-react";
-import { supabaseSelect } from "./supabase";
 
 
 export type Post = {
@@ -58,19 +57,41 @@ export function formatDate(iso: string | null): string {
 	});
 }
 
-export function getPublishedPosts(env: CloudflareEnv): Promise<Post[]> {
-	return supabaseSelect<Post>(
-		env,
-		"posts",
-		"select=*&published=eq.true&order=published_at.desc",
-	);
+// --- D1 -------------------------------------------------------------------
+// SQLite no tiene arrays ni boolean: tags es JSON en TEXT, published es 0/1.
+
+type Row = Omit<Post, "tags" | "published"> & { tags: string; published: number };
+
+function toPost(row: Row): Post {
+	return {
+		...row,
+		tags: JSON.parse(row.tags || "[]") as string[],
+		published: row.published === 1,
+	};
+}
+
+export async function getPublishedPosts(env: CloudflareEnv): Promise<Post[]> {
+	const { results } = await env.DB.prepare(
+		"SELECT * FROM posts WHERE published = 1 ORDER BY published_at DESC",
+	).all<Row>();
+	return results.map(toPost);
 }
 
 export async function getPublishedPost(env: CloudflareEnv, slug: string): Promise<Post | null> {
-	const rows = await supabaseSelect<Post>(
-		env,
-		"posts",
-		`select=*&published=eq.true&slug=eq.${encodeURIComponent(slug)}&limit=1`,
-	);
-	return rows[0] ?? null;
+	const row = await env.DB.prepare("SELECT * FROM posts WHERE published = 1 AND slug = ?")
+		.bind(slug)
+		.first<Row>();
+	return row ? toPost(row) : null;
+}
+
+export async function getAllPosts(env: CloudflareEnv): Promise<Post[]> {
+	const { results } = await env.DB.prepare(
+		"SELECT * FROM posts ORDER BY created_at DESC",
+	).all<Row>();
+	return results.map(toPost);
+}
+
+export async function getPost(env: CloudflareEnv, id: string): Promise<Post | null> {
+	const row = await env.DB.prepare("SELECT * FROM posts WHERE id = ?").bind(id).first<Row>();
+	return row ? toPost(row) : null;
 }

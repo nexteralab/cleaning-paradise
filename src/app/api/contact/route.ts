@@ -1,7 +1,27 @@
 import { NextResponse } from "next/server";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { sendLeadEmails, type Lead } from "@/lib/email";
-import { supabaseInsert } from "@/lib/supabase";
+
+const COLS = [
+	"first_name",
+	"last_name",
+	"email",
+	"phone",
+	"street",
+	"unit",
+	"city",
+	"zip",
+	"services",
+	"service",
+	"date",
+	"time",
+	"frequency",
+	"sqft",
+	"pets",
+	"notes",
+	"promo",
+	"source",
+] as const;
 
 // Public endpoint — the contact & quote forms POST here to create a lead.
 export async function POST(req: Request) {
@@ -22,27 +42,34 @@ export async function POST(req: Request) {
 	const services = Array.isArray(body.services) ? (body.services as string[]) : [];
 
 	const { env, ctx } = await getCloudflareContext({ async: true });
-	const saved = await supabaseInsert(env, "leads", {
-		first_name: firstName,
-		last_name: s("lastName"),
+	const values = [
+		firstName,
+		s("lastName"),
 		email,
-		phone: s("phone"),
-		street: s("street"),
-		unit: s("unit"),
-		city: s("city"),
-		zip: s("zip"),
-		services,
-		service: s("service"),
-		date: s("date"),
-		time: s("time"),
-		frequency: s("frequency"),
-		sqft: s("sqft"),
-		pets: s("pets"),
-		notes: s("notes"),
-		promo: !!body.promo,
-		source: s("source") ?? "contact",
-	});
-	if (!saved) {
+		s("phone"),
+		s("street"),
+		s("unit"),
+		s("city"),
+		s("zip"),
+		JSON.stringify(services),
+		s("service"),
+		s("date"),
+		s("time"),
+		s("frequency"),
+		s("sqft"),
+		s("pets"),
+		s("notes"),
+		body.promo ? 1 : 0,
+		s("source") ?? "contact",
+	];
+	try {
+		await env.DB.prepare(
+			`INSERT INTO leads (${COLS.join(", ")}) VALUES (${COLS.map(() => "?").join(", ")})`,
+		)
+			.bind(...values)
+			.run();
+	} catch (e) {
+		console.error("[contact] insert", e);
 		return NextResponse.json({ error: "could not save lead" }, { status: 502 });
 	}
 

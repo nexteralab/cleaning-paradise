@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Upload } from "lucide-react";
 import { CATEGORIES, type Post } from "@/lib/blog";
-import { uploadBlogImage } from "@/lib/supabase/storage";
+import { uploadBlogImage } from "@/lib/upload";
 import MarkdownEditor from "./MarkdownEditor";
 
 const inputClass =
@@ -51,7 +51,7 @@ export default function PostForm({ post }: { post?: Post }) {
 		try {
 			setCoverUrl(await uploadBlogImage(file));
 		} catch {
-			setError("Image upload failed — ¿corriste la migración 0004 (bucket blog)?");
+			setError("Image upload failed");
 		} finally {
 			setUploading(false);
 		}

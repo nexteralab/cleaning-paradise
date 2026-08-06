@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Lock, Eye, EyeOff, ArrowLeft } from "lucide-react";
-import { supabaseBrowser } from "@/lib/supabase/browser";
 
 export default function AdminLogin() {
 	const router = useRouter();
@@ -18,9 +17,13 @@ export default function AdminLogin() {
 		e.preventDefault();
 		setLoading(true);
 		setError("");
-		const { error } = await supabaseBrowser().auth.signInWithPassword({ email, password });
+		const res = await fetch("/api/auth/login", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ email, password }),
+		});
 		setLoading(false);
-		if (!error) {
+		if (res.ok) {
 			router.push("/admin");
 			router.refresh();
 		} else {
