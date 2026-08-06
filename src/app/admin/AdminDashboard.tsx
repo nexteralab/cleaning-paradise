@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Trash2, Mail, Phone } from "lucide-react";
+import ConfirmDelete from "./ConfirmDelete";
 
 export type Lead = {
 	id: number;
@@ -35,6 +37,7 @@ const statusColor: Record<string, string> = {
 
 export default function AdminDashboard({ leads }: { leads: Lead[] }) {
 	const router = useRouter();
+	const [target, setTarget] = useState<Lead | null>(null);
 
 	async function updateStatus(id: number, status: string) {
 		await fetch("/api/admin/leads", {
@@ -45,9 +48,10 @@ export default function AdminDashboard({ leads }: { leads: Lead[] }) {
 		router.refresh();
 	}
 
-	async function deleteLead(id: number) {
-		if (!confirm("Delete this lead?")) return;
-		await fetch(`/api/admin/leads?id=${id}`, { method: "DELETE" });
+	async function deleteLead() {
+		if (!target) return;
+		await fetch(`/api/admin/leads?id=${target.id}`, { method: "DELETE" });
+		setTarget(null);
 		router.refresh();
 	}
 
@@ -123,7 +127,7 @@ export default function AdminDashboard({ leads }: { leads: Lead[] }) {
 												))}
 											</select>
 											<button
-												onClick={() => deleteLead(l.id)}
+												onClick={() => setTarget(l)}
 												aria-label="Delete lead"
 												className="rounded-lg border border-ink-200 p-2 text-ink-400 hover:bg-pink-50 hover:text-pink-600"
 											>
@@ -137,6 +141,18 @@ export default function AdminDashboard({ leads }: { leads: Lead[] }) {
 					)}
 				</section>
 			</div>
+
+			<ConfirmDelete
+				open={target !== null}
+				label="lead"
+				description={
+					target
+						? `Se va a eliminar el lead de ${target.first_name} ${target.last_name ?? ""} (${target.email}). Esta acción no se puede deshacer.`
+						: ""
+				}
+				onCancel={() => setTarget(null)}
+				onConfirm={deleteLead}
+			/>
 		</div>
 	);
 }

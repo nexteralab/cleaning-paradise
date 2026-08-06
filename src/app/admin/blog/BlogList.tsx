@@ -1,16 +1,20 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Plus, Trash2, ExternalLink } from "lucide-react";
 import type { Post } from "@/lib/blog";
+import ConfirmDelete from "../ConfirmDelete";
 
 export default function BlogList({ posts }: { posts: Post[] }) {
 	const router = useRouter();
+	const [target, setTarget] = useState<Post | null>(null);
 
-	async function deletePost(id: string, title: string) {
-		if (!confirm(`Delete "${title}"?`)) return;
-		await fetch(`/api/admin/posts?id=${encodeURIComponent(id)}`, { method: "DELETE" });
+	async function deletePost() {
+		if (!target) return;
+		await fetch(`/api/admin/posts?id=${encodeURIComponent(target.id)}`, { method: "DELETE" });
+		setTarget(null);
 		router.refresh();
 	}
 
@@ -71,7 +75,7 @@ export default function BlogList({ posts }: { posts: Post[] }) {
 											</a>
 										)}
 										<button
-											onClick={() => deletePost(p.id, p.title)}
+											onClick={() => setTarget(p)}
 											aria-label="Delete post"
 											className="rounded-lg border border-ink-200 p-2 text-ink-400 hover:bg-pink-50 hover:text-pink-600"
 										>
@@ -84,6 +88,16 @@ export default function BlogList({ posts }: { posts: Post[] }) {
 					)}
 				</section>
 			</div>
+
+			<ConfirmDelete
+				open={target !== null}
+				label="post"
+				description={
+					target ? `Se va a eliminar "${target.title}". Esta acción no se puede deshacer.` : ""
+				}
+				onCancel={() => setTarget(null)}
+				onConfirm={deletePost}
+			/>
 		</div>
 	);
 }
