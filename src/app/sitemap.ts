@@ -6,6 +6,11 @@ import { getPublishedPosts } from "@/lib/blog";
 
 const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://cleaningparadisellc.com";
 
+// Se genera por request, no en el build: lee los posts de D1 y en CI la base no
+// existe (el build corre sin bindings). Además así el sitemap sale siempre
+// fresco cuando se publica un post.
+export const dynamic = "force-dynamic";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	const now = new Date();
 	const { env } = await getCloudflareContext({ async: true });
