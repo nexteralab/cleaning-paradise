@@ -51,7 +51,7 @@ const featuresLeft: Feature[] = [
     iconClasses: "bg-[#FFE0F0] text-pink-500",
     title: "Local Expertise",
     description:
-      "Over 10 years serving Greater Seattle. We know the specific cleaning challenges of Pacific Northwest homes.",
+      "Over 5 years serving Greater Seattle. We know the specific cleaning challenges of Pacific Northwest homes.",
   },
   {
     icon: <ShieldCheck size={24} />,

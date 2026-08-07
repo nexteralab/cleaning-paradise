@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import CountUp from "@/components/CountUp";
 import Reveal from "@/components/Reveal";
-import ReviewCard from "@/components/ReviewCard";
-import { reviews } from "@/lib/reviews";
+import ReviewsTrack from "@/components/ReviewsTrack";
 import { ArrowRight, Star } from "lucide-react";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import JsonLd from "@/components/JsonLd";
@@ -233,24 +232,8 @@ export function TestimonialsSection() {
 					</div>
 				</Reveal>
 			</div>
-			{/* ponytail: mismo marquee CSS que ReviewsMarquee — track ×2, hover pausa.
-			    Full-bleed: fuera del max-w para que el tren cruce toda la pantalla. */}
-			<Reveal>
-				<div className="group mb-[34px] w-full overflow-hidden pt-2 pb-6">
-					{/* pr en cada card (no gap/px en el track): así -50% calza exacto y el loop es invisible */}
-					<div className="flex w-max items-start animate-[galleryScrollH_70s_linear_infinite] group-hover:[animation-play-state:paused]">
-						{[...reviews, ...reviews].map((r, i) => (
-							<div
-								key={i}
-								aria-hidden={i >= reviews.length}
-								className="w-[min(410px,85vw)] shrink-0 pr-[22px]"
-							>
-								<ReviewCard review={r} />
-							</div>
-						))}
-					</div>
-				</div>
-			</Reveal>
+			{/* Full-bleed: fuera del max-w para que el tren cruce toda la pantalla. */}
+			<ReviewsTrack />
 			<div className="max-w-[1360px] mx-auto px-10 max-md:px-6">
 				<div className="text-center">
 					<Link
@@ -266,7 +249,7 @@ export function TestimonialsSection() {
 						rel="noopener"
 						className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 no-underline hover:underline"
 					>
-						Read all 113 reviews on Thumbtack{" "}
+						Read all 111 reviews on Thumbtack{" "}
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							width="15"

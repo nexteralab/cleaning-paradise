@@ -4,9 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { motion } from "motion/react";
 import type { Review } from "@/lib/reviews";
 
-// ~6 lines at text-[15px]/leading-[1.65] ≈ 149px — the length of our shortest
-// featured review. Longer quotes collapse to this and reveal on "Ver más".
-const COLLAPSED = 150;
+// Texto colapsado: ~5 líneas a text-[15px]/leading-[1.65]. Junto con header,
+// botón y padding da los 300px de tarjeta cerrada (CARD_H).
+const COLLAPSED = 140;
+// ponytail: alto fijo en cerrado para que el tren no baile; "Show more" lo suelta a auto.
+const CARD_H = "h-[300px]";
 
 // "Camilo P." -> "CP". First letter of first two words.
 const initials = (name: string) =>
@@ -33,7 +35,10 @@ export default function ReviewCard({ review }: { review: Review }) {
 	const collapsed = overflowing && !expanded;
 
 	return (
-		<div className="flex flex-col rounded-[22px] bg-white px-7 py-[30px] shadow-[0_8px_24px_rgba(30,62,162,0.06)]">
+		<div
+			className={`flex flex-col overflow-hidden rounded-[22px] bg-white px-7 py-[30px] shadow-[0_8px_24px_rgba(30,62,162,0.06)] ${expanded ? "h-auto" : CARD_H
+				}`}
+		>
 			<div className="flex items-center justify-between gap-2 mb-4">
 				<div className="flex items-center gap-3">
 					<div className="flex h-[42px] w-[42px] items-center justify-center rounded-full bg-pink-100 text-[13px] font-bold text-pink-700">
@@ -69,19 +74,6 @@ export default function ReviewCard({ review }: { review: Review }) {
 				>
 					{expanded ? "Show less" : "Show more"}
 				</button>
-			)}
-			{review.photos && review.photos.length > 0 && (
-				<div className="mt-[18px] flex gap-2">
-					{review.photos.map((src) => (
-						// eslint-disable-next-line @next/next/no-img-element
-						<img
-							key={src}
-							src={src}
-							alt="Review photo"
-							className="h-[76px] w-[76px] shrink-0 rounded-[10px] object-cover"
-						/>
-					))}
-				</div>
 			)}
 		</div>
 	);

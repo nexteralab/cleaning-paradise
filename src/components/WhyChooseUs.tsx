@@ -9,8 +9,8 @@ const FEATURES: { icon: React.ReactNode; title: string; desc: string }[] = [
 	},
 	{
 		icon: <Award size={27} />,
-		title: "10+ Years of Experience",
-		desc: "A decade of housekeeping in the Seattle area means we understand Pacific Northwest homes: moisture issues, older construction, pet households, and the details that matter.",
+		title: "5+ Years of Experience",
+		desc: "Five-plus years of housekeeping in the Seattle area means we understand Pacific Northwest homes: moisture issues, older construction, pet households, and the details that matter.",
 	},
 	{
 		icon: <BadgeDollarSign size={27} />,
@@ -45,7 +45,7 @@ const PHOTOS = [
 // headline: "Why {city} Families Choose Cleaning Paradise".
 export default function WhyChooseUs({
 	city = "Seattle",
-	intro = "We've spent 10+ years earning the trust of homeowners across King and Snohomish County. Here's what sets us apart from other cleaning companies in Seattle:",
+	intro = "We've spent 5+ years earning the trust of homeowners across King and Snohomish County. Here's what sets us apart from other cleaning companies in Seattle:",
 }: {
 	city?: string;
 	intro?: string;

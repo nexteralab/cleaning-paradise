@@ -27,6 +27,7 @@ import {
 import { FaqAccordion, QuoteForm } from "./client-sections";
 import { services, serviceSlugs, type IconName, type ServiceContent } from "./services-data";
 import JsonLd from "@/components/JsonLd";
+import { locations } from "@/app/locations/locations-data";
 import { TestimonialsSection } from "@/app/page";
 
 const icons: Record<IconName, LucideIcon> = {
@@ -65,35 +66,19 @@ const galleryImages: { src: string; alt: string; wide: boolean }[] = [
 		alt: "Maid polishing a glass shower door during a deep cleaning in Seattle, WA",
 		wide: true,
 	},
+	{ src: "/img/person-mopping-floor.webp", alt: "Person mopping floor", wide: true },
 	{
 		src: "/img/bathroom-mirror-cleaning-bellevue-wa.jpg",
 		alt: "Cleaning Paradise housekeeper wiping a bathroom mirror in Bellevue, WA",
 		wide: false,
 	},
+	{ src: "/img/saturdays-are-for-spring-cleaning-together-shot.webp", alt: "Spring cleaning together", wide: false },
 	{
 		src: "/img/house-cleaning-team-playroom-lynnwood-wa.jpg",
 		alt: "House cleaning team tidying a kids' playroom in Lynnwood, WA",
 		wide: true,
 	},
-	// ponytail: svc-* son gráficos placeholder (no fotos) — alt vacío hasta tener material real (D8).
-	{ src: "/img/svc-move.jpg", alt: "", wide: false },
-	{ src: "/img/svc-deep.jpg", alt: "", wide: true },
-	{ src: "/img/svc-carpet.jpg", alt: "", wide: false },
-];
-
-const coverageCities = [
-	"Seattle",
-	"Bellevue",
-	"Redmond",
-	"Kirkland",
-	"Renton",
-	"Tacoma",
-	"Everett",
-	"Shoreline",
-	"Bothell",
-	"Lynnwood",
-	"Mercer Island",
-	"Issaquah",
+	{ src: "/img/office-cleaning-two-women-cleaning-a-modern.webp", alt: "Two women cleaning a modern office space", wide: false },
 ];
 
 function Eyebrow({ children, className = "" }: { children: React.ReactNode; className?: string }) {
@@ -275,8 +260,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 								<span
 									key={chip.label}
 									className={`rounded-full border-[1.5px] px-[18px] py-1.5 text-[12.5px] font-semibold ${chip.active
-											? "border-[#FFB8E2] bg-pink-50 text-pink-500"
-											: "border-ink-200 bg-[#F4F4F8] text-[#808098]"
+										? "border-[#FFB8E2] bg-pink-50 text-pink-500"
+										: "border-ink-200 bg-[#F4F4F8] text-[#808098]"
 										}`}
 								>
 									{chip.label}
@@ -384,13 +369,14 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 					</h2>
 					<p className="mb-8 text-[15px] leading-[1.75] text-white/65">{service.coverageText}</p>
 					<div className="flex flex-wrap gap-2.5">
-						{coverageCities.map((city) => (
-							<span
-								key={city}
-								className="rounded-full border border-white/20 bg-white/12 px-[18px] py-2 text-[13px] font-semibold text-white"
+						{Object.values(locations).map((city) => (
+							<Link
+								key={city.slug}
+								href={`/locations/${city.slug}`}
+								className="rounded-full border border-white/20 bg-white/12 px-[18px] py-2 text-[13px] font-semibold text-white no-underline transition-colors hover:border-white/40 hover:bg-white/25"
 							>
-								{city}
-							</span>
+								{city.name}
+							</Link>
 						))}
 					</div>
 				</div>

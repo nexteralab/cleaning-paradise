@@ -324,8 +324,8 @@ export default async function LocationPage({
 								Our Services
 							</span>
 						</div>
-						<h2 className="mb-3.5 text-[clamp(30px,3.4vw,46px)] leading-[1.12] font-normal tracking-[-0.025em] text-ink-900">
-							<span className="font-heading italic">Cleaning </span>for every home
+						<h2 className="font-heading mb-3.5 text-[clamp(40px,4vw,60px)] leading-[1.12] font-normal tracking-[-0.025em] text-ink-900">
+							Cleaning for every home
 						</h2>
 						<p className="mx-auto max-w-[560px] text-[15.5px] leading-[1.7] text-ink-600">
 							Whether you need a one-time deep-clean before a home inspection, recurring housekeeping
@@ -400,8 +400,8 @@ export default async function LocationPage({
 								Service areas
 							</span>
 						</div>
-						<h2 className="mb-3.5 text-[clamp(30px,3.4vw,46px)] leading-[1.12] font-medium tracking-[-0.025em] text-ink-900">
-							Cleaning in your <span className="font-heading font-normal italic">neighborhood</span>
+						<h2 className="font-heading mb-3.5 text-[clamp(40px,4vw,60px)] leading-[1.12] font-normal tracking-[-0.025em] text-ink-900">
+							Cleaning in your neighborhood
 						</h2>
 						<p className="mx-auto max-w-[560px] text-[16.5px] leading-[1.7] text-ink-600">
 							Pick your city to see local availability, ratings and the neighborhoods our teams cover

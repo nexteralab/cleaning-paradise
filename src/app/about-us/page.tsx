@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
 import CountUp from "@/components/CountUp";
+import ReviewsTrack from "@/components/ReviewsTrack";
 import {
 	ArrowRight,
 	ArrowUpRight,
@@ -30,7 +31,7 @@ const stats = [
 
 const storyParagraphs = [
 	"Cleaning Paradise started with one person, a handful of supplies, and a promise: to leave every home better than we found it. What began as a small family operation in Lynnwood quickly grew into a full team through word of mouth alone.",
-	"Over a decade later, we serve hundreds of families and businesses across King and Snohomish County. We still operate with that same first-day mentality — attention to detail, respect for your space, and care for the people who live in it.",
+	"Five-plus years later, we serve hundreds of families and businesses across King and Snohomish County. We still operate with that same first-day mentality — attention to detail, respect for your space, and care for the people who live in it.",
 	"We're bilingual, locally owned, and deeply proud of the community we serve. When you invite us in, we treat your home like it's our own.",
 ];
 
@@ -97,30 +98,6 @@ const teamPhotos = [
 	{ src: "/img/aw1a0550.jpg", className: "mt-8" },
 	{ src: "/img/aw1a0619.jpg", className: "md:-mt-8" },
 	{ src: "/img/aw1a0659.jpg", className: "" },
-];
-
-const reviews = [
-	{
-		quote:
-			"“I've had many cleaning companies and Cleaning Paradise is by far the best. Reliable, thorough, and they actually care.”",
-		initials: "SR",
-		name: "Sarah R.",
-		location: "Seattle, WA",
-	},
-	{
-		quote:
-			"“Booking was easy, the team was friendly and professional. My house has never been this clean. Will absolutely rebook.”",
-		initials: "DM",
-		name: "David M.",
-		location: "Kirkland, WA",
-	},
-	{
-		quote:
-			"“Hablan español, son puntuales y dejan todo impecable. Los recomiendo al 100% a toda la comunidad latina de Seattle.”",
-		initials: "LV",
-		name: "Lucía V.",
-		location: "Lynnwood, WA",
-	},
 ];
 
 function Kicker({ children }: { children: React.ReactNode }) {
@@ -320,8 +297,8 @@ export default function AboutPage() {
 			</section>
 
 			{/* ============ REVIEWS ============ */}
-			<section className="px-10 py-24 bg-white border-t border-ink-200">
-				<div className="max-w-[1360px] mx-auto">
+			<section className="py-24 bg-white border-t border-ink-200">
+				<div className="max-w-[1360px] mx-auto px-10">
 					<Reveal className="mb-14 flex items-end justify-between gap-8 flex-wrap">
 						<div>
 							<Kicker>What clients say</Kicker>
@@ -337,40 +314,12 @@ export default function AboutPage() {
 							rel="noopener"
 							className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 no-underline whitespace-nowrap mb-2 hover:underline"
 						>
-							All 39 reviews on Thumbtack <ArrowUpRight size={15} />
+							All 111 reviews on Thumbtack <ArrowUpRight size={15} />
 						</a>
 					</Reveal>
-
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-						{reviews.map((r, i) => (
-							<Reveal
-								key={r.name}
-								delay={i * 90}
-								className="border border-ink-200 rounded-[20px] py-8 px-7"
-							>
-								<div className="text-pink-500 text-[15px] tracking-[2px] mb-4">
-									★★★★★
-								</div>
-								<p className="font-heading text-xl font-normal leading-[1.55] text-ink-900 mb-6 italic">
-									{r.quote}
-								</p>
-								<div className="flex items-center gap-3 pt-5 border-t border-ink-200">
-									<div className="w-10 h-10 rounded-full bg-[#F4F4F8] text-ink-600 font-bold text-[12px] flex items-center justify-center shrink-0">
-										{r.initials}
-									</div>
-									<div>
-										<div className="font-semibold text-sm text-ink-800">
-											{r.name}
-										</div>
-										<div className="text-[12px] text-[#808098]">
-											{r.location}
-										</div>
-									</div>
-								</div>
-							</Reveal>
-						))}
-					</div>
 				</div>
+				{/* Full-bleed: fuera del max-w para que el tren cruce toda la pantalla. */}
+				<ReviewsTrack />
 			</section>
 
 			{/* ============ CTA ============ */}
