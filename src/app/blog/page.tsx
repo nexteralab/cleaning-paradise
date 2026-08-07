@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Calendar } from "lucide-react";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
-import { getPublishedPosts, categoryIcon, formatDate } from "@/lib/blog";
+import { getPublishedPosts, categoryIcon, formatDate, CATEGORIES } from "@/lib/blog";
 
 export const dynamic = "force-dynamic";
 
@@ -12,17 +12,17 @@ export const metadata: Metadata = {
 		"Expert advice on maintaining your home, seasonal cleaning guides, and stories from the neighborhoods we serve across Greater Seattle.",
 };
 
-const categories = [
-	{ label: "All", href: "#all", active: true },
-	{ label: "Cleaning Tips", href: "#tips", active: false },
-	{ label: "Seasonal", href: "#seasonal", active: false },
-	{ label: "Local Stories", href: "#local", active: false },
-	{ label: "Eco-Friendly", href: "#eco", active: false },
-];
 
-export default async function BlogPage() {
+export default async function BlogPage({
+	searchParams,
+}: {
+	searchParams: Promise<{ category?: string }>;
+}) {
+	const { category } = await searchParams;
 	const { env } = await getCloudflareContext({ async: true });
-	const postList = await getPublishedPosts(env);
+	const all = await getPublishedPosts(env);
+	// ponytail: filtro en el server vía ?category — sin estado de cliente ni nuqs.
+	const postList = category ? all.filter((p) => p.category === category) : all;
 
 	return (
 		<div className="relative w-full overflow-x-clip">
@@ -51,15 +51,16 @@ export default async function BlogPage() {
 						<span className="text-xs font-semibold uppercase tracking-[.08em] text-[#A0A0AE]">
 							Categories:
 						</span>
-						{categories.map((cat) => (
-							<a
+						{[{ label: "All", value: "" }, ...CATEGORIES.map((c) => ({ label: c, value: c }))].map((cat) => (
+							<Link
 								key={cat.label}
-								href={cat.href}
-								className={`text-sm font-medium transition-opacity duration-200 hover:opacity-70 ${cat.active ? "text-pink-500" : "text-[#808098]"
+								href={cat.value ? `/blog?category=${encodeURIComponent(cat.value)}` : "/blog"}
+								scroll={false}
+								className={`text-sm font-medium no-underline transition-opacity duration-200 hover:opacity-70 ${(category ?? "") === cat.value ? "text-pink-500" : "text-[#808098]"
 									}`}
 							>
 								{cat.label}
-							</a>
+							</Link>
 						))}
 					</div>
 				</div>
@@ -111,6 +112,14 @@ export default async function BlogPage() {
 							);
 						})}
 					</div>
+					{postList.length === 0 && (
+						<p className="mb-[60px] text-base text-ink-600">
+							No posts in this category yet.{" "}
+							<Link href="/blog" className="font-semibold text-pink-500">
+								See all posts
+							</Link>
+						</p>
+					)}
 				</div>
 			</section>
 

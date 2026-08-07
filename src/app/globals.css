@@ -162,17 +162,18 @@ body {
 }
 .prose-blog ol li {
 	counter-increment: prose-num;
-	display: flex;
-	align-items: flex-start;
-	gap: 12px;
+	/* ponytail: badge absoluto en vez de flex — con flex, un <strong> inicial se volvía columna aparte. */
+	position: relative;
+	padding-left: 34px;
 	font-size: 15.5px;
 	line-height: 1.7;
 	color: var(--color-ink-600);
 }
 .prose-blog ol li::before {
 	content: counter(prose-num);
-	flex-shrink: 0;
-	margin-top: 2px;
+	position: absolute;
+	left: 0;
+	top: 2px;
 	width: 22px;
 	height: 22px;
 	display: flex;

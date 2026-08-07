@@ -52,7 +52,7 @@ export function HeroSection() {
 				</div>
 			</div>
 			{/* mobile only: booking form below the hero */}
-			<BookingForm className="md:hidden mt-4" />
+			<BookingForm className="md:hidden my-10" />
 		</section>
 	);
 }
@@ -101,7 +101,8 @@ export function BookingForm({ className = "" }: { className?: string }) {
 						setSubmitting(false);
 					}
 				}}
-				className="bg-white rounded-[26px] shadow-[0_26px_60px_rgba(19,19,32,0.28)] p-6 flex flex-col gap-[15px] max-h-[calc(100vh-150px)] overflow-y-auto"
+				/* ponytail: en móvil crece libre (la página scrollea); clamp + scroll interno solo desde md */
+				className="bg-white rounded-[26px] shadow-[0_26px_60px_rgba(19,19,32,0.28)] p-6 flex flex-col gap-[15px] md:max-h-[calc(100vh-150px)] md:overflow-y-auto"
 			>
 				<div>
 					<h3 className="font-sans text-[27px] text-ink-900 tracking-[-0.01em] mb-[3px]">Get your free quote</h3>
