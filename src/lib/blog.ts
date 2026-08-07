@@ -70,10 +70,12 @@ function toPost(row: Row): Post {
 	};
 }
 
-export async function getPublishedPosts(env: CloudflareEnv): Promise<Post[]> {
+export async function getPublishedPosts(env: CloudflareEnv, limit?: number): Promise<Post[]> {
 	const { results } = await env.DB.prepare(
-		"SELECT * FROM posts WHERE published = 1 ORDER BY published_at DESC",
-	).all<Row>();
+		`SELECT * FROM posts WHERE published = 1 ORDER BY published_at DESC${limit ? " LIMIT ?" : ""}`,
+	)
+		.bind(...(limit ? [limit] : []))
+		.all<Row>();
 	return results.map(toPost);
 }
 

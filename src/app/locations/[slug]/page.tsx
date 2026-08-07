@@ -5,25 +5,25 @@ import {
 	ArrowRight,
 	Calendar,
 	CircleCheck,
-	Leaf,
 	MapPin,
 	Navigation,
 	Star,
-	Tag,
 	Users,
 	type LucideIcon,
 } from "lucide-react";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
+import { getPublishedPosts, categoryIcon, formatDate } from "@/lib/blog";
 import { CitySelector, FaqAccordion, HeroSlider } from "./client-sections";
 import JsonLd from "@/components/JsonLd";
 import Reveal from "@/components/Reveal";
 import BgVideo from "@/components/BgVideo";
 import CountUp from "@/components/CountUp";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import { locations, locationSlugs, locationFaqs } from "../locations-data";
+import { locations, locationFaqs } from "../locations-data";
 
-export function generateStaticParams() {
-	return locationSlugs.map((slug) => ({ slug }));
-}
+// ponytail: force-dynamic porque la sección de blog lee D1 (sin binding en build),
+// igual que /blog y /blog/[slug].
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
 	params,
@@ -114,51 +114,6 @@ const stats: Stat[] = [
 ];
 
 
-type BlogPost = {
-	img: string;
-	tag: string;
-	tagClasses: string;
-	tagIcon: LucideIcon;
-	category: string;
-	title: string;
-	date: string;
-	dateIconColor: string;
-};
-
-const blogPosts: BlogPost[] = [
-	{
-		img: "/img/aw1a0547.jpg",
-		tag: "Cleaning Tips",
-		tagClasses: "text-pink-500",
-		tagIcon: Tag,
-		category: "Spring Cleaning Guide",
-		title: "How to Deep Clean Your Home This Spring",
-		date: "March 15, 2026",
-		dateIconColor: "text-pink-500",
-	},
-	{
-		img: "/img/aw1a0550.jpg",
-		tag: "Eco-Friendly",
-		tagClasses: "text-blue-600",
-		tagIcon: Leaf,
-		category: "Sustainable Living",
-		title: "Green Cleaning Products That Actually Work",
-		date: "March 8, 2026",
-		dateIconColor: "text-blue-600",
-	},
-	{
-		img: "/img/aw1a0562.jpg",
-		tag: "Local Stories",
-		tagClasses: "text-pink-500",
-		tagIcon: MapPin,
-		category: "Community Spotlight",
-		title: "Cleaning Seattle's Historic Homes",
-		date: "February 28, 2026",
-		dateIconColor: "text-pink-500",
-	},
-];
-
-
 export default async function LocationPage({
 	params,
 }: {
@@ -167,6 +122,9 @@ export default async function LocationPage({
 	const { slug } = await params;
 	const loc = locations[slug];
 	if (!loc) notFound();
+
+	const { env } = await getCloudflareContext({ async: true });
+	const blogPosts = await getPublishedPosts(env, 3);
 
 	const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://cleaningparadisellc.com";
 
@@ -433,36 +391,37 @@ export default async function LocationPage({
 
 					<div className="mb-12 grid grid-cols-1 gap-8 md:grid-cols-3">
 						{blogPosts.map((post, i) => {
-							const TagIcon = post.tagIcon;
+							const TagIcon = categoryIcon(post.category);
+							const accent = post.accent === "blue" ? "text-blue-600" : "text-pink-500";
 							return (
-								<Reveal key={post.title} delay={(i % 3) * 90}>
+								<Reveal key={post.slug} delay={(i % 3) * 90}>
 									<Link
-										href="/blog"
+										href={`/blog/${post.slug}`}
 										className="block text-inherit no-underline transition-transform duration-300 ease-[cubic-bezier(.16,1,.3,1)] hover:-translate-y-1.5"
 									>
 										<div className="relative mb-[22px] h-[280px] w-full overflow-hidden rounded-[20px] bg-[#f0f0f5]">
 											{/* eslint-disable-next-line @next/next/no-img-element */}
 											<img
-												src={post.img}
+												src={post.cover_url ?? "/img/aw1a0547.jpg"}
 												alt={post.title}
 												className="block h-full w-full object-cover"
 											/>
 											<div
-												className={`absolute top-3.5 left-3.5 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-[11px] py-[5px] text-[11px] font-bold tracking-[0.06em] uppercase ${post.tagClasses}`}
+												className={`absolute top-3.5 left-3.5 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-[11px] py-[5px] text-[11px] font-bold tracking-[0.06em] uppercase ${accent}`}
 											>
 												<TagIcon size={11} />
-												{post.tag}
+												{post.category}
 											</div>
 										</div>
 										<div className="mb-2 text-[11.5px] font-bold tracking-[0.06em] text-[#A0A0AE] uppercase">
-											{post.category}
+											{post.kicker}
 										</div>
 										<h3 className="mb-2.5 font-heading text-2xl leading-[1.3] font-normal tracking-[-0.01em] text-ink-900">
 											{post.title}
 										</h3>
 										<div className="flex items-center gap-[7px] text-[13px] text-[#808098]">
-											<Calendar size={13} className={post.dateIconColor} />
-											{post.date}
+											<Calendar size={13} className={accent} />
+											{formatDate(post.published_at)}
 										</div>
 									</Link>
 								</Reveal>
