@@ -36,7 +36,7 @@ export function HeroSection() {
 								<MapPin size={13} />
 								Serving Greater Seattle
 							</div>
-							<h1 className="font-heading text-[clamp(2.475rem,5.4vw,4.05rem)] font-semibold leading-[1.1] text-white tracking-[-0.025em] [text-shadow:0_4px_24px_rgba(0,0,0,0.35)] max-w-[558px] mb-4">
+							<h1 className="font-heading text-[clamp(2.475rem,5.4vw,4.05rem)] font-semibold leading-[1.1] text-white tracking-[-0.025em] [text-shadow:0_4px_24px_rgba(0,0,0,0.35)] max-w-[700px] mb-4">
 								House Cleaning Services in Seattle, WA
 							</h1>
 		
