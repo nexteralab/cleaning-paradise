@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Lora, Poppins } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -111,19 +110,16 @@ export default function RootLayout({
 					type="application/ld+json"
 					dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
 				/>
+				{/* ponytail: script crudo en <head>, no next/script. afterInteractive lo inyecta
+				    en cliente y el verificador de GA4 (que no ejecuta JS) no lo ve. */}
+				<script async src="https://www.googletagmanager.com/gtag/js?id=G-K92THXSRRF" />
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-K92THXSRRF');`,
+					}}
+				/>
 			</head>
 			<body className={`${lora.variable} ${poppins.variable} antialiased`}>
-				{/* ponytail: next/script con afterInteractive — sin @next/third-parties. */}
-				<Script
-					src="https://www.googletagmanager.com/gtag/js?id=G-K92THXSRRF"
-					strategy="afterInteractive"
-				/>
-				<Script id="ga4" strategy="afterInteractive">{`
-					window.dataLayer = window.dataLayer || [];
-					function gtag(){dataLayer.push(arguments);}
-					gtag('js', new Date());
-					gtag('config', 'G-K92THXSRRF');
-				`}</Script>
 				<a
 					href="#main"
 					className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[10000] focus:rounded-lg focus:bg-ink-900 focus:px-4 focus:py-2 focus:text-white"
