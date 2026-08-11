@@ -114,7 +114,7 @@ export default function CleaningServicesInWaPage() {
 								</span>
 							</h1>
 							<p className="mb-[34px] max-w-[520px] text-[clamp(17px,1.4vw,18px)] leading-[1.72] text-white/[0.88]">
-								From weekly home maintenance to move-out deep cleans and commercial spaces — Cleaning
+								From weekly home maintenance to move-out deep cleans and commercial spaces, Cleaning
 								Paradise has the right service for you, with 100% satisfaction guaranteed.
 							</p>
 							<div className="flex flex-wrap gap-3.5">
