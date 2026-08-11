@@ -6,6 +6,7 @@ export const metadata: Metadata = {
 	title: "Contact | Cleaning Paradise — Get Your Free Cleaning Quote",
 	description:
 		"Fill out the form and we'll reach out within one business day with a quote and available appointment times. Serving Seattle, Lynnwood, Bellevue, Kirkland and the greater Seattle area.",
+	alternates: { canonical: "/contact" },
 };
 
 const socialClass =

@@ -176,15 +176,15 @@ export const locations: Record<string, Location> = {
 		homes: 85,
 		pin: { left: "56%", top: "30%" },
 	},
-	mulkiteo: {
-		slug: "mulkiteo",
-		// ponytail: reusa edmonds.png (ciudad costera vecina) — cambiar cuando llegue mulkiteo.png
-		name: "Mulkiteo",
+	mukilteo: {
+		slug: "mukilteo",
+		// ponytail: reusa edmonds.png (ciudad costera vecina) — cambiar cuando llegue mukilteo.png
+		name: "Mukilteo",
 		img: "/img/locations/edmonds.png",
 		before: "/img/locations/nursery-before-house-cleaning.webp",
 		after: "/img/locations/nursery-after-house-cleaning.webp",
-		beforeAlt: "Toys scattered across a nursery before house cleaning in Mulkiteo, WA",
-		afterAlt: "Tidy nursery after house cleaning in Mulkiteo, WA",
+		beforeAlt: "Toys scattered across a nursery before house cleaning in Mukilteo, WA",
+		afterAlt: "Tidy nursery after house cleaning in Mukilteo, WA",
 		blurb:
 			"Waterfront homes and quiet bluff neighborhoods north of Edmonds — detailed cleaning with easy ferry-side scheduling.",
 		hoods: "Old Town · Harbour Pointe · Japanese Gulch",

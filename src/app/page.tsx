@@ -12,6 +12,7 @@ export const metadata: Metadata = {
 	title: "House Cleaning Services in Seattle, WA | Cleaning Paradise",
 	description:
 		"Spotless homes, reliable maids, and a housekeeping experience that makes coming home the best part of your day. Serving Seattle, Lynnwood, Bellevue, Kirkland, and surrounding communities.",
+	alternates: { canonical: "/" },
 };
 
 /* ============ TRUST INDICATORS ============ */

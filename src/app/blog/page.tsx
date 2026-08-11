@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 	title: "Cleaning Tips & Local Stories | Cleaning Paradise",
 	description:
 		"Expert advice on maintaining your home, seasonal cleaning guides, and stories from the neighborhoods we serve across Greater Seattle.",
+	alternates: { canonical: "/blog" },
 };
 
 

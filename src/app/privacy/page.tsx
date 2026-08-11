@@ -4,6 +4,7 @@ export const metadata: Metadata = {
 	title: "Privacy Policy | Cleaning Paradise",
 	description:
 		"How Cleaning Paradise LLC collects, uses and protects the personal information you submit through our website.",
+	alternates: { canonical: "/privacy" },
 };
 
 // ponytail: baseline policy accurate to what the site actually does today

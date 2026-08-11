@@ -20,6 +20,7 @@ export const metadata: Metadata = {
 	title: "About Us — Cleaning Paradise",
 	description:
 		"We clean so you can live freely. Cleaning Paradise was born from a simple belief: every family deserves a spotless home without the stress of doing it themselves. Based in Lynnwood, WA — serving Greater Seattle since 2014.",
+	alternates: { canonical: "/about-us" },
 };
 
 const stats = [

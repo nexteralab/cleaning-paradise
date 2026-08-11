@@ -36,6 +36,7 @@ export async function generateMetadata({
 	return {
 		title: `House Cleaning Services in ${loc.name}, WA | Cleaning Paradise`,
 		description: `Your local maids in ${loc.name}, WA. Cleaning Paradise offers licensed, insured residential and commercial cleaning with same-week availability and a 100% satisfaction guarantee.`,
+		alternates: { canonical: `/locations/${slug}` },
 	};
 }
 

@@ -176,7 +176,7 @@ export const steps: Step[] = [
 			"Shoreline",
 			"Edmonds",
 			"Bothell",
-			"Mulkiteo",
+			"Mukilteo",
 			"Other",
 		],
 		validate: (raw) => {
@@ -188,7 +188,7 @@ export const steps: Step[] = [
 				"Shoreline",
 				"Edmonds",
 				"Bothell",
-				"Mulkiteo",
+				"Mukilteo",
 			];
 			const m = matchOption(raw, opts);
 			if (m) return { ok: true, value: m };

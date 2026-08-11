@@ -57,7 +57,11 @@ export async function generateMetadata({
 	const { slug } = await params;
 	const service = services[slug];
 	if (!service) return {};
-	return { title: service.metaTitle, description: service.metaDescription };
+	return {
+		title: service.metaTitle,
+		description: service.metaDescription,
+		alternates: { canonical: `/cleaning-services-in-wa/${slug}` },
+	};
 }
 
 const galleryImages: { src: string; alt: string; wide: boolean }[] = [

@@ -16,6 +16,7 @@ export const metadata: Metadata = {
 	title: "Cleaning Services in WA | Cleaning Paradise — The clean you deserve, every single time",
 	description:
 		"From weekly home maintenance to move-out deep cleans and commercial spaces — Cleaning Paradise has the right service for you, with 100% satisfaction guaranteed.",
+	alternates: { canonical: "/cleaning-services-in-wa" },
 };
 
 type ServiceCard = {

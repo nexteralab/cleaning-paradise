@@ -16,6 +16,7 @@ export const metadata: Metadata = {
   title: "Professional Cleaning in Your City | Cleaning Paradise",
   description:
     "Cleaning Paradise brings expert residential and commercial cleaning services to neighborhoods across King and Snohomish County. Find your local team and book a free quote today.",
+  alternates: { canonical: "/locations" },
 };
 
 type City = {

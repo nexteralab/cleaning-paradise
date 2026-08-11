@@ -4,6 +4,7 @@ export const metadata: Metadata = {
 	title: "Terms of Service | Cleaning Paradise",
 	description:
 		"The terms that govern quotes, bookings and use of the Cleaning Paradise LLC website.",
+	alternates: { canonical: "/terms" },
 };
 
 // ponytail: baseline terms covering the site's actual flow (quote requests are

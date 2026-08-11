@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 	return {
 		title: post.meta_title ?? `${post.title} | Cleaning Paradise Blog`,
 		description: post.meta_description ?? post.lead,
+		alternates: { canonical: `/blog/${slug}` },
 	};
 }
 

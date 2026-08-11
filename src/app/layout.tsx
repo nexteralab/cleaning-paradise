@@ -79,7 +79,7 @@ const localBusinessJsonLd = {
 		"Shoreline",
 		"Edmonds",
 		"Bothell",
-		"Mulkiteo"
+		"Mukilteo"
 	].map((name) => ({ "@type": "City", name })),
 	openingHoursSpecification: {
 		"@type": "OpeningHoursSpecification",
