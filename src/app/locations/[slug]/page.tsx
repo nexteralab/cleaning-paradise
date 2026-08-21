@@ -33,10 +33,22 @@ export async function generateMetadata({
 	const { slug } = await params;
 	const loc = locations[slug];
 	if (!loc) return {};
+	const canonical = `/locations/${slug}`;
 	return {
-		title: `House Cleaning Services in ${loc.name}, WA | Cleaning Paradise`,
-		description: `Your local maids in ${loc.name}, WA. Cleaning Paradise offers licensed, insured residential and commercial cleaning with same-week availability and a 100% satisfaction guarantee.`,
-		alternates: { canonical: `/locations/${slug}` },
+		title: loc.metaTitle,
+		description: loc.metaDescription,
+		alternates: { canonical },
+		openGraph: {
+			title: loc.ogTitle,
+			description: loc.ogDescription,
+			url: canonical,
+			type: "website",
+		},
+		twitter: {
+			card: "summary_large_image",
+			title: loc.ogTitle,
+			description: loc.ogDescription,
+		},
 	};
 }
 

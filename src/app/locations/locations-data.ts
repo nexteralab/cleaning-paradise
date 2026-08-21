@@ -43,6 +43,10 @@ export type Location = {
 	homes: number;
 	hq?: boolean;
 	pin: { left: string; top: string }; // position on the decorative map (0-100%)
+	metaTitle: string; // <title>, unique per city, max 60 chars
+	metaDescription: string; // meta description, 120-158 chars
+	ogTitle: string; // og:title, must NOT be shared across cities
+	ogDescription: string; // og:description, must NOT be shared across cities
 };
 
 export const locations: Record<string, Location> = {
@@ -61,6 +65,12 @@ export const locations: Record<string, Location> = {
 		resp: "Same day",
 		homes: 180,
 		pin: { left: "41%", top: "66%" },
+		metaTitle: "Top-Rated House Cleaning in Seattle, WA | Cleaning Paradise",
+		metaDescription:
+			"Maids who know Seattle, from Capitol Hill walk-ups to Ballard bungalows. Licensed, insured, same-week openings. Get your free quote today.",
+		ogTitle: "House Cleaning in Seattle, WA | Cleaning Paradise",
+		ogDescription:
+			"Capitol Hill, Ballard, Queen Anne and Fremont homes cleaned by insured local maids. Standard, deep and move-out cleaning from $55/hr.",
 	},
 	bellevue: {
 		slug: "bellevue",
@@ -77,6 +87,12 @@ export const locations: Record<string, Location> = {
 		resp: "2 hrs",
 		homes: 120,
 		pin: { left: "67%", top: "62%" },
+		metaTitle: "Bellevue Maid Service & House Cleaning | Cleaning Paradise",
+		metaDescription:
+			"Downtown Bellevue, Somerset, Bridle Trails and Newport homes cleaned by background-checked teams. Transparent $55/hr pricing, no surprises.",
+		ogTitle: "Maid Service in Bellevue, WA | Cleaning Paradise",
+		ogDescription:
+			"Detail-driven Eastside house cleaning for Downtown, Somerset, Bridle Trails and Newport. Licensed, insured and eco-friendly.",
 	},
 	kirkland: {
 		slug: "kirkland",
@@ -93,6 +109,12 @@ export const locations: Record<string, Location> = {
 		resp: "3 hrs",
 		homes: 95,
 		pin: { left: "64%", top: "44%" },
+		metaTitle: "Kirkland Maid Service & Deep Cleaning | Cleaning Paradise",
+		metaDescription:
+			"Lakeside living, spotless home. Our Kirkland maids cover Moss Bay, Juanita, Houghton and Totem Lake with deep, standard and move-out cleans.",
+		ogTitle: "House Cleaners in Kirkland, WA | Cleaning Paradise",
+		ogDescription:
+			"Moss Bay, Juanita, Houghton and Totem Lake cleaning by a 4.9-star local team. Weekly, biweekly or one-time visits.",
 	},
 	lynnwood: {
 		slug: "lynnwood",
@@ -110,6 +132,12 @@ export const locations: Record<string, Location> = {
 		homes: 160,
 		hq: true,
 		pin: { left: "40%", top: "28%" },
+		metaTitle: "Lynnwood, WA House Cleaning | Local Team | Cleaning Paradise",
+		metaDescription:
+			"Lynnwood is home base for our crews, so Alderwood, Martha Lake and Mill Creek get the fastest scheduling. Same-week cleanings from $55/hr.",
+		ogTitle: "House Cleaning in Lynnwood, WA | Cleaning Paradise",
+		ogDescription:
+			"Our home base. Alderwood, Martha Lake and Mill Creek homes cleaned fast by insured, background-checked housekeepers.",
 	},
 	"mercer-island": {
 		slug: "mercer-island",
@@ -126,6 +154,12 @@ export const locations: Record<string, Location> = {
 		resp: "3 hrs",
 		homes: 60,
 		pin: { left: "56%", top: "73%" },
+		metaTitle: "Mercer Island Home & Deep Cleaning | Cleaning Paradise",
+		metaDescription:
+			"Spacious Island homes deserve careful hands. EPA-approved products and vetted housekeepers serving North End, East Seattle and Mercerwood.",
+		ogTitle: "Home Cleaning on Mercer Island, WA | Cleaning Paradise",
+		ogDescription:
+			"Eco-conscious cleaning for North End, East Seattle and Mercerwood homes. Licensed, insured, 100% satisfaction guaranteed.",
 	},
 	shoreline: {
 		slug: "shoreline",
@@ -142,6 +176,12 @@ export const locations: Record<string, Location> = {
 		resp: "4 hrs",
 		homes: 70,
 		pin: { left: "45%", top: "50%" },
+		metaTitle: "Shoreline House Cleaning | Same-Week | Cleaning Paradise",
+		metaDescription:
+			"We clean where we are based: Richmond Beach, Echo Lake and Ridgecrest. Recurring, deep and move-in/out cleaning by insured local housekeepers.",
+		ogTitle: "House Cleaning in Shoreline, WA | Cleaning Paradise",
+		ogDescription:
+			"Richmond Beach, Echo Lake and Ridgecrest homes cleaned by your neighbors. Same-week openings, flat hourly pricing.",
 	},
 	edmonds: {
 		slug: "edmonds",
@@ -158,6 +198,12 @@ export const locations: Record<string, Location> = {
 		resp: "2 hrs",
 		homes: 65,
 		pin: { left: "23%", top: "37%" },
+		metaTitle: "Edmonds Maid Service | Coastal Homes | Cleaning Paradise",
+		metaDescription:
+			"Coastal homes near Downtown Edmonds, Seaview and Perrinville, cleaned top to bottom. Weekly, biweekly or one-time visits, satisfaction guaranteed.",
+		ogTitle: "Maid Service in Edmonds, WA | Cleaning Paradise",
+		ogDescription:
+			"Downtown, Seaview and Perrinville homes cleaned minutes from our Lynnwood HQ. Standard, deep, move-in/out and carpet cleaning.",
 	},
 	bothell: {
 		slug: "bothell",
@@ -175,6 +221,12 @@ export const locations: Record<string, Location> = {
 		resp: "3 hrs",
 		homes: 85,
 		pin: { left: "56%", top: "30%" },
+		metaTitle: "Bothell House Cleaning | 85+ Homes | Cleaning Paradise",
+		metaDescription:
+			"Over 85 Bothell homes cleaned and counting, from Canyon Park and North Creek to Queensgate and Downtown. Flexible weekday and weekend slots.",
+		ogTitle: "House Cleaning in Bothell, WA | Cleaning Paradise",
+		ogDescription:
+			"Canyon Park, North Creek, Queensgate and Downtown Bothell cleaning from $55/hr. Insured, background-checked, 4.9 stars.",
 	},
 	mukilteo: {
 		slug: "mukilteo",
@@ -192,6 +244,12 @@ export const locations: Record<string, Location> = {
 		resp: "3 hrs",
 		homes: 55,
 		pin: { left: "21%", top: "16%" },
+		metaTitle: "Mukilteo Cleaning Service & Maids | Cleaning Paradise",
+		metaDescription:
+			"Waterfront and bluff homes in Old Town, Harbour Pointe and Japanese Gulch, cleaned around the ferry schedule. Licensed, insured and guaranteed.",
+		ogTitle: "Cleaning Service in Mukilteo, WA | Cleaning Paradise",
+		ogDescription:
+			"Old Town, Harbour Pointe and Japanese Gulch homes cleaned by a trusted Snohomish County team. Book a free quote in minutes.",
 	},
 };
 

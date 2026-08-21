@@ -13,10 +13,23 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Professional Cleaning in Your City | Cleaning Paradise",
+  title: "Service Areas in King & Snohomish County | Cleaning Paradise",
   description:
-    "Cleaning Paradise brings expert residential and commercial cleaning services to neighborhoods across King and Snohomish County. Find your local team and book a free quote today.",
+    "Find your local Cleaning Paradise team across nine cities, from Seattle and Bellevue to Edmonds and Mukilteo. Compare services and book a free quote.",
   alternates: { canonical: "/locations" },
+  openGraph: {
+    title: "Our Service Areas | Cleaning Paradise",
+    description:
+      "Residential and commercial cleaning across King and Snohomish County. Nine local teams, one standard of clean.",
+    url: "/locations",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Our Service Areas | Cleaning Paradise",
+    description:
+      "Residential and commercial cleaning across King and Snohomish County. Nine local teams, one standard of clean.",
+  },
 };
 
 type City = {
