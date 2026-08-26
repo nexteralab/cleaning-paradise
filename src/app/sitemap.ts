@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { serviceSlugs } from "./cleaning-services-in-wa/[slug]/services-data";
+import { checklistPages } from "@/features/checklists/checklists-data";
 import { locationSlugs } from "./locations/locations-data";
 import { getPublishedPosts } from "@/lib/blog";
 
@@ -21,6 +22,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 		"/about-us",
 		"/blog",
 		"/cleaning-services-in-wa",
+		"/cleaning-services-in-wa/checklists",
 		"/contact",
 		"/locations",
 		"/privacy",
@@ -34,6 +36,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 			changeFrequency: "weekly" as const,
 			priority: p === "" ? 1 : 0.8,
 		})),
+		// Only checklists with real content — placeholders are noindex.
+		...checklistPages
+			.filter((c) => c.rooms)
+			.map((c) => ({
+				url: `${base}/cleaning-services-in-wa/${c.service}/${c.checklist}`,
+				lastModified: now,
+				changeFrequency: "monthly" as const,
+				priority: 0.6,
+			})),
 		...serviceSlugs.map((s) => ({
 			url: `${base}/cleaning-services-in-wa/${s}`,
 			lastModified: now,
