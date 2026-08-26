@@ -1,6 +1,8 @@
+// The shared body of the four checklist pages. Each route hardcodes its own
+// service/checklist pair and hands the matching data object in here, so there
+// are no dynamic params to resolve — that's what kept 404ing in production.
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import {
 	AppWindow,
 	ArrowRight,
@@ -9,8 +11,8 @@ import {
 	ChevronDown,
 	Footprints,
 	Grid2x2,
-	House,
 	HardHat,
+	House,
 	ListChecks,
 	Microwave,
 	Phone,
@@ -22,11 +24,11 @@ import {
 	type LucideIcon,
 } from "lucide-react";
 import JsonLd from "@/components/JsonLd";
-import {
-	findChecklist,
-	type AddonIcon,
-	type NotePart,
-	type RoomIcon,
+import type {
+	AddonIcon,
+	ChecklistPage,
+	NotePart,
+	RoomIcon,
 } from "./checklists-data";
 
 const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://cleaningparadisellc.com";
@@ -50,32 +52,19 @@ const addonIcons: Record<AddonIcon, LucideIcon> = {
 	home: House,
 };
 
-// No generateStaticParams here on purpose. The parent [slug] segment has one, so
-// Next would call this per service and, for the services with no checklist, pass
-// the parent params through with `checklist` undefined — which fails the build
-// ("A required parameter (checklist) was not provided as a string"). These four
-// pages render on demand and cache instead; findChecklist below 404s anything
-// that isn't a real service/checklist pair, so no bogus combination is indexable.
-
-export async function generateMetadata({
-	params,
-}: {
-	params: Promise<{ slug: string; checklist: string }>;
-}): Promise<Metadata> {
-	const { slug, checklist } = await params;
-	const page = findChecklist(slug, checklist);
-	if (!page) return {};
-	const url = `${base}/cleaning-services-in-wa/${slug}/${checklist}`;
+/** Metadata for a checklist route — same shape for all four. */
+export function checklistMetadata(page: ChecklistPage): Metadata {
+	const path = `/cleaning-services-in-wa/${page.service}/${page.checklist}`;
 	return {
 		title: page.metaTitle,
 		description: page.description,
-		alternates: { canonical: `/cleaning-services-in-wa/${slug}/${checklist}` },
+		alternates: { canonical: path },
 		openGraph: {
 			type: "article",
 			siteName: "Cleaning Paradise",
 			title: page.metaTitle,
 			description: page.description,
-			url,
+			url: `${base}${path}`,
 		},
 		// Placeholders stay out of the index until their rooms are written.
 		...(page.rooms ? {} : { robots: { index: false, follow: true } }),
@@ -106,17 +95,9 @@ function SectionPill({ children }: { children: React.ReactNode }) {
 	);
 }
 
-export default async function ChecklistPage({
-	params,
-}: {
-	params: Promise<{ slug: string; checklist: string }>;
-}) {
-	const { slug, checklist } = await params;
-	const page = findChecklist(slug, checklist);
-	if (!page) notFound();
-
-	const url = `${base}/cleaning-services-in-wa/${slug}/${checklist}`;
-	const servicePath = `/cleaning-services-in-wa/${slug}`;
+export default function ChecklistPageView({ page }: { page: ChecklistPage }) {
+	const url = `${base}/cleaning-services-in-wa/${page.service}/${page.checklist}`;
+	const servicePath = `/cleaning-services-in-wa/${page.service}`;
 
 	return (
 		<div className="relative w-full overflow-x-clip">

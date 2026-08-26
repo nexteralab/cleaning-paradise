@@ -767,3 +767,13 @@ export const checklistPages: ChecklistPage[] = [
 
 export const findChecklist = (service: string, checklist: string) =>
 	checklistPages.find((p) => p.service === service && p.checklist === checklist);
+
+/**
+ * Same lookup, but throws instead of returning undefined — the four checklist
+ * routes hardcode their pair, so a typo should break the build, not ship a 404.
+ */
+export function getChecklist(service: string, checklist: string): ChecklistPage {
+	const page = findChecklist(service, checklist);
+	if (!page) throw new Error(`No checklist data for ${service}/${checklist}`);
+	return page;
+}
