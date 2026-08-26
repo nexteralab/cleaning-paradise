@@ -274,15 +274,14 @@ export default function ChecklistPageView({ page }: { page: ChecklistPage }) {
 								<SectionPill>ADD-ONS (FLAT RATE)</SectionPill>
 								<div className="-mt-5 rounded-[20px] border-[1.5px] border-[#FFC2E5] bg-white px-[22px] pt-10 pb-[26px]">
 									<div
-									className={`grid grid-cols-2 ${page.addons.length === 5 ? "md:grid-cols-5" : "md:grid-cols-4"}`}
+									className={`grid grid-cols-1 ${page.addons.length === 5 ? "md:grid-cols-5" : "md:grid-cols-4"}`}
 								>
 										{page.addons.map((addon, i) => {
 											const AddonIconCmp = addonIcons[addon.icon];
 											return (
 												<div
 													key={addon.label}
-													className={`px-3.5 text-center ${i % 2 === 1 ? "border-l border-[#FFDDF1]" : ""} ${i > 0 ? "md:border-l md:border-[#FFDDF1]" : ""
-														} ${i > 1 ? "mt-6 md:mt-0" : ""}`}
+													className={`px-3.5 text-center ${i > 0 ? "mt-6 border-t border-[#FFDDF1] pt-6 md:mt-0 md:border-t-0 md:border-l md:pt-0" : ""}`}
 												>
 													<AddonIconCmp
 														size={34}
