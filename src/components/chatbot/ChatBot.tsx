@@ -16,6 +16,38 @@ import { getLead, resetLead, setLead, type Lead } from "./leadStore";
 
 type Msg = { id: number; from: "bot" | "user"; text: string };
 
+// The conversation is the /contact form in disguise, so it posts the same
+// payload to the same endpoint — that's what triggers the lead email.
+async function submitLead(lead: Lead): Promise<boolean> {
+	const parts = (lead.name ?? "").trim().split(/\s+/);
+	const firstName = parts.shift() ?? "";
+	try {
+		const res = await fetch("/api/contact", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				firstName,
+				lastName: parts.join(" ") || null,
+				email: lead.email ?? "",
+				phone: lead.phone ?? null,
+				service: lead.service ?? null,
+				street: lead.street ?? null,
+				services: lead.service ? [lead.service] : [],
+				city: lead.city ?? null,
+				sqft: lead.sqft || null,
+				pets: lead.pets ?? null,
+				date: lead.date || null,
+				frequency: lead.frequency ?? null,
+				notes: lead.notes || null,
+				source: "chatbot",
+			}),
+		});
+		return res.ok;
+	} catch {
+		return false;
+	}
+}
+
 // Simulated AI booking assistant. Walks the visitor through the /contact form
 // fields conversationally, validates each answer, and persists to the lead
 // store. Floats bottom-right (opposite the MusicPlayer).
@@ -26,11 +58,16 @@ export default function ChatBot() {
 	const [stepIndex, setStepIndex] = useState(-1); // -1 = intro not run yet
 	const [typing, setTyping] = useState(false);
 	const [done, setDone] = useState(false);
+	const [failed, setFailed] = useState(false);
 	const [input, setInput] = useState("");
 
 	const idRef = useRef(0);
 	const scrollRef = useRef<HTMLDivElement>(null);
 	const startedRef = useRef(false);
+	const sendingRef = useRef(false);
+	const timerRef = useRef<number | null>(null);
+	// Bumped on restart so a line still "being typed" never lands in the new chat.
+	const genRef = useRef(0);
 
 	const nextId = () => ++idRef.current;
 	const pushUser = (text: string) =>
@@ -41,9 +78,13 @@ export default function ChatBot() {
 	// bot "types" then speaks — delay scales with message length
 	const botSay = (text: string) =>
 		new Promise<void>((resolve) => {
+			const gen = genRef.current;
 			setTyping(true);
 			const delay = 450 + Math.min(text.length * 14, 1300);
-			window.setTimeout(() => {
+			timerRef.current = window.setTimeout(() => {
+				// Restarted mid-sentence: drop the line and leave this promise
+				// unresolved so the abandoned conversation stops right here.
+				if (gen !== genRef.current) return;
 				setTyping(false);
 				pushBot(text);
 				resolve();
@@ -67,10 +108,15 @@ export default function ChatBot() {
 	}, [open]);
 
 	const restart = () => {
+		genRef.current++;
+		if (timerRef.current) window.clearTimeout(timerRef.current);
+		setTyping(false);
 		resetLead();
 		setMessages([]);
 		setStepIndex(-1);
 		setDone(false);
+		setFailed(false);
+		sendingRef.current = false;
 		setInput("");
 		startedRef.current = false;
 		// re-trigger intro
@@ -108,15 +154,35 @@ export default function ChatBot() {
 		} else {
 			setStepIndex(next);
 			setLead({ completedAt: new Date().toISOString() });
-			await botSay(finalMessage(getLead()));
-			setDone(true);
+			await send();
 		}
+	}
+
+	// Posts the lead and closes the conversation. Kept separate so a failed
+	// send can be retried without replaying the questions.
+	async function send() {
+		if (sendingRef.current) return;
+		sendingRef.current = true;
+		setTyping(true);
+		const lead = getLead();
+		const ok = await submitLead(lead);
+		setTyping(false);
+		sendingRef.current = false;
+		setFailed(!ok);
+		// Only clear on success — a failed send still needs the answers to retry.
+		if (ok) resetLead();
+		await botSay(
+			ok
+				? finalMessage(lead)
+				: "I couldn't send your request just now. Tap \u201cSend again\u201d below, or call us at (425) 610-0241 and we'll take it from there.",
+		);
+		setDone(ok);
 	}
 
 	if (pathname?.startsWith("/admin")) return null;
 
 	const current = stepIndex >= 0 && stepIndex < steps.length ? steps[stepIndex] : null;
-	const showChips = !!current && !typing && !done;
+	const showChips = !!current && !typing && !done && !failed;
 
 	return (
 		<>
@@ -189,6 +255,18 @@ export default function ChatBot() {
 					</div>
 
 					{/* quick-reply chips */}
+					{failed && !typing && (
+						<div className="flex flex-wrap gap-2 border-t border-ink-200 bg-white px-4 pt-3">
+							<button
+								type="button"
+								onClick={() => void send()}
+								className="cursor-pointer rounded-full bg-pink-500 px-3.5 py-1.5 text-[12.5px] font-semibold text-white transition-colors hover:bg-pink-600"
+							>
+								Send again
+							</button>
+						</div>
+					)}
+
 					{showChips && (current.options || current.optional) && (
 						<div className="flex flex-wrap gap-2 border-t border-ink-200 bg-white px-4 pt-3">
 							{current.options?.map((o) => (

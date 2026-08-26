@@ -2,8 +2,8 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Plus, ShieldCheck } from "lucide-react";
-import type { ServiceFaq } from "./services-data";
+import { ArrowRight, Info, ListChecks, Plus, ShieldCheck, Sparkles } from "lucide-react";
+import type { ServiceFaq, ServiceNotesTab } from "./services-data";
 import SuccessModal from "@/components/SuccessModal";
 
 /* ─── Before / After slider (hero) ─── */
@@ -310,5 +310,90 @@ export function FaqAccordion({ items }: { items: ServiceFaq[] }) {
 				);
 			})}
 		</div>
+	);
+}
+
+/* ─── Service notes ("Good to Know Before Your Visit") ─── */
+
+const noteIcons = { info: Info, sparkles: Sparkles, "shield-check": ShieldCheck } as const;
+
+export function ServiceNotes({ tabs }: { tabs: ServiceNotesTab[] }) {
+	const [active, setActive] = useState(0);
+	const tab = tabs[active] ?? tabs[0];
+	if (!tab) return null;
+
+	return (
+		<>
+			<div className="mb-[clamp(30px,3.4vw,44px)] flex flex-wrap items-end justify-between gap-5">
+				<div className="max-w-[640px]">
+					<div className="mb-3.5 text-[13px] font-bold tracking-[.1em] text-pink-500 uppercase">
+						Service Notes
+					</div>
+					<h2 className="font-heading text-[clamp(28px,3.2vw,48px)] leading-[1.15] font-normal tracking-[-0.02em] text-ink-900">
+						Good to Know Before Your Visit
+					</h2>
+				</div>
+				{tab.cta && (
+					<Link
+						href={tab.cta.href}
+						className="inline-flex shrink-0 items-center gap-2 rounded-full border-[1.5px] border-[#C9D3F0] bg-white px-6 py-3 text-[15px] font-semibold text-blue-600 no-underline transition-colors hover:border-blue-600 hover:bg-[#F3F6FF]"
+					>
+						<ListChecks size={16} />
+						{tab.cta.label}
+					</Link>
+				)}
+			</div>
+
+			{tabs.length > 1 && (
+				<div role="tablist" className="mb-[clamp(26px,3vw,36px)] flex gap-[18px] border-b border-pink-100">
+					{tabs.map((t, i) => (
+						<button
+							key={t.label}
+							type="button"
+							role="tab"
+							aria-selected={i === active}
+							onClick={() => setActive(i)}
+							className={`-mb-px cursor-pointer border-b-2 px-1 py-2.5 text-sm font-semibold transition-colors ${i === active
+								? "border-pink-500 text-pink-500"
+								: "border-transparent text-[#9090A8] hover:text-ink-800"
+								}`}
+						>
+							{t.label}
+						</button>
+					))}
+				</div>
+			)}
+
+			{tab.lead && (
+				<p className="mb-[clamp(26px,3vw,36px)] max-w-[760px] text-[clamp(16px,1.4vw,18px)] leading-[1.75] text-[#3A3A52] text-pretty">
+					{tab.lead}
+				</p>
+			)}
+
+			<div className="grid grid-cols-1 gap-[clamp(28px,4vw,64px)] md:grid-cols-3">
+				{tab.groups.map((group) => {
+					const GroupIcon = noteIcons[group.icon as keyof typeof noteIcons] ?? Info;
+					return (
+						<div key={group.title}>
+							<div className="mb-3 flex items-center gap-[9px]">
+								<GroupIcon size={16} className="text-blue-600" />
+								<div className="text-xs font-bold tracking-[.09em] text-pink-500 uppercase">
+									{group.title}
+								</div>
+							</div>
+							<div className="mb-[18px] h-0.5 w-[34px] bg-pink-200" />
+							<div className="flex flex-col gap-3.5">
+								{group.items.map((item) => (
+									<div key={item} className="flex gap-[11px]">
+										<div className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-pink-500" />
+										<p className="text-[15px] leading-[1.7] text-ink-600 text-pretty">{item}</p>
+									</div>
+								))}
+							</div>
+						</div>
+					);
+				})}
+			</div>
+		</>
 	);
 }

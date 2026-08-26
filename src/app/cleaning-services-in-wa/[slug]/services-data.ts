@@ -14,7 +14,9 @@ export type IconName =
 	| "clock"
 	| "circle-check"
 	| "box"
-	| "tag";
+	| "tag"
+	| "info"
+	| "shield-check";
 
 export interface TitlePart {
 	text: string;
@@ -33,6 +35,21 @@ export interface ServiceFeature {
 	icon: IconName;
 	title: string;
 	text: string;
+}
+
+export interface ServiceNoteGroup {
+	icon: IconName;
+	title: string;
+	items: string[];
+}
+
+/** One tab of the "Good to Know Before Your Visit" section. A single tab renders without the tab bar. */
+export interface ServiceNotesTab {
+	label: string;
+	lead?: string;
+	groups: ServiceNoteGroup[];
+	/** Checklist link shown beside the heading while this tab is active. */
+	cta?: { label: string; href: string };
 }
 
 export interface ServiceContent {
@@ -65,6 +82,7 @@ export interface ServiceContent {
 	coverageText: string;
 	faqHeading: string;
 	faqs: ServiceFaq[];
+	serviceNotes?: ServiceNotesTab[];
 }
 
 const defaultFrequencyChips = [
@@ -169,6 +187,44 @@ export const services: Record<string, ServiceContent> = {
 				],
 			},
 		],
+		serviceNotes: [
+			{
+				label: "Standard cleaning",
+				cta: {
+					label: "See the Standard Cleaning checklist",
+					href: "/cleaning-services-in-wa/standard-cleaning/standard-checklist",
+				},
+				groups: [
+					{
+						icon: "info",
+						title: "About Standard Cleaning",
+						items: [
+							"A routine maintenance clean to keep your home fresh between deep cleans, perfect for weekly, biweekly, or monthly upkeep",
+							"Covers accessible surfaces and high-touch areas",
+							"We do not move heavy furniture or appliances",
+						],
+					},
+					{
+						icon: "sparkles",
+						title: "What to Expect",
+						items: [
+							"Light dusting, tidying, and surface cleaning throughout the home",
+							"Light decluttering only, we don't organize or move personal belongings unless requested",
+							"Beds made on request",
+						],
+					},
+					{
+						icon: "shield-check",
+						title: "Guidelines",
+						items: [
+							"Trash removal includes bagged household trash only",
+							"Deep scrubbing (grout, blinds, fans, under furniture) is an add-on, not included",
+							"For heavy buildup or first-time cleans, we recommend a Deep Clean",
+						],
+					},
+				],
+			},
+		],
 	},
 
 	"deep-cleaning": { // CHECK
@@ -254,6 +310,46 @@ export const services: Record<string, ServiceContent> = {
 				q: "How often should I book a deep clean?",
 				a: [
 					"Most homes benefit from a deep clean every 3 to 6 months, especially before seasonal changes or after a health event. Many clients then keep results going with recurring housekeeping in between.",
+				],
+			},
+		],
+		serviceNotes: [
+			{
+				label: "Deep cleaning",
+				cta: {
+					label: "See the Deep Cleaning checklist",
+					href: "/cleaning-services-in-wa/deep-cleaning/deep-checklist",
+				},
+				groups: [
+					{
+						icon: "info",
+						title: "About Deep Cleaning",
+						items: [
+							"Targets areas often missed in routine cleanings, ideal for first-time visits, move-ins, or seasonal resets",
+							"Service covers accessible surfaces only",
+							"We do not move heavy furniture or appliances",
+							"Water & electricity must be available at the time of service",
+						],
+					},
+					{
+						icon: "sparkles",
+						title: "Condition & Results",
+						items: [
+							"Heavy buildup (grease, hard water, mold) may require added time, charges, or multiple cleanings",
+							"Some stains or buildup may be permanent and not fully removable",
+							"Heavy-condition homes are quoted at +$50–$150",
+						],
+					},
+					{
+						icon: "shield-check",
+						title: "Guidelines",
+						items: [
+							"Not responsible for pre-existing damage",
+							"Trash removal includes bagged household trash only, no haul-away",
+							"Includes a final walkthrough for quality assurance",
+							"Wall cleaning performed only on washable paint",
+						],
+					},
 				],
 			},
 		],
@@ -445,6 +541,89 @@ export const services: Record<string, ServiceContent> = {
 				],
 			},
 		],
+		serviceNotes: [
+			{
+				label: "Move-in cleaning",
+				lead: "Move-in cleaning is a deep clean of an empty home, completed before your furniture and belongings arrive.",
+				cta: {
+					label: "See the Move-In Cleaning checklist",
+					href: "/cleaning-services-in-wa/move-in-out/move-in-checklist",
+				},
+				groups: [
+					{
+						icon: "info",
+						title: "General",
+						items: [
+							"Move-in cleaning is best completed before your furniture and belongings move in",
+							"Service covers accessible surfaces only",
+							"We do not move heavy furniture or appliances",
+							"Water and electricity must be available at the property at the time of service",
+						],
+					},
+					{
+						icon: "sparkles",
+						title: "Condition & Results",
+						items: [
+							"Some stains or buildup already in the home may be permanent and not fully removable",
+							"Heavy buildup such as grease, hard water or mold may require added time, added charges, or multiple cleanings",
+							"Carpet cleaning may be included as spot cleaning when the carpet allows, or quoted separately",
+						],
+					},
+					{
+						icon: "shield-check",
+						title: "Guidelines",
+						items: [
+							"Inside the fridge, oven and cabinets are flat rate add-ons, cleaned only when empty and accessible",
+							"Interior windows are available as a flat rate add-on, priced per pane",
+							"Wall cleaning is available by request and is performed only on washable paint",
+							"We are not responsible for pre-existing damage in the home",
+							"Every move-in cleaning ends with a final walkthrough for quality assurance",
+						],
+					},
+				],
+			},
+			{
+				label: "Move-out cleaning",
+				lead: "Move-out cleaning is a deep clean of an empty property, completed once your belongings are out.",
+				cta: {
+					label: "See the Move-Out Cleaning checklist",
+					href: "/cleaning-services-in-wa/move-in-out/move-out-checklist",
+				},
+				groups: [
+					{
+						icon: "info",
+						title: "General",
+						items: [
+							"Water and electricity must be available at the property at the time of service",
+							"The property should be empty and all personal items removed before your move-out cleaning begins",
+							"We do not move heavy furniture or appliances left at the property",
+							"Service covers accessible surfaces only",
+						],
+					},
+					{
+						icon: "sparkles",
+						title: "Condition & Results",
+						items: [
+							"Heavy buildup such as grease, hard water or mold may require added time, added charges, or multiple cleanings",
+							"Specialty services such as carpet, garage or patio cleaning are quoted by size and condition",
+							"Some stains or buildup may be permanent and not fully removable",
+						],
+					},
+					{
+						icon: "shield-check",
+						title: "Guidelines",
+						items: [
+							"Every move-out cleaning ends with a final walkthrough for quality assurance",
+							"Trash removal covers bagged household trash only, heavy debris and haul out are quoted separately",
+							"Wall cleaning is available by request and is performed only on washable paint",
+							"Interior windows are available as a flat rate add-on, priced per pane",
+							"Inside the fridge, oven and cabinets are flat rate add-ons, cleaned only when empty and accessible",
+							"We are not responsible for pre-existing damage at the property",
+						],
+					},
+				],
+			},
+		],
 	},
 
 	"carpet-cleaning": { // CHECK
@@ -606,7 +785,7 @@ export const services: Record<string, ServiceContent> = {
 			{
 				q: "Do you provide boxes and packing materials?",
 				a: [
-					"Yes. We can supply boxes, bubble wrap, tape and packing paper or work with materials you already have. Whatever fits your budget.",
+					"To keep our packing service flexible and affordable, clients provide all necessary packing materials, such as boxes, bubble wrap, tape, and packing paper. Our team will handle the packing with care using the supplies you have ready.",
 				],
 			},
 			{

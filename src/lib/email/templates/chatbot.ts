@@ -1,5 +1,5 @@
-// Chatbot assistant lead: name, email, phone, service, city, sqft, pets, date,
-// frequency, notes — whatever the conversation collected.
+// Chatbot assistant lead: name, email, phone, service, address, city, sqft,
+// pets, date, frequency, notes — whatever the conversation collected.
 import type { Lead, Template } from "../types";
 import { detailsHtml, detailsText, fullName, shell, type Field } from "./layout";
 
@@ -9,6 +9,7 @@ function fields(lead: Lead): Field[] {
 		{ label: "Email", value: lead.email },
 		{ label: "Phone", value: lead.phone },
 		{ label: "Service", value: lead.service },
+		{ label: "Address", value: lead.street },
 		{ label: "City", value: lead.city },
 		{ label: "Home size", value: lead.sqft ? `${lead.sqft} sq ft` : null },
 		{ label: "Pets", value: lead.pets },

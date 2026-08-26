@@ -24,7 +24,21 @@ const COLS = [
 ] as const;
 
 // Public endpoint — the contact & quote forms POST here to create a lead.
+// Rate limited per IP: every request writes a row AND sends a confirmation to
+// whatever address the caller supplies, so unlimited access is an open mail relay.
 export async function POST(req: Request) {
+	const { env, ctx } = await getCloudflareContext({ async: true });
+
+	const ip = req.headers.get("CF-Connecting-IP") ?? "unknown";
+	// ponytail: optional chaining so `next dev` without the binding still works.
+	const allowed = (await env.LEAD_LIMITER?.limit({ key: ip }))?.success ?? true;
+	if (!allowed) {
+		return NextResponse.json(
+			{ error: "too many requests" },
+			{ status: 429, headers: { "Retry-After": "60" } },
+		);
+	}
+
 	let body: Record<string, unknown>;
 	try {
 		body = await req.json();
@@ -41,7 +55,6 @@ export async function POST(req: Request) {
 	const s = (k: string) => (typeof body[k] === "string" ? (body[k] as string) : null);
 	const services = Array.isArray(body.services) ? (body.services as string[]) : [];
 
-	const { env, ctx } = await getCloudflareContext({ async: true });
 	const values = [
 		firstName,
 		s("lastName"),

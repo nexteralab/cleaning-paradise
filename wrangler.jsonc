@@ -41,6 +41,15 @@
 			"migrations_dir": "migrations"
 		}
 	],
+	// Rate limit del endpoint público de leads (por IP). Nativo de Workers: no
+	// necesita KV ni tabla propia. El límite es por colo, suficiente para abuso.
+	"ratelimits": [
+		{
+			"name": "LEAD_LIMITER",
+			"namespace_id": "1001",
+			"simple": { "limit": 5, "period": 60 }
+		}
+	],
 	// Imágenes del blog (prefijo blog/). remote:true → `next dev` lee el bucket real.
 	"r2_buckets": [
 		{

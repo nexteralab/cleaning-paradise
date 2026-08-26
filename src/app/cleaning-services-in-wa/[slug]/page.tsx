@@ -14,6 +14,7 @@ import {
 	FileX,
 	Heart,
 	House,
+	Info,
 	Leaf,
 	Phone,
 	Tag,
@@ -24,7 +25,7 @@ import {
 	UserCheck,
 	type LucideIcon,
 } from "lucide-react";
-import { FaqAccordion, QuoteForm } from "./client-sections";
+import { FaqAccordion, QuoteForm, ServiceNotes } from "./client-sections";
 import { services, serviceSlugs, type IconName, type ServiceContent } from "./services-data";
 import JsonLd from "@/components/JsonLd";
 import { locations } from "@/app/locations/locations-data";
@@ -43,6 +44,8 @@ const icons: Record<IconName, LucideIcon> = {
 	"circle-check": CircleCheck,
 	box: Box,
 	tag: Tag,
+	info: Info,
+	"shield-check": ShieldCheck,
 };
 
 export function generateStaticParams() {
@@ -259,7 +262,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 						>
 							Get a free quote <ArrowRight size={15} />
 						</Link>
-						<div className="flex flex-wrap gap-2">
+						{/* <div className="flex flex-wrap gap-2">
 							{service.frequencyChips.map((chip) => (
 								<span
 									key={chip.label}
@@ -271,7 +274,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 									{chip.label}
 								</span>
 							))}
-						</div>
+						</div> */}
 					</div>
 				</div>
 			</section>
@@ -292,6 +295,15 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 					</div>
 				</div>
 			</section>
+
+			{/* ═══ SERVICE NOTES ═══ */}
+			{service.serviceNotes && (
+				<section className="bg-white px-6 pt-[clamp(52px,6vw,88px)]">
+					<div className="mx-auto max-w-[1360px]">
+						<ServiceNotes tabs={service.serviceNotes} />
+					</div>
+				</section>
+			)}
 
 			{/* ═══ CALLOUT ═══ */}
 			<section className="px-6 pt-[clamp(36px,4vw,52px)]">

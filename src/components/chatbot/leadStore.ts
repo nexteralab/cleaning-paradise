@@ -11,6 +11,7 @@ export type Lead = {
 	phone?: string;
 	service?: string;
 	city?: string;
+	street?: string;
 	sqft?: string;
 	pets?: "Yes" | "No";
 	date?: string;

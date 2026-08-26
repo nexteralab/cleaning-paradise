@@ -199,6 +199,26 @@ export const steps: Step[] = [
 		},
 	},
 	{
+		key: "street",
+		prompts: [
+			"What's the street address we should clean?",
+			"Which address are we heading to? Street and number is enough.",
+			"Where exactly is it? Street address, please.",
+			"Got it. What's the address — street, number and unit if any?",
+		],
+		errors: [
+			"That looks a bit short for an address — street and number, e.g. 1200 Pine St Apt 3.",
+			"I didn't catch the address. Could you include the street name and number?",
+			"Mind re-typing the address? Something like 512 NE 80th St works.",
+		],
+		validate: (raw) => {
+			const v = raw.trim().replace(/\s+/g, " ");
+			// Deliberately loose — over-validating addresses turns away real people.
+			if (v.length < 5 || !/[a-z]/i.test(v)) return { ok: false };
+			return { ok: true, value: v };
+		},
+	},
+	{
 		key: "sqft",
 		optional: true,
 		prompts: [
