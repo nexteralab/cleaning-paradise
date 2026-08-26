@@ -23,7 +23,6 @@ import {
 } from "lucide-react";
 import JsonLd from "@/components/JsonLd";
 import {
-	checklistPages,
 	findChecklist,
 	type AddonIcon,
 	type NotePart,
@@ -51,18 +50,12 @@ const addonIcons: Record<AddonIcon, LucideIcon> = {
 	home: House,
 };
 
-// Only the combinations in checklists-data exist; anything else 404s. A static
-// folder under [slug] would answer for every service and hand Google duplicates.
-export const dynamicParams = false;
-
-// The parent [slug] segment has its own generateStaticParams, so Next calls this
-// once per service and expects ONLY the child param back — returning `slug` too
-// makes it generate nothing here, which with dynamicParams=false is a 404.
-export function generateStaticParams({ params }: { params: { slug: string } }) {
-	return checklistPages
-		.filter((p) => p.service === params.slug)
-		.map((p) => ({ checklist: p.checklist }));
-}
+// No generateStaticParams here on purpose. The parent [slug] segment has one, so
+// Next would call this per service and, for the services with no checklist, pass
+// the parent params through with `checklist` undefined — which fails the build
+// ("A required parameter (checklist) was not provided as a string"). These four
+// pages render on demand and cache instead; findChecklist below 404s anything
+// that isn't a real service/checklist pair, so no bogus combination is indexable.
 
 export async function generateMetadata({
 	params,
