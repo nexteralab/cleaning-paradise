@@ -55,8 +55,13 @@ const addonIcons: Record<AddonIcon, LucideIcon> = {
 // folder under [slug] would answer for every service and hand Google duplicates.
 export const dynamicParams = false;
 
-export function generateStaticParams() {
-	return checklistPages.map((p) => ({ slug: p.service, checklist: p.checklist }));
+// The parent [slug] segment has its own generateStaticParams, so Next calls this
+// once per service and expects ONLY the child param back — returning `slug` too
+// makes it generate nothing here, which with dynamicParams=false is a 404.
+export function generateStaticParams({ params }: { params: { slug: string } }) {
+	return checklistPages
+		.filter((p) => p.service === params.slug)
+		.map((p) => ({ checklist: p.checklist }));
 }
 
 export async function generateMetadata({
