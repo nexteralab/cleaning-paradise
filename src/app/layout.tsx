@@ -120,6 +120,13 @@ export default function RootLayout({
 				/>
 				{/* Hotjar / Contentsquare */}
 				<script async src="https://t.contentsquare.net/uxa/628fbdef29c13.js" />
+				{/* Traks */}
+				<script
+					dangerouslySetInnerHTML={{
+						__html: `window.traks=window.traks||function(){(window.traks.q=window.traks.q||[]).push(arguments)}`,
+					}}
+				/>
+				<script defer data-site="pb_live_qai23u1emmk2q32annfx6aue" src="https://traks-collect.nexteralab.workers.dev/t.js" />
 			</head>
 			<body className={`${lora.variable} ${poppins.variable} antialiased`}>
 				<a
