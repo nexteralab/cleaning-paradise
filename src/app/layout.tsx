@@ -30,10 +30,10 @@ export const metadata: Metadata = {
 	description: DESCRIPTION,
 	icons: {
 		icon: [
-			{ url: "/favicon.ico", sizes: "32x32" },
+			{ url: "/favicon.ico", sizes: "16x16 32x32 48x48" },
 			{ url: "/favicon.png", type: "image/png", sizes: "64x64" },
 		],
-		apple: "/apple-icon.png",
+		apple: "/apple-touch-icon.png",
 	},
 	manifest: "/site.webmanifest",
 	openGraph: {
