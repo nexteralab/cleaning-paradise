@@ -30,7 +30,9 @@ export async function POST(req: Request) {
 	const res = NextResponse.json({ ok: true });
 	res.cookies.set(SESSION_COOKIE, await createSession(env.AUTH_SECRET!, user.id), {
 		httpOnly: true,
-		secure: true,
+		// ponytail: Safari descarta cookies Secure sobre http://localhost y el
+		// login queda en loop. En prod siempre es https, así que esto es true.
+		secure: new URL(req.url).protocol === "https:",
 		sameSite: "lax",
 		path: "/",
 		maxAge: SESSION_MAX_AGE,
