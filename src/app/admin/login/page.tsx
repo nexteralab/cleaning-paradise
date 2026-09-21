@@ -21,8 +21,10 @@ export default function AdminLogin() {
 		const { error } = await authClient.signIn.email({ email, password });
 		setLoading(false);
 		if (!error) {
-			router.push("/admin");
-			router.refresh();
+			// Sin router.refresh(): recargaba /admin/login y pisaba la navegación,
+			// dejando al usuario en el login con la sesión ya creada. /admin es
+			// force-dynamic, así que no hay caché que refrescar.
+			router.replace("/admin");
 		} else {
 			setError("Invalid email or password");
 		}

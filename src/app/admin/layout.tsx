@@ -24,8 +24,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
 	async function logout() {
 		await authClient.signOut();
-		router.push("/admin/login");
-		router.refresh();
+		router.replace("/admin/login");
 	}
 
 	const isActive = (href: string) =>
