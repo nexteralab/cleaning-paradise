@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Lock, Eye, EyeOff, ArrowLeft } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
 
 export default function AdminLogin() {
 	const router = useRouter();
@@ -17,13 +18,9 @@ export default function AdminLogin() {
 		e.preventDefault();
 		setLoading(true);
 		setError("");
-		const res = await fetch("/api/auth/login", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ email, password }),
-		});
+		const { error } = await authClient.signIn.email({ email, password });
 		setLoading(false);
-		if (res.ok) {
+		if (!error) {
 			router.push("/admin");
 			router.refresh();
 		} else {

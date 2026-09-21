@@ -2,23 +2,28 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Users, FileText, LogOut, UserCog } from "lucide-react";
+import { Users, FileText, LogOut, UserCog, ShieldCheck } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
 
 const NAV = [
 	{ href: "/admin", label: "Leads", icon: Users },
 	{ href: "/admin/blog", label: "Blog", icon: FileText },
 	{ href: "/admin/profile", label: "Perfil", icon: UserCog },
+	// Solo admins. El servidor también lo exige (src/app/admin/users/page.tsx).
+	{ href: "/admin/users", label: "Usuarios", icon: ShieldCheck, adminOnly: true },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
 	const pathname = usePathname();
 	const router = useRouter();
+	const { data: session } = authClient.useSession();
+	const nav = NAV.filter((n) => !n.adminOnly || session?.user.role === "admin");
 
-	// El login no lleva sidebar.
-	if (pathname === "/admin/login") return <>{children}</>;
+	// El login y el reset de clave no llevan sidebar.
+	if (pathname === "/admin/login" || pathname === "/admin/reset-password") return <>{children}</>;
 
 	async function logout() {
-		await fetch("/api/auth/logout", { method: "POST" });
+		await authClient.signOut();
 		router.push("/admin/login");
 		router.refresh();
 	}
@@ -35,7 +40,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 					<div className="text-xs text-ink-500">Admin</div>
 				</div>
 				<nav className="flex flex-1 items-center gap-1 md:flex-none md:flex-col md:items-stretch">
-					{NAV.map(({ href, label, icon: Icon }) => (
+					{nav.map(({ href, label, icon: Icon }) => (
 						<Link
 							key={href}
 							href={href}

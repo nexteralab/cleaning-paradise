@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
 
 const inputClass =
 	"w-full rounded-xl border-[1.5px] border-ink-200 bg-white px-3.5 py-2.5 text-sm text-ink-900 outline-none transition-colors focus:border-pink-500";
@@ -9,10 +10,15 @@ const labelClass = "mb-1.5 block text-xs font-semibold text-ink-600";
 
 type User = {
 	email: string;
-	name: string | null;
+	name: string;
 	role: string;
-	created_at: string;
 	last_login_at: string | null;
+};
+
+// Better Auth responde en inglés; traducimos los dos códigos que ve el usuario.
+const ERRORS: Record<string, string> = {
+	INVALID_PASSWORD: "La contraseña actual no coincide",
+	PASSWORD_TOO_SHORT: "La contraseña nueva necesita al menos 8 caracteres",
 };
 
 function formatDate(iso: string | null): string {
@@ -22,7 +28,7 @@ function formatDate(iso: string | null): string {
 
 export default function ProfileForm({ user }: { user: User }) {
 	const router = useRouter();
-	const [name, setName] = useState(user.name ?? "");
+	const [name, setName] = useState(user.name);
 	const [currentPassword, setCurrentPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
 	const [confirm, setConfirm] = useState("");
@@ -40,18 +46,19 @@ export default function ProfileForm({ user }: { user: User }) {
 			return;
 		}
 		setSaving(true);
-		const res = await fetch("/api/admin/profile", {
-			method: "PATCH",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				name,
-				...(changingPassword ? { currentPassword, newPassword } : {}),
-			}),
-		});
+		// Better Auth hace ambas cosas; la contraseña nunca pasa por código nuestro.
+		let err = null;
+		if (name.trim() !== user.name) {
+			err = (await authClient.updateUser({ name: name.trim() || user.email })).error;
+		}
+		if (!err && changingPassword) {
+			err = (
+				await authClient.changePassword({ currentPassword, newPassword, revokeOtherSessions: true })
+			).error;
+		}
 		setSaving(false);
-		const data = (await res.json().catch(() => ({}))) as { error?: string };
-		if (!res.ok) {
-			setError(data.error ?? "No se pudo guardar");
+		if (err) {
+			setError(ERRORS[err.code ?? ""] ?? err.message ?? "No se pudo guardar");
 			return;
 		}
 		setCurrentPassword("");

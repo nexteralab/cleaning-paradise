@@ -1,18 +1,20 @@
-import { cookies } from "next/headers";
-import { getCloudflareContext } from "@opennextjs/cloudflare";
-import { SESSION_COOKIE, verifySession } from "./auth";
+import { headers } from "next/headers";
+import { getAuth } from "./auth";
 
-// Chequeo real de sesión, para páginas y rutas de /admin.
-//
-// El middleware NO puede hacer esto: corre en el runtime edge, donde en
-// `next dev` el contexto de Cloudflare llega por un monkey-patch asíncrono de
-// initOpenNextCloudflareForDev() y hay una carrera. Acá estamos en runtime
-// node, donde getCloudflareContext resuelve solo. Además Next recomienda que
-// el middleware no sea el único control de acceso.
-//
-// Devuelve el id del usuario, o null.
+// Chequeo real de sesión, para páginas y rutas de /admin. El middleware solo
+// mira que exista la cookie; acá Better Auth la valida contra la tabla `session`.
+
+export type SessionUser = { id: string; role: "admin" | "user" };
+
+// Cualquier usuario logueado entra al panel; `role` decide qué ve
+// (Usuarios es solo para admin — ver src/app/admin/users/page.tsx).
+export async function getSessionUser(): Promise<SessionUser | null> {
+	const auth = await getAuth();
+	const session = await auth.api.getSession({ headers: await headers() });
+	if (!session) return null;
+	return { id: session.user.id, role: session.user.role === "admin" ? "admin" : "user" };
+}
+
 export async function getSessionUserId(): Promise<string | null> {
-	const { env } = await getCloudflareContext({ async: true });
-	const cookie = (await cookies()).get(SESSION_COOKIE)?.value;
-	return verifySession(env.AUTH_SECRET, cookie);
+	return (await getSessionUser())?.id ?? null;
 }

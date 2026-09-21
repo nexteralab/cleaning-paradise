@@ -1,15 +1,15 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { SESSION_COOKIE } from "@/lib/auth";
+import { getSessionCookie } from "better-auth/cookies";
 
 // Solo UX: si no hay cookie, mandar al login sin renderizar nada.
-// NO es el control de acceso — la firma se verifica en cada página y ruta con
+// NO es el control de acceso — la sesión se valida en cada página y ruta con
 // getSessionUserId() (ver src/lib/session.ts), que corre en runtime node.
-// Acá no se pueden leer bindings de forma confiable en `next dev`.
 export const config = { matcher: ["/admin/:path*", "/api/admin/:path*"] };
 
 export function middleware(req: NextRequest) {
 	const path = req.nextUrl.pathname;
-	if (path === "/admin/login" || req.cookies.has(SESSION_COOKIE)) {
+	// login y reset-password son públicos: el segundo llega desde el email.
+	if (path === "/admin/login" || path === "/admin/reset-password" || getSessionCookie(req)) {
 		return NextResponse.next();
 	}
 	if (path.startsWith("/api/")) {

@@ -10,17 +10,19 @@ export default async function ProfilePage() {
 	const uid = await getSessionUserId();
 	if (!uid) redirect("/admin/login");
 	const { env } = await getCloudflareContext({ async: true });
-	const user = await env.DB.prepare(
-		"SELECT email, name, role, created_at, last_login_at FROM users WHERE id = ?",
+	// Tabla de Better Auth: timestamps en epoch segundos.
+	const row = await env.DB.prepare(
+		"SELECT email, name, role, last_login_at FROM user WHERE id = ?",
 	)
 		.bind(uid)
-		.first<{
-			email: string;
-			name: string | null;
-			role: string;
-			created_at: string;
-			last_login_at: string | null;
-		}>();
-	if (!user) notFound();
-	return <ProfileForm user={user} />;
+		.first<{ email: string; name: string; role: string; last_login_at: number | null }>();
+	if (!row) notFound();
+	return (
+		<ProfileForm
+			user={{
+				...row,
+				last_login_at: row.last_login_at ? new Date(row.last_login_at * 1000).toISOString() : null,
+			}}
+		/>
+	);
 }

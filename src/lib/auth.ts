@@ -1,59 +1,27 @@
-// Sesión del admin: cookie firmada con HMAC-SHA256 (WebCrypto, sin dependencias).
-// Las credenciales viven en la tabla `users` (PBKDF2); acá solo se firma y se
-// verifica la sesión con AUTH_SECRET.
+// Better Auth sobre D1 (drizzle adapter), igual que app-demo. Credenciales en
+// `account` (provider_id = 'credential'), sesión en `session`, cookie firmada
+// por Better Auth con AUTH_SECRET. Nadie del proyecto hashea ni compara.
 //
-// AUTH_SECRET entra por parámetro: en `next dev` vive en el env de Cloudflare
-// (getCloudflareContext), no en process.env.
+// La instancia se crea perezosa porque en `next dev` el env de Cloudflare
+// llega por getCloudflareContext, no en import time.
+import { betterAuth } from "better-auth";
+import { admin } from "better-auth/plugins";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { hashPassword, verifyPassword } from "better-auth/crypto";
+import { getCloudflareContext } from "@opennextjs/cloudflare";
+import { drizzle } from "drizzle-orm/d1";
+import { eq } from "drizzle-orm";
+import * as authSchema from "@/db/auth.schema";
+import { sendEmail } from "@/lib/email/send";
+import { resetPassword } from "@/lib/email/templates/resetPassword";
 
-export const SESSION_COOKIE = "cp_session";
-export const SESSION_MAX_AGE = 60 * 60 * 24 * 7; // 7 días
-
-async function hmac(secret: string, data: string): Promise<string> {
-	const key = await crypto.subtle.importKey(
-		"raw",
-		new TextEncoder().encode(secret),
-		{ name: "HMAC", hash: "SHA-256" },
-		false,
-		["sign"],
-	);
-	const sig = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(data));
-	return [...new Uint8Array(sig)].map((b) => b.toString(16).padStart(2, "0")).join("");
-}
-
-// Double HMAC: compara digests, no los valores — el timing del === no filtra
-// nada sobre el secreto porque el atacante no puede invertir el digest.
-async function eq(secret: string, a: string, b: string): Promise<boolean> {
-	return (await hmac(secret, `cmp:${a}`)) === (await hmac(secret, `cmp:${b}`));
-}
-
-// La cookie lleva el id del usuario: <uid>.<exp>.<firma>. Así el server sabe
-// quién es sin ir a la DB (los ids son hex, nunca traen puntos).
-export async function createSession(secret: string, userId: string): Promise<string> {
-	const exp = String(Date.now() + SESSION_MAX_AGE * 1000);
-	return `${userId}.${exp}.${await hmac(secret, `${userId}.${exp}`)}`;
-}
-
-// Devuelve el id del usuario, o null si la cookie no sirve.
-export async function verifySession(
-	secret: string | undefined,
-	value: string | undefined,
-): Promise<string | null> {
-	if (!secret || !value) return null;
-	const [uid, exp, sig] = value.split(".");
-	if (!uid || !exp || !sig || !Number(exp) || Number(exp) < Date.now()) return null;
-	return (await eq(secret, sig, await hmac(secret, `${uid}.${exp}`))) ? uid : null;
-}
-
-// --- users.password_hash --------------------------------------------------
-// PBKDF2-SHA256 (bcrypt/argon no corren en Workers). Formato:
-//   pbkdf2$<iteraciones>$<salt_hex>$<hash_hex>
-
-const PBKDF2_ITERATIONS = 100_000;
-
-const hex = (b: Uint8Array) => [...b].map((x) => x.toString(16).padStart(2, "0")).join("");
-const unhex = (s: string) => Uint8Array.from(s.match(/../g) ?? [], (h) => parseInt(h, 16));
-
-async function pbkdf2(password: string, salt: Uint8Array, iterations: number): Promise<string> {
+// ponytail: puente para los hashes previos a la migración 0008
+// (pbkdf2$<iters>$<salt_hex>$<hash_hex>). Better Auth rehashea con scrypt al
+// cambiar la contraseña; cuando ningún `account.password` empiece por
+// "pbkdf2$" se borra esto y queda `verifyPassword` a secas.
+async function verifyLegacyPbkdf2(stored: string, password: string): Promise<boolean> {
+	const [, iterations, saltHex, hashHex] = stored.split("$");
+	const salt = Uint8Array.from(saltHex.match(/../g) ?? [], (h) => parseInt(h, 16));
 	const key = await crypto.subtle.importKey(
 		"raw",
 		new TextEncoder().encode(password),
@@ -62,22 +30,70 @@ async function pbkdf2(password: string, salt: Uint8Array, iterations: number): P
 		["deriveBits"],
 	);
 	const bits = await crypto.subtle.deriveBits(
-		{ name: "PBKDF2", salt: salt as BufferSource, iterations, hash: "SHA-256" },
+		{ name: "PBKDF2", salt, iterations: Number(iterations), hash: "SHA-256" },
 		key,
 		256,
 	);
-	return hex(new Uint8Array(bits));
+	const hex = [...new Uint8Array(bits)].map((b) => b.toString(16).padStart(2, "0")).join("");
+	return hex === hashHex;
 }
 
-export async function hashPassword(password: string): Promise<string> {
-	const salt = crypto.getRandomValues(new Uint8Array(16));
-	const hash = await pbkdf2(password, salt, PBKDF2_ITERATIONS);
-	return `pbkdf2$${PBKDF2_ITERATIONS}$${hex(salt)}$${hash}`;
+function build(env: CloudflareEnv) {
+	const db = drizzle(env.DB, { schema: authSchema });
+	return betterAuth({
+		database: drizzleAdapter(db, { provider: "sqlite", schema: authSchema }),
+		// Sin signup público — los usuarios los crea un admin desde /admin/users
+		// (plugin admin) o con scripts/create-admin.mjs.
+		emailAndPassword: {
+			enabled: true,
+			disableSignUp: true,
+			// Invitaciones y "olvidé mi clave" usan el mismo link de reset.
+			// 24h para que una invitación no caduque antes de que la abran.
+			resetPasswordTokenExpiresIn: 60 * 60 * 24,
+			sendResetPassword: async ({ user, url }) => {
+				await sendEmail(env, { to: user.email, ...resetPassword(user.name, url) });
+			},
+			password: {
+				hash: hashPassword,
+				verify: ({ hash, password }) =>
+					hash.startsWith("pbkdf2$")
+						? verifyLegacyPbkdf2(hash, password)
+						: verifyPassword({ hash, password }),
+			},
+		},
+		// `role` lo aporta el plugin admin (input: false — nadie se asigna rol
+		// desde el cliente). lastLoginAt se declara para que listUsers lo devuelva.
+		user: {
+			additionalFields: {
+				lastLoginAt: { type: "date", required: false, input: false },
+			},
+		},
+		// admin: crea usuarios, cambia rol/contraseña, borra. Solo role 'admin'.
+		plugins: [admin()],
+		secret: env.AUTH_SECRET,
+		// Sin baseURL: Better Auth lo deriva del request entrante.
+		// Cada sesión nueva = un login; se marca acá para que cuente venga de donde venga.
+		databaseHooks: {
+			session: {
+				create: {
+					after: async (session) => {
+						await db
+							.update(authSchema.user)
+							.set({ lastLoginAt: new Date() })
+							.where(eq(authSchema.user.id, session.userId));
+					},
+				},
+			},
+		},
+	});
 }
 
-export async function verifyPassword(stored: string, input: string): Promise<boolean> {
-	const [scheme, iterations, salt, hash] = stored.split("$");
-	if (scheme !== "pbkdf2" || !Number(iterations) || !salt || !hash) return false;
-	// Digests hex de largo fijo: el === no filtra nada del password.
-	return (await pbkdf2(input, unhex(salt), Number(iterations))) === hash;
+export type Auth = ReturnType<typeof build>;
+
+let cached: { env: CloudflareEnv; auth: Auth } | undefined;
+
+export async function getAuth(): Promise<Auth> {
+	const { env } = await getCloudflareContext({ async: true });
+	if (cached?.env !== env) cached = { env, auth: build(env) };
+	return cached.auth;
 }
