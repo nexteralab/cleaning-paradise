@@ -121,9 +121,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 						telephone: "+1-425-610-0241",
 						url: base,
 					},
-					areaServed: ["Seattle", "Bellevue", "Kirkland", "Lynnwood", "Shoreline", "Edmonds"].map(
-						(name) => ({ "@type": "City", name }),
-					),
+					areaServed: Object.values(locations).map(({ name }) => ({ "@type": "City", name })),
 				}}
 			/>
 			<JsonLd

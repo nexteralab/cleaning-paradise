@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import MusicPlayer from "@/components/MusicPlayer";
 import ChatBot from "@/components/chatbot/ChatBot";
+import { locations } from "@/app/locations/locations-data";
 
 const lora = Lora({
 	variable: "--font-lora",
@@ -71,16 +72,7 @@ const localBusinessJsonLd = {
 		addressRegion: "WA",
 		addressCountry: "US",
 	},
-	areaServed: [
-		"Seattle",
-		"Bellevue",
-		"Kirkland",
-		"Mercer Island",
-		"Shoreline",
-		"Edmonds",
-		"Bothell",
-		"Mukilteo"
-	].map((name) => ({ "@type": "City", name })),
+	areaServed: Object.values(locations).map(({ name }) => ({ "@type": "City", name })),
 	openingHoursSpecification: {
 		"@type": "OpeningHoursSpecification",
 		dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
