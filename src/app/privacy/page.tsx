@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { currentMonth } from "@/lib/date";
 
 export const metadata: Metadata = {
 	title: "Privacy Policy | Cleaning Paradise",
@@ -10,7 +11,8 @@ export const metadata: Metadata = {
 // ponytail: baseline policy accurate to what the site actually does today
 // (form data → leads DB, functional cookies, no ad trackers yet). Have counsel
 // review before launch, and revise when GA4/Clarity/Jobber (audit P5) go live.
-const UPDATED = "July 2026";
+// ponytail: la página es estática, así que el mes se fija en el build = mes del último deploy.
+const UPDATED = currentMonth();
 
 export default function PrivacyPage() {
 	return (
@@ -39,6 +41,16 @@ export default function PrivacyPage() {
 					We use your information to respond to your request, prepare a quote, schedule and deliver
 					cleaning services, and follow up about your inquiry. We do not sell your personal
 					information.
+				</p>
+
+				<h2>Text messages</h2>
+				<p>
+					If you give us your mobile number and agree to receive texts, we use it only to send you
+					messages about your cleanings, quotes, invoices and payments. We never sell, rent or share
+					your mobile number, or your text-message opt-in and consent, with third parties or affiliates
+					for their marketing or promotional purposes. Text-messaging opt-in data and consent are not
+					shared with any third party. Everything else this policy says about sharing information
+					excludes them.
 				</p>
 
 				<h2>Cookies</h2>

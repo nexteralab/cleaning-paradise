@@ -6,8 +6,12 @@ import AdminDashboard, { type Lead } from "./AdminDashboard";
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Admin — Cleaning Paradise", robots: { index: false } };
 
-// D1 no tiene arrays ni boolean: services es JSON en TEXT y promo es 0/1.
-type Row = Omit<Lead, "services" | "promo"> & { services: string; promo: number };
+// D1 no tiene arrays ni boolean: services es JSON en TEXT; promo y sms_consent son 0/1.
+type Row = Omit<Lead, "services" | "promo" | "sms_consent"> & {
+	services: string;
+	promo: number;
+	sms_consent: number;
+};
 
 export default async function AdminPage() {
 	if (!(await getSessionUserId())) redirect("/admin/login");
@@ -19,6 +23,7 @@ export default async function AdminPage() {
 		...r,
 		services: JSON.parse(r.services || "[]") as string[],
 		promo: r.promo === 1,
+		sms_consent: r.sms_consent === 1,
 	}));
 	return <AdminDashboard leads={leads} />;
 }

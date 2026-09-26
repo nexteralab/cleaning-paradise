@@ -21,6 +21,7 @@ export type Lead = {
 	pets?: string | null;
 	notes?: string | null;
 	promo?: boolean;
+	smsConsent?: boolean;
 	source: LeadSource | string;
 };
 

@@ -13,6 +13,7 @@ import {
 	type LucideIcon,
 } from "lucide-react";
 import SuccessModal from "@/components/SuccessModal";
+import SmsConsent from "@/components/SmsConsent";
 
 const inputClass =
 	"w-full rounded-xl border-[1.5px] border-ink-200 bg-ink-50 px-3.5 py-3 text-sm text-ink-900 outline-none transition-colors duration-200 focus:border-pink-500 focus:bg-white";
@@ -65,6 +66,7 @@ export default function ContactForm() {
 						lastName: fd.get("lastName"),
 						email: fd.get("email"),
 						phone: fd.get("phone"),
+						smsConsent: fd.get("smsConsent") === "on",
 						street: fd.get("street"),
 						unit: fd.get("unit"),
 						city: fd.get("city"),
@@ -254,6 +256,8 @@ export default function ContactForm() {
 						</span>
 					</label>
 				</div>
+
+				<SmsConsent />
 
 				{error && <p className="text-center text-sm text-pink-600">{error}</p>}
 				<button

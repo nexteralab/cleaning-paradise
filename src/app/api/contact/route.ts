@@ -21,6 +21,7 @@ const COLS = [
 	"notes",
 	"promo",
 	"source",
+	"sms_consent",
 ] as const;
 
 // Public endpoint — the contact & quote forms POST here to create a lead.
@@ -54,6 +55,8 @@ export async function POST(req: Request) {
 
 	const s = (k: string) => (typeof body[k] === "string" ? (body[k] as string) : null);
 	const services = Array.isArray(body.services) ? (body.services as string[]) : [];
+	// Sin teléfono no hay a dónde enviar SMS: el opt-in solo cuenta si viene con número.
+	const smsConsent = body.smsConsent === true && !!s("phone")?.trim();
 
 	const values = [
 		firstName,
@@ -74,6 +77,7 @@ export async function POST(req: Request) {
 		s("notes"),
 		body.promo ? 1 : 0,
 		s("source") ?? "contact",
+		smsConsent ? 1 : 0,
 	];
 	try {
 		await env.DB.prepare(
@@ -107,6 +111,7 @@ export async function POST(req: Request) {
 		notes: s("notes"),
 		promo: !!body.promo,
 		source: s("source") ?? "contact",
+		smsConsent,
 	};
 	ctx.waitUntil(sendLeadEmails(env, lead));
 

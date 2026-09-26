@@ -51,3 +51,6 @@ next-env.d.ts
 
 
 !.dev.vars.example
+
+# credenciales locales de prueba (nunca a git)
+/src/data/*.local.md

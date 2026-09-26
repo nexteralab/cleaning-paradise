@@ -4,13 +4,14 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, ChevronRight, MapPin, Plus, ShieldCheck } from "lucide-react";
 import SuccessModal from "@/components/SuccessModal";
+import SmsConsent from "@/components/SmsConsent";
 import Reveal from "@/components/Reveal";
 import BgVideo from "@/components/BgVideo";
 
 /* ============ HERO: full-screen video card + booking form ============ */
 
 const inputClasses =
-	"font-sans text-[14px] text-ink-900 bg-white border-[1.5px] border-ink-200 rounded-[12px] px-3.5 py-3 outline-none transition-[border-color] duration-200 focus:border-pink-500";
+	"font-sans text-[14px] text-ink-900 bg-white border-[1.5px] border-ink-200 rounded-[12px] px-3.5 py-3 md:px-3 md:py-2.5 md:text-[13px] outline-none transition-[border-color] duration-200 focus:border-pink-500";
 
 export function HeroSection() {
 	return (
@@ -65,7 +66,7 @@ export function BookingForm({ className = "" }: { className?: string }) {
 	const [error, setError] = useState("");
 
 	return (
-		<div className={`w-[min(460px,44%)] min-w-[230px] shrink-0 max-md:w-full ${className}`}>
+		<div className={`w-[min(400px,40%)] min-w-[230px] shrink-0 max-md:w-full ${className}`}>
 			<form
 				onSubmit={async (e) => {
 					e.preventDefault();
@@ -79,6 +80,7 @@ export function BookingForm({ className = "" }: { className?: string }) {
 						lastName: fd.get("lastName"),
 						email: fd.get("email"),
 						phone: fd.get("phone"),
+						smsConsent: fd.get("smsConsent") === "on",
 						service,
 						services: service ? [service] : [],
 						sqft: fd.get("sqft"),
@@ -102,11 +104,11 @@ export function BookingForm({ className = "" }: { className?: string }) {
 					}
 				}}
 				/* ponytail: en móvil crece libre (la página scrollea); clamp + scroll interno solo desde md */
-				className="bg-white rounded-[26px] shadow-[0_26px_60px_rgba(19,19,32,0.28)] p-6 flex flex-col gap-[15px] md:max-h-[calc(100vh-150px)] md:overflow-y-auto"
+				className="bg-white rounded-[26px] shadow-[0_26px_60px_rgba(19,19,32,0.28)] p-6 md:p-5 flex flex-col gap-[15px] md:gap-3 md:max-h-[calc(100vh-150px)] md:overflow-y-auto"
 			>
 				<div>
-					<h3 className="font-sans text-[27px] text-ink-900 tracking-[-0.01em] mb-[3px]">Get your free quote</h3>
-					<p className="flex items-center gap-2.5 rounded-2xl bg-pink-50 px-4 py-3 text-[13px] text-pink-400">
+					<h3 className="font-sans text-[27px] md:text-[22px] text-ink-900 tracking-[-0.01em] mb-[3px]">Get your free quote</h3>
+					<p className="flex items-center gap-2.5 rounded-2xl bg-pink-50 px-4 py-3 md:px-3.5 md:py-2 text-[13px] md:text-[12px] text-pink-400">
 						<strong className="font-bold tracking-wide text-pink-500 whitespace-nowrap">10% OFF</strong>
 						Book your first cleaning this month and save.
 					</p>
@@ -151,7 +153,7 @@ export function BookingForm({ className = "" }: { className?: string }) {
 
 				{/* sqft */}
 				<div>
-					<label className="block text-xs font-semibold text-ink-600 mb-2">Home size (sq ft)</label>
+					<label className="block text-xs font-semibold text-ink-600 mb-2 md:mb-1.5">Home size (sq ft)</label>
 					<input
 						name="sqft"
 						type="number"
@@ -164,14 +166,16 @@ export function BookingForm({ className = "" }: { className?: string }) {
 
 				{/* notes */}
 				<div>
-					<label className="block text-xs font-semibold text-ink-600 mb-2">Additional notes</label>
+					<label className="block text-xs font-semibold text-ink-600 mb-2 md:mb-1.5">Additional notes</label>
 					<textarea
 						name="notes"
 						rows={3}
 						placeholder="Pets, special areas to focus on, access instructions…"
-						className={`w-full resize-y ${inputClasses}`}
+						className={`w-full resize-y md:h-[62px] ${inputClasses}`}
 					/>
 				</div>
+
+				<SmsConsent />
 
 				{error && <p className="text-center text-[13px] text-pink-600">{error}</p>}
 
@@ -179,7 +183,7 @@ export function BookingForm({ className = "" }: { className?: string }) {
 				<button
 					type="submit"
 					disabled={submitting}
-					className="mt-0.5 bg-pink-500 text-white font-sans font-semibold text-[15px] border-none cursor-pointer p-[15px] rounded-[14px] flex items-center justify-center gap-2 transition-all duration-200 ease-[var(--ease-out)] hover:bg-pink-600 hover:shadow-[0_8px_28px_rgba(255,80,181,0.36)] disabled:opacity-60"
+					className="mt-0.5 bg-pink-500 text-white font-sans font-semibold text-[15px] md:text-[14px] border-none cursor-pointer p-[15px] md:p-3 rounded-[14px] flex items-center justify-center gap-2 transition-all duration-200 ease-[var(--ease-out)] hover:bg-pink-600 hover:shadow-[0_8px_28px_rgba(255,80,181,0.36)] disabled:opacity-60"
 				>
 					{submitting ? "Sending…" : "Get my free quote"} <ArrowRight size={16} />
 				</button>

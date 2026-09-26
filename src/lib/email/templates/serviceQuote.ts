@@ -4,7 +4,7 @@ import type { Lead, Template } from "../types";
 import { detailsHtml, detailsText, escape, fullName, shell, type Field } from "./layout";
 
 // The service <select> submits short codes — map them to readable labels.
-const SERVICE_LABELS: Record<string, string> = {
+export const SERVICE_LABELS: Record<string, string> = {
 	standard: "Standard Maid Service",
 	deep: "Deep Cleaning",
 	commercial: "Commercial Cleaning",
@@ -27,6 +27,7 @@ function fields(lead: Lead): Field[] {
 		{ label: "Frequency", value: lead.frequency },
 		{ label: "Home size", value: lead.sqft ? `${lead.sqft} sq ft` : null },
 		{ label: "Notes", value: lead.notes },
+		{ label: "Text messages", value: lead.smsConsent ? "Opted in" : "Not opted in" },
 	];
 }
 

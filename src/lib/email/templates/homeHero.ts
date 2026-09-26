@@ -10,6 +10,7 @@ function fields(lead: Lead): Field[] {
 		{ label: "Service", value: lead.service },
 		{ label: "Home size", value: lead.sqft ? `${lead.sqft} sq ft` : null },
 		{ label: "Notes", value: lead.notes },
+		{ label: "Text messages", value: lead.smsConsent ? "Opted in" : "Not opted in" },
 	];
 }
 

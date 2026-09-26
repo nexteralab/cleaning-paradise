@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { currentMonth } from "@/lib/date";
 
 export const metadata: Metadata = {
 	title: "Terms of Service | Cleaning Paradise",
@@ -10,7 +12,8 @@ export const metadata: Metadata = {
 // ponytail: baseline terms covering the site's actual flow (quote requests are
 // not binding contracts; scheduling/cancellation mirrors the FAQ copy). Have
 // counsel review and confirm the cancellation/guarantee wording before launch.
-const UPDATED = "July 2026";
+// ponytail: la página es estática, así que el mes se fija en el build = mes del último deploy.
+const UPDATED = currentMonth();
 
 export default function TermsPage() {
 	return (
@@ -49,6 +52,45 @@ export default function TermsPage() {
 					We aim to keep the site accurate and up to date, but content is provided &ldquo;as is&rdquo;
 					and may change without notice.
 				</p>
+
+				<h2 id="sms" className="scroll-mt-32">
+					Text message terms: Cleaning Paradise Notifications
+				</h2>
+				<ul className="flex flex-col gap-3 [&_strong]:font-semibold [&_strong]:text-ink-900">
+					<li>
+						<strong>Program.</strong> Cleaning Paradise LLC sends automated text messages about your
+						service: booking confirmations, visit reminders, invoices, invoice reminders and payment
+						receipts.
+					</li>
+					<li>
+						<strong>How you join.</strong> You tick the text-message box on our request form, or you
+						ask our office to text you. Joining is optional and is not a condition of any purchase.
+					</li>
+					<li>
+						<strong>How often.</strong> Message frequency varies with your cleanings and bills.
+					</li>
+					<li>
+						<strong>Cost.</strong> Msg &amp; data rates may apply.
+					</li>
+					<li>
+						<strong>Help.</strong> Reply <strong>HELP</strong> for help, or call or text us at{" "}
+						<a href="tel:+14256100241">(425) 610-0241</a>.
+					</li>
+					<li>
+						<strong>Stop.</strong> Reply <strong>STOP</strong> at any time to stop receiving texts. We
+						will send one message confirming it. Reply <strong>START</strong> to join again.
+					</li>
+					<li>
+						<strong>Replies.</strong> Our notification number does not read replies. To reach a person,
+						call or text <a href="tel:+14256100241">(425) 610-0241</a>.
+					</li>
+					<li>
+						<strong>Carriers.</strong> Carriers are not liable for delayed or undelivered messages.
+					</li>
+					<li>
+						<strong>Privacy.</strong> See our <Link href="/privacy">Privacy policy</Link>.
+					</li>
+				</ul>
 
 				<h2>Contact</h2>
 				<p>

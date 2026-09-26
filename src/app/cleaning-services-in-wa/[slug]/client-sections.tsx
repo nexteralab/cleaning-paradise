@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowRight, Info, ListChecks, Plus, ShieldCheck, Sparkles } from "lucide-react";
 import type { ServiceFaq, ServiceNotesTab } from "./services-data";
 import SuccessModal from "@/components/SuccessModal";
+import SmsConsent from "@/components/SmsConsent";
 
 /* ─── Before / After slider (hero) ─── */
 
@@ -154,6 +155,7 @@ export function QuoteForm({ defaultService }: { defaultService: string }) {
 						firstName: fd.get("name"),
 						email: fd.get("email"),
 						phone: fd.get("phone"),
+						smsConsent: fd.get("smsConsent") === "on",
 						service,
 						services: service ? [service] : [],
 						frequency: freq,
@@ -236,6 +238,7 @@ export function QuoteForm({ defaultService }: { defaultService: string }) {
 					placeholder="Special requests — pets, allergies, areas to focus on…"
 					className={`${inputClass} resize-y`}
 				/>
+				<SmsConsent />
 				{error && <p className="text-center text-[13px] text-pink-600">{error}</p>}
 				<button
 					type="submit"

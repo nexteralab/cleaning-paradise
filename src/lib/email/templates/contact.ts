@@ -15,6 +15,7 @@ function fields(lead: Lead): Field[] {
 		{ label: "Frequency", value: lead.frequency },
 		{ label: "Pets", value: lead.pets },
 		{ label: "Notes", value: lead.notes },
+		{ label: "Text messages", value: lead.smsConsent ? "Opted in" : "Not opted in" },
 	];
 }
 
