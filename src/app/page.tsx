@@ -299,7 +299,7 @@ function GallerySection() {
 				<div className="grid grid-cols-2 auto-rows-[180px] lg:grid-cols-4 lg:grid-rows-[220px_220px_300px] gap-3.5">
 					{/* tall left */}
 					<Reveal delay={0} className="row-span-2 lg:col-start-1 lg:row-start-1 lg:row-span-2 rounded-[22px] overflow-hidden shadow-[0_12px_32px_rgba(30,62,162,0.10)]">
-						<img src="/img/aw1a0547.jpg" alt="Cleaning Paradise team arriving with supplies at a home in Lynnwood, WA" className="w-full h-full object-cover block" />
+						<img src="/img/aw1a0547.jpg" alt="Cleaning Paradise team arriving with supplies at a home in Shoreline, WA" className="w-full h-full object-cover block" />
 					</Reveal>
 					{/* top center-left */}
 					<Reveal delay={80} className="lg:col-start-2 lg:row-start-1 rounded-[22px] overflow-hidden shadow-[0_12px_32px_rgba(30,62,162,0.10)]">

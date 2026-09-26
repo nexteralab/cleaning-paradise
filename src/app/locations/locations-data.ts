@@ -125,19 +125,18 @@ export const locations: Record<string, Location> = {
 		beforeAlt: "Toys and clutter in a living room before house cleaning in Lynnwood, WA",
 		afterAlt: "Clean and tidy living room after house cleaning in Lynnwood, WA",
 		blurb:
-			"Our home base. Reliable weekly and bi-weekly cleaning for Lynnwood, Mill Creek and the north corridor.",
+			"Reliable weekly and bi-weekly cleaning for Lynnwood, Mill Creek and the north corridor.",
 		hoods: "Alderwood · Martha Lake · Mill Creek",
 		rating: "4.9",
 		resp: "Same day",
 		homes: 160,
-		hq: true,
 		pin: { left: "40%", top: "28%" },
 		metaTitle: "Lynnwood, WA House Cleaning | Local Team | Cleaning Paradise",
 		metaDescription:
-			"Lynnwood is home base for our crews, so Alderwood, Martha Lake and Mill Creek get the fastest scheduling. Same-week cleanings from $55/hr.",
+			"Alderwood, Martha Lake and Mill Creek homes get fast, same-week scheduling from our nearby crews. Insured housekeepers, cleanings from $55/hr.",
 		ogTitle: "House Cleaning in Lynnwood, WA | Cleaning Paradise",
 		ogDescription:
-			"Our home base. Alderwood, Martha Lake and Mill Creek homes cleaned fast by insured, background-checked housekeepers.",
+			"Alderwood, Martha Lake and Mill Creek homes cleaned fast by insured, background-checked housekeepers.",
 	},
 	"mercer-island": {
 		slug: "mercer-island",
@@ -170,11 +169,12 @@ export const locations: Record<string, Location> = {
 		beforeAlt: "Toys scattered across a nursery before house cleaning in Shoreline, WA",
 		afterAlt: "Tidy nursery after house cleaning in Shoreline, WA",
 		blurb:
-			"Family-friendly neighborhoods north of Seattle — affordable, dependable cleaning that works around your schedule.",
+			"Our home base. Family-friendly neighborhoods north of Seattle — dependable cleaning that works around your schedule.",
 		hoods: "Richmond Beach · Echo Lake · Ridgecrest",
 		rating: "4.8",
 		resp: "4 hrs",
 		homes: 70,
+		hq: true,
 		pin: { left: "45%", top: "50%" },
 		metaTitle: "Shoreline House Cleaning | Same-Week | Cleaning Paradise",
 		metaDescription:
@@ -203,7 +203,7 @@ export const locations: Record<string, Location> = {
 			"Coastal homes near Downtown Edmonds, Seaview and Perrinville, cleaned top to bottom. Weekly, biweekly or one-time visits, satisfaction guaranteed.",
 		ogTitle: "Maid Service in Edmonds, WA | Cleaning Paradise",
 		ogDescription:
-			"Downtown, Seaview and Perrinville homes cleaned minutes from our Lynnwood HQ. Standard, deep, move-in/out and carpet cleaning.",
+			"Downtown, Seaview and Perrinville homes cleaned minutes from our Shoreline HQ. Standard, deep, move-in/out and carpet cleaning.",
 	},
 	bothell: {
 		slug: "bothell",

@@ -19,7 +19,7 @@ import {
 export const metadata: Metadata = {
 	title: "About Us — Cleaning Paradise",
 	description:
-		"We clean so you can live freely. Cleaning Paradise was born from a simple belief: every family deserves a spotless home without the stress of doing it themselves. Based in Lynnwood, WA — serving Greater Seattle since 2014.",
+		"We clean so you can live freely. Cleaning Paradise was born from a simple belief: every family deserves a spotless home without the stress of doing it themselves. Based in Shoreline, WA — serving Greater Seattle since 2014.",
 	alternates: { canonical: "/about-us" },
 };
 
@@ -31,7 +31,7 @@ const stats = [
 ];
 
 const storyParagraphs = [
-	"Cleaning Paradise started with one person, a handful of supplies, and a promise: to leave every home better than we found it. What began as a small family operation in Lynnwood quickly grew into a full team through word of mouth alone.",
+	"Cleaning Paradise started with one person, a handful of supplies, and a promise: to leave every home better than we found it. What began as a small family operation in Shoreline quickly grew into a full team through word of mouth alone.",
 	"Five-plus years later, we serve hundreds of families and businesses across King and Snohomish County. We still operate with that same first-day mentality — attention to detail, respect for your space, and care for the people who live in it.",
 	"We're bilingual, locally owned, and deeply proud of the community we serve. When you invite us in, we treat your home like it's our own.",
 ];
@@ -127,7 +127,7 @@ export default function AboutPage() {
 							<p className="text-[18px] text-ink-600 leading-[1.8]">
 								Cleaning Paradise was born from a simple belief: every family
 								deserves a spotless home without the stress of doing it
-								themselves. Based in Lynnwood, WA — serving Greater Seattle
+								themselves. Based in Shoreline, WA — serving Greater Seattle
 								since 2014.
 							</p>
 						</Reveal>
@@ -204,7 +204,7 @@ export default function AboutPage() {
 									Cleaning Paradise LLC
 								</div>
 								<div className="text-[13px] text-[#909098]">
-									Lynnwood, WA · Serving Greater Seattle
+									Shoreline, WA · Serving Greater Seattle
 								</div>
 							</div>
 						</div>
