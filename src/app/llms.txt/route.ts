@@ -11,15 +11,15 @@ export const dynamic = "force-dynamic";
 // Solo el blog se genera, que es lo único que crece solo desde el admin.
 const STATIC = `# Cleaning Paradise
 
-> Licensed, insured and bonded residential and commercial cleaning company based in Shoreline, WA, serving Seattle and the greater King & Snohomish County area. Services range from recurring maintenance cleans to deep cleaning, move-in/move-out, carpet cleaning, commercial spaces and packing/unpacking.
+> Licensed, insured and bonded residential and commercial cleaning company based in Lynnwood, WA, serving Seattle and the greater King & Snohomish County area. Services range from recurring maintenance cleans to deep cleaning, move-in/move-out, carpet cleaning, commercial spaces and packing/unpacking.
 
 ## Key Facts
 
 - **Legal name**: Cleaning Paradise LLC
-- **Based in**: Shoreline, WA (United States)
+- **Based in**: Lynnwood, WA (United States)
 - **Service area**: Seattle, Bellevue, Kirkland, Mercer Island, Shoreline, Edmonds, Bothell, Lynnwood and Mukilteo — King & Snohomish County, WA
 - **Phone**: +1 (425) 610-0241
-- **Email**: cleaning.paradise.llc@gmail.com
+- **Email**: hello@cleaningparadisellc.com
 - **Hours**: Monday–Saturday, 7:00–19:00 (Pacific Time)
 - **Credentials**: Licensed, insured and bonded in the state of Washington; every cleaner is background-checked and trained before their first visit
 - **Typical pricing**: most standard cleans start at $55/hr per person; every job is quoted before work begins

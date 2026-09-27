@@ -74,7 +74,7 @@ export default function ContactPage() {
 										</a>
 									</div>
 								</div>
-								<a href="mailto:cleaning.paradise.llc@gmail.com" className="flex items-start gap-[13px] no-underline">
+								<a href="mailto:hello@cleaningparadisellc.com" className="flex items-start gap-[13px] no-underline">
 									<div className="flex h-[38px] w-[38px] shrink-0 items-center justify-center rounded-[11px] bg-blue-50">
 										<Mail size={17} className="text-blue-600" />
 									</div>
@@ -83,7 +83,7 @@ export default function ContactPage() {
 											Email
 										</div>
 										<div className="text-[13.5px] font-semibold break-all text-ink-900">
-											cleaning.paradise.llc@gmail.com
+											hello@cleaningparadisellc.com
 										</div>
 									</div>
 								</a>
@@ -107,7 +107,7 @@ export default function ContactPage() {
 										<div className="mb-0.5 text-[11px] font-semibold tracking-[0.05em] text-[#A0A0AE] uppercase">
 											Based in
 										</div>
-										<div className="text-sm font-semibold text-ink-900">Shoreline, WA</div>
+										<div className="text-sm font-semibold text-ink-900">Lynnwood, WA</div>
 										<div className="text-[13px] text-[#808098]">Serving King &amp; Snohomish County</div>
 									</div>
 								</div>

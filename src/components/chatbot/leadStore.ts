@@ -9,6 +9,7 @@ export type Lead = {
 	name?: string;
 	email?: string;
 	phone?: string;
+	smsConsent?: "Yes" | "No";
 	service?: string;
 	city?: string;
 	street?: string;

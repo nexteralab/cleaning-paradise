@@ -14,7 +14,7 @@ export default function SmsConsent() {
 					aria-describedby={id}
 					className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-pink-500"
 				/>
-				<span>Text me about my cleanings, quotes, invoices and receipts.</span>
+				<span>Text me about my cleanings, invoices and receipts.</span>
 			</label>
 			<p id={id} className="mt-1 pl-[26px] text-[10.5px] leading-[1.5] text-ink-500 [&_a]:underline [&_a]:hover:text-pink-500">
 				Optional. By ticking this box you agree to receive automated text messages from Cleaning

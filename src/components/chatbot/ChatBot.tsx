@@ -30,6 +30,7 @@ async function submitLead(lead: Lead): Promise<boolean> {
 				lastName: parts.join(" ") || null,
 				email: lead.email ?? "",
 				phone: lead.phone ?? null,
+				smsConsent: lead.smsConsent === "Yes",
 				service: lead.service ?? null,
 				street: lead.street ?? null,
 				services: lead.service ? [lead.service] : [],

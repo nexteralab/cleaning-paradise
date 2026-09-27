@@ -27,7 +27,7 @@ function fields(lead: Lead): Field[] {
 		{ label: "Frequency", value: lead.frequency },
 		{ label: "Home size", value: lead.sqft ? `${lead.sqft} sq ft` : null },
 		{ label: "Notes", value: lead.notes },
-		{ label: "Text messages", value: lead.smsConsent ? "Opted in" : "Not opted in" },
+		{ label: "Text opt-in", value: lead.smsConsent ? "yes" : "no" },
 	];
 }
 

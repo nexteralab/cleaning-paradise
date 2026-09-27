@@ -64,7 +64,7 @@
 	// se ponen una vez y sobreviven cada deploy.
 	"vars": {
 		"EMAIL_FROM": "Cleaning Paradise <noreply@thenexteralab.com>",
-		"LEAD_NOTIFY_TO": "cleaning.paradise.llc@gmail.com"
+		"LEAD_NOTIFY_TO": "hello@cleaningparadisellc.com"
 	},
 	"observability": {
 		"enabled": true

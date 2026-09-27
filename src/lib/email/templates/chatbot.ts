@@ -8,6 +8,7 @@ function fields(lead: Lead): Field[] {
 		{ label: "Name", value: fullName(lead) },
 		{ label: "Email", value: lead.email },
 		{ label: "Phone", value: lead.phone },
+		{ label: "Text opt-in", value: lead.smsConsent ? "yes" : "no" },
 		{ label: "Service", value: lead.service },
 		{ label: "Address", value: lead.street },
 		{ label: "City", value: lead.city },

@@ -19,7 +19,7 @@ import {
 export const metadata: Metadata = {
 	title: "About Us — Cleaning Paradise",
 	description:
-		"We clean so you can live freely. Cleaning Paradise was born from a simple belief: every family deserves a spotless home without the stress of doing it themselves. Based in Shoreline, WA — serving Greater Seattle since 2014.",
+		"We clean so you can live freely. Cleaning Paradise was born from a simple belief: every family deserves a spotless home without the stress of doing it themselves. Based in Lynnwood, WA — serving Greater Seattle since 2014.",
 	alternates: { canonical: "/about-us" },
 };
 
@@ -127,7 +127,7 @@ export default function AboutPage() {
 							<p className="text-[18px] text-ink-600 leading-[1.8]">
 								Cleaning Paradise was born from a simple belief: every family
 								deserves a spotless home without the stress of doing it
-								themselves. Based in Shoreline, WA — serving Greater Seattle
+								themselves. Based in Lynnwood, WA — serving Greater Seattle
 								since 2014.
 							</p>
 						</Reveal>
@@ -204,7 +204,7 @@ export default function AboutPage() {
 									Cleaning Paradise LLC
 								</div>
 								<div className="text-[13px] text-[#909098]">
-									Shoreline, WA · Serving Greater Seattle
+									Lynnwood, WA · Serving Greater Seattle
 								</div>
 							</div>
 						</div>

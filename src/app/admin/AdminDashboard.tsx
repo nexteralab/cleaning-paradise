@@ -245,7 +245,7 @@ export default function AdminDashboard({ leads: initial }: { leads: Lead[] }) {
 														<div className="mt-1.5 flex flex-wrap items-center gap-1.5">
 															<StatusPill status={l.status} />
 															<span className="text-[11px] text-ink-400">{SOURCES[l.source] ?? l.source}</span>
-															{l.sms_consent && <Badge>SMS ok</Badge>}
+															<Badge on={l.sms_consent}>{l.sms_consent ? "Text opt-in: yes" : "Text opt-in: no"}</Badge>
 														</div>
 													</div>
 												</button>
@@ -343,9 +343,8 @@ function LeadDetail({
 			</div>
 
 			{/* Quick actions */}
-			<div className="mt-4 grid grid-cols-3 gap-2">
+			<div className="mt-4 grid grid-cols-2 gap-2">
 				<Action href={tel ? `tel:${tel}` : undefined} icon={<Phone size={16} />} label="Call" />
-				<Action href={tel ? `sms:${tel}` : undefined} icon={<MessageSquare size={16} />} label="Text" />
 				<Action href={`mailto:${lead.email}`} icon={<Mail size={16} />} label="Email" />
 			</div>
 
@@ -359,11 +358,11 @@ function LeadDetail({
 				<Row icon={<Phone size={15} />} label="Phone">
 					{lead.phone ?? <span className="text-ink-400">Not provided</span>}
 				</Row>
-				<Row icon={<MessageSquare size={15} />} label="Text messages">
+				<Row icon={<MessageSquare size={15} />} label="Text opt-in">
 					{lead.sms_consent ? (
-						<span className="font-medium text-green-700">Opted in</span>
+						<span className="font-semibold text-green-700">Yes</span>
 					) : (
-						<span className="text-ink-400">Not opted in — no automated texts</span>
+						<span className="font-semibold text-ink-500">No — do not text</span>
 					)}
 				</Row>
 			</Section>
@@ -448,8 +447,9 @@ function StatusPill({ status }: { status: string }) {
 	);
 }
 
-function Badge({ children }: { children: React.ReactNode }) {
-	return <span className="rounded-full bg-green-50 px-2 py-0.5 text-[11px] font-semibold text-green-700">{children}</span>;
+function Badge({ on, children }: { on: boolean; children: React.ReactNode }) {
+	const tone = on ? "bg-green-50 text-green-700" : "bg-ink-100 text-ink-500";
+	return <span className={`rounded-full px-2 py-0.5 text-[11px] font-semibold ${tone}`}>{children}</span>;
 }
 
 function Action({ href, icon, label }: { href?: string; icon: React.ReactNode; label: string }) {

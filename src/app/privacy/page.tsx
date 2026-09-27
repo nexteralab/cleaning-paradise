@@ -46,7 +46,7 @@ export default function PrivacyPage() {
 				<h2>Text messages</h2>
 				<p>
 					If you give us your mobile number and agree to receive texts, we use it only to send you
-					messages about your cleanings, quotes, invoices and payments. We never sell, rent or share
+					messages about your cleanings, invoices and payments. We never sell, rent or share
 					your mobile number, or your text-message opt-in and consent, with third parties or affiliates
 					for their marketing or promotional purposes. Text-messaging opt-in data and consent are not
 					shared with any third party. Everything else this policy says about sharing information
@@ -75,7 +75,7 @@ export default function PrivacyPage() {
 				<h2>Contact</h2>
 				<p>
 					Questions about this policy? Email{" "}
-					<a href="mailto:cleaning.paradise.llc@gmail.com">cleaning.paradise.llc@gmail.com</a> or call{" "}
+					<a href="mailto:hello@cleaningparadisellc.com">hello@cleaningparadisellc.com</a> or call{" "}
 					<a href="tel:+14256100241">(425) 610-0241</a>.
 				</p>
 			</div>

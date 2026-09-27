@@ -38,7 +38,7 @@ export default function Footer() {
 							<span className="text-[21px] text-white">Cleaning Paradise</span>
 						</div>
 						<p className="mb-[18px] max-w-[300px] text-sm leading-[1.7] text-ink-400">
-							Professional residential and commercial cleaning based in Shoreline, WA — serving
+							Professional residential and commercial cleaning based in Lynnwood, WA — serving
 							Seattle and King &amp; Snohomish County. Your home, perfectly clean.
 						</p>
 						<div className="flex gap-2.5">
@@ -90,13 +90,13 @@ export default function Footer() {
 							<Phone size={15} className="text-pink-500" />
 							(425) 610-0241
 						</a>
-						<a href="mailto:cleaning.paradise.llc@gmail.com" className="mb-[11px] flex items-center gap-[9px] text-sm break-all text-ink-400 hover:text-pink-500">
+						<a href="mailto:hello@cleaningparadisellc.com" className="mb-[11px] flex items-center gap-[9px] text-sm break-all text-ink-400 hover:text-pink-500">
 							<Mail size={15} className="shrink-0 text-pink-500" />
-							cleaning.paradise.llc@gmail.com
+							hello@cleaningparadisellc.com
 						</a>
 						<div className="mb-[11px] flex items-center gap-[9px] text-sm text-ink-400">
 							<MapPin size={15} className="text-pink-500" />
-							Shoreline, WA
+							Lynnwood, WA
 						</div>
 						<div className="flex items-center gap-[9px] text-sm text-ink-400">
 							<Clock size={15} className="text-pink-500" />

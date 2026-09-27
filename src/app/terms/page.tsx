@@ -95,7 +95,7 @@ export default function TermsPage() {
 				<h2>Contact</h2>
 				<p>
 					Questions about these terms? Email{" "}
-					<a href="mailto:cleaning.paradise.llc@gmail.com">cleaning.paradise.llc@gmail.com</a> or call{" "}
+					<a href="mailto:hello@cleaningparadisellc.com">hello@cleaningparadisellc.com</a> or call{" "}
 					<a href="tel:+14256100241">(425) 610-0241</a>.
 				</p>
 			</div>

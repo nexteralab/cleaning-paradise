@@ -114,6 +114,24 @@ export const steps: Step[] = [
 		},
 	},
 	{
+		key: "smsConsent",
+		// Wording is legally required (matches SmsConsent.tsx), so a single phrasing.
+		prompts: [
+			"Can we text you about your cleanings, invoices and receipts? Msg frequency varies. Msg & data rates may apply. Reply HELP for help, STOP to opt out. Consent is not a condition of purchase.",
+		],
+		errors: [
+			"A simple Yes or No works here 🙂",
+			"Just tap Yes or No, please.",
+		],
+		options: ["Yes", "No"],
+		validate: (raw) => {
+			const v = raw.trim().toLowerCase();
+			if (/^(y|yes|yeah|yep|yup|sure|ok|okay)/.test(v)) return { ok: true, value: "Yes" };
+			if (/^(n|no|nope|nah)/.test(v)) return { ok: true, value: "No" };
+			return { ok: false };
+		},
+	},
+	{
 		key: "service",
 		prompts: [
 			"Which service are you interested in?",
