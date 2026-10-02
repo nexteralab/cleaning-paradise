@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import { SITE, graph, webPageNode, breadcrumbNode, itemListNode } from "@/lib/schema";
+import JsonLd from "@/components/JsonLd";
 import { locations, locationSlugs } from "./locations-data";
 import {
   MapPin,
@@ -155,6 +157,21 @@ function FeatureItem({ feature, last }: { feature: Feature; last?: boolean }) {
 export default function LocationsPage() {
   return (
     <div className="relative w-full overflow-x-clip">
+      <JsonLd
+        data={graph([
+          webPageNode(`${SITE}/locations`, {
+            type: "CollectionPage",
+            title: "Service Areas in King & Snohomish County | Cleaning Paradise",
+            description: String(metadata.description),
+            mainEntity: `${SITE}/locations#list`,
+          }),
+          breadcrumbNode(`${SITE}/locations`, [{ name: "Locations", path: "/locations" }]),
+          itemListNode(
+            `${SITE}/locations`,
+            Object.values(locations).map((l) => ({ name: `House Cleaning in ${l.name}, WA`, path: `/locations/${l.slug}` })),
+          ),
+        ])}
+      />
       {/* HERO: Locations Overview */}
       <section className="bg-white px-10 pt-[120px] pb-20 text-center border-b border-ink-200 max-md:px-5">
         <Reveal className="max-w-[1360px] mx-auto">

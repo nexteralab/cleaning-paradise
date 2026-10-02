@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Reveal from "@/components/Reveal";
+import JsonLd from "@/components/JsonLd";
+import { SITE, graph, webPageNode, breadcrumbNode, itemListNode } from "@/lib/schema";
+import { services } from "./[slug]/services-data";
 import {
 	ArrowDown,
 	ArrowRight,
@@ -17,6 +20,14 @@ export const metadata: Metadata = {
 	description:
 		"From weekly home maintenance to move-out deep cleans and commercial spaces — Cleaning Paradise has the right service for you, with 100% satisfaction guaranteed.",
 	alternates: { canonical: "/cleaning-services-in-wa" },
+	// Sin esto hereda el openGraph del layout (título y url del home).
+	openGraph: {
+		type: "website",
+		title: "Cleaning Services in WA | Cleaning Paradise",
+		description:
+			"From weekly home maintenance to move-out deep cleans and commercial spaces — Cleaning Paradise has the right service for you, with 100% satisfaction guaranteed.",
+		url: "/cleaning-services-in-wa",
+	},
 };
 
 type ServiceCard = {
@@ -91,6 +102,26 @@ const whyItems: { icon: LucideIcon; title: string; description: string }[] = [
 export default function CleaningServicesInWaPage() {
 	return (
 		<div className="relative w-full overflow-x-clip">
+			<JsonLd
+				data={graph([
+					webPageNode(`${SITE}/cleaning-services-in-wa`, {
+						type: "CollectionPage",
+						title: String(metadata.title),
+						description: String(metadata.description),
+						mainEntity: `${SITE}/cleaning-services-in-wa#list`,
+					}),
+					breadcrumbNode(`${SITE}/cleaning-services-in-wa`, [
+						{ name: "Cleaning Services", path: "/cleaning-services-in-wa" },
+					]),
+					itemListNode(
+						`${SITE}/cleaning-services-in-wa`,
+						Object.values(services).map((s) => ({
+							name: s.heroTitle.map((p) => p.text).join(" ").replace(/\s+/g, " ").trim(),
+							path: `/cleaning-services-in-wa/${s.slug}`,
+						})),
+					),
+				])}
+			/>
 			{/* HERO */}
 			<section className="bg-white p-6">
 				<div className="relative min-h-[580px] w-full overflow-hidden rounded-[30px] bg-[linear-gradient(140deg,#1E3EA2_0%,#16307E_100%)]">

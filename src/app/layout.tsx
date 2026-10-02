@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import MusicPlayer from "@/components/MusicPlayer";
 import ChatBot from "@/components/chatbot/ChatBot";
 import { locations } from "@/app/locations/locations-data";
+import { SITE as SITE_URL, BUSINESS_ID, WEBSITE_ID, FOUNDER_ID } from "@/lib/schema";
 
 const lora = Lora({
 	variable: "--font-lora",
@@ -20,7 +21,6 @@ const poppins = Poppins({
 	style: ["normal", "italic"],
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://cleaningparadisellc.com";
 const TITLE = "Cleaning Paradise | House Cleaning Services in Seattle, WA";
 const DESCRIPTION =
 	"Professional residential and commercial cleaning based in Lynnwood, WA — serving Seattle and King & Snohomish County. Your home, perfectly clean.";
@@ -53,32 +53,74 @@ export const metadata: Metadata = {
 	},
 };
 
-// Sitewide LocalBusiness structured data — helps Google/AI engines identify the
-// business, service area and hours. AggregateRating deliberately omitted until
-// on-page reviews are verifiable (avoids a manual-action risk).
-const localBusinessJsonLd = {
+// Sitewide JSON-LD (@graph). El negocio se define UNA vez con @id; las páginas lo
+// referencian con { "@id": BUSINESS_ID } en vez de crear otro nodo de negocio.
+// Sin aggregateRating/review: Google ignora ratings propios en LocalBusiness.
+
+const siteJsonLd = {
 	"@context": "https://schema.org",
-	"@type": "HouseCleaningService",
-	name: "Cleaning Paradise LLC",
-	description: DESCRIPTION,
-	url: SITE_URL,
-	telephone: "+1-425-610-0241",
-	email: "hello@cleaningparadisellc.com",
-	image: `${SITE_URL}/img/logo.png`,
-	priceRange: "$$",
-	address: {
-		"@type": "PostalAddress",
-		addressLocality: "Lynnwood",
-		addressRegion: "WA",
-		addressCountry: "US",
-	},
-	areaServed: Object.values(locations).map(({ name }) => ({ "@type": "City", name })),
-	openingHoursSpecification: {
-		"@type": "OpeningHoursSpecification",
-		dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-		opens: "07:00",
-		closes: "19:00",
-	},
+	"@graph": [
+		{
+			"@type": "WebSite",
+			"@id": WEBSITE_ID,
+			url: SITE_URL,
+			name: "Cleaning Paradise",
+			publisher: { "@id": BUSINESS_ID },
+			inLanguage: "en-US",
+		},
+		{
+			"@type": "HouseCleaningService",
+			"@id": BUSINESS_ID,
+			name: "Cleaning Paradise LLC",
+			alternateName: "Cleaning Paradise",
+			url: SITE_URL,
+			logo: { "@type": "ImageObject", url: `${SITE_URL}/img/logo.png`, width: 512, height: 512 },
+			image: `${SITE_URL}/img/group.webp`,
+			description:
+				"Residential and commercial cleaning based in Lynnwood, WA, serving Seattle and King and Snohomish County.",
+			telephone: "+1-425-610-0241",
+			email: "hello@cleaningparadisellc.com",
+			priceRange: "$$",
+			// Service-area business: sin streetAddress, igual que el GBP.
+			address: {
+				"@type": "PostalAddress",
+				addressLocality: "Lynnwood",
+				addressRegion: "WA",
+				postalCode: "98087",
+				addressCountry: "US",
+			},
+			geo: { "@type": "GeoCoordinates", latitude: 47.8209, longitude: -122.3151 },
+			areaServed: Object.values(locations).map(({ name }) => ({ "@type": "City", name: `${name}, WA` })),
+			openingHoursSpecification: [
+				{
+					"@type": "OpeningHoursSpecification",
+					dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+					opens: "07:00",
+					closes: "19:00",
+				},
+			],
+			foundingDate: "2019-04-15",
+			founder: { "@id": FOUNDER_ID },
+			knowsLanguage: ["en", "es"],
+			paymentAccepted: "Credit card, debit card",
+			// Solo perfiles con NAP igual al sitio. Yelp fuera hasta arreglar el listing CLOSED.
+			// TODO: URL del Google Business Profile (también va en hasMap).
+			sameAs: [
+				"https://www.facebook.com/cleaningparadisellc",
+				"https://www.instagram.com/cleaningparadisellc",
+				"https://www.youtube.com/@cleaningparadisellc",
+				"https://www.tiktok.com/@cleaningparadisellc",
+				"https://www.bbb.org/us/wa/seattle-washington/profile/cleaning-services/cleaning-paradise-llc-1296-1000178895",
+			],
+		},
+		{
+			"@type": "Person",
+			"@id": FOUNDER_ID,
+			name: "Allizon Arana",
+			jobTitle: "Founder",
+			worksFor: { "@id": BUSINESS_ID },
+		},
+	],
 };
 
 export default function RootLayout({
@@ -100,7 +142,7 @@ export default function RootLayout({
 				</noscript>
 				<script
 					type="application/ld+json"
-					dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+					dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd).replace(/</g, "\\u003c") }}
 				/>
 				{/* ponytail: script crudo en <head>, no next/script. afterInteractive lo inyecta
 				    en cliente y el verificador de GA4 (que no ejecuta JS) no lo ve. */}

@@ -118,7 +118,7 @@ export function BeforeAfterSlider() {
 							<span className="text-[22px] leading-none font-bold text-ink-900">4.9</span>
 						</div>
 						<span className="text-[11px] tracking-[-1px] text-[#FBBC05]">★★★★★</span>
-						<div className="text-[10px] font-semibold text-[#808098]">(51) Google Reviews</div>
+						<div className="text-[10px] font-semibold text-[#808098]">60 Google reviews</div>
 					</div>
 				</div>
 			</div>

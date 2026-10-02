@@ -26,7 +26,7 @@ export const metadata: Metadata = {
 const stats = [
 	{ value: "100+", label: "Homes Cleaned" },
 	{ value: "5+", label: "Years of Experience" },
-	{ value: "111", label: "5-Star Reviews" },
+	{ value: "60", label: "5-Star Reviews" },
 	{ value: "100%", label: "Satisfaction Guarantee" },
 ];
 
@@ -310,12 +310,12 @@ export default function AboutPage() {
 							</h2>
 						</div>
 						<a
-							href="https://www.thumbtack.com/wa/lynnwood/house-cleaning/cleaning-paradise-llc/service/454839254774677504"
+							href="https://g.page/r/CfZDEfHZ_q_SEBM/review"
 							target="_blank"
 							rel="noopener"
 							className="inline-flex items-center gap-2 text-sm font-semibold text-blue-600 no-underline whitespace-nowrap mb-2 hover:underline"
 						>
-							All 111 reviews on Thumbtack <ArrowUpRight size={15} />
+							All 60 reviews on Google <ArrowUpRight size={15} />
 						</a>
 					</Reveal>
 				</div>

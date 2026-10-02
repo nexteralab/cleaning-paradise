@@ -15,7 +15,7 @@ import {
 	Star,
 	Home,
 } from "lucide-react";
-import { locations, locationSlugs, locationFaqs } from "../locations-data";
+import { locations, locationSlugs } from "../locations-data";
 
 /* ─── Hero before / after slider (per-city images) ─── */
 
@@ -129,12 +129,12 @@ export function HeroSlider({
 
 /* ─── FAQ accordion ─── */
 
-export function FaqAccordion() {
+export function FaqAccordion({ items }: { items: { q: string; a: string }[] }) {
 	const [open, setOpen] = useState<number | null>(null);
 
 	return (
 		<div className="flex flex-col gap-3.5">
-			{locationFaqs.map((item, i) => {
+			{items.map((item, i) => {
 				const isOpen = open === i;
 				return (
 					<div

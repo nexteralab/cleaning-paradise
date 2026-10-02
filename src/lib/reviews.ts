@@ -25,7 +25,7 @@ export const reviews: Review[] = [
 		name: "Roynerah B",
 		location: "Seattle, WA",
 	},
-	// Thumbtack no publica la ciudad del reviewer — usamos el área de servicio.
+	// Sin ciudad del reviewer — usamos el área de servicio.
 	{
 		text: "We love Cleaning Paradise! We look forward to them coming every two weeks. We have arranged for a standard set of to-dos as well as a \"project\" like the oven or our downstairs bathroom that don't need regular cleaning. When we don't tell them which project we'd like, they always just find something to tackle and exceed our expectations. Love them!!",
 		initials: "MH",

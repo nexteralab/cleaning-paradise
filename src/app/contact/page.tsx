@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CalendarCheck, Clock, Gift, Mail, MapPin, Music, Phone, Star } from "lucide-react";
 import ContactForm from "./ContactForm";
+import { GoogleG } from "@/components/ReviewCard";
 
 export const metadata: Metadata = {
 	title: "Contact | Cleaning Paradise — Get Your Free Cleaning Quote",
@@ -139,16 +140,19 @@ export default function ContactPage() {
 						{/* Reviews trust */}
 						<div className="rounded-[22px] bg-blue-50 px-[26px] py-[22px]">
 							<div className="mb-1.5 flex items-center gap-2">
-								<span className="text-sm tracking-[1px] text-[#FBBC05]">★★★★★</span>
-								<span className="text-sm font-bold text-ink-900">4.9</span>
+								<GoogleG size={18} />
+								<span className="text-base leading-none font-bold text-ink-900">4.9</span>
+								<span className="text-sm leading-none tracking-[1px] text-[#FBBC05]" aria-label="5 stars">
+									★★★★★
+								</span>
 							</div>
 							<p className="text-[13px] leading-[1.55] text-ink-600">
-								Rated by 100+ homeowners across King &amp; Snohomish County.{" "}
+								60 Google reviews from homeowners across King &amp; Snohomish County.{" "}
 								<a
-									href="https://www.thumbtack.com/wa/lynnwood/house-cleaning/cleaning-paradise-llc/service/454839254774677504"
+									href="https://g.page/r/CfZDEfHZ_q_SEBM/review"
 									target="_blank"
 									rel="noopener"
-									className="font-semibold text-blue-600 no-underline hover:underline"
+									className="font-semibold text-[#1a73e8] no-underline hover:underline"
 								>
 									Read reviews →
 								</a>

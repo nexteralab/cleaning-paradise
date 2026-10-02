@@ -20,7 +20,6 @@ import {
 	Tag,
 	ShieldCheck,
 	Sparkles,
-	Star,
 	Truck,
 	UserCheck,
 	type LucideIcon,
@@ -28,6 +27,8 @@ import {
 import { FaqAccordion, QuoteForm, ServiceNotes } from "./client-sections";
 import { services, serviceSlugs, type IconName, type ServiceContent } from "./services-data";
 import JsonLd from "@/components/JsonLd";
+import { GoogleG } from "@/components/ReviewCard";
+import { SITE, BUSINESS_ID, graph, webPageNode, breadcrumbNode, faqNode } from "@/lib/schema";
 import { locations } from "@/app/locations/locations-data";
 import { TestimonialsSection } from "@/app/page";
 
@@ -64,6 +65,20 @@ export async function generateMetadata({
 		title: service.metaTitle,
 		description: service.metaDescription,
 		alternates: { canonical: `/cleaning-services-in-wa/${slug}` },
+		// Sin esto hereda el openGraph del layout (título y url del home).
+		openGraph: {
+			type: "website",
+			title: service.metaTitle,
+			description: service.metaDescription,
+			url: `/cleaning-services-in-wa/${slug}`,
+			images: [{ url: service.heroImage, alt: service.heroImageAlt }],
+		},
+		twitter: {
+			card: "summary_large_image",
+			title: service.metaTitle,
+			description: service.metaDescription,
+			images: [service.heroImage],
+		},
 	};
 }
 
@@ -104,50 +119,41 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 	if (!service) notFound();
 
 	const serviceName = service.heroTitle.map((p) => p.text).join(" ").replace(/\s+/g, " ").trim();
-	const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://cleaningparadisellc.com";
+	const url = `${SITE}/cleaning-services-in-wa/${slug}`;
 
 	return (
 		<div className="relative w-full overflow-x-clip">
 			<JsonLd
-				data={{
-					"@context": "https://schema.org",
-					"@type": "Service",
-					name: serviceName,
-					description: service.metaDescription,
-					url: `${base}/cleaning-services-in-wa/${service.slug}`,
-					provider: {
-						"@type": "HouseCleaningService",
-						name: "Cleaning Paradise LLC",
-						telephone: "+1-425-610-0241",
-						url: base,
+				data={graph([
+					webPageNode(url, {
+						title: service.metaTitle,
+						description: service.metaDescription,
+						image: service.heroImage,
+						mainEntity: `${url}#service`,
+					}),
+					breadcrumbNode(url, [
+						{ name: "Cleaning Services", path: "/cleaning-services-in-wa" },
+						{ name: serviceName, path: `/cleaning-services-in-wa/${slug}` },
+					]),
+					{
+						"@type": "Service",
+						"@id": `${url}#service`,
+						name: serviceName,
+						serviceType: serviceName,
+						description: service.metaDescription,
+						url,
+						image: `${SITE}${service.heroImage}`,
+						provider: { "@id": BUSINESS_ID },
+						areaServed: Object.values(locations).map(({ name }) => ({ "@type": "City", name: `${name}, WA` })),
 					},
-					areaServed: Object.values(locations).map(({ name }) => ({ "@type": "City", name })),
-				}}
-			/>
-			<JsonLd
-				data={{
-					"@context": "https://schema.org",
-					"@type": "FAQPage",
-					mainEntity: service.faqs.map((f) => ({
-						"@type": "Question",
-						name: f.q,
-						acceptedAnswer: {
-							"@type": "Answer",
-							text: f.a.map((part) => (typeof part === "string" ? part : part.label)).join(""),
-						},
-					})),
-				}}
-			/>
-			<JsonLd
-				data={{
-					"@context": "https://schema.org",
-					"@type": "BreadcrumbList",
-					itemListElement: [
-						{ "@type": "ListItem", position: 1, name: "Home", item: base },
-						{ "@type": "ListItem", position: 2, name: "Cleaning Services", item: `${base}/cleaning-services-in-wa` },
-						{ "@type": "ListItem", position: 3, name: serviceName },
-					],
-				}}
+					faqNode(
+						url,
+						service.faqs.map((f) => ({
+							q: f.q,
+							a: f.a.map((part) => (typeof part === "string" ? part : part.label)).join(""),
+						})),
+					),
+				])}
 			/>
 			{/* ═══ HERO ═══ */}
 			<section className="bg-white px-6 pt-[clamp(120px,11vw,160px)] pb-[clamp(60px,7vw,88px)]">
@@ -209,14 +215,23 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 									<div className="mt-[3px] text-[11px] font-semibold text-[#808098]">Years Experience</div>
 								</div>
 								<div className="h-8 w-px bg-ink-200" />
-								<div className="flex flex-col items-center gap-[3px]">
-									<div className="flex items-center gap-[5px]">
-										<Star size={14} className="fill-[#FBBC05] text-[#FBBC05]" />
+								<a
+									href="https://g.page/r/CfZDEfHZ_q_SEBM/review"
+									target="_blank"
+									rel="noopener"
+									className="group flex flex-col items-center text-center no-underline"
+								>
+									<div className="flex items-center gap-1.5">
+										<GoogleG size={18} />
 										<span className="font-sans text-[22px] leading-none font-bold text-ink-900">4.9</span>
+										<span className="text-[12px] leading-none tracking-[0.5px] text-[#FBBC05]" aria-label="5 stars">
+											★★★★★
+										</span>
 									</div>
-									<span className="text-[11px] tracking-[-1px] text-[#FBBC05]">★★★★★</span>
-									<div className="text-[10px] font-semibold text-[#808098]">(51) Google Reviews</div>
-								</div>
+									<div className="mt-[3px] text-[11px] font-semibold text-[#808098] group-hover:text-[#1a73e8]">
+										60 Google reviews
+									</div>
+								</a>
 							</div>
 						</div>
 					</div>

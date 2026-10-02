@@ -113,15 +113,13 @@ const defaultFeatures: ServiceFeature[] = [
 export const services: Record<string, ServiceContent> = {
 	"standard-cleaning": { // CHECK
 		slug: "standard-cleaning",
-		metaTitle: "Standard Cleaning Services in Seattle, WA | Cleaning Paradise",
+		metaTitle: "Standard House Cleaning in Seattle, WA | Cleaning Paradise",
 		metaDescription:
-			"Get your home professionally maintained with our top-rated standard cleaning services in the Seattle area; book your first session today.",
+			"Regular house cleaning in Seattle by vetted local maids: dusting, floors, kitchens and bathrooms. Weekly, biweekly or monthly. Get a free quote.",
 		badgeIcon: "house",
 		heroImage: "/img/aw1a0685.jpg",
 		heroImageAlt: "Professional maid cleaning a kitchen counter in Seattle",
-		heroTitle: [
-			{ text: "Standard Cleaning Services" }
-		],
+		heroTitle: [{ text: "Standard House Cleaning" }],
 		heroSubtitle:
 			"Get your home professionally maintained with our top-rated standard cleaning services in the Seattle area; book your first session today.",
 		introEyebrow: "Professional housekeeping",
@@ -229,13 +227,13 @@ export const services: Record<string, ServiceContent> = {
 
 	"deep-cleaning": { // CHECK
 		slug: "deep-cleaning",
-		metaTitle: "Deep Cleaning & Sanitization Services in Seattle, WA | Cleaning Paradise",
+		metaTitle: "Deep Cleaning Services in Seattle, WA | Cleaning Paradise",
 		metaDescription:
-			"From kitchen surface sanitization to full bathroom disinfection, our deep clean service removes what everyday cleaning leaves behind.",
+			"Deep house cleaning in Seattle that reaches baseboards, appliances, grout and every overlooked corner, with full kitchen and bathroom sanitization.",
 		badgeIcon: "sparkles",
 		heroImage: "/img/house-cleaning-team-playroom-lynnwood-wa.jpg",
 		heroImageAlt: "Deep cleaning and sanitization service in Seattle",
-		heroTitle: [{ text: "Deep Cleaning & Sanitization" }],
+		heroTitle: [{ text: "Deep Cleaning Services" }],
 		heroSubtitle:
 			"From full kitchen sanitization to complete bathroom disinfection, our deep clean removes what everyday cleaning leaves behind.",
 		introEyebrow: "Deep clean & sanitize",
@@ -357,15 +355,13 @@ export const services: Record<string, ServiceContent> = {
 
 	"commercial-cleaning": { // CHECK
 		slug: "commercial-cleaning",
-		metaTitle: "Commercial Cleaning Services in Seattle, WA | Cleaning Paradise",
+		metaTitle: "Janitorial & Commercial Cleaning Seattle | Cleaning Paradise",
 		metaDescription:
-			"Professional office and commercial cleaning for businesses across Seattle, WA — flexible schedules, insured crews, spotless results.",
+			"Janitorial services in Seattle for offices, retail and medical spaces. Insured crews, flexible schedules before or after business hours. Free quote.",
 		badgeIcon: "building-2",
 		heroImage: "/img/commercial-cleaning-office.webp",
 		heroImageAlt: "Commercial cleaning service in Seattle",
-		heroTitle: [
-			{ text: "Commercial Cleaning & Janitorial Services" }
-		],
+		heroTitle: [{ text: "Commercial Cleaning & Janitorial Services" }],
 		heroSubtitle:
 			"Keep your office, retail space or facility spotless with flexible janitorial service scheduled before, during or after business hours.",
 		introEyebrow: "Commercial & janitorial",
@@ -452,9 +448,9 @@ export const services: Record<string, ServiceContent> = {
 
 	"move-in-out": { // CHECK
 		slug: "move-in-out",
-		metaTitle: "Move In / Out Cleaning Services in Seattle, WA | Cleaning Paradise",
+		metaTitle: "Move In & Move Out Cleaning Seattle | Cleaning Paradise",
 		metaDescription:
-			"Top-to-bottom move in / move out cleaning for homes and apartments across Seattle, WA — get your deposit back or move into a truly clean space.",
+			"Move out cleaning in Seattle for homes and apartments: inside cabinets, appliances and closets, top to bottom. Get your deposit back. Free quote.",
 		badgeIcon: "truck",
 		heroImage: "/img/aw1a0626-scaled.jpg",
 		heroImageAlt: "Move in / move out cleaning service in Seattle",
@@ -630,13 +626,11 @@ export const services: Record<string, ServiceContent> = {
 		slug: "carpet-cleaning",
 		metaTitle: "Carpet Cleaning Services in Seattle, WA | Cleaning Paradise",
 		metaDescription:
-			"Professional carpet and rug cleaning across Seattle, WA — lifting stains, odors and allergens that vacuuming leaves behind.",
+			"Professional carpet cleaning services across Seattle, WA. Hot water extraction lifts stains, pet odors and allergens that vacuuming leaves behind.",
 		badgeIcon: "brush",
 		heroImage: "/img/carpet-cleaning.webp",
 		heroImageAlt: "Carpet cleaning service in Seattle",
-		heroTitle: [
-			{ text: "Carpet Cleaning Services" }
-		],
+		heroTitle: [{ text: "Carpet Cleaning Services" }],
 		heroSubtitle:
 			"Professional extraction cleaning that lifts deep stains, odors and allergens. Your carpets come out spotless, sparkling and genuinely fresh.",
 		introEyebrow: "Professional carpet cleaning",
@@ -723,9 +717,9 @@ export const services: Record<string, ServiceContent> = {
 	// content from design: Service - Packing Unpacking.dc.html
 	"packing-unpacking": { // CHECK PACKING
 		slug: "packing-unpacking",
-		metaTitle: "Packing & Unpacking Services in Seattle, WA | Cleaning Paradise",
+		metaTitle: "Packing & Unpacking Services Seattle | Cleaning Paradise",
 		metaDescription:
-			"Trained local movers pack, label and unpack your home across Seattle, WA — settle in faster with a lot less stress.",
+			"Packing and unpacking services in Seattle: our trained team wraps, labels and unpacks your home so you settle in faster, with a lot less stress.",
 		badgeIcon: "truck",
 		heroImage: "/img/gemini_generated_image_67heuh67heuh67he.webp",
 		heroImageAlt: "Packing and unpacking service in Seattle",

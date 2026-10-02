@@ -15,10 +15,12 @@ import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { getPublishedPosts, categoryIcon, formatDate } from "@/lib/blog";
 import { CitySelector, FaqAccordion, HeroSlider } from "./client-sections";
 import JsonLd from "@/components/JsonLd";
+import { SITE, BUSINESS_ID, graph, webPageNode, breadcrumbNode, faqNode } from "@/lib/schema";
 import Reveal from "@/components/Reveal";
 import BgVideo from "@/components/BgVideo";
 import CountUp from "@/components/CountUp";
 import WhyChooseUs from "@/components/WhyChooseUs";
+import { GoogleG } from "@/components/ReviewCard";
 import { locations, locationFaqs } from "../locations-data";
 
 // ponytail: force-dynamic porque la sección de blog lee D1 (sin binding en build),
@@ -118,12 +120,13 @@ const services: Service[] = [
 	},
 ];
 
-type Stat = { icon: LucideIcon; value: string; label: string };
+// `google`: muestra la G de Google en vez del ícono lucide.
+type Stat = { icon: LucideIcon; value: string; label: string; google?: boolean };
 
 const stats: Stat[] = [
 	{ icon: Users, value: "100+", label: "Customers Served" },
 	{ icon: CircleCheck, value: "100%", label: "Satisfaction Rate" },
-	{ icon: Star, value: "50+", label: "5-star Reviews" },
+	{ icon: Star, value: "4.9", label: "60 reviews on Google", google: true },
 ];
 
 
@@ -139,31 +142,60 @@ export default async function LocationPage({
 	const { env } = await getCloudflareContext({ async: true });
 	const blogPosts = await getPublishedPosts(env, 3);
 
-	const base = process.env.NEXT_PUBLIC_SITE_URL ?? "https://cleaningparadisellc.com";
+	const url = `${SITE}/locations/${slug}`;
+	const hoods = loc.hoods.split("·").map((h) => h.trim());
+	const faqs = [...loc.faqs, ...locationFaqs];
 
 	return (
 		<div className="relative w-full overflow-x-clip">
 			<JsonLd
-				data={{
-					"@context": "https://schema.org",
-					"@type": "FAQPage",
-					mainEntity: locationFaqs.map((f) => ({
-						"@type": "Question",
-						name: f.q,
-						acceptedAnswer: { "@type": "Answer", text: f.a },
+				data={graph([
+					webPageNode(url, {
+						title: loc.metaTitle,
+						description: loc.metaDescription,
+						image: loc.after,
+						mainEntity: `${url}#service`,
+					}),
+					breadcrumbNode(url, [
+						{ name: "Locations", path: "/locations" },
+						{ name: loc.name, path: `/locations/${slug}` },
+					]),
+					{
+						"@type": "Service",
+						"@id": `${url}#service`,
+						name: `House Cleaning in ${loc.name}, WA`,
+						serviceType: "House cleaning",
+						description: loc.blurb,
+						url,
+						provider: { "@id": BUSINESS_ID },
+						areaServed: [
+							{ "@type": "City", name: `${loc.name}, WA` },
+							...hoods.map((n) => ({
+								"@type": "Place",
+								name: `${n}, ${loc.name}, WA`,
+								containedInPlace: { "@type": "City", name: `${loc.name}, WA` },
+							})),
+						],
+						hasOfferCatalog: {
+							"@type": "OfferCatalog",
+							name: "Cleaning services",
+							itemListElement: services.map((s) => ({
+								"@type": "Offer",
+								itemOffered: { "@type": "Service", "@id": `${SITE}${s.href}#service`, name: s.title },
+							})),
+						},
+					},
+					...[
+						[loc.before, loc.beforeAlt],
+						[loc.after, loc.afterAlt],
+					].map(([src, caption]) => ({
+						"@type": "ImageObject",
+						contentUrl: `${SITE}${src}`,
+						caption,
+						contentLocation: { "@type": "City", name: `${loc.name}, WA` },
 					})),
-				}}
-			/>
-			<JsonLd
-				data={{
-					"@context": "https://schema.org",
-					"@type": "BreadcrumbList",
-					itemListElement: [
-						{ "@type": "ListItem", position: 1, name: "Home", item: base },
-						{ "@type": "ListItem", position: 2, name: "Locations", item: `${base}/locations` },
-						{ "@type": "ListItem", position: 3, name: `${loc.name}, WA` },
-					],
-				}}
+					faqNode(url, faqs),
+				])}
 			/>
 			{/* ===== HERO / BEFORE-AFTER ===== */}
 			<section id="top" className="bg-white p-6">
@@ -180,7 +212,7 @@ export default async function LocationPage({
 								</span>
 							</div>
 							<h1 className="text-[clamp(36px,4.6vw,60px)] leading-[1.08] font-normal tracking-[-0.03em] text-ink-900 md:mb-5 font-heading">
-								A spotless home, right here in Greater{" "} <br />
+								{loc.heroLead}{" "}<br />
 								<span className="underline-offset-[6px]">
 									{loc.name}, WA
 									<svg width="354" height="12" viewBox="0 0 354 11" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -206,8 +238,7 @@ export default async function LocationPage({
 						{/* description + buttons + trust badges */}
 						<Reveal delay={80} className="md:col-start-1 md:row-start-2 md:self-start">
 							<p className="mb-[30px] max-w-[520px] text-[clamp(16px,1.4vw,18px)] leading-[1.75] text-[#5A5A6E]">
-								Your home deserves a spotless finish and a team you can actually count on. We are
-								Cleaning Paradise, your local maids in {loc.name}.
+								{loc.intro}
 							</p>
 							<div className="mb-[26px] flex flex-wrap gap-[13px]">
 								<Link
@@ -267,7 +298,7 @@ export default async function LocationPage({
 										className="flex items-center gap-3.5 rounded-2xl border border-white/[0.18] px-[clamp(14px,1.8vw,24px)] py-[clamp(18px,2.2vw,30px)] text-left"
 									>
 										<div className="shrink-0">
-											<Icon size={22} className="text-pink-500" />
+											{stat.google ? <GoogleG size={26} /> : <Icon size={22} className="text-pink-500" />}
 										</div>
 										<div>
 											<CountUp
@@ -296,12 +327,10 @@ export default async function LocationPage({
 							</span>
 						</div>
 						<h2 className="font-heading mb-3.5 text-[clamp(40px,4vw,60px)] leading-[1.12] font-normal tracking-[-0.025em] text-ink-900">
-							Cleaning for every home
+							{loc.name} cleaning services
 						</h2>
 						<p className="mx-auto max-w-[560px] text-[15.5px] leading-[1.7] text-ink-600">
-							Whether you need a one-time deep-clean before a home inspection, recurring housekeeping
-							that keeps your kitchen and bathrooms sparkling all year, or professional sanitization
-							after illness — our local maids show up prepared, trained, and ready.
+							{loc.servicesIntro}
 						</p>
 					</Reveal>
 
@@ -341,7 +370,7 @@ export default async function LocationPage({
 			{/* ===== WHY CHOOSE US ===== */}
 			<WhyChooseUs
 				city={loc.name}
-				intro={`We have been cleaning homes in ${loc.name} for over 5 years. Our maids are background checked, trained, and genuinely care about leaving your home sparkling. Here is what makes us different.`}
+				intro={loc.whyIntro}
 			/>
 
 			{/* ===== FAQs ===== */}
@@ -356,7 +385,7 @@ export default async function LocationPage({
 						</h2>
 					</Reveal>
 					<Reveal delay={80}>
-						<FaqAccordion />
+						<FaqAccordion items={faqs} />
 					</Reveal>
 				</div>
 			</section>
