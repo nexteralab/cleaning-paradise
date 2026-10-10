@@ -19,7 +19,9 @@ export default function SmsConsent() {
 			</label>
 			<p id={id} className="mt-1 pl-[26px] text-[10.5px] leading-[1.5] text-ink-500 [&_a]:underline [&_a]:hover:text-pink-500">
 				{SMS_DISCLOSURE} See our{" "}
-				<Link href="/terms#sms">Text message terms</Link> and <Link href="/privacy">Privacy policy</Link>.
+				{/* Pestaña nueva: navegar en la misma borraría lo que el cliente ya llenó. */}
+				<Link href="/terms#sms" target="_blank" rel="noopener noreferrer">Text message terms</Link> and{" "}
+				<Link href="/privacy" target="_blank" rel="noopener noreferrer">Privacy policy</Link>.
 			</p>
 		</div>
 	);

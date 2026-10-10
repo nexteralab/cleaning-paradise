@@ -328,7 +328,7 @@ const SITE_URL = /(cleaningparadisellc\.com\/[^\s·]+)/;
 function Linkified({ text }: { text: string }) {
 	return text.split(SITE_URL).map((part, i) =>
 		i % 2 ? (
-			<Link key={i} href={part.slice(part.indexOf("/"))} className="font-medium text-pink-600 underline">
+			<Link key={i} href={part.slice(part.indexOf("/"))} target="_blank" rel="noopener noreferrer" className="font-medium text-pink-600 underline">
 				{part}
 			</Link>
 		) : (

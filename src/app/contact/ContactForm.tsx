@@ -273,7 +273,7 @@ export default function ContactForm() {
 				</p>
 				<p className="text-center text-[11px] text-[#A0A0AE]">
 					By submitting, you agree to our{" "}
-					<a href="/privacy" className="underline hover:text-pink-500">
+					<a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline hover:text-pink-500">
 						Privacy Policy
 					</a>
 					.
