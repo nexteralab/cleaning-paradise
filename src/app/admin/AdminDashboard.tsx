@@ -42,6 +42,8 @@ export type Lead = {
 	promo: boolean;
 	sms_consent: boolean;
 	sms_consent_version: string | null;
+	sms_consent_method: string | null;
+	sms_consent_at: string | null;
 	source: string;
 	status: string;
 	created_at: string;
@@ -130,6 +132,22 @@ export default function AdminDashboard({ leads: initial }: { leads: Lead[] }) {
 			body: JSON.stringify({ id, status: next }),
 		});
 		if (!res.ok && prev) setOverrides((o) => ({ ...o, [id]: prev }));
+		router.refresh();
+	}
+
+	// Consentimiento leído por teléfono o en persona con el guion de /terms#sms-consent.
+	async function recordConsent(id: number, method: string) {
+		const how = method === "phone" ? "by phone" : "in person";
+		const ok = window.confirm(
+			`Record SMS consent given ${how}?\n\nOnly if you read the full script at /terms#sms-consent and the customer said an explicit YES. A refusal or no answer is NOT consent.`,
+		);
+		if (!ok) return;
+		const res = await fetch("/api/admin/leads", {
+			method: "PATCH",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ id, smsConsent: method }),
+		});
+		if (!res.ok) window.alert("Could not record consent: the lead needs a phone number and no previous consent.");
 		router.refresh();
 	}
 
@@ -267,6 +285,7 @@ export default function AdminDashboard({ leads: initial }: { leads: Lead[] }) {
 									onBack={() => setSelectedId(null)}
 									onStatus={(s) => updateStatus(active.id, s)}
 									onDelete={() => setTarget(active)}
+									onConsent={(m) => recordConsent(active.id, m)}
 								/>
 							</aside>
 						)}
@@ -294,11 +313,13 @@ function LeadDetail({
 	onBack,
 	onStatus,
 	onDelete,
+	onConsent,
 }: {
 	lead: Lead;
 	onBack: () => void;
 	onStatus: (s: string) => void;
 	onDelete: () => void;
+	onConsent: (method: string) => void;
 }) {
 	const address = [lead.street, lead.unit, lead.city, lead.zip].filter(Boolean).join(", ");
 	const schedule = [lead.frequency, lead.date, lead.time].filter(Boolean).join(" · ");
@@ -361,11 +382,35 @@ function LeadDetail({
 				</Row>
 				<Row icon={<MessageSquare size={15} />} label="Text opt-in">
 					{lead.sms_consent ? (
-						<span className="font-semibold text-green-700">
-							Yes{lead.sms_consent_version && ` · disclosure v${lead.sms_consent_version}`}
+						<span suppressHydrationWarning className="font-semibold text-green-700">
+							Yes
+							{[
+								lead.sms_consent_method,
+								lead.sms_consent_version && `disclosure v${lead.sms_consent_version}`,
+								lead.sms_consent_at &&
+									new Date(lead.sms_consent_at).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" }),
+							]
+								.filter(Boolean)
+								.map((v) => ` · ${v}`)}
 						</span>
 					) : (
-						<span className="font-semibold text-ink-500">No — do not text</span>
+						<div>
+							<span className="font-semibold text-ink-500">No — do not text</span>
+							{lead.phone?.trim() && (
+								<div className="mt-1.5 flex flex-wrap items-center gap-1.5 text-xs">
+									<span className="text-ink-400">Record verbal consent:</span>
+									{["phone", "in-person"].map((m) => (
+										<button
+											key={m}
+											onClick={() => onConsent(m)}
+											className="rounded-full border border-ink-200 px-2.5 py-0.5 font-semibold text-ink-600 capitalize hover:border-pink-300 hover:text-pink-600"
+										>
+											{m.replace("-", " ")}
+										</button>
+									))}
+								</div>
+							)}
+						</div>
 					)}
 				</Row>
 			</Section>

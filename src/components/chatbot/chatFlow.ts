@@ -22,6 +22,8 @@ export type Step = {
 	/** Optional steps accept "skip"/"none"/empty. */
 	optional?: boolean;
 	validate: (raw: string) => Validated;
+	/** Fixed reply to the answer instead of a random ack. */
+	ack?: (value: string) => string;
 };
 
 // ── helpers ───────────────────────────────────────────────────────────────
@@ -129,6 +131,11 @@ export const steps: Step[] = [
 			if (/^(n|no|nope|nah)\b/.test(v)) return { ok: true, value: "No" };
 			return { ok: false };
 		},
+		// Confirma qué quedó registrado: un "Love it." random después de un "No" se lee mal.
+		ack: (v) =>
+			v === "Yes"
+				? "Thanks! You're opted in to service texts. Reply STOP anytime to opt out."
+				: "No problem, we won't text you. We'll reach out by phone or email.",
 	},
 	{
 		key: "service",

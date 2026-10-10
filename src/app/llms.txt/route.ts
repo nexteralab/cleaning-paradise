@@ -28,7 +28,7 @@ const STATIC = `# Cleaning Paradise
 
 ## Main Pages
 
-- [House Cleaning Services in Seattle, WA](${base}/): Spotless homes and reliable maids offering a superior housekeeping experience in Seattle, Lynnwood, Bellevue and surrounding communities, with comprehensive services and a clear process.
+- [House Cleaning & Maid Service in Greater Seattle](${base}/): Spotless homes and reliable maids offering a superior housekeeping experience in Seattle, Lynnwood, Bellevue and surrounding communities, with comprehensive services and a clear process.
 - [Cleaning Services in WA](${base}/cleaning-services-in-wa): Overview of every cleaning service offered in Washington, from weekly home maintenance to deep cleans and commercial spaces.
 - [Service Areas in King & Snohomish County](${base}/locations): Local Cleaning Paradise teams across nine cities in King & Snohomish County.
 - [About Us](${base}/about-us): Cleaning Paradise's mission and its growth from a single mop to a trusted Seattle cleaning crew.
@@ -53,7 +53,7 @@ const STATIC = `# Cleaning Paradise
 
 ## Service Areas
 
-- [Seattle](${base}/locations/seattle): House cleaning across Greater Seattle with local maids who know the neighborhoods.
+- [Cleaning Services in Seattle, WA](${base}/locations/seattle): House cleaning, deep cleaning and move-out cleaning across Seattle neighborhoods like Capitol Hill, Ballard, Queen Anne and Fremont, with local maids who know the city.
 - [Bellevue](${base}/locations/bellevue): Maid service and house cleaning in Bellevue, WA, with transparent pricing.
 - [Kirkland](${base}/locations/kirkland): Maid service and deep cleaning in Kirkland, WA — Moss Bay, Juanita and Houghton.
 - [Mercer Island](${base}/locations/mercer-island): Home and deep cleaning for spacious island homes, using EPA-approved products and vetted housekeepers.

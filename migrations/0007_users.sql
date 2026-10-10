@@ -1,3 +1,6 @@
+-- OBSOLETO: esta tabla fue reemplazada por Better Auth en 0008_better_auth.sql.
+-- Para crear usuarios ver docs/usuarios-locales.md (scripts/create-admin.mjs).
+--
 -- Usuarios del admin — única fuente de verdad del login. Sin fila acá, nadie
 -- entra: no hay password de emergencia ni fallback.
 --

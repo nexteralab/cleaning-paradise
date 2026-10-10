@@ -366,7 +366,7 @@ export const services: Record<string, ServiceContent> = {
 			"Keep your office, retail space or facility spotless with flexible janitorial service scheduled before, during or after business hours.",
 		introEyebrow: "Commercial & janitorial",
 		introTitle: "What Our Commercial Cleaning Service Covers",
-		introImage: "/img/commercial-cleaning-window.png",
+		introImage: "/img/commercial-cleaning-window.webp",
 		introImageAlt: "Commercial cleaning service Seattle",
 		introLead:
 			"Cleaning Paradise provides dependable commercial cleaning services across Seattle, WA. From daily janitorial service for offices to recurring care for retail spaces, medical offices and multi unit facilities, our team shows up on time, follows your protocols and respects your workspace on every visit. Businesses searching for a cleaning office service near them trust us because we deliver consistent results without the back and forth.",
@@ -728,7 +728,7 @@ export const services: Record<string, ServiceContent> = {
 			"Skip the late night boxing marathon. Our trained home care team packs, organizes and unpacks so you can settle in faster and with a lot less stress.",
 		introEyebrow: "Professional packing & unpacking",
 		introTitle: "What Our Packing & Unpacking Service Covers",
-		introImage: "/img/carpet.png",
+		introImage: "/img/carpet.webp",
 		introImageAlt: "Packing and unpacking service Seattle",
 		introLead:
 			"Moving day should not mean weeks of boxes piling up in every room. Our Packing and Unpacking service pairs you with a professional local team that carefully wraps, labels and packs your belongings from kitchenware to closets, so nothing gets lost, damaged or left behind. It is the same trusted home care approach our clients already know from our housekeeping and maid services, applied to your move.",

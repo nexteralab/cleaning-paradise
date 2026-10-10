@@ -36,6 +36,8 @@ export async function generateMetadata({
 	const loc = locations[slug];
 	if (!loc) return {};
 	const canonical = `/locations/${slug}`;
+	// Sin images el openGraph de la página pisa el del layout y queda sin imagen.
+	const images = [{ url: loc.img, alt: `House cleaning in ${loc.name}, WA` }];
 	return {
 		title: loc.metaTitle,
 		description: loc.metaDescription,
@@ -45,11 +47,13 @@ export async function generateMetadata({
 			description: loc.ogDescription,
 			url: canonical,
 			type: "website",
+			images,
 		},
 		twitter: {
 			card: "summary_large_image",
 			title: loc.ogTitle,
 			description: loc.ogDescription,
+			images,
 		},
 	};
 }

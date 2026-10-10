@@ -24,6 +24,8 @@ const COLS = [
 	"source",
 	"sms_consent",
 	"sms_consent_version",
+	"sms_consent_method",
+	"sms_consent_at",
 ] as const;
 
 // Public endpoint — the contact & quote forms POST here to create a lead.
@@ -82,6 +84,8 @@ export async function POST(req: Request) {
 		smsConsent ? 1 : 0,
 		// La versión la fija el servidor (no el cliente): es el texto que este deploy muestra.
 		smsConsent ? SMS_CONSENT_VERSION : null,
+		smsConsent ? "web" : null,
+		smsConsent ? new Date().toISOString().replace(/\.\d+Z$/, "Z") : null,
 	];
 	try {
 		await env.DB.prepare(

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Bot, RotateCcw, Send, Sparkles, X } from "lucide-react";
 import {
@@ -149,7 +150,7 @@ export default function ChatBot() {
 
 		const next = stepIndex + 1;
 		if (next < steps.length) {
-			await botSay(pick(acks));
+			await botSay(step.ack ? step.ack(res.value) : pick(acks));
 			setStepIndex(next);
 			await botSay(fillPrompt(pick(steps[next].prompts), getLead()));
 		} else {
@@ -236,7 +237,7 @@ export default function ChatBot() {
 											: "rounded-bl-md bg-white text-ink-800 shadow-[0_2px_10px_rgba(30,62,162,0.08)]"
 									}`}
 								>
-									{m.text}
+									{m.from === "bot" ? <Linkified text={m.text} /> : m.text}
 								</div>
 							</div>
 						))}
@@ -319,5 +320,19 @@ export default function ChatBot() {
 				</div>
 			)}
 		</>
+	);
+}
+
+// Las URLs del sitio en los mensajes del bot (p. ej. el consentimiento SMS) se vuelven links.
+const SITE_URL = /(cleaningparadisellc\.com\/[^\s·]+)/;
+function Linkified({ text }: { text: string }) {
+	return text.split(SITE_URL).map((part, i) =>
+		i % 2 ? (
+			<Link key={i} href={part.slice(part.indexOf("/"))} className="font-medium text-pink-600 underline">
+				{part}
+			</Link>
+		) : (
+			part
+		),
 	);
 }

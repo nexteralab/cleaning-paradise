@@ -50,7 +50,7 @@ export const locations: Record<string, Location> = {
 	seattle: {
 		slug: "seattle",
 		name: "Seattle",
-		img: "/img/locations/seattle.png",
+		img: "/img/locations/seattle.webp",
 		before: "/img/locations/playroom-before-house-cleaning.webp",
 		after: "/img/locations/playroom-after-house-cleaning.webp",
 		beforeAlt: "Cluttered playroom before house cleaning in Seattle, WA",
@@ -93,7 +93,7 @@ export const locations: Record<string, Location> = {
 	bellevue: {
 		slug: "bellevue",
 		name: "Bellevue",
-		img: "/img/locations/bellevue.png",
+		img: "/img/locations/bellevue.webp",
 		before: "/img/locations/nursery-before-house-cleaning.webp",
 		after: "/img/locations/nursery-after-house-cleaning.webp",
 		beforeAlt: "Toys scattered across a nursery before house cleaning in Bellevue, WA",
@@ -136,7 +136,7 @@ export const locations: Record<string, Location> = {
 	kirkland: {
 		slug: "kirkland",
 		name: "Kirkland",
-		img: "/img/locations/kirkland.png",
+		img: "/img/locations/kirkland.webp",
 		before: "/img/locations/fridge-before-deep-cleaning.webp",
 		after: "/img/locations/fridge-after-deep-cleaning.webp",
 		beforeAlt: "Refrigerator interior before deep cleaning in Kirkland, WA",
@@ -266,7 +266,7 @@ export const locations: Record<string, Location> = {
 	shoreline: {
 		slug: "shoreline",
 		name: "Shoreline",
-		img: "/img/locations/shoreline.png",
+		img: "/img/locations/shoreline.webp",
 		before: "/img/locations/nursery-before-house-cleaning.webp",
 		after: "/img/locations/nursery-after-house-cleaning.webp",
 		beforeAlt: "Toys scattered across a nursery before house cleaning in Shoreline, WA",
@@ -309,7 +309,7 @@ export const locations: Record<string, Location> = {
 	edmonds: {
 		slug: "edmonds",
 		name: "Edmonds",
-		img: "/img/locations/edmonds.png",
+		img: "/img/locations/edmonds.webp",
 		before: "/img/locations/fridge-before-deep-cleaning.webp",
 		after: "/img/locations/fridge-after-deep-cleaning.webp",
 		beforeAlt: "Refrigerator interior before deep cleaning in Edmonds, WA",
@@ -353,7 +353,7 @@ export const locations: Record<string, Location> = {
 		slug: "bothell",
 		// ponytail: reusa mill-creek.png (sin foto propia aún) — cambiar cuando llegue bothell.png
 		name: "Bothell",
-		img: "/img/locations/mill-creek.png",
+		img: "/img/locations/mill-creek.webp",
 		before: "/img/locations/living-room-before-house-cleaning.webp",
 		after: "/img/locations/living-room-after-house-cleaning.webp",
 		beforeAlt: "Toys and clutter in a living room before house cleaning in Bothell, WA",
@@ -397,7 +397,7 @@ export const locations: Record<string, Location> = {
 		slug: "mukilteo",
 		// ponytail: reusa edmonds.png (ciudad costera vecina) — cambiar cuando llegue mukilteo.png
 		name: "Mukilteo",
-		img: "/img/locations/edmonds.png",
+		img: "/img/locations/edmonds.webp",
 		before: "/img/locations/nursery-before-house-cleaning.webp",
 		after: "/img/locations/nursery-after-house-cleaning.webp",
 		beforeAlt: "Toys scattered across a nursery before house cleaning in Mukilteo, WA",
