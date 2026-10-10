@@ -21,7 +21,7 @@ const poppins = Poppins({
 	style: ["normal", "italic"],
 });
 
-const TITLE = "Cleaning Paradise | House Cleaning Services in Seattle, WA";
+const TITLE = "Cleaning Paradise | House Cleaning & Maid Service in Greater Seattle";
 const DESCRIPTION =
 	"Professional residential and commercial cleaning based in Lynnwood, WA — serving Seattle and King & Snohomish County. Your home, perfectly clean.";
 
@@ -43,13 +43,13 @@ export const metadata: Metadata = {
 		title: TITLE,
 		description: DESCRIPTION,
 		url: SITE_URL,
-		images: [{ url: "/img/logo.png", width: 512, height: 512, alt: "Cleaning Paradise" }],
+		images: [{ url: "/img/og.jpg", width: 1200, height: 630, alt: "Cleaning Paradise house cleaning team" }],
 	},
 	twitter: {
 		card: "summary_large_image",
 		title: TITLE,
 		description: DESCRIPTION,
-		images: ["/img/logo.png"],
+		images: ["/img/og.jpg"],
 	},
 };
 
@@ -104,8 +104,9 @@ const siteJsonLd = {
 			knowsLanguage: ["en", "es"],
 			paymentAccepted: "Credit card, debit card",
 			// Solo perfiles con NAP igual al sitio. Yelp fuera hasta arreglar el listing CLOSED.
-			// TODO: URL del Google Business Profile (también va en hasMap).
+			hasMap: "https://maps.google.com/?cid=15181633080895030262",
 			sameAs: [
+				"https://maps.google.com/?cid=15181633080895030262",
 				"https://www.facebook.com/cleaningparadisellc",
 				"https://www.instagram.com/cleaningparadisellc",
 				"https://www.youtube.com/@cleaningparadisellc",

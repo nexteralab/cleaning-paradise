@@ -9,7 +9,7 @@ import JsonLd from "@/components/JsonLd";
 import { FaqSection, HeroSection, ServicesSection } from "./home-client";
 
 export const metadata: Metadata = {
-	title: "House Cleaning Services in Seattle, WA | Cleaning Paradise",
+	title: "House Cleaning & Maid Service in Greater Seattle | Cleaning Paradise",
 	description:
 		"Spotless homes, reliable maids, and a housekeeping experience that makes coming home the best part of your day. Serving Seattle, Lynnwood, Bellevue, Kirkland, and surrounding communities.",
 	alternates: { canonical: "/" },

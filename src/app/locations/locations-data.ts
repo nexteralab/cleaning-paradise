@@ -62,13 +62,13 @@ export const locations: Record<string, Location> = {
 		resp: "Same day",
 		homes: 180,
 		pin: { left: "41%", top: "66%" },
-		metaTitle: "Top-Rated House Cleaning in Seattle, WA | Cleaning Paradise",
+		metaTitle: "Cleaning Services in Seattle, WA | Cleaning Paradise",
 		metaDescription:
 			"Maids who know Seattle, from Capitol Hill walk-ups to Ballard bungalows. Licensed, insured, same-week openings. Get your free quote today.",
-		ogTitle: "House Cleaning in Seattle, WA | Cleaning Paradise",
+		ogTitle: "Cleaning Services in Seattle, WA | Cleaning Paradise",
 		ogDescription:
 			"Capitol Hill, Ballard, Queen Anne and Fremont homes cleaned by insured local maids. Standard, deep and move-out cleaning from $55/hr.",
-		heroLead: "Trusted House Cleaning in",
+		heroLead: "Trusted Cleaning Services in",
 		intro:
 			"Seattle house cleaning from a local team that knows the city, from Capitol Hill walk-ups and downtown condos to Craftsman homes in Ballard and Queen Anne. Recurring maid service, deep cleans and move-out cleaning, all by insured, background-checked housekeepers.",
 		servicesIntro:

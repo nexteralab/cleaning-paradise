@@ -38,12 +38,16 @@ export function HeroSection() {
 								Serving Greater Seattle
 							</div>
 							<h1 className="font-heading text-[clamp(2.475rem,5.4vw,4.05rem)] font-semibold leading-[1.1] text-white tracking-[-0.025em] [text-shadow:0_4px_24px_rgba(0,0,0,0.35)] max-w-[700px] mb-4">
-								Trusted house cleaning across Greater Seattle and the Eastside
+								Trusted house cleaning services across Greater Seattle and the Eastside
 							</h1>
 		
 							<p className="text-[clamp(17px,1.35vw,18px)] text-white md:text-white/[0.88] leading-[1.72] max-w-[560px] [text-shadow:0_4px_40px_rgba(0,0,0,0.28)]">
 								Spotless homes, reliable maids, and a housekeeping experience that makes coming home the best
-								part of your day. Serving Seattle, Lynnwood, Bellevue, Kirkland, and surrounding communities.
+								part of your day. Offering{" "}
+								<Link href="/locations/seattle" className="font-semibold text-white underline underline-offset-4">
+									cleaning services in Seattle
+								</Link>
+								, Lynnwood, Bellevue, Kirkland, and surrounding communities.
 							</p>
 						</div>
 
