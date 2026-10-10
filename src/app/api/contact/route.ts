@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { sendLeadEmails, type Lead } from "@/lib/email";
+import { SMS_CONSENT_VERSION } from "@/lib/sms-consent";
 
 const COLS = [
 	"first_name",
@@ -22,6 +23,7 @@ const COLS = [
 	"promo",
 	"source",
 	"sms_consent",
+	"sms_consent_version",
 ] as const;
 
 // Public endpoint — the contact & quote forms POST here to create a lead.
@@ -78,6 +80,8 @@ export async function POST(req: Request) {
 		body.promo ? 1 : 0,
 		s("source") ?? "contact",
 		smsConsent ? 1 : 0,
+		// La versión la fija el servidor (no el cliente): es el texto que este deploy muestra.
+		smsConsent ? SMS_CONSENT_VERSION : null,
 	];
 	try {
 		await env.DB.prepare(

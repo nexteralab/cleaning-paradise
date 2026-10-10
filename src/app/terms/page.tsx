@@ -58,39 +58,73 @@ export default function TermsPage() {
 				</h2>
 				<ul className="flex flex-col gap-3 [&_strong]:font-semibold [&_strong]:text-ink-900">
 					<li>
-						<strong>Program.</strong> Cleaning Paradise LLC sends automated text messages about your
-						service: booking confirmations, visit reminders, invoices, invoice reminders and payment
-						receipts.
+						<strong>Program.</strong> Cleaning Paradise LLC provides recurring automated service texts:
+						booking confirmations, visit reminders, invoices, invoice reminders and payment receipts.
+						This program does not send marketing messages.
 					</li>
 					<li>
-						<strong>How you join.</strong> You tick the text-message box on our request form, or you
-						ask our office to text you. Joining is optional and is not a condition of any purchase.
+						<strong>How you join.</strong> Enter your mobile number and select the optional, unchecked
+						SMS consent box on our request form before submitting, or expressly agree after our office
+						reads the full <a href="#sms-consent">consent script below</a>. Giving us a phone number,
+						requesting a quote or signing a service agreement alone does not enroll you. Consent is
+						optional and is not a condition of purchase.
 					</li>
 					<li>
-						<strong>How often.</strong> Message frequency varies with your cleanings and bills.
+						<strong>Enrollment confirmation.</strong> After enrollment in the active program, you
+						receive a confirmation text identifying Cleaning Paradise, message frequency, possible
+						charges, and HELP and STOP instructions.
 					</li>
 					<li>
-						<strong>Cost.</strong> Msg &amp; data rates may apply.
+						<strong>Frequency and cost.</strong> Message frequency varies with your cleaning services
+						and billing activity. Message and data rates may apply.
 					</li>
 					<li>
-						<strong>Help.</strong> Reply <strong>HELP</strong> for help, or call or text us at{" "}
-						<a href="tel:+14256100241">(425) 610-0241</a>.
+						<strong>Help.</strong> Reply <strong>HELP</strong> for help. You may also call or text{" "}
+						<a href="tel:+14256100241">(425) 610-0241</a> or email{" "}
+						<a href="mailto:hello@cleaningparadisellc.com">hello@cleaningparadisellc.com</a>.
 					</li>
 					<li>
-						<strong>Stop.</strong> Reply <strong>STOP</strong> at any time to stop receiving texts. We
-						will send one message confirming it. Reply <strong>START</strong> to join again.
+						<strong>Opt out.</strong> Reply <strong>STOP</strong> at any time to stop receiving texts
+						from this program. We send one opt-out confirmation, after which no further program
+						messages are sent unless you re-enroll. Reply <strong>START</strong> or{" "}
+						<strong>UNSTOP</strong> to re-enroll.
 					</li>
 					<li>
-						<strong>Replies.</strong> Our notification number does not read replies. To reach a person,
-						call or text <a href="tel:+14256100241">(425) 610-0241</a>.
+						<strong>Replies.</strong> Ordinary replies to the notification number are not read by
+						staff. The service processes HELP, STOP and reenrollment keywords. For a person, call or
+						text <a href="tel:+14256100241">(425) 610-0241</a>.
 					</li>
 					<li>
-						<strong>Carriers.</strong> Carriers are not liable for delayed or undelivered messages.
+						<strong>Carriers.</strong> Carriers are not liable for any delayed or undelivered messages.
 					</li>
 					<li>
-						<strong>Privacy.</strong> See our <Link href="/privacy">Privacy policy</Link>.
+						<strong>Privacy.</strong> See our <Link href="/privacy">Privacy Policy</Link>. Mobile
+						information and SMS consent are not sold or shared with third parties or affiliates for
+						marketing or promotional purposes.
 					</li>
 				</ul>
+
+				<h2 id="sms-consent" className="scroll-mt-32">
+					Phone and in-person SMS consent script
+				</h2>
+				<p>
+					The staff member confirms the customer&apos;s mobile number, reads the entire script and asks
+					for an explicit yes or no:
+				</p>
+				<blockquote className="border-l-4 border-pink-200 pl-4 italic">
+					May Cleaning Paradise LLC send you automated text messages at your mobile number for booking
+					confirmations, visit reminders, invoices, invoice reminders and payment receipts? Message
+					frequency varies. Message and data rates may apply. Reply HELP for help or call (425)
+					610-0241. Reply STOP to opt out. Consent is optional and is not a condition of purchase. Our
+					SMS terms are at cleaningparadisellc.com/terms#sms and our privacy policy is at
+					cleaningparadisellc.com/privacy. After enrollment, you will receive a confirmation text. Do
+					you agree?
+				</blockquote>
+				<p>
+					Only an explicit affirmative answer is recorded as consent. Staff retain the response, mobile
+					number, date, method and disclosure version. A refusal or lack of an answer does not enroll
+					the customer. A general service agreement is not SMS consent.
+				</p>
 
 				<h2>Contact</h2>
 				<p>

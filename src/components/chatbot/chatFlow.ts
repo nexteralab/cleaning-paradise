@@ -1,4 +1,5 @@
 import type { Lead } from "./leadStore";
+import { SMS_CHAT_PROMPT } from "@/lib/sms-consent";
 
 // One conversational step per lead field. Each step carries MANY phrasings so
 // the bot never sounds scripted, a typed validator that normalizes + accepts
@@ -115,10 +116,8 @@ export const steps: Step[] = [
 	},
 	{
 		key: "smsConsent",
-		// Wording is legally required (matches SmsConsent.tsx), so a single phrasing.
-		prompts: [
-			"Can we text you about your cleanings, invoices and receipts? Msg frequency varies. Msg & data rates may apply. Reply HELP for help, STOP to opt out. Consent is not a condition of purchase.",
-		],
+		// Wording is legally required (lib/sms-consent.ts), so a single phrasing.
+		prompts: [SMS_CHAT_PROMPT],
 		errors: [
 			"A simple Yes or No works here 🙂",
 			"Just tap Yes or No, please.",
@@ -126,8 +125,8 @@ export const steps: Step[] = [
 		options: ["Yes", "No"],
 		validate: (raw) => {
 			const v = raw.trim().toLowerCase();
-			if (/^(y|yes|yeah|yep|yup|sure|ok|okay)/.test(v)) return { ok: true, value: "Yes" };
-			if (/^(n|no|nope|nah)/.test(v)) return { ok: true, value: "No" };
+			if (/^(y|yes|yeah|yep|yup|sure|ok|okay)\b/.test(v)) return { ok: true, value: "Yes" };
+			if (/^(n|no|nope|nah)\b/.test(v)) return { ok: true, value: "No" };
 			return { ok: false };
 		},
 	},

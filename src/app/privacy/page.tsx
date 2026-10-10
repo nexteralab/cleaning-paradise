@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { currentMonth } from "@/lib/date";
 
 export const metadata: Metadata = {
@@ -43,14 +44,28 @@ export default function PrivacyPage() {
 					information.
 				</p>
 
-				<h2>Text messages</h2>
+				<h2>Text messages: Cleaning Paradise Notifications</h2>
 				<p>
-					If you give us your mobile number and agree to receive texts, we use it only to send you
-					messages about your cleanings, invoices and payments. We never sell, rent or share
-					your mobile number, or your text-message opt-in and consent, with third parties or affiliates
-					for their marketing or promotional purposes. Text-messaging opt-in data and consent are not
-					shared with any third party. Everything else this policy says about sharing information
-					excludes them.
+					Cleaning Paradise LLC collects your mobile number and your affirmative SMS consent to send
+					automated service messages about booking confirmations, visit reminders, invoices, invoice
+					reminders and payment receipts. We retain the consent response and available records of when
+					and how you agreed, including the disclosure version. We do not send marketing messages
+					through this program.
+				</p>
+				<p>
+					Message frequency varies with your cleaning services and billing activity. Message and data
+					rates may apply. Consent is optional and is not a condition of purchase. Reply HELP for help
+					or call or text <a href="tel:+14256100241">(425) 610-0241</a>. Reply STOP to opt out.
+				</p>
+				<p>
+					We never sell, rent or share your mobile number, or your text-message opt-in and consent,
+					with third parties or affiliates for their marketing or promotional purposes. Text-messaging
+					opt-in data and consent are not shared with any third party. Everything else this policy says
+					about sharing information excludes them.
+				</p>
+				<p>
+					See the <Link href="/terms#sms">Cleaning Paradise Notifications SMS terms</Link> for the
+					program description and consent process.
 				</p>
 
 				<h2>Cookies</h2>

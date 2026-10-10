@@ -41,6 +41,7 @@ export type Lead = {
 	notes: string | null;
 	promo: boolean;
 	sms_consent: boolean;
+	sms_consent_version: string | null;
 	source: string;
 	status: string;
 	created_at: string;
@@ -360,7 +361,9 @@ function LeadDetail({
 				</Row>
 				<Row icon={<MessageSquare size={15} />} label="Text opt-in">
 					{lead.sms_consent ? (
-						<span className="font-semibold text-green-700">Yes</span>
+						<span className="font-semibold text-green-700">
+							Yes{lead.sms_consent_version && ` · disclosure v${lead.sms_consent_version}`}
+						</span>
 					) : (
 						<span className="font-semibold text-ink-500">No — do not text</span>
 					)}
