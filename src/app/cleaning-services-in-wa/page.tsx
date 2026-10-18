@@ -190,7 +190,7 @@ export default function CleaningServicesInWaPage() {
 									{/* Card body → service detail */}
 									<Link href={card.href} className="flex flex-1 flex-col text-inherit no-underline">
 										{/* eslint-disable-next-line @next/next/no-img-element */}
-										<img src={card.img} alt={card.title} className="block h-[250px] w-full object-cover" />
+										<img loading="lazy" src={card.img} alt={card.title} className="block h-[250px] w-full object-cover" />
 										<div className="flex flex-1 flex-col px-8 pt-7">
 											<h3 className="mb-3.5 text-2xl font-bold tracking-[-0.01em] text-blue-600">
 												{card.title}

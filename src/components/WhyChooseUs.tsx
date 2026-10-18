@@ -83,7 +83,7 @@ export default function WhyChooseUs({
 								}`}
 						>
 							{/* eslint-disable-next-line @next/next/no-img-element */}
-							<img src={photo.src} alt={photo.alt} className="w-full h-full object-cover block" />
+							<img loading="lazy" src={photo.src} alt={photo.alt} className="w-full h-full object-cover block" />
 						</Reveal>
 					))}
 				</div>

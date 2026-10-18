@@ -161,7 +161,7 @@ export default async function BlogPostPage({ params }: Params) {
 								className="flex flex-col gap-3 no-underline transition-transform duration-[250ms] ease-(--ease-out) hover:-translate-y-1"
 							>
 								<div className="h-[180px] w-full overflow-hidden rounded-2xl bg-[#f0f0f5]">
-									<img
+									<img loading="lazy"
 										src={rel.cover_url ?? "/img/aw1a0547.jpg"}
 										alt={rel.title}
 										className="block h-full w-full object-cover"

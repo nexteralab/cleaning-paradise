@@ -202,13 +202,14 @@ export default async function LocationPage({
 				])}
 			/>
 			{/* ===== HERO / BEFORE-AFTER ===== */}
+			{/* Hero sin <Reveal>: es above the fold y su opacity 0 inicial retrasaba el LCP. */}
 			<section id="top" className="bg-white p-6">
 				<div className="px-[clamp(28px,5vw,72px)] pt-[clamp(96px,9vw,116px)] pb-[clamp(44px,6vw,72px)]">
 					{/* Mobile DOM order (grid-cols-1): h1 → slider → description/buttons.
 					    Desktop: copy stacked left, slider right (col/row placement). */}
 					<div className="mx-auto grid max-w-[1360px] grid-cols-1 items-center gap-8 md:grid-cols-2 md:gap-x-[clamp(32px,5vw,60px)] md:gap-y-0">
 						{/* h1 block */}
-						<Reveal className="md:col-start-1 md:row-start-1 md:self-end">
+						<div className="md:col-start-1 md:row-start-1 md:self-end">
 							<div className="mb-[22px]">
 								<span className="inline-flex items-center gap-1.5 rounded-full bg-pink-500/15 px-4 py-2 text-[11.5px] font-semibold tracking-[0.06em] text-pink-500 uppercase">
 									<MapPin size={13} />
@@ -224,11 +225,10 @@ export default async function LocationPage({
 									</svg>
 								</span>
 							</h1>
-						</Reveal>
+						</div>
 
 						{/* before/after slider (per-city images) */}
-						<Reveal
-							delay={150}
+						<div
 							className="w-full max-w-[680px] md:col-start-2 md:row-start-1 md:row-span-2 md:justify-self-end"
 						>
 							<HeroSlider
@@ -237,10 +237,10 @@ export default async function LocationPage({
 								beforeAlt={loc.beforeAlt}
 								afterAlt={loc.afterAlt}
 							/>
-						</Reveal>
+						</div>
 
 						{/* description + buttons + trust badges */}
-						<Reveal delay={80} className="md:col-start-1 md:row-start-2 md:self-start">
+						<div className="md:col-start-1 md:row-start-2 md:self-start">
 							<p className="mb-[30px] max-w-[520px] text-[clamp(16px,1.4vw,18px)] leading-[1.75] text-[#5A5A6E]">
 								{loc.intro}
 							</p>
@@ -269,7 +269,7 @@ export default async function LocationPage({
 									</span>
 								))}
 							</div>
-						</Reveal>
+						</div>
 					</div>
 				</div>
 			</section>
@@ -280,7 +280,8 @@ export default async function LocationPage({
 					{/* ponytail: video compartido — cuando llegue media por ciudad (D8),
 					    agregar campo `video` en locations-data y usar loc.video aquí. */}
 					<BgVideo
-						src={loc.video ?? "/video/kirkland-bg.mp4"}
+						src={loc.video ?? "/video/kirkland-bg-720.mp4"}
+						poster="/img/kirkland-bg-poster.jpg"
 						className="absolute inset-0 h-full w-full object-cover opacity-[0.52]"
 					/>
 					<div className="pointer-events-none absolute inset-0 bg-[rgba(12,17,38,0.48)]" />
@@ -331,7 +332,7 @@ export default async function LocationPage({
 							</span>
 						</div>
 						<h2 className="font-heading mb-3.5 text-[clamp(40px,4vw,60px)] leading-[1.12] font-normal tracking-[-0.025em] text-ink-900">
-							{loc.name} cleaning services
+							{loc.name} house cleaning services
 						</h2>
 						<p className="mx-auto max-w-[560px] text-[15.5px] leading-[1.7] text-ink-600">
 							{loc.servicesIntro}
@@ -348,7 +349,7 @@ export default async function LocationPage({
 								{/* Card body → service detail */}
 								<Link href={s.href} className="block text-inherit no-underline">
 									{/* eslint-disable-next-line @next/next/no-img-element */}
-									<img src={s.img} alt={s.alt} className="block h-[206px] w-full object-cover" />
+									<img loading="lazy" src={s.img} alt={s.alt} className="block h-[206px] w-full object-cover" />
 									<div className="px-6 pt-6">
 										<h3 className="mb-[9px] text-xl font-semibold tracking-[-0.01em] text-blue-600">
 											{s.title}
@@ -385,7 +386,7 @@ export default async function LocationPage({
 							FAQ
 						</div>
 						<h2 className="font-heading text-[clamp(36px,4vw,56px)] leading-[1.15] font-normal tracking-[-0.02em] text-ink-900">
-							Questions About Our {loc.name} Cleaning Services
+							Questions About Our {loc.name} House Cleaning Services
 						</h2>
 					</Reveal>
 					<Reveal delay={80}>
@@ -447,7 +448,7 @@ export default async function LocationPage({
 									>
 										<div className="relative mb-[22px] h-[280px] w-full overflow-hidden rounded-[20px] bg-[#f0f0f5]">
 											{/* eslint-disable-next-line @next/next/no-img-element */}
-											<img
+											<img loading="lazy"
 												src={post.cover_url ?? "/img/aw1a0547.jpg"}
 												alt={post.title}
 												className="block h-full w-full object-cover"

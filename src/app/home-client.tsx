@@ -18,7 +18,9 @@ export function HeroSection() {
 		<section id="top" className="bg-white p-4 md:p-6">
 			<div className="relative w-full h-full min-h-[85vh] rounded-[30px] overflow-hidden bg-[#131320] shadow-[0_30px_70px_rgba(30,62,162,0.18)]">
 				<BgVideo
-					src="/video/cleaning-paradise-bg.mp4"
+					src="/video/cleaning-paradise-bg-720.mp4"
+					poster="/img/cleaning-paradise-bg-poster.jpg"
+					priority
 					className="absolute inset-0 w-full h-full object-cover"
 				/>
 				{/* legibility overlay */}
@@ -45,7 +47,7 @@ export function HeroSection() {
 								Spotless homes, reliable maids, and a housekeeping experience that makes coming home the best
 								part of your day. Offering{" "}
 								<Link href="/locations/seattle" className="font-semibold text-white underline underline-offset-4">
-									cleaning services in Seattle
+									house cleaning in Seattle
 								</Link>
 								, Lynnwood, Bellevue, Kirkland, and surrounding communities.
 							</p>
@@ -420,7 +422,7 @@ export function ServicesSection() {
 									>
 										<div className="overflow-hidden">
 										<div className="pt-5 pb-2 pl-8">
-											<img
+											<img loading="lazy"
 												src={svc.img}
 												alt={svc.alt}
 												className="lg:hidden w-full h-[200px] object-cover rounded-[20px] mb-4"
@@ -476,7 +478,7 @@ export function ServicesSection() {
 								}`}
 							>
 								<div className="absolute inset-0 rounded-[26px] overflow-hidden shadow-[0_32px_80px_rgba(30,62,162,0.13)]">
-									<img src={svc.img} alt={svc.alt} className="w-full h-full object-cover block" />
+									<img loading="lazy" src={svc.img} alt={svc.alt} className="w-full h-full object-cover block" />
 									<div className="absolute bottom-0 left-0 right-0 h-[45%] bg-[linear-gradient(transparent,rgba(19,19,32,0.18))] pointer-events-none" />
 								</div>
 							</div>
@@ -592,7 +594,7 @@ export function FaqSection() {
 				{/* left: photo + CTA card */}
 				<div className="flex flex-col gap-6 lg:top-[100px]">
 					<Reveal>
-						<img
+						<img loading="lazy"
 							src="/img/group.webp"
 							alt="The Cleaning Paradise team"
 							className="w-full rounded-[26px] object-cover shadow-[0_16px_44px_rgba(30,62,162,0.12)]"

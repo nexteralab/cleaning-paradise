@@ -34,7 +34,7 @@ export default function Footer() {
 					<div>
 						<div className="mb-4 flex items-center gap-[11px]">
 							{/* eslint-disable-next-line @next/next/no-img-element */}
-							<img src="/img/logo.png" alt="Cleaning Paradise" className="h-[42px] w-[42px] rounded-full" />
+							<img loading="lazy" src="/img/logo-96.png" alt="Cleaning Paradise" className="h-[42px] w-[42px] rounded-full" />
 							<span className="text-[21px] text-white">Cleaning Paradise</span>
 						</div>
 						<p className="mb-[18px] max-w-[300px] text-sm leading-[1.7] text-ink-400">
@@ -114,8 +114,6 @@ export default function Footer() {
 						<Link href="/terms" className="hover:text-pink-500">Terms</Link>
 						<span aria-hidden>·</span>
 						<a href="/sitemap.xml" className="hover:text-pink-500">Sitemap</a>
-						<span aria-hidden>·</span>
-						<Link href="/admin" className="hover:text-pink-500">Admin</Link>
 					</div>
 				</div>
 			</div>

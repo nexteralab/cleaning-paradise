@@ -316,19 +316,19 @@ function GallerySection() {
 				<div className="grid grid-cols-2 auto-rows-[180px] lg:grid-cols-4 lg:grid-rows-[220px_220px_300px] gap-3.5">
 					{/* tall left */}
 					<Reveal delay={0} className="row-span-2 lg:col-start-1 lg:row-start-1 lg:row-span-2 rounded-[22px] overflow-hidden shadow-[0_12px_32px_rgba(30,62,162,0.10)]">
-						<img src="/img/aw1a0547.jpg" alt="Cleaning Paradise team arriving with supplies at a home in Shoreline, WA" className="w-full h-full object-cover block" />
+						<img loading="lazy" src="/img/aw1a0547.jpg" alt="Cleaning Paradise team arriving with supplies at a home in Shoreline, WA" className="w-full h-full object-cover block" />
 					</Reveal>
 					{/* top center-left */}
 					<Reveal delay={80} className="lg:col-start-2 lg:row-start-1 rounded-[22px] overflow-hidden shadow-[0_12px_32px_rgba(30,62,162,0.10)]">
-						<img src="/img/aw1a0550.jpg" alt="Maid detailing a bathroom vanity during a house cleaning in Seattle, WA" className="w-full h-full object-cover block" />
+						<img loading="lazy" src="/img/aw1a0550.jpg" alt="Maid detailing a bathroom vanity during a house cleaning in Seattle, WA" className="w-full h-full object-cover block" />
 					</Reveal>
 					{/* top center-right */}
 					<Reveal delay={160} className="lg:col-start-3 lg:row-start-1 rounded-[22px] overflow-hidden shadow-[0_12px_32px_rgba(30,62,162,0.10)]">
-						<img src="/img/aw1a0562.jpg" alt="Maid deep cleaning a glass shower door in Bellevue, WA" className="w-full h-full object-cover block" />
+						<img loading="lazy" src="/img/aw1a0562.jpg" alt="Maid deep cleaning a glass shower door in Bellevue, WA" className="w-full h-full object-cover block" />
 					</Reveal>
 					{/* tall right */}
 					<Reveal delay={240} className="row-span-2 lg:col-start-4 lg:row-start-1 lg:row-span-2 rounded-[22px] overflow-hidden shadow-[0_12px_32px_rgba(30,62,162,0.10)]">
-						<img
+						<img loading="lazy"
 							src="/img/pasted-1782782341097-0.webp"
 							alt="Aerial view of the Space Needle and downtown Seattle, WA skyline"
 							className="w-full h-full object-cover block"
@@ -336,7 +336,7 @@ function GallerySection() {
 					</Reveal>
 					{/* bottom center-left */}
 					<Reveal delay={120} className="lg:col-start-2 lg:row-start-2 rounded-[22px] overflow-hidden shadow-[0_12px_32px_rgba(30,62,162,0.10)]">
-						<img src="/img/aw1a0626-scaled.jpg" alt="Cleaning team tidying a kids playroom during a deep clean in Bellevue, WA" className="w-full h-full object-cover block" />
+						<img loading="lazy" src="/img/aw1a0626-scaled.jpg" alt="Cleaning team tidying a kids playroom during a deep clean in Bellevue, WA" className="w-full h-full object-cover block" />
 					</Reveal>
 					{/* blog CTA card */}
 					<Reveal delay={200} className="lg:col-start-3 lg:row-start-2 rounded-[22px] overflow-hidden bg-[linear-gradient(135deg,#FF50B5_0%,#E0389C_100%)] flex flex-col items-start justify-end p-[26px] shadow-[0_12px_32px_rgba(255,80,181,0.30)]">
@@ -355,7 +355,7 @@ function GallerySection() {
 					</Reveal>
 					{/* full-width team strip */}
 					<Reveal delay={280} className="col-span-2 lg:col-span-4 lg:row-start-3 rounded-[22px] overflow-hidden shadow-[0_12px_32px_rgba(30,62,162,0.10)]">
-						<img src="/img/aw1a0732.jpg" alt="Housekeepers folding blankets and tidying a living room in Kirkland, WA" className="w-full h-full object-cover block" />
+						<img loading="lazy" src="/img/aw1a0732.jpg" alt="Housekeepers folding blankets and tidying a living room in Kirkland, WA" className="w-full h-full object-cover block" />
 					</Reveal>
 				</div>
 			</div>

@@ -163,7 +163,7 @@ export default function AboutPage() {
 					{/* Left: image */}
 					<Reveal className="relative">
 						<div className="rounded-[20px] overflow-hidden aspect-[4/5]">
-							<img
+							<img loading="lazy"
 								src="/img/aw1a0626-scaled.jpg"
 								alt="Cleaning Paradise team at work"
 								className="w-full h-full object-cover block"
@@ -194,8 +194,8 @@ export default function AboutPage() {
 							))}
 						</div>
 						<div className="mt-9 flex items-center gap-4">
-							<img
-								src="/img/logo.png"
+							<img loading="lazy"
+								src="/img/logo-96.png"
 								alt="Cleaning Paradise"
 								className="w-[46px] h-[46px] rounded-full"
 							/>
@@ -286,7 +286,7 @@ export default function AboutPage() {
 								delay={i * 90}
 								className={`rounded-[20px] overflow-hidden aspect-[3/4] ${p.className}`}
 							>
-								<img
+								<img loading="lazy"
 									src={p.src}
 									alt="Team member"
 									className="w-full h-full object-cover block"

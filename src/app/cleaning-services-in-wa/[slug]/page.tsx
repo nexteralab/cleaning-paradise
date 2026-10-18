@@ -243,7 +243,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 				<div className="mx-auto grid max-w-[1360px] grid-cols-1 items-center gap-[clamp(40px,6vw,80px)] md:grid-cols-2">
 					{/* LEFT: image */}
 					<div className="h-[clamp(380px,48vw,560px)] overflow-hidden rounded-[26px] shadow-[0_32px_80px_rgba(30,62,162,0.12)]">
-						<img
+						<img loading="lazy"
 							src={service.introImage}
 							alt={service.introImageAlt}
 							className="block h-full w-full object-cover"
@@ -297,7 +297,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 				<div className="relative overflow-hidden [mask-image:linear-gradient(to_right,transparent_0%,#000_5%,#000_95%,transparent_100%)]">
 					<div className="flex w-max animate-[galleryScrollH_35s_linear_infinite] gap-4 px-10">
 						{[...galleryImages, ...galleryImages].map((img, i) => (
-							<img
+							<img loading="lazy"
 								key={i}
 								src={img.src}
 								alt={img.alt}

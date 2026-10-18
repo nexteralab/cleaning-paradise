@@ -269,7 +269,7 @@ export function CitySelector({ initial }: { initial: string }) {
 									href={`/locations/${current}`}
 									className="inline-flex items-center gap-[7px] rounded-full bg-pink-500 px-[22px] py-3 text-sm font-semibold text-white no-underline transition-all duration-200 ease-[cubic-bezier(.16,1,.3,1)] hover:bg-pink-600 hover:shadow-[0_10px_26px_rgba(255,80,181,0.36)]"
 								>
-									View {d.name} <ArrowRight size={15} />
+									{d.name} house cleaning <ArrowRight size={15} />
 								</Link>
 							</div>
 						</motion.div>
