@@ -153,8 +153,6 @@ export default function RootLayout({
 						__html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-K92THXSRRF');`,
 					}}
 				/>
-				{/* Hotjar / Contentsquare */}
-				<script async src="https://t.contentsquare.net/uxa/628fbdef29c13.js" />
 				{/* Traks */}
 				<script
 					dangerouslySetInnerHTML={{

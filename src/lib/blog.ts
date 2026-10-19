@@ -48,6 +48,12 @@ export function categoryIcon(category: string): LucideIcon {
 	return CATEGORY_ICONS[category] ?? Tag;
 }
 
+// Portada en tamaño tarjeta: /blog-img la sirve reducida a 800px (ver su route.ts).
+export function cardCover(url: string | null): string {
+	if (!url) return "/img/aw1a0547.jpg";
+	return url.startsWith("/blog-img/") ? `${url}?w=800` : url;
+}
+
 export function formatDate(iso: string | null): string {
 	if (!iso) return "";
 	return new Date(iso).toLocaleDateString("en-US", {

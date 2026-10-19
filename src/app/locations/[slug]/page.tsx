@@ -12,7 +12,7 @@ import {
 	type LucideIcon,
 } from "lucide-react";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
-import { getPublishedPosts, categoryIcon, formatDate } from "@/lib/blog";
+import { getPublishedPosts, categoryIcon, formatDate, cardCover } from "@/lib/blog";
 import { CitySelector, FaqAccordion, HeroSlider } from "./client-sections";
 import JsonLd from "@/components/JsonLd";
 import { SITE, BUSINESS_ID, graph, webPageNode, breadcrumbNode, faqNode } from "@/lib/schema";
@@ -470,7 +470,7 @@ export default async function LocationPage({
 										<div className="relative mb-[22px] h-[280px] w-full overflow-hidden rounded-[20px] bg-[#f0f0f5]">
 											{/* eslint-disable-next-line @next/next/no-img-element */}
 											<img loading="lazy"
-												src={post.cover_url ?? "/img/aw1a0547.jpg"}
+												src={cardCover(post.cover_url)}
 												alt={post.title}
 												className="block h-full w-full object-cover"
 											/>

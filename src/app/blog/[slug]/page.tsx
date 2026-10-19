@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, Calendar, Clock, User } from "lucide-react";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { marked } from "marked";
-import { getPublishedPost, getPublishedPosts, categoryIcon, formatDate } from "@/lib/blog";
+import { getPublishedPost, getPublishedPosts, categoryIcon, formatDate, cardCover } from "@/lib/blog";
 import JsonLd from "@/components/JsonLd";
 
 export const dynamic = "force-dynamic";
@@ -162,7 +162,7 @@ export default async function BlogPostPage({ params }: Params) {
 							>
 								<div className="h-[180px] w-full overflow-hidden rounded-2xl bg-[#f0f0f5]">
 									<img loading="lazy"
-										src={rel.cover_url ?? "/img/aw1a0547.jpg"}
+										src={cardCover(rel.cover_url)}
 										alt={rel.title}
 										className="block h-full w-full object-cover"
 									/>

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Calendar } from "lucide-react";
 import { getCloudflareContext } from "@opennextjs/cloudflare";
-import { getPublishedPosts, categoryIcon, formatDate, CATEGORIES } from "@/lib/blog";
+import { getPublishedPosts, categoryIcon, formatDate, CATEGORIES, cardCover } from "@/lib/blog";
 
 export const dynamic = "force-dynamic";
 
@@ -83,7 +83,7 @@ export default async function BlogPage({
 								>
 									<div className="relative mb-6 h-[360px] w-full overflow-hidden rounded-[20px] bg-[#f0f0f5]">
 										<img
-											src={post.cover_url ?? "/img/aw1a0547.jpg"}
+											src={cardCover(post.cover_url)}
 											alt={post.title}
 											className="block h-full w-full object-cover"
 										/>
