@@ -21,7 +21,7 @@ import BgVideo from "@/components/BgVideo";
 import CountUp from "@/components/CountUp";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import { GoogleG } from "@/components/ReviewCard";
-import { locations, locationFaqs } from "../locations-data";
+import { locations, type ServiceSlug } from "../locations-data";
 
 // ponytail: force-dynamic porque la sección de blog lee D1 (sin binding en build),
 // igual que /blog y /blog/[slug].
@@ -67,8 +67,8 @@ const heroBadges: HeroBadge[] = [
 ];
 
 type Service = {
+	slug: ServiceSlug;
 	title: string;
-	description: string;
 	img: string;
 	alt: string;
 	href: string;
@@ -77,50 +77,45 @@ type Service = {
 const services: Service[] = [
 	{
 		title: "Standard Cleaning",
-		description:
-			"Recurring upkeep for kitchens, baths, living areas and bedrooms — week after week.",
 		img: "/img/cleaning.webp",
 		alt: "Standard cleaning",
 		href: "/cleaning-services-in-wa/standard-cleaning",
+		slug: "standard-cleaning",
 	},
 	{
 		title: "Deep Cleaning",
-		description:
-			"Top-to-bottom reset: baseboards, appliances, grout and every overlooked corner.",
 		img: "/img/deep-cleaning.jpg",
 		alt: "Deep cleaning",
 		href: "/cleaning-services-in-wa/deep-cleaning",
+		slug: "deep-cleaning",
 	},
 	{
 		title: "Commercial Cleaning",
-		description:
-			"Offices and workspaces across the metro — productive, hygienic and client-ready.",
 		img: "/img/commercial-cleaning.webp",
 		alt: "Commercial cleaning",
 		href: "/cleaning-services-in-wa/commercial-cleaning",
+		slug: "commercial-cleaning",
 	},
 	{
 		title: "Move In / Out",
-		description:
-			"Detailed cleaning before you hand over the keys or settle into your new home.",
 		img: "/img/move-in.jpg",
 		alt: "Move in / out",
 		href: "/cleaning-services-in-wa/move-in-out",
+		slug: "move-in-out",
 	},
 	{
 		title: "Packing & Unpacking",
-		description: "Professional packing and unpacking to take the stress out of moving day.",
 		img: "/img/gemini_generated_image_67heuh67heuh67he.webp",
 		alt: "Packing and unpacking",
 		href: "/cleaning-services-in-wa/packing-unpacking",
+		slug: "packing-unpacking",
 	},
 	{
 		title: "Carpet Cleaning",
-		description:
-			"Deep extraction that lifts allergens, pet dander and embedded dirt — freshness restored.",
 		img: "/img/carpet-cleaning.webp",
 		alt: "Carpet cleaning",
 		href: "/cleaning-services-in-wa/carpet-cleaning",
+		slug: "carpet-cleaning",
 	},
 ];
 
@@ -144,11 +139,14 @@ export default async function LocationPage({
 	if (!loc) notFound();
 
 	const { env } = await getCloudflareContext({ async: true });
-	const blogPosts = await getPublishedPosts(env, 3);
+	// Rota los posts por ciudad para que las 9 páginas no muestren las mismas 3 tarjetas.
+	const allPosts = await getPublishedPosts(env, 12);
+	const start = (Object.keys(locations).indexOf(slug) * 3) % Math.max(allPosts.length, 1);
+	const blogPosts = [...allPosts.slice(start), ...allPosts.slice(0, start)].slice(0, 3);
 
 	const url = `${SITE}/locations/${slug}`;
 	const hoods = loc.hoods.split("·").map((h) => h.trim());
-	const faqs = [...loc.faqs, ...locationFaqs];
+	const faqs = loc.faqs;
 
 	return (
 		<div className="relative w-full overflow-x-clip">
@@ -354,7 +352,7 @@ export default async function LocationPage({
 										<h3 className="mb-[9px] text-xl font-semibold tracking-[-0.01em] text-blue-600">
 											{s.title}
 										</h3>
-										<p className="text-sm leading-[1.7] text-blue-600">{s.description}</p>
+										<p className="text-sm leading-[1.7] text-blue-600">{loc.serviceNotes[s.slug]}</p>
 									</div>
 								</Link>
 								{/* Book now → contact */}
@@ -369,6 +367,28 @@ export default async function LocationPage({
 							</Reveal>
 						))}
 					</div>
+				</div>
+			</section>
+
+			{/* ===== LOCAL: vivienda, clima y zona (texto único por ciudad) ===== */}
+			<section id="local" className="bg-white py-[clamp(64px,8vw,104px)]">
+				<div className="mx-auto grid max-w-[1160px] grid-cols-1 gap-10 px-10 max-md:px-5 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
+					<Reveal>
+						<span className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-pink-500/15 px-4 py-2 text-[11.5px] font-semibold tracking-[0.06em] text-pink-500 uppercase">
+							<MapPin size={13} />
+							{loc.hoods}
+						</span>
+						<h2 className="font-heading text-[clamp(32px,3.4vw,48px)] leading-[1.15] font-normal tracking-[-0.025em] text-ink-900">
+							{loc.localHeading}
+						</h2>
+					</Reveal>
+					<Reveal delay={80}>
+						{loc.local.map((p) => (
+							<p key={p.slice(0, 24)} className="mb-5 text-[15.5px] leading-[1.8] text-ink-600 last:mb-0">
+								{p}
+							</p>
+						))}
+					</Reveal>
 				</div>
 			</section>
 
