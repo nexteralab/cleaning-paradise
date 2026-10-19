@@ -38,6 +38,7 @@ export type Location = {
 	localHeading: string; // H2 de la sección local (vivienda, clima, zona)
 	local: string[]; // párrafos de la sección local, únicos por ciudad
 	serviceNotes: Record<ServiceSlug, string>; // descripción de cada tarjeta de servicio
+	whyNotes: string[]; // textos de las 6 tarjetas de WhyChooseUs, en el mismo orden
 	faqs: { q: string; a: string }[]; // FAQs propias de la ciudad (sin FAQs compartidas)
 };
 
@@ -89,6 +90,14 @@ export const locations: Record<string, Location> = {
 			"carpet-cleaning":
 				"Hot water extraction for the mud and damp that Seattle winters track into carpets and rugs.",
 		},
+		whyNotes: [
+			"We bring our own vacuums, microfiber and products, so you don't need to store supplies in a small Seattle apartment or condo.",
+			"Years of cleaning Seattle homes taught us where rain and age show up first: entryways, window tracks, grout and old hardwood.",
+			"You get a detailed quote for your Seattle home before the first visit, based on its size, layout and the service you pick.",
+			"Every housekeeper is background checked and trained before entering a Seattle home, including buildings with doormen and key fobs.",
+			"Non-toxic, biodegradable products that are safe for kids, pets and the many Seattle households with allergies.",
+			"Weekly, biweekly or monthly visits that fit around commutes, building access windows and work-from-home days.",
+		],
 		faqs: [
 			{
 				q: "Which Seattle neighborhoods do you serve?",
@@ -159,6 +168,14 @@ export const locations: Record<string, Location> = {
 			"carpet-cleaning":
 				"Carpet and rug extraction for family rooms, bedrooms and stairs in larger Eastside homes.",
 		},
+		whyNotes: [
+			"Stone-safe cleaners for quartz and marble, streak-free tools for glass and stainless, and commercial-grade vacuums for larger homes.",
+			"We know Eastside homes, from Downtown high-rises to large Somerset and Bridle Trails houses with many bathrooms.",
+			"Your quote is based on your Bellevue home's size and number of bathrooms, so larger homes are planned and priced up front.",
+			"Background-checked, trained housekeepers you can trust with keys, alarm codes and building access in Bellevue.",
+			"Eco-friendly products that keep high-end finishes safe and leave no harsh chemical smell behind.",
+			"Recurring plans built around busy work schedules, plus move-in cleans timed to closings and relocations.",
+		],
 		faqs: [
 			{
 				q: "Which Bellevue neighborhoods do you serve?",
@@ -229,6 +246,14 @@ export const locations: Record<string, Location> = {
 			"carpet-cleaning":
 				"Extraction for carpets that collect sand, pollen and pet hair near the lake.",
 		},
+		whyNotes: [
+			"Microfiber and streak-free tools for the big windows, sliders and glass doors that lakeside Kirkland homes are known for.",
+			"We know Kirkland neighborhoods, from Moss Bay condos to Houghton and Juanita family homes and new Totem Lake buildings.",
+			"A clear quote up front for your Kirkland home, based on its size, layout and how often you want visits.",
+			"Background-checked, trained housekeepers, and we aim to send the same team to your Kirkland home every visit.",
+			"Pet-safe, non-toxic products for Kirkland households with dogs, cats and kids.",
+			"Biweekly and monthly plans made for busy professionals, with notes kept on how you like your home cleaned.",
+		],
 		faqs: [
 			{
 				q: "Which Kirkland neighborhoods do you serve?",
@@ -300,6 +325,14 @@ export const locations: Record<string, Location> = {
 			"carpet-cleaning":
 				"Carpet cleaning for muddy-season floors, booked alone or added to a regular visit.",
 		},
+		whyNotes: [
+			"Our teams head out from our Lynnwood base fully stocked, so they arrive with everything your home needs.",
+			"Lynnwood is where Cleaning Paradise started, so we know the area's homes, neighborhoods and seasons well.",
+			"Being local keeps travel costs low for Lynnwood homes, and you get a clear quote before any work begins.",
+			"Background-checked, trained housekeepers based just minutes from your Lynnwood home.",
+			"Non-toxic products for Lynnwood homes with kids and pets, effective on muddy-season floors without harsh fumes.",
+			"Same-week openings are most common in Lynnwood, our home base, for recurring or one-time cleaning.",
+		],
 		faqs: [
 			{
 				q: "Is Cleaning Paradise based in Lynnwood?",
@@ -370,6 +403,14 @@ export const locations: Record<string, Location> = {
 			"carpet-cleaning":
 				"Non-toxic carpet and rug extraction, safe for kids, pets and allergy-prone homes.",
 		},
+		whyNotes: [
+			"Commercial-grade vacuums, microfiber and the right products for every surface in larger, multi-level Mercer Island homes.",
+			"We plan Mercer Island cleanings around the home: team size, room order and time on site so nothing gets rushed.",
+			"A detailed quote sized to your Island home before any work begins, with no surprises on larger properties.",
+			"Background-checked, trained housekeepers who can work with lockboxes, gate access or your house manager.",
+			"Non-toxic, biodegradable products by default, the standard many Mercer Island families ask for.",
+			"Recurring housekeeping scheduled around your calendar, including visits while you are away.",
+		],
 		faqs: [
 			{
 				q: "Which Mercer Island neighborhoods do you serve?",
@@ -440,6 +481,14 @@ export const locations: Record<string, Location> = {
 			"carpet-cleaning":
 				"Pet-safe carpet extraction for family rooms, bedrooms and stairs.",
 		},
+		whyNotes: [
+			"We bring all the equipment and supplies, from vacuums for carpeted stairs to products for kitchens and baths.",
+			"We know Shoreline homes, from mid-century ramblers and split-levels to new townhomes near the light rail stations.",
+			"A clear quote for your Shoreline home before the first visit, with no hidden fees.",
+			"Background-checked, trained housekeepers who are comfortable working around kids, pets and home offices.",
+			"Pet-safe, non-toxic products so nobody needs to leave the house while we clean.",
+			"Visits scheduled around school runs and work-from-home days, weekly, biweekly or monthly.",
+		],
 		faqs: [
 			{
 				q: "Which Shoreline neighborhoods do you serve?",
@@ -510,6 +559,14 @@ export const locations: Record<string, Location> = {
 			"carpet-cleaning":
 				"Carpet extraction through the wet months, booked alone or with a regular visit.",
 		},
+		whyNotes: [
+			"Streak-free tools and products that cut the salt film on Edmonds windows, sliders and glass doors.",
+			"We know Edmonds homes, from older houses near the Bowl to view homes in Seaview and family homes in Perrinville.",
+			"A clear quote for your Edmonds home, minutes from our Lynnwood base, so there is no long-distance travel fee.",
+			"Background-checked, trained housekeepers who treat every Edmonds home like a neighbor's, because it is.",
+			"Gentle, non-toxic products for older woodwork and floors, safe for kids and pets.",
+			"Recurring maid service with an optional seasonal deep clean in spring or fall.",
+		],
 		faqs: [
 			{
 				q: "Which Edmonds neighborhoods do you serve?",
@@ -581,6 +638,14 @@ export const locations: Record<string, Location> = {
 			"carpet-cleaning":
 				"Carpet extraction for new and established homes, great after move-in.",
 		},
+		whyNotes: [
+			"Commercial-grade vacuums and detail tools that pull builder dust out of vents, tracks and cabinet corners.",
+			"We know Bothell's mix of new construction around North Creek and Canyon Park and established Queensgate homes.",
+			"A clear quote for your Bothell home before work begins, including first cleans for brand-new construction.",
+			"Background-checked, trained housekeepers serving both the King County and Snohomish County sides of Bothell.",
+			"Non-toxic products that are safe for kids and pets in busy Bothell family homes.",
+			"Weekday and weekend recurring visits that fit around school, sports and work schedules.",
+		],
 		faqs: [
 			{
 				q: "Which Bothell neighborhoods do you serve?",
@@ -652,6 +717,14 @@ export const locations: Record<string, Location> = {
 			"carpet-cleaning":
 				"Carpet extraction for stairs and family rooms in Mukilteo homes.",
 		},
+		whyNotes: [
+			"Streak-free tools for the salt film on Mukilteo view windows, plus vacuums made for carpeted stairs.",
+			"We know Mukilteo homes, from Old Town waterfront and bluff houses to Harbour Pointe homes from the 80s and 90s.",
+			"A clear quote for your Mukilteo home before work begins, a short drive from our Lynnwood base.",
+			"Background-checked, trained housekeepers you can trust in your Mukilteo home, whether you are there or not.",
+			"Non-toxic, biodegradable products, safe for kids, pets and homes near the Sound.",
+			"Recurring visits scheduled without long travel windows, weekly, biweekly or monthly.",
+		],
 		faqs: [
 			{
 				q: "Which Mukilteo neighborhoods do you serve?",

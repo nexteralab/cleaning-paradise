@@ -45,9 +45,11 @@ const PHOTOS = [
 // headline: "Why {city} Families Choose Cleaning Paradise".
 export default function WhyChooseUs({
 	city = "Seattle",
+	notes,
 	intro = "We've spent 5+ years earning the trust of homeowners across King and Snohomish County. Here's what sets us apart from other cleaning companies in Seattle:",
 }: {
 	city?: string;
+	notes?: string[]; // textos por ciudad para las 6 tarjetas (mismo orden que FEATURES)
 	intro?: string;
 }) {
 	return (
@@ -99,7 +101,7 @@ export default function WhyChooseUs({
 								<h3 className="font-sans text-xl font-semibold text-ink-900 leading-[1.4] tracking-[-0.01em] mb-3.5">
 									{f.title}
 								</h3>
-								<p className="text-[15.5px] text-ink-600 leading-[1.95]">{f.desc}</p>
+								<p className="text-[15.5px] text-ink-600 leading-[1.95]">{notes?.[i] ?? f.desc}</p>
 							</div>
 						</Reveal>
 					))}

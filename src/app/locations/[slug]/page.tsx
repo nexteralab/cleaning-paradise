@@ -395,6 +395,7 @@ export default async function LocationPage({
 			{/* ===== WHY CHOOSE US ===== */}
 			<WhyChooseUs
 				city={loc.name}
+				notes={loc.whyNotes}
 				intro={loc.whyIntro}
 			/>
 
