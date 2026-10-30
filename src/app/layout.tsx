@@ -160,6 +160,12 @@ export default function RootLayout({
 					}}
 				/>
 				<script defer data-site="pb_live_qai23u1emmk2q32annfx6aue" src="https://traks-collect.nexteralab.workers.dev/t.js" />
+				{/* Overtracking */}
+				<script
+  				dangerouslySetInnerHTML={{
+  				  __html: `!function(w,d,s,u){var t=d.createElement(s);t.async=1;t.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(t,f);}(window,document,'script','https://cdn.overtracking.com/t/t4aa8d646ec84c656/');`,
+  				}}
+				/>
 			</head>
 			<body className={`${lora.variable} ${poppins.variable} antialiased`}>
 				<a
